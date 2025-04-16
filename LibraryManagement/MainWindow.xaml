@@ -4,21 +4,211 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagement"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
         Style="{StaticResource MaterialDesignWindow}"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <materialDesign:SplitButton
-            Content="Corners"
-            VerticalAlignment="Bottom"
-            materialDesign:ButtonAssist.CornerRadius="10,10,0,0"
-            Style="{StaticResource MaterialDesignOutlinedSplitButton}">
-            <materialDesign:SplitButton.PopupContent>
-                <ContentControl
-                    ContentTemplate="{StaticResource PopupContent}" />
-            </materialDesign:SplitButton.PopupContent>
-        </materialDesign:SplitButton>
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+        DataContext="{StaticResource MainVM}"
+        Title="MainWindow" 
+        Height="800" 
+        Width="1200"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Name="MainNavigationWindow">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding GetNavigationFrameCM}"
+                               CommandParameter="{Binding ElementName=mainFrame}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid x:Name="mainGrid"
+          Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border CornerRadius="25,0,0,25" 
+                Grid.Column="0">
+            <Border.Background>
+                <LinearGradientBrush 
+                    StartPoint="0,0" 
+                    EndPoint="0,1">
+                    <GradientStop Color="#343155" Offset="0"/>
+                    <GradientStop Color="#3B2E58" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Border CornerRadius="0,25,20,0" 
+                Grid.Column="1">
+            <Border.Background>
+                <LinearGradientBrush 
+                    StartPoint="0,0" 
+                    EndPoint="0,1">
+                    <GradientStop Color="#3E3A65" 
+                                  Offset="0"/>
+                    <GradientStop Color="#473765" 
+                                  Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <!--NavigationPanel-->
+        <StackPanel x:Name="NavigationBar"
+                    Grid.Column="0">
+            <TextBlock HorizontalAlignment="Center" 
+                       Text="Library Manangement" 
+                       FontSize="20" 
+                       FontWeight="Bold" 
+                       Foreground="White" 
+                       VerticalAlignment="Center" 
+                       Margin="20 50 20 40"/>
+            <!--Quan ly doc gia -->
+            <Button Command="{Binding QuanLyDocGiaCM}" 
+                    Style="{StaticResource NavigationButton}">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Left">
+                        <materialDesign:PackIcon Kind="AccountMultiple"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Style="{StaticResource IconButton}"/>
+                        <TextBlock Style="{StaticResource TextButton }"
+                                   Text="Quản lý độc giả"/>
+                    </StackPanel>
+                    <materialDesign:PackIcon Kind="ChevronRight"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Center"
+                                             Visibility="Visible"
+                                             Style="{StaticResource IconExpandedButton}"/>
+                </Grid>
+            </Button>
+            <!--Quan ly sach -->
+            <Button Command="{Binding QuanLySachCM}" 
+                    Style="{StaticResource NavigationButton}">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Left">
+                        <materialDesign:PackIcon Kind="Bookshelf"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Style="{StaticResource IconButton}"/>
+                        <TextBlock Style="{StaticResource TextButton }"
+                                   Text="Quản lý sách"/>
+                    </StackPanel>
+                    <materialDesign:PackIcon Kind="ChevronRight"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Center"
+                                             Visibility="Visible"
+                                             Style="{StaticResource IconExpandedButton}"/>
+                </Grid>
+            </Button>
+            <!--Muon sach -->
+            <Button Command="{Binding ThongKeCM}" 
+                    Style="{StaticResource NavigationButton}">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Left">
+                        <materialDesign:PackIcon Kind="DatabaseEye"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Style="{StaticResource IconButton}"/>
+                        <TextBlock Style="{StaticResource TextButton }"
+                                   Text="Thông kê"/>
+                    </StackPanel>
+                    <materialDesign:PackIcon Kind="ChevronRight"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Center"
+                                             Visibility="Visible"
+                                             Style="{StaticResource IconExpandedButton}"/>
+                </Grid>
+            </Button>
+            <!--Tra sach -->
+            <Button Command="{Binding QuanLyNhanSuCM}" 
+                    Style="{StaticResource NavigationButton}">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Left">
+                        <materialDesign:PackIcon Kind="AccountGroupOutline"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Style="{StaticResource IconButton}"/>
+                        <TextBlock Style="{StaticResource TextButton }"
+                                   Text="Quản lý nhân sự"/>
+                    </StackPanel>
+                    <materialDesign:PackIcon Kind="ChevronRight"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Center"
+                                             Visibility="Visible"
+                                             Style="{StaticResource IconExpandedButton}"/>
+                </Grid>
+            </Button>
+
+
+            <Button Command="{Binding TaiKhoanCM}" 
+                    Style="{StaticResource NavigationButton}"
+                    Margin="0 200 0 20">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Left">
+                        <materialDesign:PackIcon Kind="Account"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Style="{StaticResource IconButton}"/>
+                        <TextBlock Style="{StaticResource TextButton }"
+                                   Text="Tài khoản"/>
+                    </StackPanel>
+                    <materialDesign:PackIcon Kind="ChevronRight"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Center"
+                                             Visibility="Visible"
+                                             Style="{StaticResource IconExpandedButton}"/>
+                </Grid>
+            </Button>
+            <Button Command="{Binding DangXuatCM}" 
+                    Style="{StaticResource NavigationButton}">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Left">
+                        <materialDesign:PackIcon Kind="Logout"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Style="{StaticResource IconButton}"/>
+                        <TextBlock Style="{StaticResource TextButton }"
+                                   Text="Đăng xuất"/>
+                    </StackPanel>
+                    <materialDesign:PackIcon Kind="ChevronRight"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Center"
+                                             Visibility="Visible"
+                                             Style="{StaticResource IconExpandedButton}"/>
+                </Grid>
+            </Button>
+        </StackPanel>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" 
+                    Style="{StaticResource buttonClose}" 
+                    Content="X" 
+                    HorizontalAlignment="Right"
+                    Width="53" 
+                    Background="#FFF25C5C" 
+                    Foreground="#FFE7DDDD"
+                    Command="{Binding ThoatCM}"/>
+
+            <Frame x:Name="mainFrame" 
+                   NavigationUIVisibility="Hidden" 
+                   Grid.Row="1" 
+                   Width="auto" 
+                   Margin="30,10,30,10"/>
+        </Grid>
     </Grid>
 </Window>
