@@ -1,5 +1,4 @@
-﻿using LibraryManagement.View;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LibraryManagement
+namespace LibraryManagement.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for BookManagement.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BookManagement : Page
     {
-        public MainWindow()
+        public BookManagement()
         {
             InitializeComponent();
-            mainFrame.Navigate(new ReaderManagement());
         }
     }
 }

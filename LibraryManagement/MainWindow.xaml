@@ -28,8 +28,8 @@
     <Grid x:Name="mainGrid"
           Background="Transparent">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
 
         <Border CornerRadius="25,0,0,25" 
