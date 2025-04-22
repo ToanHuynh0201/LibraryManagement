@@ -132,6 +132,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -155,6 +157,100 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BLL\CT_TGSachBLL.cs" />
+    <Compile Include="BLL\CuonSachBLL.cs" />
+    <Compile Include="BLL\DauSachBLL.cs" />
+    <Compile Include="BLL\SachBLL.cs" />
+    <Compile Include="BLL\TacGiaBLL.cs" />
+    <Compile Include="BLL\ThamSoBLL.cs" />
+    <Compile Include="BLL\TheLoaiBLL.cs" />
+    <Compile Include="DAL\BCLuotMuonTheoTheLoaiDAL.cs" />
+    <Compile Include="DAL\BCSachTraTreDAL.cs" />
+    <Compile Include="DAL\BCTongLuotMuonDAL.cs" />
+    <Compile Include="DAL\ChucNangDAL.cs" />
+    <Compile Include="DAL\CT_PhieuNhapSachDAL.cs" />
+    <Compile Include="DAL\CuonSachDAL.cs" />
+    <Compile Include="DAL\DauSachDAL.cs" />
+    <Compile Include="DAL\DocGiaDAL.cs" />
+    <Compile Include="DAL\LoaiDocGiaDAL.cs" />
+    <Compile Include="DAL\NguoiDungDAL.cs" />
+    <Compile Include="DAL\NhomNguoiDungDAL.cs" />
+    <Compile Include="DAL\PhieuMuonTraDAL.cs" />
+    <Compile Include="DAL\PhieuNhapSachDAL.cs" />
+    <Compile Include="DAL\PhieuThuTienPhatDAL.cs" />
+    <Compile Include="DAL\SachDAL.cs" />
+    <Compile Include="DAL\TacGiaDAL.cs" />
+    <Compile Include="DAL\ThamSoDAL.cs" />
+    <Compile Include="DAL\TheLoaiDAL.cs" />
+    <Compile Include="DTO\BCLUOTMUONTHEOTHELOAI.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\BCSACHTRATRE.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\BCTONGLUOTMUON.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\CHUCNANG.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\CT_PHIEUNHAPSACH.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\CUONSACH.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\DAUSACH.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\DOCGIA.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\LibraryManagementModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryManagementModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\LibraryManagementModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\LibraryManagementModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryManagementModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\LOAIDOCGIA.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\NGUOIDUNG.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\NHOMNGUOIDUNG.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\PHIEUMUONTRA.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\PHIEUNHAPSACH.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\PHIEUTHUTIENPHAT.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\SACH.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\TACGIA.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\THAMSO.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\THELOAI.cs">
+      <DependentUpon>LibraryManagementModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -200,6 +296,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="DTO\LibraryManagementModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LibraryManagementModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DTO\LibraryManagementModel.edmx.diagram">
+      <DependentUpon>LibraryManagementModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -210,11 +313,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DTO\" />
+    <Content Include="DTO\LibraryManagementModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LibraryManagementModel.edmx</DependentUpon>
+      <LastGenOutput>LibraryManagementModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DTO\LibraryManagementModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LibraryManagementModel.edmx</DependentUpon>
+      <LastGenOutput>LibraryManagementModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.5.2.2-ci942\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.5.2.2-ci942\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
