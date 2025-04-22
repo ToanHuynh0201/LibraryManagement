@@ -88,7 +88,7 @@ namespace LibraryManagement.DAL
             using (var context = new LibraryManagementEntities())
                 try
                 {
-                    var tacgia = await context.TACGIAs.FindAsync(tg.id);
+                    var tacgia = await context.TACGIAs.FindAsync(id);
                     context.TACGIAs.Remove(tacgia);
                     await context.SaveChangesAsync();
                     return (true, "Xoá tác giả thành công");
