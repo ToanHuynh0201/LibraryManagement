@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9633d0a419e644b596a2d7af2c3bc605" Name="Diagram1">
+        <EntityTypeShape EntityType="LibraryManagementModel.BCLUOTMUONTHEOTHELOAI" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.BCSACHTRATRE" Width="1.5" PointX="9.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.BCTONGLUOTMUON" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.CHUCNANG" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.CT_PHIEUNHAPSACH" Width="1.5" PointX="7.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.CUONSACH" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.DAUSACH" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.DOCGIA" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.LOAIDOCGIA" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.NGUOIDUNG" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.NHOMNGUOIDUNG" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.PHIEUMUONTRA" Width="1.5" PointX="9.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.PHIEUNHAPSACH" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.PHIEUTHUTIENPHAT" Width="1.5" PointX="9.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.SACH" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.TACGIA" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.THELOAI" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryManagementModel.THAMSO" Width="1.5" PointX="11.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="LibraryManagementModel.fk_blmtl_bctlm" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.fk_blmtl_tl" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.fk_bcstt_s" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.fk_ctpns_pns" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.fk_ctpns_s" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.fk_cs_s" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.fk_pmt_cs" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.fk_s_tts" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.fk_tts_tl" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.fk_dg_ldg" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.fk_dg_nd" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.fk_pmt_dg" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.fk_pttp_dg" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.fk_nd_nnd" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.CT_TGSACH" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryManagementModel.PHANQUYEN" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

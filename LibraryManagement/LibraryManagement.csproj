@@ -158,7 +158,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="View\LoginWindow.xaml.cs">
+    <Compile Include="VIew\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -169,37 +169,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DTO\LibraryManagement.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LibraryManagement.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\LibraryManagement.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LibraryManagement.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\LibraryManagementModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LibraryManagementModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\LibraryManagementModel1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LibraryManagementModel1.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\MainResource.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\LoginWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="VIew\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -220,13 +200,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="DTO\LibraryManagement.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LibraryManagement.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="DTO\LibraryManagement.edmx.diagram">
-      <DependentUpon>LibraryManagement.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -237,23 +210,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Ultis\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DTO\LibraryManagement.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>LibraryManagement.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DTO\LibraryManagementModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>LibraryManagementModel.Context.cs</LastGenOutput>
-      <DependentUpon>LibraryManagement.edmx</DependentUpon>
-    </Content>
-    <Content Include="DTO\LibraryManagementModel1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>LibraryManagementModel1.Context.cs</LastGenOutput>
-      <DependentUpon>LibraryManagement.edmx</DependentUpon>
-    </Content>
+    <Folder Include="DTO\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
