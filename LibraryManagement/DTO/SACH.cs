@@ -29,6 +29,7 @@ namespace LibraryManagement.DTO
         public Nullable<int> SoLuong { get; set; }
         public int TriGia { get; set; }
         public int SoLuongCon { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUNHAPSACH> CT_PHIEUNHAPSACH { get; set; }

@@ -25,6 +25,7 @@ namespace LibraryManagement.DTO
         public string MaCuonSach { get; set; }
         public int MaSach { get; set; }
         public Nullable<bool> TinhTrang { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BCSACHTRATRE> BCSACHTRATREs { get; set; }

@@ -42,7 +42,8 @@ CREATE TABLE SACH
     NhaXB nvarchar(max) NOT NULL,
     SoLuong int DEFAULT 0,
     TriGia int NOT NULL, 
-    SoLuongCon int NOT NULL
+    SoLuongCon int NOT NULL,
+    IsDeleted bit DEFAULT 0
 )
 
 CREATE TABLE DAUSACH
@@ -58,7 +59,8 @@ CREATE TABLE CUONSACH
     id int IDENTITY(1,1) PRIMARY KEY,
     MaCuonSach as cast('CS' + format(id,'00000') as char(7)),
     MaSach int NOT NULL,
-    TinhTrang bit DEFAULT 0
+    TinhTrang bit DEFAULT 0,
+    IsDeleted bit DEFAULT 0
 )
 
 CREATE TABLE THELOAI
