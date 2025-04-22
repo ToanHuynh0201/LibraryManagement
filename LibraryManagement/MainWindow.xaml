@@ -128,7 +128,7 @@
                 </Grid>
             </Button>
             <!--Tra sach -->
-            <Button Command="{Binding QuanLyNhanSuCM}" 
+            <Button Command="{Binding QuanLyNoiBoCM}" 
                     Style="{StaticResource NavigationButton}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 

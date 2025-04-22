@@ -8,6 +8,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
       d:DataContext="{d:DesignInstance Type=viewmodel:AccountViewModel}"
+      DataContext="{StaticResource AccountVM}"
       mc:Ignorable="d" 
       d:DesignHeight="740" 
       d:DesignWidth="840"
@@ -64,7 +65,8 @@
                             Width="180"
                             Cursor="Hand"
                             HorizontalAlignment="Center"
-                            Style="{StaticResource ultisButton}">
+                            Style="{StaticResource ultisButton}"
+                            Command="{Binding UpdateImageCM}">
                         <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center">
@@ -212,13 +214,15 @@
                                 Command="{Binding ChangePassCM}"
                                 Content="Đổi mật khẩu"
                                 FontSize="20"
+                                FontWeight="Bold"
                                 Margin="20"/>
                         
                         <Button Style="{StaticResource ultisButton}"
                                 Width="180"
-                                Command="{Binding ChangePassCM}"
-                                Content="Đổi mật khẩu"
+                                Command="{Binding LogoutCM}"
+                                Content="Đăng Xuất"
                                 FontSize="20"
+                                FontWeight="Bold"
                                 Margin="20 0 0 0"/>
                     </StackPanel>
                 </StackPanel>

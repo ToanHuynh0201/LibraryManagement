@@ -9,7 +9,7 @@ namespace LibraryManagement.ViewModel
         public ICommand GetNavigationFrameCM { get; set; }
         public ICommand QuanLyDocGiaCM { get; set; }
         public ICommand QuanLySachCM { get; set; }
-        public ICommand QuanLyNhanSuCM { get; set; }
+        public ICommand QuanLyNoiBoCM { get; set; }
         public ICommand ThongKeCM { get; set; }
         public ICommand TaiKhoanCM { get; set; }
         public ICommand DangXuatCM { get; set; }
@@ -33,7 +33,11 @@ namespace LibraryManagement.ViewModel
             });
             ThongKeCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-
+                NavigationFrame.Navigate(new StatisticPage());
+            });
+            QuanLyNoiBoCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                NavigationFrame.Navigate(new InternalManagement());
             });
             TaiKhoanCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

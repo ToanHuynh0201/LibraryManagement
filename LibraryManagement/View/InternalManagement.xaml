@@ -1,0 +1,85 @@
+﻿<Page x:Class="LibraryManagement.View.InternalManagement"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LibraryManagement.View"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
+      d:DataContext="{d:DesignInstance Type=viewmodel:InternalManagementViewModel}"
+      DataContext="{StaticResource InternalManagementVM}"
+      mc:Ignorable="d" 
+      d:DesignHeight="740" 
+      d:DesignWidth="840"
+      Title="InternalManagement"
+      x:Name="InternalManagementPage"
+      Background="Transparent">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding GetNavigationFrameCM}"
+                               CommandParameter="{Binding ElementName=manageFrame}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Page.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="InternalManagementPage"
+                                 Storyboard.TargetProperty="Opacity"
+                                 From="0"
+                                 To="1"
+                                 Duration="0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
+    <Border Background="#eff2f7"
+            CornerRadius="30">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border CornerRadius="30" 
+                    BorderBrush="Black" 
+                    BorderThickness="1" 
+                    Margin="100,20,100,10">
+                <StackPanel Grid.Row="0"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Margin="0 0 0 0">
+                    <Button Style="{StaticResource barButton}"
+                            Content="Quy định"
+                            FontWeight="Bold"
+                            Foreground="MediumPurple"
+                            FontSize="30"
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center"
+                            Height="50" 
+                            Width="150"
+                            Margin="0 0 30 0"
+                            Command="{Binding BookStatisticCM}"/>
+                    <Button Style="{StaticResource barButton}"
+                            Content="Phân quyền"
+                            FontWeight="Bold"
+                            Foreground="MediumPurple"
+                            FontSize="30"
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center"
+                            Height="50" 
+                            Width="auto"
+                            Command="{Binding ReaderStatisticCM}"/>
+                </StackPanel>
+            </Border>
+
+            <Frame x:Name="manageFrame"
+                   Grid.Row="1"
+                   Margin="10"
+                   Background="Transparent"
+                   NavigationUIVisibility="Hidden"/>
+        </Grid>
+    </Border>
+</Page>
+
