@@ -36,28 +36,28 @@ namespace LibraryManagement.DAL
                 return await context.DAUSACHes.FindAsync(id);
             }
         }
-        public async Task<List<DAUSACH>> GetDauSachByMa(string MaDauSach)
+        public async Task<List<DAUSACH>> GetDauSachByMa(string madausach)
         {
             using (var context = new LibraryManagementEntities())
             {
                 return await context.DAUSACHes.AsNoTracking()
-                .Where(ds => ds.MaDauSach.Contains(MaDauSach)).ToListAsync();
+                .Where(ds => ds.MaDauSach.Contains(madausach)).ToListAsync();
             }
         }
-        public async Task<List<DAUSACH>> GetDauSachByTen(string TenDauSach)
+        public async Task<List<DAUSACH>> GetDauSachByTen(string tendausach)
         {
             using (var context = new LibraryManagementEntities())
             {
                 return await context.DAUSACHes.AsNoTracking()
-                .Where(ds => ds.TenDauSach.Contains(TenDauSach)).ToListAsync();
+                .Where(ds => ds.TenDauSach.Contains(tendausach)).ToListAsync();
             }
         }
-        public async Task<List<DAUSACH>> GetDauSachByMaTheLoai(int MaTheLoai)
+        public async Task<List<DAUSACH>> GetDauSachByMaTheLoai(int matheloai)
         {
             using (var context = new LibraryManagementEntities())
             {
                 return await context.DAUSACHes.AsNoTracking()
-                .Where(ds => ds.MaTheLoai == MaTheLoai).ToListAsync();
+                .Where(ds => ds.MaTheLoai == matheloai).ToListAsync();
             }
         }
         public async Task<List<DAUSACH>> GetDauSachByTacGia(List<TACGIA> dstg)

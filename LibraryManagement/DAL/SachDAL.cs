@@ -37,36 +37,36 @@ namespace LibraryManagement.DAL
                 return await context.SACHes.AsNoTracking().FirstOrDefaultAsync(s => s.id == id && s.IsDeleted == false);
             }
         }
-        public async Task<List<SACH>> GetSachByMaDauSach(int MaDauSach)
+        public async Task<List<SACH>> GetSachByMaDauSach(int madausach)
         {
             using (var context = new LibraryManagementEntities())
             {
                 return await context.SACHes.AsNoTracking()
-                .Where(s => s.MaDauSach == MaDauSach && s.IsDeleted == false).ToListAsync();
+                .Where(s => s.MaDauSach == madausach && s.IsDeleted == false).ToListAsync();
             }
         }
-        public async Task<List<SACH>> GetSachByTenDauSach(string TenDauSach)
+        public async Task<List<SACH>> GetSachByTenDauSach(string tendausach)
         {
             using (var context = new LibraryManagementEntities())
             {
                 return await context.SACHes.AsNoTracking()
-                .Where(s => s.DAUSACH.TenDauSach.Contains(TenDauSach) && s.IsDeleted == false).ToListAsync();
+                .Where(s => s.DAUSACH.TenDauSach.Contains(tendausach) && s.IsDeleted == false).ToListAsync();
             }
         }
-        public async Task<List<SACH>> GetSachByNXB(string NhaXB)
+        public async Task<List<SACH>> GetSachByNXB(string nhaxb)
         {
             using (var context = new LibraryManagementEntities())
             {
                 return await context.SACHes.AsNoTracking()
-                .Where(s => s.NhaXB.Contains(NhaXB) && s.IsDeleted == false).ToListAsync();
+                .Where(s => s.NhaXB.Contains(nhaxb) && s.IsDeleted == false).ToListAsync();
             }
         }
-        public async Task<List<SACH>> GetSachByNamXB(int NamXB)
+        public async Task<List<SACH>> GetSachByNamXB(int namxb)
         {
             using (var context = new LibraryManagementEntities())
             {
                 return await context.SACHes.AsNoTracking()
-                .Where(s => s.NamXB == NamXB && s.IsDeleted == false).ToListAsync();
+                .Where(s => s.NamXB == namxb && s.IsDeleted == false).ToListAsync();
             }
         }
         public async Task<SACH> CheckExistingSach(SACH s)
@@ -120,9 +120,11 @@ namespace LibraryManagement.DAL
                 try
                 {
                     var sach = await context.SACHes.FindAsync(id);
+                    foreach(var cuonsach in sach.CUONSACHes)
+                        cuonsach.IsDeleted = true;
+                    sach.IsDeleted = true;
                     sach.SoLuongCon = 0;
                     sach.SoLuong = 0;
-                    sach.IsDeleted = true;
                     await context.SaveChangesAsync();
                     return (true, "Xóa sách thành công");
                 }
@@ -131,7 +133,7 @@ namespace LibraryManagement.DAL
                     return (false, ex.Message);
                 }
             }
-        }
+        }   
         public async Task<(bool, string)> UpdateSach(SACH s)
         {
             using (var context = new LibraryManagementEntities())

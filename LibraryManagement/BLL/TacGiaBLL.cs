@@ -40,12 +40,20 @@ namespace LibraryManagement.BLL
         }
         public async Task<(bool, string)> AddTacGia(TACGIA tg)
         {
+            if (String.IsNullOrEmpty(tg.TenTG))
+            {
+                return (false, "Tên tác giả không được để trống");
+            }
             return await TacGiaDAL.Instance.AddTacGia(tg);
         }
         public async Task<(bool, string)> UpdateTacGia(TACGIA tg)
         {
             var tacgia = await TacGiaDAL.Instance.GetTacGiaById(tg.id);
-            if(tacgia == null)
+            if(String.IsNullOrEmpty(tacgia.TenTG))
+            {
+                return (false, "Tên tác giả không được để trống");
+            }
+            if (tacgia == null)
             {
                 return (false, "Tác giả không tồn tại");
             }
