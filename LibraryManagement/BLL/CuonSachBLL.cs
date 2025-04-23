@@ -40,24 +40,24 @@ namespace LibraryManagement.BLL
         }
         public async Task<(bool, string)> AddCuonSach(CUONSACH cs)
         {
-            if(cs == null)
-            {
-                return (false, "Cuốn sách không hợp lệ.");
-            }
             var sach = await SachDAL.Instance.GetSachById(cs.MaSach);
             if (sach == null)
             {
-                return (false, "Sách không tồn tại.");
+                return (false, "Không thể thêm, sách không tồn tại.");
             }
             cs.TinhTrang = false;
-            return await CuonSachDAL.Instance.AddCuonSach(cs);
+            var res = await CuonSachDAL.Instance.AddCuonSach(cs);
+            if (res.Item1 == false) return res;
+            else
+            {
+                sach.SoLuong++;
+                sach.SoLuongCon++;
+                await SachDAL.Instance.UpdateSach(sach);
+                return res;
+            }
         }
         public async Task<(bool, string)> UpdateCuonSach(CUONSACH cs)
         {
-            if (cs == null)
-            {
-                return (false, "Cuốn sách không hợp lệ.");
-            }
             var sach = await SachDAL.Instance.GetSachById(cs.MaSach);
             if (sach == null)
             {
@@ -73,31 +73,26 @@ namespace LibraryManagement.BLL
         public async Task<(bool, string)> DeleteCuonSach(int id)
         {
             var cuonsach = await CuonSachDAL.Instance.GetCuonSachById(id);
-            if (cuonsach == null)
+            if (cuonsach == null || cuonsach.IsDeleted == true)
             {
                 return (false, "Cuốn sách không tồn tại.");
             }
             if (cuonsach.TinhTrang == true)
             {
-                return (false, "Cuốn sách đã được mượn, không thể xoá.");
+                return (false, "Cuốn sách đang được mượn, không thể xoá.");
             }
             var res = await CuonSachDAL.Instance.DeleteCuonSach(id);
-            if (res.Item1 == false) return res;
-            else
+            if (res.Item1 == true)
             {
                 var sach = await SachDAL.Instance.GetSachById(cuonsach.MaSach);
                 if (sach != null)
                 {
                     sach.SoLuong--;
                     sach.SoLuongCon--;
-                    if (sach.SoLuong == 0)
-                    {
-                        sach.IsDeleted = true;
-                    }
                     await SachDAL.Instance.UpdateSach(sach);
                 }
-                return res;
             }
+            return res;
         }
     }
 }

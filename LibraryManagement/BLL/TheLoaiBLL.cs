@@ -40,6 +40,8 @@ namespace LibraryManagement.BLL
         }
         public async Task<(bool, string)> AddTheLoai(THELOAI tl)
         {
+            if(string.IsNullOrEmpty(tl.TenTheLoai))
+                return (false, "Tên thể loại không được để trống");
             return await TheLoaiDAL.Instance.AddTheLoai(tl);
         }
         public async Task<(bool, string)> UpdateTheLoai(THELOAI tl)
@@ -49,6 +51,8 @@ namespace LibraryManagement.BLL
             {
                 return (false, "Thể loại không tồn tại");
             }
+            if (string.IsNullOrEmpty(tl.TenTheLoai))
+                return (false, "Tên thể loại không được để trống");
             return await TheLoaiDAL.Instance.UpdateTheLoai(tl);
         }
         public async Task<(bool, string)> DeleteTheLoai(int id)

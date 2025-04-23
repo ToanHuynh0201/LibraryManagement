@@ -39,18 +39,18 @@ namespace LibraryManagement.DAL
             }
         }
 
-        public async Task<List<THELOAI>> GetTheLoaiByMa(string MaTheLoai)
+        public async Task<List<THELOAI>> GetTheLoaiByMa(string matheloai)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.THELOAIs.AsNoTracking().Where(tl => tl.MaTheLoai.Contains(MaTheLoai)).ToListAsync();
+                return await context.THELOAIs.AsNoTracking().Where(tl => tl.MaTheLoai.Contains(matheloai)).ToListAsync();
             }
         }
-        public async Task<List<THELOAI>> GetTheLoaiByTen(string TenTheLoai)
+        public async Task<List<THELOAI>> GetTheLoaiByTen(string tentheloai)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.THELOAIs.AsNoTracking().Where(tl => tl.TenTheLoai.Contains(TenTheLoai)).ToListAsync();
+                return await context.THELOAIs.AsNoTracking().Where(tl => tl.TenTheLoai.Contains(tentheloai)).ToListAsync();
             }
         }
 

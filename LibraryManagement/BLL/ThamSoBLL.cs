@@ -30,8 +30,8 @@ namespace LibraryManagement.BLL
         {
             if (ts.TuoiDGToiDa < ts.TuoiDGToiThieu)
                 return (false, "Tuổi độc giả tối đa không được nhỏ hơn tuổi độc giả tối thiểu");
-            if (ts.GiaTriThe < 0)
-                return (false, "Giá trị thẻ không được nhỏ hơn 0");
+            if (ts.GiaTriThe <= 0)
+                return (false, "Giá trị thẻ phải là số dương");
             if (ts.KhoangCachNamXB < 0)
                 return (false, "Khoảng cách năm xuất bản không được nhỏ hơn 0");
             if (ts.SoSachMuonToiDa < 0)

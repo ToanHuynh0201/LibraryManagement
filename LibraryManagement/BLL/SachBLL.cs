@@ -76,6 +76,36 @@ namespace LibraryManagement.BLL
         {
             return await SachDAL.Instance.AddExistingSach(s.id, (int)s.SoLuong);
         }
+        public async Task<(bool, string)> UpdateSach(SACH s)
+        {
+            var sach = await SachDAL.Instance.GetSachById(s.id);
+            if (sach == null || sach.IsDeleted == true)
+            {
+                return (false, "Sách không tồn tại"); 
+            }
+            var res = CheckSach(s);
+            if(res.Item1 == false)
+            {
+                return res;
+            }
+            return await SachDAL.Instance.UpdateSach(s);
+        }
+        public async Task<(bool, string)> DeleteSach(int id)
+        {
+            var sach = await SachDAL.Instance.GetSachById(id);
+            if (sach == null || sach.IsDeleted == true)
+            {
+                return (false, "Sách không tồn tại");
+            }
+            foreach(var cuonsach in sach.CUONSACHes)
+            {
+                if (cuonsach.TinhTrang == true && cuonsach.IsDeleted == false)
+                {
+                    return (false, "Không thể xoá sách vì đang có cuốn sách được mượn.");
+                }
+            }
+            return await SachDAL.Instance.DeleteSach(id);
+        }
         private (bool, string) CheckSach(SACH s)
         {
             if (string.IsNullOrEmpty(s.NhaXB))

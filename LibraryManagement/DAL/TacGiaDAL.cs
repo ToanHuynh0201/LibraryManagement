@@ -40,18 +40,18 @@ namespace LibraryManagement.DAL
             }
         }
 
-        public async Task<List<TACGIA>> GetTacGiaByMa(string MaTG)
+        public async Task<List<TACGIA>> GetTacGiaByMa(string matg)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.TACGIAs.AsNoTracking().Where(tg => tg.MaTG.Contains(MaTG)).ToListAsync();
+                return await context.TACGIAs.AsNoTracking().Where(tg => tg.MaTG.Contains(matg)).ToListAsync();
             }
         }
-        public async Task<List<TACGIA>> GetTacGiaByTen(string TenTG)
+        public async Task<List<TACGIA>> GetTacGiaByTen(string tentg)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.TACGIAs.AsNoTracking().Where(tg => tg.TenTG.Contains(TenTG)).ToListAsync();
+                return await context.TACGIAs.AsNoTracking().Where(tg => tg.TenTG.Contains(tentg)).ToListAsync();
             }
         }
         public async Task<(bool, string)> AddTacGia(TACGIA tg)

@@ -38,20 +38,20 @@ namespace LibraryManagement.DAL
                 .FirstOrDefaultAsync(cs => cs.id == id && cs.IsDeleted == false);
             }
         }
-        public async Task<List<CUONSACH>> GetCuonSachByMaSach(int MaSach)
+        public async Task<List<CUONSACH>> GetCuonSachByMaSach(int masach)
         {
             using (var context = new LibraryManagementEntities())
             {
                 return await context.CUONSACHes.AsNoTracking()
-                .Where(cs => cs.MaSach == MaSach && cs.IsDeleted == false).ToListAsync();
+                .Where(cs => cs.MaSach == masach && cs.IsDeleted == false).ToListAsync();
             }
         }
-        public async Task<List<CUONSACH>> GetCuonSachChuaDuocMuonByMaSach(int MaSach)
+        public async Task<List<CUONSACH>> GetCuonSachChuaDuocMuonByMaSach(int masach)
         {
             using (var context = new LibraryManagementEntities())
             {
                 return await context.CUONSACHes.AsNoTracking()
-                .Where(cs => cs.MaSach == MaSach && cs.TinhTrang == false
+                .Where(cs => cs.MaSach == masach && cs.TinhTrang == false
                 && cs.IsDeleted == false).ToListAsync();
             }
         }
