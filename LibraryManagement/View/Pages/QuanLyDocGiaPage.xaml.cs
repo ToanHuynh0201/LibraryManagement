@@ -12,16 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LibraryManagement.View.Pages;
 
-namespace LibraryManagement
+namespace LibraryManagement.View.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for QuanLyDocGiaPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class QuanLyDocGiaPage : Page
     {
-        public MainWindow()
+        public QuanLyDocGiaPage()
         {
             InitializeComponent();
         }
