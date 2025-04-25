@@ -22,7 +22,7 @@
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding GetNavigationFrameCM}"
-                               CommandParameter="{Binding ElementName=mainFrame}"/>
+                                   CommandParameter="{Binding ElementName=mainFrame}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid x:Name="mainGrid"

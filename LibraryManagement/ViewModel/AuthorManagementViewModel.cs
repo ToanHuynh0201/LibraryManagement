@@ -5,26 +5,15 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LibraryManagement.ViewModel
 {
-    public class BookManagementViewModel : BaseViewModel
+    public class AuthorManagementViewModel : BaseViewModel
     {
         #region Properties
-        private string _SearchText;
-        public string SearchText
-        {
-            get
-            {
-                return _SearchText;
-            }
-            set
-            {
-                _SearchText = value;
-                OnPropertyChanged();
-            }
-        }
         private string _SearchProperties;
         public string SearchProperties
         {
@@ -38,16 +27,29 @@ namespace LibraryManagement.ViewModel
                 OnPropertyChanged();
             }
         }
-        private object _BookSeleted;
-        public object BookSeleted
+        private string _SearchText;
+        public string SearchText
         {
             get
             {
-                return _BookSeleted;
+                return _SearchText;
             }
             set
             {
-                _BookSeleted = value;
+                _SearchText = value;
+                OnPropertyChanged();
+            }
+        }
+        private object _AuthorSeleted;
+        public object AuthorSeleted
+        {
+            get
+            {
+                return _AuthorSeleted;
+            }
+            set
+            {
+                _AuthorSeleted = value;
                 OnPropertyChanged();
             }
         }
@@ -77,63 +79,73 @@ namespace LibraryManagement.ViewModel
                 OnPropertyChanged();
             }
         }
-        private string _Author;
-        public string Author
+        private string _DetailID;
+        public string DetailID
         {
             get
             {
-                return _Author;
+                return _DetailID;
             }
             set
             {
-                _Author = value;
+                _DetailID = value;
                 OnPropertyChanged();
             }
         }
-        private string _PublishingHouse;
-        public string PublishingHouse
+        private string _DetailName;
+        public string DetailName
         {
             get
             {
-                return _PublishingHouse;
+                return _DetailName;
             }
             set
             {
-                _PublishingHouse = value;
+                _DetailName = value;
                 OnPropertyChanged();
             }
         }
 
         public ObservableCollection<string> SearchList { get; set; }
-        private ObservableCollection<object> _ListBooks;
-        public ObservableCollection<object> ListBooks
+        private ObservableCollection<object> _ListAuthors;
+        public ObservableCollection<object> ListAuthors
         {
             get
             {
-                return _ListBooks;
+                return _ListAuthors;
             }
             set
             {
-                _ListBooks = value;
+                _ListAuthors = value;
                 OnPropertyChanged();
             }
         }
+
+        private Window mainWindow { get; set; }
         #endregion
 
         #region Commands
-        public ICommand LoadDataBookCM { get; set; }
-        public ICommand SearchData { get; set; }
+        public ICommand ExitCM { get; set; }
         public ICommand ResetData { get; set; }
-        public ICommand AddBookCM { get; set; }
-        public ICommand ViewBookCM { get; set; }
-        public ICommand UpdateBookCM { get; set; }
-        public ICommand DeleteBookCM { get; set; }
+        public ICommand SearchData { get; set; }
         public ICommand AddAuthorCM { get; set; }
-        public ICommand AddCategoryCM { get; set; }
+        public ICommand DeleteAuthorCM { get; set; }
+        public ICommand EditCM { get; set; }
+        public ICommand SaveCM { get; set; }
+        public ICommand GetThisWindowCM { get; set; }
         #endregion
-        public BookManagementViewModel()
+
+        public AuthorManagementViewModel()
         {
-            LoadDataBookCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            GetThisWindowCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                mainWindow = p;
+            });
+            ExitCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                mainWindow.Close();
+            });
+            ResetData = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
 
             });
@@ -141,35 +153,24 @@ namespace LibraryManagement.ViewModel
             {
 
             });
-            ResetData = new RelayCommand<object>((p) => { return true; }, (p) =>
+            DeleteAuthorCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
 
             });
-            AddBookCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            SaveCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
 
             });
-            ViewBookCM = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-
-            });
-            UpdateBookCM = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-
-            });
-            DeleteBookCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            EditCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
 
             });
             AddAuthorCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                AuthorManagement authorManagement = new AuthorManagement();
-                authorManagement.ShowDialog();
-            });
-            AddCategoryCM = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {   CategoryManagement categoryManagement = new CategoryManagement();
-                categoryManagement.ShowDialog();
+                AddAuthorWindow addAuthorWindow = new AddAuthorWindow();
+                addAuthorWindow.ShowDialog();
             });
         }
+
     }
 }

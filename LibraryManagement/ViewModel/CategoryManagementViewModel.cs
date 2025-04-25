@@ -168,7 +168,8 @@ namespace LibraryManagement.ViewModel
             });
             AddCategoryCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-
+                AddCategoryWindow addCategoryWindow = new AddCategoryWindow();
+                addCategoryWindow.ShowDialog();
             });
         }
     }
