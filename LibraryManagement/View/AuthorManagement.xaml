@@ -127,6 +127,11 @@
                           AutoGenerateColumns="False" IsReadOnly="True"
                           Grid.Column="0"
                           Width="500">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding ViewDetailCM}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn CanUserResize="False" 
                                                 Width="Auto" 

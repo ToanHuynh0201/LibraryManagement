@@ -63,7 +63,7 @@
                              Height="25"
                              Margin="84 0 0 0"
                              IsReadOnly="True"
-                             Text="{Binding CurrentStaff}"/>
+                             Text="{Binding CurrentRule}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10 30 0 0">
@@ -77,7 +77,7 @@
                              Height="25"
                              Margin="108 0 0 0"
                              IsReadOnly="True"
-                             Text="{Binding CurrentStaff}"/>
+                             Text="{Binding CurrentRule}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10 30 0 0">
@@ -91,7 +91,7 @@
                              Height="25"
                              Margin="20 0 0 0"
                              IsReadOnly="True"
-                             Text="{Binding CurrentStaff}"/>
+                             Text="{Binding CurrentRule}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10 30 0 0">
@@ -105,7 +105,7 @@
                              Height="25"
                              Margin="24 0 0 0"
                              IsReadOnly="True"
-                             Text="{Binding CurrentStaff}"/>
+                             Text="{Binding CurrentRule}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Column="1" 
@@ -131,7 +131,7 @@
                              Height="25"
                              Margin="40 0 0 0"
                              IsReadOnly="True"
-                             Text="{Binding CurrentStaff}"/>
+                             Text="{Binding CurrentRule}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10 30 0 0">
@@ -145,7 +145,7 @@
                              Height="25"
                              Margin="115 0 0 0"
                              IsReadOnly="True"
-                             Text="{Binding CurrentStaff}"/>
+                             Text="{Binding CurrentRule}"/>
                 </StackPanel>
             </StackPanel>
 
@@ -164,7 +164,8 @@
                         FontWeight="Bold"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Margin="0 0 20 0"/>
+                        Margin="0 0 20 0"
+                        Command="{Binding EditCM}"/>
                 <Button Content="Lưu thay đổi"
                         materialDesign:ButtonAssist.CornerRadius="10"
                         materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5"
@@ -175,7 +176,8 @@
                         FontWeight="Bold"
                         Margin="20 0 0 0"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center"
+                        Command="{Binding SaveCM}"/>
             </StackPanel>
         </Grid>
     </Border>

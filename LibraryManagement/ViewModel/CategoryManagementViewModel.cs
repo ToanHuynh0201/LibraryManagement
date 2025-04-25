@@ -133,6 +133,7 @@ namespace LibraryManagement.ViewModel
         public ICommand SaveCM { get; set; }
         public ICommand EditCM { get; set; }
         public ICommand DeleteCategoryCM { get; set; }
+        public ICommand ViewDetailCM { get; set; }
         public ICommand GetThisWindowCM { get; set; }
         #endregion
 
@@ -163,6 +164,10 @@ namespace LibraryManagement.ViewModel
 
             });
             EditCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+
+            });
+            ViewDetailCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
 
             });
