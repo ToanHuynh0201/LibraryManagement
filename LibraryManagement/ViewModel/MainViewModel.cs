@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
+using LibraryManagement.View;
 
 namespace LibraryManagement.ViewModel
 {
@@ -13,7 +9,7 @@ namespace LibraryManagement.ViewModel
         public ICommand GetNavigationFrameCM { get; set; }
         public ICommand QuanLyDocGiaCM { get; set; }
         public ICommand QuanLySachCM { get; set; }
-        public ICommand QuanLyNhanSuCM { get; set; }
+        public ICommand QuanLyNoiBoCM { get; set; }
         public ICommand ThongKeCM { get; set; }
         public ICommand TaiKhoanCM { get; set; }
         public ICommand DangXuatCM { get; set; }
@@ -27,29 +23,33 @@ namespace LibraryManagement.ViewModel
             {
                 NavigationFrame = p;
             });
-            QuanLyDocGiaCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            QuanLyDocGiaCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                
+                NavigationFrame.Navigate(new ReaderManagement());
             });
-            QuanLySachCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            QuanLySachCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {   
+                NavigationFrame.Navigate(new BookManagement());
+            });
+            ThongKeCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                NavigationFrame.Navigate(new StatisticPage());
+            });
+            QuanLyNoiBoCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                NavigationFrame.Navigate(new InternalManagement());
+            });
+            TaiKhoanCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                NavigationFrame.Navigate(new Account());
+            });
+            DangXuatCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
 
             });
-            ThongKeCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            ThoatCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-
-            });
-            TaiKhoanCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
-            {
-
-            });
-            DangXuatCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
-            {
-
-            });
-            ThoatCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
-            {
-
+                App.Current.Shutdown();
             });
         }
     }

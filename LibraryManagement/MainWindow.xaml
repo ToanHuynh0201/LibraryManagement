@@ -23,14 +23,14 @@
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding GetNavigationFrameCM}"
-                               CommandParameter="{Binding ElementName=mainFrame}"/>
+                                   CommandParameter="{Binding ElementName=mainFrame}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid x:Name="mainGrid"
           Background="Transparent">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
 
         <Border CornerRadius="25,0,0,25" 
@@ -129,7 +129,7 @@
                 </Grid>
             </Button>
             <!--Tra sach -->
-            <Button Command="{Binding QuanLyNhanSuCM}" 
+            <Button Command="{Binding QuanLyNoiBoCM}" 
                     Style="{StaticResource NavigationButton}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
