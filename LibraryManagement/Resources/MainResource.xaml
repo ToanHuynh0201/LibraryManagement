@@ -22,7 +22,7 @@
     
     
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-    <converters:GridLinesVisibilityBorderToThicknessConverter x:Key="GridLinesVisibilityBorderToThicknessConverter"/>
+    <converters:ListViewGridViewConverter x:Key="GridLinesVisibilityBorderToThicknessConverter"/>
 
 
     <!--#region SolidColorBrush-->

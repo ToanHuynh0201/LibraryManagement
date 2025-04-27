@@ -1,17 +1,17 @@
 ﻿<Application x:Class="LibraryManagement.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:LibraryManagement"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             StartupUri="MainWindow.xaml">
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:local="clr-namespace:LibraryManagement"
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            StartupUri="MainWindow.xaml">
+   <Application.Resources>
+       <ResourceDictionary>
+           <ResourceDictionary.MergedDictionaries>
+               <!-- Ensure the MaterialDesignThemes.Wpf NuGet package is installed -->
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
                 <ResourceDictionary Source="/Resources/MainResource.xaml"></ResourceDictionary>
-                
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Application.Resources>
+           </ResourceDictionary.MergedDictionaries>
+       </ResourceDictionary>
+   </Application.Resources>
 </Application>
