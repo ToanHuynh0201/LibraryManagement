@@ -165,6 +165,7 @@
     <Compile Include="BLL\LoaiDocGiaBLL.cs" />
     <Compile Include="BLL\NguoiDungBLL.cs" />
     <Compile Include="BLL\NhomNguoiDungBLL.cs" />
+    <Compile Include="BLL\PhieuMuonTraBLL.cs" />
     <Compile Include="BLL\PhieuNhapSachBLL.cs" />
     <Compile Include="BLL\SachBLL.cs" />
     <Compile Include="BLL\TacGiaBLL.cs" />

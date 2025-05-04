@@ -81,7 +81,7 @@ namespace LibraryManagement.BLL
             var docgia = DocGiaBLL.Instance.GetDocGiaByTenDangNhap(tendangnhap);
             if (docgia != null)
             {
-                return (false, "Người dùng đang là độc giả, không thể xoá");
+                return (false, "Người dùng là độc giả, không thể xoá");
             }
             return await NguoiDungDAL.Instance.DeleteNguoiDung(tendangnhap);
         }

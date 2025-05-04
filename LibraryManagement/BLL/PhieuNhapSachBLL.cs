@@ -34,7 +34,7 @@ namespace LibraryManagement.BLL
         }
         public async Task<(bool, string)> UpdatePhieuNhapSach(PHIEUNHAPSACH pns)
         {
-            var phieunhapsach = await PhieuNhapSachDAL.Instance.GetPhieuNhapSachById(pns.SoPNS);
+            var phieunhapsach = await PhieuNhapSachDAL.Instance.GetPhieuNhapSachById(pns.id);
             if (phieunhapsach == null)
             {
                 return (false, "KhÔng tìm thấy phiếu nhập");
