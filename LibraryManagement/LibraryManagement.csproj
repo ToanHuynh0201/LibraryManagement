@@ -171,12 +171,15 @@
     <Compile Include="ViewModel\AddCategoryViewModel.cs" />
     <Compile Include="ViewModel\AuthorManagementViewModel.cs" />
     <Compile Include="BLL\ChucNangBLL.cs" />
+    <Compile Include="BLL\CT_PhieuNhapSachBLL.cs" />
     <Compile Include="BLL\CuonSachBLL.cs" />
     <Compile Include="BLL\DauSachBLL.cs" />
     <Compile Include="BLL\DocGiaBLL.cs" />
     <Compile Include="BLL\LoaiDocGiaBLL.cs" />
     <Compile Include="BLL\NguoiDungBLL.cs" />
     <Compile Include="BLL\NhomNguoiDungBLL.cs" />
+    <Compile Include="BLL\PhieuMuonTraBLL.cs" />
+    <Compile Include="BLL\PhieuNhapSachBLL.cs" />
     <Compile Include="BLL\SachBLL.cs" />
     <Compile Include="BLL\TacGiaBLL.cs" />
     <Compile Include="BLL\ThamSoBLL.cs" />
