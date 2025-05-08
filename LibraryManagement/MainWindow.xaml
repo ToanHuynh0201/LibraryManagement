@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LibraryManagement"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:pages="clr-namespace:LibraryManagement.View.Pages"
+        xmlns:view="clr-namespace:LibraryManagement.View"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
         Style="{StaticResource MaterialDesignWindow}"
         d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
@@ -211,7 +211,7 @@
                    Width="auto" 
                    Margin="30,10,30,10">
                 <Frame.Content>
-                    <pages:QuanLyDocGiaPage />
+                    <view:ReaderManagement />
                 </Frame.Content>
             </Frame>
 

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:LibraryManagement.View"
         mc:Ignorable="d"
@@ -100,15 +101,28 @@
                     </Grid>
 
                     <!--Loại độc giả-->
-                    <Grid
-                    Grid.Row="2" Margin="10 10">
-                        <TextBox
-                        VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="Loại độc giả"
-                        FontSize="18" 
-                        Foreground="Black"
-                        Text=""
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <Grid Grid.Row="2" Margin="10 10">
+                        <ComboBox materialDesign:ComboBoxAssist.MaxLength="2"
+                                  materialDesign:HintAssist.Hint="Loại độc giả."
+                                  materialDesign:HintAssist.HintOpacity=".7"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                  Padding="10 0 5 0"
+                                  IsEditable="True"
+                                  StaysOpenOnEdit="True"
+                                  IsTextSearchEnabled="True"
+                                  VerticalAlignment="Center" 
+                                  HorizontalAlignment="Left"
+                                  Height="40"
+                                  FontSize="18"
+                                  Width="200"
+                                  ItemsSource="{Binding SearchList}" 
+                                  SelectedItem="{Binding SearchProperties, Mode=TwoWay}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding ResetData}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
                     </Grid>
 
                     <!--Ngày tạo thẻ-->

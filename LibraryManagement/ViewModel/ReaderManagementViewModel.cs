@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManagement.View;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -161,7 +162,8 @@ namespace LibraryManagement.ViewModel
             });
             AddCustomerCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-
+                Window themTheDocGia = new ThemTheDocGiaWindow();
+                themTheDocGia.ShowDialog();
             });
             ExportExcelCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

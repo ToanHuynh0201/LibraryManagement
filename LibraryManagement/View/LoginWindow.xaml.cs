@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LibraryManagement.View.Pages
+namespace LibraryManagement.View
 {
     /// <summary>
-    /// Interaction logic for QuanLySachPage.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class QuanLySachPage : Page
+    public partial class LoginWindow : Window
     {
-        public QuanLySachPage()
+        public LoginWindow()
         {
             InitializeComponent();
         }

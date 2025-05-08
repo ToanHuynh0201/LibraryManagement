@@ -298,6 +298,9 @@
     <Compile Include="View\InternalManagement.xaml.cs">
       <DependentUpon>InternalManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ReaderManagement.xaml.cs">
       <DependentUpon>ReaderManagement.xaml</DependentUpon>
     </Compile>
@@ -306,12 +309,6 @@
     </Compile>
     <Compile Include="View\StatisticPage.xaml.cs">
       <DependentUpon>StatisticPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Pages\QuanLyDocGiaPage.xaml.cs">
-      <DependentUpon>QuanLyDocGiaPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Pages\QuanLySachPage.xaml.cs">
-      <DependentUpon>QuanLySachPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PhieuMuonWindow.xaml.cs">
       <DependentUpon>PhieuMuonWindow.xaml</DependentUpon>
@@ -350,11 +347,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Pages\QuanLyDocGiaPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Pages\QuanLySachPage.xaml">
+    <Page Include="View\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -474,7 +467,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="View\Pages\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
