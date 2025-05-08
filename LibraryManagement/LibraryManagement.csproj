@@ -287,20 +287,41 @@
     <Compile Include="View\AddAuthorWindow.xaml.cs">
       <DependentUpon>AddAuthorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddBookWindow.xaml.cs">
+      <DependentUpon>AddBookWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddCategoryWindow.xaml.cs">
       <DependentUpon>AddCategoryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddReaderWindow.xaml.cs">
+      <DependentUpon>AddReaderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AuthorManagement.xaml.cs">
       <DependentUpon>AuthorManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\BookInformationWindow.xaml.cs">
+      <DependentUpon>BookInformationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BookManagement.xaml.cs">
       <DependentUpon>BookManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BorrowFormWindow.xaml.cs">
+      <DependentUpon>BorrowFormWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CategoryManagement.xaml.cs">
       <DependentUpon>CategoryManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditBookInformationWindow.xaml.cs">
+      <DependentUpon>EditBookInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditReaderInformationWindow.xaml.cs">
+      <DependentUpon>EditReaderInformationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\InternalManagement.xaml.cs">
       <DependentUpon>InternalManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReaderInformtationWindow.xaml.cs">
+      <DependentUpon>ReaderInformtationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReaderManagement.xaml.cs">
       <DependentUpon>ReaderManagement.xaml</DependentUpon>
@@ -317,26 +338,8 @@
     <Compile Include="View\Pages\QuanLySachPage.xaml.cs">
       <DependentUpon>QuanLySachPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PhieuMuonWindow.xaml.cs">
-      <DependentUpon>PhieuMuonWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\SuaTheDocGiaWindow.xaml.cs">
       <DependentUpon>SuaTheDocGiaWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SuaThongTinSachWindow.xaml.cs">
-      <DependentUpon>SuaThongTinSachWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ThemSachWindow.xaml.cs">
-      <DependentUpon>ThemSachWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ThemTheDocGiaWindow.xaml.cs">
-      <DependentUpon>ThemTheDocGiaWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ThongTinDocGiaWindow.xaml.cs">
-      <DependentUpon>ThongTinDocGiaWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ThongTinSachWindow.xaml.cs">
-      <DependentUpon>ThongTinSachWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -354,6 +357,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\AddBookWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AddReaderWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BookInformationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BorrowFormWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditBookInformationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditReaderInformationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Pages\QuanLyDocGiaPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -362,23 +389,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PhieuMuonWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="View\ReaderInformtationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\SuaTheDocGiaWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SuaThongTinSachWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ThemSachWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ThemTheDocGiaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -410,9 +425,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ThongTinDocGiaWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\ReaderManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -424,9 +436,6 @@
     <Page Include="View\StatisticPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ThongTinSachWindow.xaml">
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
