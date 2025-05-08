@@ -166,42 +166,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\AccountViewModel.cs" />
-    <Compile Include="ViewModel\AddAuthorViewModel.cs" />
-    <Compile Include="ViewModel\AddCategoryViewModel.cs" />
-    <Compile Include="ViewModel\AuthorManagementViewModel.cs" />
-    <Compile Include="BLL\ChucNangBLL.cs" />
-    <Compile Include="BLL\CT_PhieuNhapSachBLL.cs" />
-    <Compile Include="BLL\CuonSachBLL.cs" />
-    <Compile Include="BLL\DauSachBLL.cs" />
-    <Compile Include="BLL\DocGiaBLL.cs" />
-    <Compile Include="BLL\LoaiDocGiaBLL.cs" />
-    <Compile Include="BLL\NguoiDungBLL.cs" />
-    <Compile Include="BLL\NhomNguoiDungBLL.cs" />
-    <Compile Include="BLL\PhieuMuonTraBLL.cs" />
-    <Compile Include="BLL\PhieuNhapSachBLL.cs" />
-    <Compile Include="BLL\SachBLL.cs" />
-    <Compile Include="BLL\TacGiaBLL.cs" />
-    <Compile Include="BLL\ThamSoBLL.cs" />
-    <Compile Include="BLL\TheLoaiBLL.cs" />
-    <Compile Include="DAL\BCLuotMuonTheoTheLoaiDAL.cs" />
-    <Compile Include="DAL\BCSachTraTreDAL.cs" />
-    <Compile Include="DAL\BCTongLuotMuonDAL.cs" />
-    <Compile Include="DAL\ChucNangDAL.cs" />
-    <Compile Include="DAL\CT_PhieuNhapSachDAL.cs" />
-    <Compile Include="DAL\CuonSachDAL.cs" />
-    <Compile Include="DAL\DauSachDAL.cs" />
-    <Compile Include="DAL\DocGiaDAL.cs" />
-    <Compile Include="DAL\LoaiDocGiaDAL.cs" />
-    <Compile Include="DAL\NguoiDungDAL.cs" />
-    <Compile Include="DAL\NhomNguoiDungDAL.cs" />
-    <Compile Include="DAL\PhieuMuonTraDAL.cs" />
-    <Compile Include="DAL\PhieuNhapSachDAL.cs" />
-    <Compile Include="DAL\PhieuThuTienPhatDAL.cs" />
-    <Compile Include="DAL\SachDAL.cs" />
-    <Compile Include="DAL\TacGiaDAL.cs" />
-    <Compile Include="DAL\ThamSoDAL.cs" />
-    <Compile Include="DAL\TheLoaiDAL.cs" />
     <Compile Include="DTO\BCLUOTMUONTHEOTHELOAI.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
@@ -271,6 +235,43 @@
     <Compile Include="DTO\THELOAI.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utils\DateToStringConvert.cs" />
+    <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\AddAuthorViewModel.cs" />
+    <Compile Include="ViewModel\AddCategoryViewModel.cs" />
+    <Compile Include="ViewModel\AuthorManagementViewModel.cs" />
+    <Compile Include="BLL\ChucNangBLL.cs" />
+    <Compile Include="BLL\CT_PhieuNhapSachBLL.cs" />
+    <Compile Include="BLL\CuonSachBLL.cs" />
+    <Compile Include="BLL\DauSachBLL.cs" />
+    <Compile Include="BLL\DocGiaBLL.cs" />
+    <Compile Include="BLL\LoaiDocGiaBLL.cs" />
+    <Compile Include="BLL\NguoiDungBLL.cs" />
+    <Compile Include="BLL\NhomNguoiDungBLL.cs" />
+    <Compile Include="BLL\PhieuMuonTraBLL.cs" />
+    <Compile Include="BLL\PhieuNhapSachBLL.cs" />
+    <Compile Include="BLL\SachBLL.cs" />
+    <Compile Include="BLL\TacGiaBLL.cs" />
+    <Compile Include="BLL\ThamSoBLL.cs" />
+    <Compile Include="BLL\TheLoaiBLL.cs" />
+    <Compile Include="DAL\BCLuotMuonTheoTheLoaiDAL.cs" />
+    <Compile Include="DAL\BCSachTraTreDAL.cs" />
+    <Compile Include="DAL\BCTongLuotMuonDAL.cs" />
+    <Compile Include="DAL\ChucNangDAL.cs" />
+    <Compile Include="DAL\CT_PhieuNhapSachDAL.cs" />
+    <Compile Include="DAL\CuonSachDAL.cs" />
+    <Compile Include="DAL\DauSachDAL.cs" />
+    <Compile Include="DAL\DocGiaDAL.cs" />
+    <Compile Include="DAL\LoaiDocGiaDAL.cs" />
+    <Compile Include="DAL\NguoiDungDAL.cs" />
+    <Compile Include="DAL\NhomNguoiDungDAL.cs" />
+    <Compile Include="DAL\PhieuMuonTraDAL.cs" />
+    <Compile Include="DAL\PhieuNhapSachDAL.cs" />
+    <Compile Include="DAL\PhieuThuTienPhatDAL.cs" />
+    <Compile Include="DAL\SachDAL.cs" />
+    <Compile Include="DAL\TacGiaDAL.cs" />
+    <Compile Include="DAL\ThamSoDAL.cs" />
+    <Compile Include="DAL\TheLoaiDAL.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BookManagementViewModel.cs" />
     <Compile Include="ViewModel\CategoryManagementViewModel.cs" />
@@ -463,6 +464,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="DTO\LibraryManagementModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LibraryManagementModel.edmx</DependentUpon>
@@ -473,9 +477,6 @@
       <DependentUpon>LibraryManagementModel.edmx</DependentUpon>
       <LastGenOutput>LibraryManagementModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

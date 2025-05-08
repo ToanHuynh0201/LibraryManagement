@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using LibraryManagement.DTO;
 namespace LibraryManagement.DAL
 {
@@ -46,7 +47,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DOCGIAs.Where(dg => dg.MaDG.Contains(tendg)).ToListAsync();
+                return await context.DOCGIAs.Where(dg => dg.TenDG.Contains(tendg)).ToListAsync();
             }
         }
         public async Task<DOCGIA> GetDocGiaByTenDangNhap(string tendangnhap)
@@ -62,6 +63,13 @@ namespace LibraryManagement.DAL
             {
                 try
                 {
+                    NGUOIDUNG nd = new NGUOIDUNG();
+                    nd.TenDangNhap = dg.TenDangNhap;
+                    nd.MatKhau = "123456";
+                    nd.TenNguoiDung = dg.TenDG;
+                    nd.MaNhom = 3;
+
+                    context.NGUOIDUNGs.Add(nd);
                     context.DOCGIAs.Add(dg);
                     await context.SaveChangesAsync();
                     return (true, "Thêm độc giả thành công");

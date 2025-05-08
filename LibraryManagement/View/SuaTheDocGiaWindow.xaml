@@ -7,10 +7,12 @@
     xmlns:local="clr-namespace:LibraryManagement.View"
     mc:Ignorable="d"
     Title="SuaTheDocGiaWindow" WindowStyle="None"
+    DataContext="{StaticResource ReaderManagementVM}"
     ResizeMode="NoResize"
     Background="Transparent"
     Height="400 " Width="821"
-    WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen"
+    Name="UpdateReaderWindow">
     <Grid>
         <Grid >
             <Grid.RowDefinitions>
@@ -79,12 +81,12 @@
                     <Grid
                  Grid.Row="0"
                  Margin="10 10">
-                        <TextBox
-                     VerticalAlignment="Center"
+                    <TextBox
+                     VerticalAlignment="Top"
                      materialDesign:HintAssist.Hint="Họ và tên"
                      FontSize="18" Foreground="Black"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text=""
+                     Text="{Binding ReaderSeleted.TenDG, Mode=TwoWay}" Margin="174,10,-174,0"
                      />
                     </Grid>
 
@@ -95,7 +97,8 @@
                     materialDesign:HintAssist.Hint="Ngày sinh"
                     materialDesign:TextFieldAssist.HasClearButton="True"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                    FontSize="18" 
+                    FontSize="18"
+                    Text="{Binding ReaderSeleted.NgaySinhDG, Mode=TwoWay}"
                     />
                     </Grid>
 
@@ -107,20 +110,13 @@
                     materialDesign:HintAssist.Hint="Loại độc giả"
                     FontSize="18" 
                     Foreground="Black"
-                    Text=""
+                    Text="{Binding ReaderSeleted.MaLoaiDG, Mode=TwoWay}"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     </Grid>
 
                     <!--Ngày tạo thẻ-->
                     <Grid
-                Grid.Row="3" Margin="10 19">
-                        <DatePicker 
-                    materialDesign:HintAssist.Hint="Ngày tạo thẻ"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                    FontSize="18" 
-                    />
-                    </Grid>
+                Grid.Row="3" Margin="10 19"/>
 
                 </Grid>
 
@@ -136,15 +132,7 @@
                     <!--CMND/CCCD-->
                     <Grid
                 Grid.Row="0"
-                Margin="10 10">
-                        <TextBox
-                    VerticalAlignment="Center"
-                    materialDesign:HintAssist.Hint="CMND/CCCD"
-                    FontSize="18" 
-                    Foreground="Black"
-                    Text=""
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    </Grid>
+                Margin="10 10"/>
 
                     <!--Email-->
                     <Grid
@@ -152,7 +140,7 @@
                         <TextBox
                     VerticalAlignment="Center"
                     materialDesign:HintAssist.Hint="Email"
-                    Text="" 
+                    Text="{Binding ReaderSeleted.Email, Mode=TwoWay}"
                     FontSize="18" Foreground="Black"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                     </Grid>
@@ -163,7 +151,7 @@
                         <TextBox
                     VerticalAlignment="Center"
                     materialDesign:HintAssist.Hint="Địa chỉ"
-                    Text="" 
+                    Text="{Binding ReaderSeleted.DiaChiDG, Mode=TwoWay}" 
                     FontSize="18" Foreground="Black"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                     </Grid>
@@ -187,12 +175,8 @@
                 <StackPanel Margin="0 0 0 10"
             Orientation="Horizontal"
             HorizontalAlignment="Right">
-                    <Button
-                Margin="10 0"
-                Content="Lưu thông tin"/>
-                    <Button
-                Content="Thoát"
-                Margin="10 0"/>
+                    <Button Margin="10 0" Content="Lưu thông tin" Command="{Binding UpdateReaderCM}" CommandParameter="{Binding ElementName=UpdateReaderWindow}"/>
+                    <Button Margin="10 0" Content="Thoát" Command="{Binding CloseWindowCM}" CommandParameter="{Binding ElementName=UpdateReaderWindow}"/>
                 </StackPanel>
             </Grid>
         </Grid>

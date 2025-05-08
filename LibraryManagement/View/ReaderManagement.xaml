@@ -17,7 +17,7 @@
       x:Name="ReaderManagementPage">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadDataCustomerCM}" />
+            <i:InvokeCommandAction Command="{Binding LoadDataReaderCM}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Page.Triggers>
@@ -55,7 +55,7 @@
                              Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="TextChanged">
-                                <i:InvokeCommandAction Command="{Binding SearchData}"/>
+                                <i:InvokeCommandAction Command="{Binding SearchReaderCM}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </TextBox>
@@ -83,7 +83,7 @@
                           SelectedItem="{Binding SearchProperties, Mode=TwoWay}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding ResetData}"/>
+                            <i:InvokeCommandAction Command="{Binding ResetDataCM}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
@@ -110,7 +110,8 @@
                     </StackPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding AddCustomerCM}"/>
+                            <i:InvokeCommandAction Command="{Binding OpenAddReaderCM}"
+                                                   CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
@@ -146,14 +147,14 @@
                        CellStyle="{DynamicResource DataGridCellStyle1}"
                        ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                        RowStyle="{DynamicResource DataGridRowStyle1}"
-                       x:Name="customerGrid" 
+                       x:Name="readerGrid" 
                        ItemsSource="{Binding ListReaders}"
                        SelectedItem="{Binding ReaderSeleted}"
                        AutoGenerateColumns="False" IsReadOnly="True"
                        Grid.Row="1">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding ViewCustomerCM}"/>
+                        <i:InvokeCommandAction Command="{Binding ViewReaderCM}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <DataGrid.Columns>
@@ -174,33 +175,33 @@
                     <DataGridTextColumn Header="ID" 
                                         IsReadOnly="True" 
                                         Width="Auto" 
-                                        Binding="{Binding ID}"/>
-                    <DataGridTextColumn Header="Tên khách hàng" 
+                                        Binding="{Binding MaDG}"/>
+                    <DataGridTextColumn Header="Tên độc giả" 
                                         IsReadOnly="True" 
                                         Width="250" 
-                                        Binding= "{Binding Name}"/>
-                    <DataGridTextColumn Header="Số điện thoại" 
-                                        IsReadOnly="True" 
-                                        Width="Auto" 
-                                        Binding="{Binding PhoneNumber}"/>
+                                        Binding= "{Binding TenDG}"/>
                     <DataGridTextColumn Header="Email" 
                                         IsReadOnly="True" 
                                         Width="Auto" 
                                         Binding="{Binding Email}"/>
-                    <DataGridTextColumn Header="Ngày đăng ký" 
+                    <DataGridTextColumn Header="Ngày lập thẻ" 
                                         IsReadOnly="True" 
                                         Width="Auto" 
-                                        Binding="{Binding Date}"/>
+                                        Binding="{Binding NgayLapThe, Converter={StaticResource DateToStringConverter}}"/>
+                    <DataGridTextColumn Header="Ngày hết hạn" 
+                                        IsReadOnly="True" 
+                                        Width="Auto" 
+                                        Binding="{Binding NgayHetHan, Converter={StaticResource DateToStringConverter}}"/>
                     <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Style="{StaticResource gridEditButton}"
-                                            Command="{Binding ElementName=customerGrid, Path=DataContext.UpdateCustomerCM}">
+                                            Command="{Binding ElementName=readerGrid, Path=DataContext.OpenUpdateReaderCM}">
                                     </Button>
                                     <Button Style="{StaticResource gridRemoveButton}" 
                                             Margin="5 0 0 0" 
-                                            Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteCustomerCM}">
+                                            Command="{Binding ElementName=readerGrid, Path=DataContext.DeleteReaderCM}">
                                     </Button>
                                 </StackPanel>
                             </DataTemplate>

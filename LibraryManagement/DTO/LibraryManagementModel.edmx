@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LibraryManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LibraryManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BCLUOTMUONTHEOTHELOAI">
           <Key>
             <PropertyRef Name="MaBaoCao" />
@@ -556,7 +556,8 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
             <End Role="DAUSACH" EntitySet="DAUSACH" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LibraryManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -624,10 +625,10 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           <Property Name="MaCuonSach" Type="String" MaxLength="7" FixedLength="true" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="MaSach" Type="Int32" Nullable="false" />
           <Property Name="TinhTrang" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="BCSACHTRATREs" Relationship="Self.fk_bcstt_s" FromRole="CUONSACH" ToRole="BCSACHTRATRE" />
           <NavigationProperty Name="SACH" Relationship="Self.fk_cs_s" FromRole="CUONSACH" ToRole="SACH" />
           <NavigationProperty Name="PHIEUMUONTRAs" Relationship="Self.fk_pmt_cs" FromRole="CUONSACH" ToRole="PHIEUMUONTRA" />
-          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="DAUSACH">
           <Key>
@@ -740,10 +741,10 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="TriGia" Type="Int32" Nullable="false" />
           <Property Name="SoLuongCon" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="CT_PHIEUNHAPSACH" Relationship="Self.fk_ctpns_s" FromRole="SACH" ToRole="CT_PHIEUNHAPSACH" />
           <NavigationProperty Name="CUONSACHes" Relationship="Self.fk_cs_s" FromRole="SACH" ToRole="CUONSACH" />
           <NavigationProperty Name="DAUSACH" Relationship="Self.fk_s_tts" FromRole="SACH" ToRole="DAUSACH" />
-          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="TACGIA">
           <Key>
@@ -1117,11 +1118,11 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           <EntitySetMapping Name="CUONSACHes">
             <EntityTypeMapping TypeName="LibraryManagementModel.CUONSACH">
               <MappingFragment StoreEntitySet="CUONSACH">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="MaCuonSach" ColumnName="MaCuonSach" />
                 <ScalarProperty Name="MaSach" ColumnName="MaSach" />
                 <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1219,7 +1220,6 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           <EntitySetMapping Name="SACHes">
             <EntityTypeMapping TypeName="LibraryManagementModel.SACH">
               <MappingFragment StoreEntitySet="SACH">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="MaSach" ColumnName="MaSach" />
                 <ScalarProperty Name="MaDauSach" ColumnName="MaDauSach" />
@@ -1228,6 +1228,7 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="TriGia" ColumnName="TriGia" />
                 <ScalarProperty Name="SoLuongCon" ColumnName="SoLuongCon" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

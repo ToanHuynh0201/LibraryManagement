@@ -1,4 +1,10 @@
-﻿using System;
+﻿using LibraryManagement.BLL;
+using LibraryManagement.DAL;
+using LibraryManagement.DTO;
+using LibraryManagement.View;
+using MaterialDesignThemes.Wpf;
+using Microsoft.Xaml.Behaviors.Core;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -39,88 +45,22 @@ namespace LibraryManagement.ViewModel
                 OnPropertyChanged();
             }
         }
-        private string _ID;
-        public string ID
+        private DOCGIA _docgia { get; set; }
+        public DOCGIA docgia
         {
             get
             {
-                return _ID;
+                return _docgia;
             }
             set
             {
-                _ID = value;
+                _docgia = value;
                 OnPropertyChanged();
             }
         }
-        private string _Name;
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                _Name = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _Phone;
-        public string Phone
-        {
-            get
-            {
-                return _Phone;
-            }
-            set
-            {
-                _Phone = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _Email;
-        public string Email
-        {
-            get
-            {
-                return _Email;
-            }
-            set
-            {
-                _Email = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _Date;
-        public string Date
-        {
-            get
-            {
-                return _Date;
-            }
-            set
-            {
-                _Date = value;
-                OnPropertyChanged();
-            }
-        }
-        private object _ReaderSeleted;
-        public object ReaderSeleted
-        {
-            get
-            {
-                return _ReaderSeleted;
-            }
-            set
-            {
-                _ReaderSeleted = value;
-                OnPropertyChanged();
-            }
-        }
-
         public ObservableCollection<string> SearchList { get; set; }
-        private ObservableCollection<object> _ListReaders;
-        public ObservableCollection<object> ListReaders
+        private ObservableCollection<DOCGIA> _ListReaders;
+        public ObservableCollection<DOCGIA> ListReaders
         {
             get
             {
@@ -132,52 +72,123 @@ namespace LibraryManagement.ViewModel
                 OnPropertyChanged();
             }
         }
+        public ObservableCollection<DOCGIA> AllReaders { get; set; }
+        public DOCGIA ReaderSeleted { get; set; }
         #endregion
 
         #region Commands
-        public ICommand LoadDataCustomerCM { get; set; }
-        public ICommand SearchData { get; set; }
-        public ICommand ResetData { get; set; }
-        public ICommand AddCustomerCM { get; set; }
-        public ICommand ExportExcelCM { get; set; }
-        public ICommand ViewCustomerCM { get; set; }
-        public ICommand UpdateCustomerCM { get; set; }
-        public ICommand DeleteCustomerCM { get; set; }
-
+        public ICommand GetCurrentWindowCM { get; set; }
+        public ICommand LoadDataReaderCM { get; set; }
+        public ICommand SearchReaderCM { get; set; }
+        public ICommand ResetDataCM { get; set; }
+        public ICommand OpenAddReaderCM { get; set; }
+        public ICommand OpenUpdateReaderCM { get; set; }
+        public ICommand AddNewReaderCM { get; set; }
+        public ICommand ViewReaderCM { get; set; }
+        public ICommand UpdateReaderCM { get; set; }
+        public ICommand DeleteReaderCM { get; set; }
+        public ICommand CloseWindowCM { get; set; }
         #endregion
         public ReaderManagementViewModel()
         {
-            LoadDataCustomerCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            SearchList = new ObservableCollection<string> { "Tên độc giả" };
+            SearchProperties = SearchList.FirstOrDefault();
+
+            LoadDataReaderCM = new RelayCommand<DOCGIA>((p) => { return true; }, async (p) =>
+            {
+                try
+                {
+                    var data = await Task.Run(async () => await DocGiaBLL.Instance.GetAllDocGia());
+                    ListReaders = new ObservableCollection<DOCGIA>(data);
+                    AllReaders = new ObservableCollection<DOCGIA>(data);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return;
+                }
+            });
+            SearchReaderCM = new RelayCommand<object>((p) => true, async (p) =>
+            {
+                try
+                {
+                    if (string.IsNullOrWhiteSpace(SearchText))
+                    {
+                        ListReaders.Clear();
+                        ListReaders = AllReaders;
+                    }
+                    else
+                    {
+                        if (SearchProperties == "Tên độc giả")
+                        {
+                            var res = await Task.Run(async () => await DocGiaBLL.Instance.GetDocGiaByTenDG(SearchText));
+                            ListReaders = new ObservableCollection<DOCGIA>(res);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi tìm kiếm: " + ex.Message);
+                }
+            });
+            ResetDataCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                SearchText = "";
+                ListReaders = new ObservableCollection<DOCGIA>(AllReaders);
+            });
+            OpenAddReaderCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                docgia = new DOCGIA()
+                {
+                    NgayLapThe = DateTime.Now,
+                    NgaySinhDG = DateTime.Now,
+                    MaLoaiDG = 1
+                };
+                var w1 = new ThemTheDocGiaWindow();
+                w1.ShowDialog();
+            });
+            OpenUpdateReaderCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                var w1 = new SuaTheDocGiaWindow();
+                w1.ShowDialog();
+            });
+            AddNewReaderCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            {
+                var res = await Task.Run(async () => await DocGiaBLL.Instance.AddDocGia(docgia));
+                MessageBox.Show(res.Item2);
+                if (res.Item1)
+                {
+                    LoadDataReaderCM.Execute(null);
+                    p.Close();
+                }
+            });
+            ViewReaderCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
 
             });
-            SearchData = new RelayCommand<object>((p) => { return true; }, (p) =>
+            UpdateReaderCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
-
+                var res = await Task.Run(async () => await DocGiaBLL.Instance.UpdateDocGia(ReaderSeleted));
+                MessageBox.Show(res.Item2);
+                if (res.Item1)
+                {
+                    p.Close();
+                }
             });
-            ResetData = new RelayCommand<object>((p) => { return true; }, (p) =>
+            DeleteReaderCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
-
+                var result = MessageBox.Show("Bạn có chắc muốn xóa độc giả không?","Xác nhận xóa",
+                                          MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if(result == MessageBoxResult.Yes)
+                {
+                    var res = await Task.Run(async () => await DocGiaBLL.Instance.DeleteDocGia(ReaderSeleted.id));
+                    LoadDataReaderCM.Execute(null);
+                    MessageBox.Show(res.Item2);
+                }
             });
-            AddCustomerCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            CloseWindowCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-
-            });
-            ExportExcelCM = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-
-            });
-            ViewCustomerCM = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-
-            });
-            UpdateCustomerCM = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-
-            });
-            DeleteCustomerCM = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-
+                p.Close();
             });
         }
     }

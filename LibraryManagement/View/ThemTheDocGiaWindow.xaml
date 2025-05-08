@@ -4,13 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:LibraryManagement.View"
+        xmlns:local="clr-namespace:LibraryManagement.View" xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" d:DataContext="{d:DesignInstance Type=viewmodel:ReaderManagementViewModel}"
+        DataContext="{StaticResource ReaderManagementVM}"
         mc:Ignorable="d"
         Title="ThemTheDocGiaWindow" WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
         Height="400 " Width="821"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Name="AddReaderWindow">
     <Grid>
         <Grid >
             <Grid.RowDefinitions>
@@ -49,14 +51,16 @@
                  FontWeight="Bold"/>
 
                 <Button Grid.Column="1" 
-                 Content="X" 
-                 HorizontalAlignment="Left"
-                 FontSize="20"
-                 Width="53" 
-                 Background="Red" 
-                 Foreground="#FFE7DDDD"
-                 Height="40"
-                 Command="{Binding ThoatCM}" Margin="4,-1,0,0" VerticalAlignment="Top"/>
+                        Content="X" 
+                        HorizontalAlignment="Left"
+                        FontSize="20"
+                        Width="53" 
+                        Background="Red" 
+                        Foreground="#FFE7DDDD"
+                        Height="40"
+                        Command="{Binding CloseWindowCM}"
+                        CommandParameter="{Binding ElementName=AddReaderWindow}"
+                        Margin="4,-1,0,0" VerticalAlignment="Top"/>
             </Grid>
 
             <Grid
@@ -84,7 +88,7 @@
                          materialDesign:HintAssist.Hint="Họ và tên"
                          FontSize="18" Foreground="Black"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         Text=""
+                         Text="{Binding docgia.TenDG, Mode=TwoWay}"
                          />
                     </Grid>
 
@@ -96,6 +100,7 @@
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                         FontSize="18" 
+                        Text="{Binding docgia.NgaySinhDG, Mode=TwoWay}"
                         />
                     </Grid>
 
@@ -107,7 +112,7 @@
                         materialDesign:HintAssist.Hint="Loại độc giả"
                         FontSize="18" 
                         Foreground="Black"
-                        Text=""
+                        Text="{Binding docgia.MaLoaiDG, Mode=TwoWay}"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     </Grid>
 
@@ -115,8 +120,9 @@
                     <Grid
                     Grid.Row="3" Margin="10 19">
                         <DatePicker 
-                        materialDesign:HintAssist.Hint="Ngày tạo thẻ"
+                        materialDesign:HintAssist.Hint="Ngày lập thẻ"
                         materialDesign:TextFieldAssist.HasClearButton="True"
+                        Text="{Binding docgia.NgayLapThe, Mode=TwoWay}"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                         FontSize="18" 
                         />
@@ -139,10 +145,10 @@
                     Margin="10 10">
                         <TextBox
                         VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="CMND/CCCD"
+                        materialDesign:HintAssist.Hint="Tên đăng nhập"
                         FontSize="18" 
                         Foreground="Black"
-                        Text=""
+                        Text="{Binding docgia.TenDangNhap, Mode=TwoWay}"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     </Grid>
 
@@ -152,9 +158,9 @@
                         <TextBox
                         VerticalAlignment="Center"
                         materialDesign:HintAssist.Hint="Email"
-                        Text="" 
                         FontSize="18" Foreground="Black"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding docgia.Email, Mode=TwoWay}"/>
                     </Grid>
 
                     <!--Địa chỉ-->
@@ -163,7 +169,7 @@
                         <TextBox
                         VerticalAlignment="Center"
                         materialDesign:HintAssist.Hint="Địa chỉ"
-                        Text="" 
+                        Text="{Binding docgia.DiaChiDG, Mode=TwoWay}" 
                         FontSize="18" Foreground="Black"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                     </Grid>
@@ -186,12 +192,12 @@
                 <StackPanel Margin="0 0 0 10"
                 Orientation="Horizontal"
                 HorizontalAlignment="Right">
-                    <Button
-                    Margin="10 0"
-                    Content="Thêm mới"/>
-                    <Button
-                    Content="Thoát"
-                    Margin="10 0"/>
+                    <Button Margin="10 0" Content="Thêm mới"
+                            Command="{Binding AddNewReaderCM}"
+                            CommandParameter="{Binding ElementName=AddReaderWindow}"/>
+                    <Button Content="Thoát" Margin="10 0"
+                            Command="{Binding CloseWindowCM}"
+                            CommandParameter="{Binding ElementName=AddReaderWindow}"/>
                 </StackPanel>
             </Grid>
         </Grid>
