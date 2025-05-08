@@ -21,7 +21,6 @@
     <viewmodel:CategoryManagementViewModel x:Key="CategoryManagementVM"/>
     <viewmodel:AddCategoryViewModel x:Key="AddCategoryVM"/>
     
-    
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <converters:ListViewGridViewConverter x:Key="GridLinesVisibilityBorderToThicknessConverter"/>
 

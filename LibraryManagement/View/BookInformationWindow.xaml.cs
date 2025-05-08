@@ -17,7 +17,7 @@ namespace LibraryManagement.View
     /// <summary>
     /// Interaction logic for BookInformationWindow.xaml
     /// </summary>
-    public partial class ThongTinSachWindow : Window
+    public partial class BookInformationWindow : Window
     {
         public BookInformationWindow()
         {

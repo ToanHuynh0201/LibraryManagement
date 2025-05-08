@@ -332,15 +332,6 @@
     <Compile Include="View\StatisticPage.xaml.cs">
       <DependentUpon>StatisticPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Pages\QuanLyDocGiaPage.xaml.cs">
-      <DependentUpon>QuanLyDocGiaPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Pages\QuanLySachPage.xaml.cs">
-      <DependentUpon>QuanLySachPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SuaTheDocGiaWindow.xaml.cs">
-      <DependentUpon>SuaTheDocGiaWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -381,21 +372,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Pages\QuanLyDocGiaPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Pages\QuanLySachPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ReaderInformtationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\SuaTheDocGiaWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Account.xaml">
       <SubType>Designer</SubType>

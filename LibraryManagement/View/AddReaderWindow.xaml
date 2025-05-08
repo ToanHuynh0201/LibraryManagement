@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:LibraryManagement.View" xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" d:DataContext="{d:DesignInstance Type=viewmodel:ReaderManagementViewModel}"
+        xmlns:local="clr-namespace:LibraryManagement.View" xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:ReaderManagementViewModel}"
         DataContext="{StaticResource ReaderManagementVM}"
         mc:Ignorable="d"
         Title="AddReaderWindow" WindowStyle="None"
@@ -13,7 +14,7 @@
         Background="Transparent"
         Height="400 " Width="821"
         WindowStartupLocation="CenterScreen"
-        Name="AddReaderWindow">
+        Name="addReaderWindow">
     <Grid>
         <Grid >
             <Grid.RowDefinitions>

@@ -11,7 +11,6 @@ namespace LibraryManagement
         public MainWindow()
         {
             InitializeComponent();
-            mainFrame.Navigate(new ReaderManagement());
         }
     }
 }
