@@ -92,7 +92,7 @@ namespace LibraryManagement.BLL
             {
                 return (false, "Nhóm người dùng chưa có tên");
             }
-            foreach (var cn in nnd.CHUCNANGs)
+            foreach (CHUCNANG cn in nnd.CHUCNANGs)
             {
                 if (ChucNangDAL.Instance.GetChucNangById(cn.id) == null)
                 {

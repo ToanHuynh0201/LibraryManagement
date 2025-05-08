@@ -2,9 +2,12 @@
 using LibraryManagement.DTO;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LibraryManagement.BLL
 {
@@ -92,21 +95,20 @@ namespace LibraryManagement.BLL
             {
                 return (false, "Độc giả không tồn tại");
             }
+            List<PHIEUMUONTRA> dspmt = await PhieuMuonTraDAL.Instance.GetPMTByMaDG(id);
+            foreach (PHIEUMUONTRA pmt in dspmt)
+                if (pmt.NgayTra == null)
+                    return (false, "Độc giả đang có sách mượn chưa trả, không thể xoá");
             return await DocGiaDAL.Instance.DeleteDocGia(id);
         }
         private (bool, string) CheckDocGia(DOCGIA dg)
         {
-            var nguoidung = NguoiDungBLL.Instance.GetNguoiDungByTenDN(dg.TenDangNhap);
-            if (nguoidung == null)
-            {
-                return (false, "Độc giả chưa có tài khoản");
-            }
             if (string.IsNullOrEmpty(dg.TenDG))
             {
                 return (false, "Tên độc giả không được để trống");
             }
             var ldg = LoaiDocGiaBLL.Instance.GetLoaiDocGiaById(dg.MaLoaiDG);
-            if(ldg == null)
+            if(ldg.Result == null)
             {
                 return (false, "Loại độc giả không tồn tại");
             }

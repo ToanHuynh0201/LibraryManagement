@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace LibraryManagement.View
 {
     /// <summary>
-    /// Interaction logic for ThongTinSachWindow.xaml
+    /// Interaction logic for EditReaderInformationWindow.xaml
     /// </summary>
-    public partial class ThongTinSachWindow : Window
+    public partial class EditReaderInformationWindow : Window
     {
-        public ThongTinSachWindow()
+        public EditReaderInformationWindow()
         {
             InitializeComponent();
         }

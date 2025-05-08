@@ -166,39 +166,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\AccountViewModel.cs" />
-    <Compile Include="ViewModel\AddAuthorViewModel.cs" />
-    <Compile Include="ViewModel\AddCategoryViewModel.cs" />
-    <Compile Include="ViewModel\AuthorManagementViewModel.cs" />
-    <Compile Include="BLL\ChucNangBLL.cs" />
-    <Compile Include="BLL\CuonSachBLL.cs" />
-    <Compile Include="BLL\DauSachBLL.cs" />
-    <Compile Include="BLL\DocGiaBLL.cs" />
-    <Compile Include="BLL\LoaiDocGiaBLL.cs" />
-    <Compile Include="BLL\NguoiDungBLL.cs" />
-    <Compile Include="BLL\NhomNguoiDungBLL.cs" />
-    <Compile Include="BLL\SachBLL.cs" />
-    <Compile Include="BLL\TacGiaBLL.cs" />
-    <Compile Include="BLL\ThamSoBLL.cs" />
-    <Compile Include="BLL\TheLoaiBLL.cs" />
-    <Compile Include="DAL\BCLuotMuonTheoTheLoaiDAL.cs" />
-    <Compile Include="DAL\BCSachTraTreDAL.cs" />
-    <Compile Include="DAL\BCTongLuotMuonDAL.cs" />
-    <Compile Include="DAL\ChucNangDAL.cs" />
-    <Compile Include="DAL\CT_PhieuNhapSachDAL.cs" />
-    <Compile Include="DAL\CuonSachDAL.cs" />
-    <Compile Include="DAL\DauSachDAL.cs" />
-    <Compile Include="DAL\DocGiaDAL.cs" />
-    <Compile Include="DAL\LoaiDocGiaDAL.cs" />
-    <Compile Include="DAL\NguoiDungDAL.cs" />
-    <Compile Include="DAL\NhomNguoiDungDAL.cs" />
-    <Compile Include="DAL\PhieuMuonTraDAL.cs" />
-    <Compile Include="DAL\PhieuNhapSachDAL.cs" />
-    <Compile Include="DAL\PhieuThuTienPhatDAL.cs" />
-    <Compile Include="DAL\SachDAL.cs" />
-    <Compile Include="DAL\TacGiaDAL.cs" />
-    <Compile Include="DAL\ThamSoDAL.cs" />
-    <Compile Include="DAL\TheLoaiDAL.cs" />
     <Compile Include="DTO\BCLUOTMUONTHEOTHELOAI.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
@@ -268,6 +235,43 @@
     <Compile Include="DTO\THELOAI.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utils\DateToStringConvert.cs" />
+    <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\AddAuthorViewModel.cs" />
+    <Compile Include="ViewModel\AddCategoryViewModel.cs" />
+    <Compile Include="ViewModel\AuthorManagementViewModel.cs" />
+    <Compile Include="BLL\ChucNangBLL.cs" />
+    <Compile Include="BLL\CT_PhieuNhapSachBLL.cs" />
+    <Compile Include="BLL\CuonSachBLL.cs" />
+    <Compile Include="BLL\DauSachBLL.cs" />
+    <Compile Include="BLL\DocGiaBLL.cs" />
+    <Compile Include="BLL\LoaiDocGiaBLL.cs" />
+    <Compile Include="BLL\NguoiDungBLL.cs" />
+    <Compile Include="BLL\NhomNguoiDungBLL.cs" />
+    <Compile Include="BLL\PhieuMuonTraBLL.cs" />
+    <Compile Include="BLL\PhieuNhapSachBLL.cs" />
+    <Compile Include="BLL\SachBLL.cs" />
+    <Compile Include="BLL\TacGiaBLL.cs" />
+    <Compile Include="BLL\ThamSoBLL.cs" />
+    <Compile Include="BLL\TheLoaiBLL.cs" />
+    <Compile Include="DAL\BCLuotMuonTheoTheLoaiDAL.cs" />
+    <Compile Include="DAL\BCSachTraTreDAL.cs" />
+    <Compile Include="DAL\BCTongLuotMuonDAL.cs" />
+    <Compile Include="DAL\ChucNangDAL.cs" />
+    <Compile Include="DAL\CT_PhieuNhapSachDAL.cs" />
+    <Compile Include="DAL\CuonSachDAL.cs" />
+    <Compile Include="DAL\DauSachDAL.cs" />
+    <Compile Include="DAL\DocGiaDAL.cs" />
+    <Compile Include="DAL\LoaiDocGiaDAL.cs" />
+    <Compile Include="DAL\NguoiDungDAL.cs" />
+    <Compile Include="DAL\NhomNguoiDungDAL.cs" />
+    <Compile Include="DAL\PhieuMuonTraDAL.cs" />
+    <Compile Include="DAL\PhieuNhapSachDAL.cs" />
+    <Compile Include="DAL\PhieuThuTienPhatDAL.cs" />
+    <Compile Include="DAL\SachDAL.cs" />
+    <Compile Include="DAL\TacGiaDAL.cs" />
+    <Compile Include="DAL\ThamSoDAL.cs" />
+    <Compile Include="DAL\TheLoaiDAL.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BookManagementViewModel.cs" />
     <Compile Include="ViewModel\CategoryManagementViewModel.cs" />
@@ -283,23 +287,41 @@
     <Compile Include="View\AddAuthorWindow.xaml.cs">
       <DependentUpon>AddAuthorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddBookWindow.xaml.cs">
+      <DependentUpon>AddBookWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddCategoryWindow.xaml.cs">
       <DependentUpon>AddCategoryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddReaderWindow.xaml.cs">
+      <DependentUpon>AddReaderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AuthorManagement.xaml.cs">
       <DependentUpon>AuthorManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\BookInformationWindow.xaml.cs">
+      <DependentUpon>BookInformationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BookManagement.xaml.cs">
       <DependentUpon>BookManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BorrowFormWindow.xaml.cs">
+      <DependentUpon>BorrowFormWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CategoryManagement.xaml.cs">
       <DependentUpon>CategoryManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditBookInformationWindow.xaml.cs">
+      <DependentUpon>EditBookInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditReaderInformationWindow.xaml.cs">
+      <DependentUpon>EditReaderInformationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\InternalManagement.xaml.cs">
       <DependentUpon>InternalManagement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    <Compile Include="View\ReaderInformtationWindow.xaml.cs">
+      <DependentUpon>ReaderInformtationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReaderManagement.xaml.cs">
       <DependentUpon>ReaderManagement.xaml</DependentUpon>
@@ -310,26 +332,14 @@
     <Compile Include="View\StatisticPage.xaml.cs">
       <DependentUpon>StatisticPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PhieuMuonWindow.xaml.cs">
-      <DependentUpon>PhieuMuonWindow.xaml</DependentUpon>
+    <Compile Include="View\Pages\QuanLyDocGiaPage.xaml.cs">
+      <DependentUpon>QuanLyDocGiaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\QuanLySachPage.xaml.cs">
+      <DependentUpon>QuanLySachPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SuaTheDocGiaWindow.xaml.cs">
       <DependentUpon>SuaTheDocGiaWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SuaThongTinSachWindow.xaml.cs">
-      <DependentUpon>SuaThongTinSachWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ThemSachWindow.xaml.cs">
-      <DependentUpon>ThemSachWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ThemTheDocGiaWindow.xaml.cs">
-      <DependentUpon>ThemTheDocGiaWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ThongTinDocGiaWindow.xaml.cs">
-      <DependentUpon>ThongTinDocGiaWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ThongTinSachWindow.xaml.cs">
-      <DependentUpon>ThongTinSachWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -347,27 +357,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\LoginWindow.xaml">
+    <Page Include="View\AddBookWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AddReaderWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BookInformationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BorrowFormWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditBookInformationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EditReaderInformationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\QuanLyDocGiaPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PhieuMuonWindow.xaml">
+    <Page Include="View\Pages\QuanLySachPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReaderInformtationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\SuaTheDocGiaWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SuaThongTinSachWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ThemSachWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ThemTheDocGiaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -399,9 +425,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ThongTinDocGiaWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\ReaderManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -413,9 +436,6 @@
     <Page Include="View\StatisticPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ThongTinSachWindow.xaml">
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -453,6 +473,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="DTO\LibraryManagementModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LibraryManagementModel.edmx</DependentUpon>
@@ -464,12 +487,7 @@
       <LastGenOutput>LibraryManagementModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\Pages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace LibraryManagement.View
 {
     /// <summary>
-    /// Interaction logic for PhieuMuonWindow.xaml
+    /// Interaction logic for AddBookWindow.xaml
     /// </summary>
-    public partial class PhieuMuonWindow : Window
+    public partial class AddBookWindow : Window
     {
-        public PhieuMuonWindow()
+        public AddBookWindow()
         {
             InitializeComponent();
         }

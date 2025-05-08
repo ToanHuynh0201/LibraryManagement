@@ -6,7 +6,8 @@
                     xmlns:local="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
                     xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
                     xmlns:internal="clr-namespace:MaterialDesignThemes.Wpf.Internal;assembly=MaterialDesignThemes.Wpf" 
-                    xmlns:converters1="http://schemas.microsoft.com/netfx/2009/xaml/presentation">
+                    xmlns:converters1="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+                    xmlns:utils="clr-namespace:LibraryManagement.Utils">
     <viewmodel:MainViewModel x:Key="MainVM"/>
     <viewmodel:LoginViewModel x:Key="LoginVM"/>
     <viewmodel:ReaderManagementViewModel x:Key="ReaderManagementVM"/>
@@ -24,7 +25,8 @@
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <converters:ListViewGridViewConverter x:Key="GridLinesVisibilityBorderToThicknessConverter"/>
 
-
+    <utils:DateToStringConverter x:Key="DateToStringConverter"/>
+    
     <!--#region SolidColorBrush-->
     <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>

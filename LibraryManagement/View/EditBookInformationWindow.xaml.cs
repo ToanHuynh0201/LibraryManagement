@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace LibraryManagement.View
 {
     /// <summary>
-    /// Interaction logic for ThemSachWindow.xaml
+    /// Interaction logic for EditBookInformationWindow.xaml
     /// </summary>
-    public partial class ThemSachWindow : Window
+    public partial class EditBookInformationWindow : Window
     {
-        public ThemSachWindow()
+        public EditBookInformationWindow()
         {
             InitializeComponent();
         }

@@ -70,6 +70,7 @@ namespace LibraryManagement.BLL
         }
         public async Task<(bool, string)> AddNewSach(SACH s)
         {
+            s.SoLuongCon = (int)s.SoLuong;
             return await SachDAL.Instance.AddNewSach(s);
         }
         public async Task<(bool, string)> AddExistingSach(SACH s)
@@ -92,12 +93,12 @@ namespace LibraryManagement.BLL
         }
         public async Task<(bool, string)> DeleteSach(int id)
         {
-            var sach = await SachDAL.Instance.GetSachById(id);
+            SACH sach = await SachDAL.Instance.GetSachById(id);
             if (sach == null || sach.IsDeleted == true)
             {
                 return (false, "Sách không tồn tại");
             }
-            foreach(var cuonsach in sach.CUONSACHes)
+            foreach(CUONSACH cuonsach in sach.CUONSACHes)
             {
                 if (cuonsach.TinhTrang == true && cuonsach.IsDeleted == false)
                 {

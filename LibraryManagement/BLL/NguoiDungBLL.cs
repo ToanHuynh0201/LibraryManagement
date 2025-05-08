@@ -42,6 +42,10 @@ namespace LibraryManagement.BLL
             {
                 return (false, "Tên đăng nhập đã tồn tại");
             }
+            if(nd.MaNhom == 3)
+            {
+                return (false, "Người dùng là độc giả phải được đăng ký thẻ trước khi thêm.");
+            }
             var res = CheckNguoiDung(nd);
             if (!res.Item1)
             {
@@ -81,7 +85,7 @@ namespace LibraryManagement.BLL
             var docgia = DocGiaBLL.Instance.GetDocGiaByTenDangNhap(tendangnhap);
             if (docgia != null)
             {
-                return (false, "Người dùng đang là độc giả, không thể xoá");
+                return (false, "Người dùng là độc giả, không thể xoá");
             }
             return await NguoiDungDAL.Instance.DeleteNguoiDung(tendangnhap);
         }

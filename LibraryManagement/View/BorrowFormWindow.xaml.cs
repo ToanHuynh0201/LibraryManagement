@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace LibraryManagement.View
 {
     /// <summary>
-    /// Interaction logic for SuaThongTinSachWindow.xaml
+    /// Interaction logic for BorrowFormWindow.xaml
     /// </summary>
-    public partial class SuaThongTinSachWindow : Window
+    public partial class BorrowFormWindow : Window
     {
-        public SuaThongTinSachWindow()
+        public BorrowFormWindow()
         {
             InitializeComponent();
         }
