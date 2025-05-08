@@ -1,16 +1,18 @@
-﻿<Window x:Class="LibraryManagement.View.SuaThongTinSachWindow"
-                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-xmlns:local="clr-namespace:LibraryManagement.View"
-mc:Ignorable="d"
-Title="SuaThongTinSachWindow" WindowStyle="None"
-ResizeMode="NoResize"
-Background="Transparent"
-Height="400 " Width="821"
-WindowStartupLocation="CenterScreen">
+﻿<Window x:Class="LibraryManagement.View.AddReaderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:LibraryManagement.View" xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" d:DataContext="{d:DesignInstance Type=viewmodel:ReaderManagementViewModel}"
+        DataContext="{StaticResource ReaderManagementVM}"
+        mc:Ignorable="d"
+        Title="AddReaderWindow" WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        Height="400 " Width="821"
+        WindowStartupLocation="CenterScreen"
+        Name="AddReaderWindow">
     <Grid>
         <Grid >
             <Grid.RowDefinitions>
@@ -41,7 +43,7 @@ WindowStartupLocation="CenterScreen">
                     <ColumnDefinition Width="0.7*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock
-                 Text="Sửa thông tin sách"
+                 Text="Thêm thẻ độc giả"
                  VerticalAlignment="Center"
                  HorizontalAlignment="Center"
                  FontSize="22"
@@ -49,14 +51,16 @@ WindowStartupLocation="CenterScreen">
                  FontWeight="Bold"/>
 
                 <Button Grid.Column="1" 
-                 Content="X" 
-                 HorizontalAlignment="Left"
-                 FontSize="20"
-                 Width="53" 
-                 Background="Red" 
-                 Foreground="#FFE7DDDD"
-                 Height="40"
-                 Command="{Binding ThoatCM}" Margin="4,-1,0,1"/>
+                        Content="X" 
+                        HorizontalAlignment="Left"
+                        FontSize="20"
+                        Width="53" 
+                        Background="Red" 
+                        Foreground="#FFE7DDDD"
+                        Height="40"
+                        Command="{Binding CloseWindowCM}"
+                        CommandParameter="{Binding ElementName=AddReaderWindow}"
+                        Margin="4,-1,0,0" VerticalAlignment="Top"/>
             </Grid>
 
             <Grid
@@ -75,49 +79,50 @@ WindowStartupLocation="CenterScreen">
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <!--Tên sách-->
+                    <!--Họ và ten-->
                     <Grid
                      Grid.Row="0"
                      Margin="10 10">
                         <TextBox
                          VerticalAlignment="Center"
-                         materialDesign:HintAssist.Hint="Tên sách"
+                         materialDesign:HintAssist.Hint="Họ và tên"
                          FontSize="18" Foreground="Black"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         Text=""
+                         Text="{Binding docgia.TenDG, Mode=TwoWay}"
                          />
                     </Grid>
 
-                    <!--Nhà xuất bản-->
+                    <!--Ngày sinh-->
                     <Grid
-                    Grid.Row="1" Margin="10 10">
-                        <TextBox
-                        VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="Nhà xuất bản"
-                        FontSize="18" Foreground="Black"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text=""
+                    Grid.Row="1" Margin="10 19">
+                        <DatePicker 
+                        materialDesign:HintAssist.Hint="Ngày sinh"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        FontSize="18" 
+                        Text="{Binding docgia.NgaySinhDG, Mode=TwoWay}"
                         />
                     </Grid>
 
-                    <!--Thể loại sách-->
+                    <!--Loại độc giả-->
                     <Grid
                     Grid.Row="2" Margin="10 10">
                         <TextBox
                         VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="Thể loại"
+                        materialDesign:HintAssist.Hint="Loại độc giả"
                         FontSize="18" 
                         Foreground="Black"
-                        Text=""
+                        Text="{Binding docgia.MaLoaiDG, Mode=TwoWay}"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     </Grid>
 
-                    <!--Ngày nhập-->
+                    <!--Ngày tạo thẻ-->
                     <Grid
                     Grid.Row="3" Margin="10 19">
                         <DatePicker 
-                        materialDesign:HintAssist.Hint="Ngày nhâp"
+                        materialDesign:HintAssist.Hint="Ngày lập thẻ"
                         materialDesign:TextFieldAssist.HasClearButton="True"
+                        Text="{Binding docgia.NgayLapThe, Mode=TwoWay}"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                         FontSize="18" 
                         />
@@ -134,42 +139,42 @@ WindowStartupLocation="CenterScreen">
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <!--Tác giả-->
+                    <!--CMND/CCCD-->
                     <Grid
                     Grid.Row="0"
                     Margin="10 10">
                         <TextBox
                         VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="Tác giả"
+                        materialDesign:HintAssist.Hint="Tên đăng nhập"
                         FontSize="18" 
                         Foreground="Black"
-                        Text=""
+                        Text="{Binding docgia.TenDangNhap, Mode=TwoWay}"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     </Grid>
 
-                    <!--Năm xuất bản-->
+                    <!--Email-->
                     <Grid
                     Grid.Row="1" Margin="10 10">
                         <TextBox
                         VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="Năm xuất bản"
-                        Text="" 
+                        materialDesign:HintAssist.Hint="Email"
                         FontSize="18" Foreground="Black"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding docgia.Email, Mode=TwoWay}"/>
                     </Grid>
 
-                    <!--Trị giá-->
+                    <!--Địa chỉ-->
                     <Grid
                     Grid.Row="2" Margin="10 10">
                         <TextBox
                         VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="Trị giá"
-                        Text="" 
+                        materialDesign:HintAssist.Hint="Địa chỉ"
+                        Text="{Binding docgia.DiaChiDG, Mode=TwoWay}" 
                         FontSize="18" Foreground="Black"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                     </Grid>
 
-                    <!--Tình trạng-->
+                    <!--Tình trạng--><!--
                     <Grid
                     Grid.Row="3" Margin="10 10">
                         <TextBox
@@ -179,20 +184,19 @@ WindowStartupLocation="CenterScreen">
                         Text=""
                         Foreground="Black"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    </Grid>
+                    </Grid>-->
                 </Grid>
             </Grid>
-            <Grid
-            Grid.Row="2">
+            <Grid Grid.Row="2">
                 <StackPanel Margin="0 0 0 10"
                 Orientation="Horizontal"
                 HorizontalAlignment="Right">
-                    <Button
-                    Margin="10 0"
-                    Content="Lưu thông tin"/>
-                    <Button
-                    Content="Thoát"
-                    Margin="10 0"/>
+                    <Button Margin="10 0" Content="Thêm mới" materialDesign:ButtonAssist.CornerRadius="10"
+                            Command="{Binding AddNewReaderCM}"
+                            CommandParameter="{Binding ElementName=AddReaderWindow}"/>
+                    <Button Content="Thoát" Margin="10 0" materialDesign:ButtonAssist.CornerRadius="10"
+                            Command="{Binding CloseWindowCM}"
+                            CommandParameter="{Binding ElementName=AddReaderWindow}"/>
                 </StackPanel>
             </Grid>
         </Grid>
