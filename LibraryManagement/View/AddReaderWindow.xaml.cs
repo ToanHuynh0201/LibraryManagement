@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace LibraryManagement.View
 {
     /// <summary>
-    /// Interaction logic for ThemTheDocGiaWindow.xaml
+    /// Interaction logic for AddReaderWindow.xaml
     /// </summary>
-    public partial class ThemTheDocGiaWindow : Window
+    public partial class AddReaderWindow : Window
     {
-        public ThemTheDocGiaWindow()
+        public AddReaderWindow()
         {
             InitializeComponent();
         }
