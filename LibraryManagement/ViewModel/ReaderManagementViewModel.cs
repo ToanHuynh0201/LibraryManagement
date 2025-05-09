@@ -144,12 +144,12 @@ namespace LibraryManagement.ViewModel
                     NgaySinhDG = DateTime.Now,
                     MaLoaiDG = 1
                 };
-                var w1 = new ThemTheDocGiaWindow();
+                var w1 = new AddAuthorWindow();
                 w1.ShowDialog();
             });
             OpenUpdateReaderCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                var w1 = new SuaTheDocGiaWindow();
+                var w1 = new EditReaderInformationWindow();
                 w1.ShowDialog();
             });
             AddNewReaderCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
@@ -164,7 +164,8 @@ namespace LibraryManagement.ViewModel
             });
             ViewReaderCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-
+                Window themTheDocGia = new AddReaderWindow();
+                themTheDocGia.ShowDialog();
             });
             UpdateReaderCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {

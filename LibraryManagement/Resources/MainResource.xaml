@@ -21,7 +21,6 @@
     <viewmodel:CategoryManagementViewModel x:Key="CategoryManagementVM"/>
     <viewmodel:AddCategoryViewModel x:Key="AddCategoryVM"/>
     
-    
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <converters:ListViewGridViewConverter x:Key="GridLinesVisibilityBorderToThicknessConverter"/>
 
@@ -245,7 +244,7 @@
     
     <!--#region PackIcon-->
     <Style x:Key="gridButtonIcon" 
-       TargetType="materialDesign:PackIcon">
+           TargetType="materialDesign:PackIcon">
         <Setter Property="Width" 
             Value="12"/>
         <Setter Property="Height" 
