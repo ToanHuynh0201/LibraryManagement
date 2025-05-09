@@ -110,8 +110,7 @@
                     </StackPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding OpenAddReaderCM}"
-                                                   CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+                            <i:InvokeCommandAction Command="{Binding OpenAddReaderCM}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>

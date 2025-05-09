@@ -6,11 +6,13 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:LibraryManagement.View"
         mc:Ignorable="d"
+        DataContext="{StaticResource ReaderManagementVM}"
         Title="EditReaderInformationWindow" WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
         Height="400 " Width="821"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Name="editReaderWindow">
     <Grid>
         <Grid >
             <Grid.RowDefinitions>
@@ -49,7 +51,9 @@
                     Background="Red" 
                     Foreground="#FFE7DDDD"
                     Height="40"
-                    Command="{Binding }" Margin="4,-1,0,0" VerticalAlignment="Top"/>    
+                    Command="{Binding UpdateReaderCM}"
+                    CommandParameter="{Binding ElementName=editReaderWindow}"
+                    Margin="4,-1,0,0" VerticalAlignment="Top"/>    
             </Grid>
 
             <Grid
@@ -77,7 +81,7 @@
                             materialDesign:HintAssist.Hint="Họ và tên"
                             FontSize="18" Foreground="Black"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            Text=""
+                            Text="{Binding ReaderSeleted.TenDG, Mode=TwoWay}"
                      />
                     </Grid>
 
@@ -89,6 +93,7 @@
                             materialDesign:TextFieldAssist.HasClearButton="True"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                             FontSize="18" 
+                            Text="{Binding ReaderSeleted.NgaySinhDG, Mode=TwoWay}"
                     />
                     </Grid>
 
@@ -100,7 +105,7 @@
                             materialDesign:HintAssist.Hint="Loại độc giả"
                             FontSize="18" 
                             Foreground="Black"
-                            Text=""
+                            Text="{Binding ReaderSeleted.MaLoaiDG, Mode=TwoWay}"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />   
                     </Grid>
 
@@ -112,6 +117,7 @@
                             materialDesign:TextFieldAssist.HasClearButton="True"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                             FontSize="18" 
+                            Text="{Binding ReaderSeleted.NgayLapThe, Mode=TwoWay}"
                     />
                     </Grid>
 
@@ -129,15 +135,7 @@
                     <!--CMND/CCCD-->
                     <Grid
                         Grid.Row="0"
-                        Margin="10 10">
-                        <TextBox
-                            VerticalAlignment="Center"
-                            materialDesign:HintAssist.Hint="CMND/CCCD"
-                            FontSize="18" 
-                            Foreground="Black"
-                            Text=""
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    </Grid>
+                        Margin="10 10"/>
 
                     <!--Email-->
                     <Grid
@@ -145,7 +143,7 @@
                         <TextBox
                             VerticalAlignment="Center"
                             materialDesign:HintAssist.Hint="Email"
-                            Text="" 
+                            Text="{Binding ReaderSeleted.Email, Mode=TwoWay}"
                             FontSize="18" Foreground="Black"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                     </Grid>
@@ -156,7 +154,7 @@
                         <TextBox
                             VerticalAlignment="Center"
                             materialDesign:HintAssist.Hint="Địa chỉ"
-                            Text="" 
+                            Text="{Binding ReaderSeleted.DiaChiDG, Mode=TwoWay}"
                             FontSize="18" Foreground="Black"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                     </Grid>
@@ -171,12 +169,16 @@
                         Margin="10 0"
                         Content="Lưu thông tin"
                         Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonAssist.CornerRadius="10"/>
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Command="{Binding UpdateReaderCM}"
+                        CommandParameter="{Binding ElementName=editReaderWindow}"/>
                     <Button
                         Content="Thoát"
                         Margin="10 0"
                         Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonAssist.CornerRadius="10"/>
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Command="{Binding CloseWindowCM}"
+                        CommandParameter="{Binding ElementName=editReaderWindow}"/>
                 </StackPanel>
             </Grid>
         </Grid>
