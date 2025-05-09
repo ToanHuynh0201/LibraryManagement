@@ -63,18 +63,7 @@ namespace LibraryManagement.BLL
             {
                 return (false, "Cuốn sách đang được mượn, không thể xoá.");
             }
-            var res = await CuonSachDAL.Instance.DeleteCuonSach(id);
-            if (res.Item1 == true)
-            {
-                var sach = await SachDAL.Instance.GetSachById(cuonsach.MaSach);
-                if (sach != null)
-                {
-                    sach.SoLuong--;
-                    sach.SoLuongCon--;
-                    await SachDAL.Instance.UpdateSach(sach);
-                }
-            }
-            return res;
+            return await CuonSachDAL.Instance.DeleteCuonSach(id);
         }
     }
 }

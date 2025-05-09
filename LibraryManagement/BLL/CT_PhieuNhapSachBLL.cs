@@ -47,13 +47,7 @@ namespace LibraryManagement.BLL
                 return (false, "Giá nhập không hợp lệ");
             }
             ctpns.ThanhTien = ctpns.SoLuongNhap * ctpns.DonGia;
-            var res = await CT_PhieuNhapSachDAL.Instance.AddCT_PhieuNhapSach(ctpns);
-            if(res.Item1)
-            {
-                phieunhapsach.TongTien += ctpns.ThanhTien;
-                await PhieuNhapSachDAL.Instance.UpdatePhieuNhapSach(phieunhapsach);
-            }
-            return res;
+            return await CT_PhieuNhapSachDAL.Instance.AddCT_PhieuNhapSach(ctpns);
         }
     }
 }

@@ -76,7 +76,10 @@ namespace LibraryManagement.DAL
                 try
                 {
                     var cuonsach = await context.CUONSACHes.FindAsync(id);
+                    var sach = await context.SACHes.FindAsync(cuonsach.MaSach);
                     cuonsach.IsDeleted = true;
+                    sach.SoLuong--;
+                    sach.SoLuongCon--;
                     await context.SaveChangesAsync();
                     return (true, "Đã xoá cuốn sách.");
                 }

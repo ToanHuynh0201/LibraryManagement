@@ -79,15 +79,12 @@ namespace LibraryManagement.BLL
         }
         private (bool, string) CheckDauSach(DAUSACH ds)
         {
-            if (ds.TACGIAs.Count() == 0)
-            {
-                return (false, "Đầu sách không có tác giả");
-            }
-            if (ds.THELOAI == null)
+            var theloai = TheLoaiBLL.Instance.GetTheLoaiById(ds.MaTheLoai);
+            if(theloai.Result == null)
             {
                 return (false, "Đầu sách không có thể loại");
             }
-            if (ds.TenDauSach == null)
+            if (String.IsNullOrEmpty(ds.TenDauSach))
             {
                 return (false, "Đầu sách không có tên");
             }

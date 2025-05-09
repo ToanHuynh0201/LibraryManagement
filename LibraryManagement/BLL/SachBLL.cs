@@ -70,7 +70,8 @@ namespace LibraryManagement.BLL
         }
         public async Task<(bool, string)> AddNewSach(SACH s)
         {
-            s.SoLuongCon = (int)s.SoLuong;
+            s.SoLuongCon = 0;
+            s.SoLuong = 0;
             return await SachDAL.Instance.AddNewSach(s);
         }
         public async Task<(bool, string)> AddExistingSach(SACH s)

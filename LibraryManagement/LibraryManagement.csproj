@@ -338,9 +338,6 @@
     <Compile Include="View\Pages\QuanLySachPage.xaml.cs">
       <DependentUpon>QuanLySachPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SuaTheDocGiaWindow.xaml.cs">
-      <DependentUpon>SuaTheDocGiaWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -393,10 +390,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\SuaTheDocGiaWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Account.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -436,6 +429,10 @@
     <Page Include="View\StatisticPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SuaTheDocGiaWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

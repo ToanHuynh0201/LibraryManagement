@@ -85,16 +85,6 @@ namespace LibraryManagement.DAL
                 try
                 {
                     context.SACHes.Add(s);
-                    for (int i = 1; i <= s.SoLuong; i++)
-                    {
-                        var cuonsach = new CUONSACH
-                        {
-                            MaSach = s.id,
-                            TinhTrang = false,
-                            IsDeleted = false
-                        };
-                        context.CUONSACHes.Add(cuonsach);
-                    }
                     await context.SaveChangesAsync();
                     return (true, "Thêm sách thành công");
                 }
