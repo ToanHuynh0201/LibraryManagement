@@ -85,7 +85,7 @@ namespace LibraryManagement.ViewModel
                 try
                 {
                     var data = await Task.Run(async () => await ThamSoBLL.Instance.GetThamSo());
-                    thamso = new THAMSO(data);     
+                    thamso = data;
                 }
                 catch (Exception ex)
                 {
@@ -97,14 +97,12 @@ namespace LibraryManagement.ViewModel
           
             OpenUpdateStatisticCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                Window w1 = new EditStatisticInformationWindow();
-                w1.ShowDialog();
+               
             });
             
             ViewStatisticCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                Window w1 = new StatisticInformtationWindow();
-                w1.ShowDialog();
+              
             });
             UpdateStatisticCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {

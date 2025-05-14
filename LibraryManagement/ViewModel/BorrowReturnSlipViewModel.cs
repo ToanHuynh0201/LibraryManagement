@@ -1,6 +1,7 @@
 ﻿using LibraryManagement.BLL;
 using LibraryManagement.DTO;
 using LibraryManagement.View;
+using LibraryManagement.View.Borrow;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -118,8 +119,8 @@ namespace LibraryManagement.ViewModel
                     {
                         if (SearchProperties == "Mã đọc giả")
                         {
-                            var res = await Task.Run(async () => await PhieuMuonTraBLL.Instance.GetPMTByMaDG(SearchText));
-                            ListBorrowReturnSlips = new ObservableCollection<PHIEUMUONTRA>(res);
+                            //var res = await Task.Run(async () => await PhieuMuonTraBLL.Instance.GetPMTByMaDG(SearchText));
+                            //ListBorrowReturnSlips = new ObservableCollection<PHIEUMUONTRA>(res);
                         }
                     }
                 }
@@ -136,7 +137,7 @@ namespace LibraryManagement.ViewModel
             OpenAddBorrowReturnSlipCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 phieumuontra = new PHIEUMUONTRA();
-                var w1 = new AddBorrowReturnSlipWindow();
+                var w1 = new BorrowFormWindow();
                 w1.ShowDialog();
             });
             OpenUpdateBorrowReturnSlipCM = new RelayCommand<Window>((p) => { return true; }, (p) =>

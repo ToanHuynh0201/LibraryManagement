@@ -274,7 +274,7 @@
     <Compile Include="DAL\TheLoaiDAL.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BookReceivingFormViewModel.cs" />
-    <Compile Include="ViewModel\UserGroupModel.cs" />
+    <Compile Include="ViewModel\UserGroupViewModel.cs" />
     <Compile Include="ViewModel\BorrowReturnSlipViewModel.cs" />
     <Compile Include="ViewModel\BookTitleViewModel.cs" />
     <Compile Include="ViewModel\BookCopyViewModel.cs" />
@@ -286,59 +286,131 @@
     <Compile Include="ViewModel\ReaderViewModel.cs" />
     <Compile Include="ViewModel\RuleViewModel.cs" />
     <Compile Include="ViewModel\StatisticViewModel.cs" />
-    <Compile Include="View\Account.xaml.cs">
-      <DependentUpon>Account.xaml</DependentUpon>
+    <Compile Include="View\Author\AuthorInformtationWindow.xaml.cs">
+      <DependentUpon>AuthorInformtationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AddAuthorWindow.xaml.cs">
-      <DependentUpon>AddAuthorWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AddBookWindow.xaml.cs">
-      <DependentUpon>AddBookWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AddCategoryWindow.xaml.cs">
-      <DependentUpon>AddCategoryWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AddReaderWindow.xaml.cs">
-      <DependentUpon>AddReaderWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AuthorManagement.xaml.cs">
+    <Compile Include="View\Author\AuthorManagement.xaml.cs">
       <DependentUpon>AuthorManagement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BookInformationWindow.xaml.cs">
-      <DependentUpon>BookInformationWindow.xaml</DependentUpon>
+    <Compile Include="View\Author\EditAuthorInformationWindow.xaml.cs">
+      <DependentUpon>EditAuthorInformationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BookManagement.xaml.cs">
+    <Compile Include="View\BookCopy\BookCopyInformtationWindow.xaml.cs">
+      <DependentUpon>BookCopyInformtationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookCopy\BookCopyManagement.xaml.cs">
+      <DependentUpon>BookCopyManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookCopy\EditBookCopyInformationWindow.xaml.cs">
+      <DependentUpon>EditBookCopyInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookReceiving\AddReceivingFormWindow.xaml.cs">
+      <DependentUpon>AddReceivingFormWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookReceiving\BookReceivingManagement.xaml.cs">
+      <DependentUpon>BookReceivingManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookReceiving\ReceivingFormInformtationWindow.xaml.cs">
+      <DependentUpon>ReceivingFormInformtationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookTitle\AddBookTitleWindow.xaml.cs">
+      <DependentUpon>AddBookTitleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookTitle\BookTitleInformtationWindow.xaml.cs">
+      <DependentUpon>BookTitleInformtationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookTitle\BookTitleManagement.xaml.cs">
+      <DependentUpon>BookTitleManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookTitle\EditBookTitleInformationWindow.xaml.cs">
+      <DependentUpon>EditBookTitleInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Book\AddBookWindow.xaml.cs">
+      <DependentUpon>AddBookWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Book\BookInformtationWindow.xaml.cs">
+      <DependentUpon>BookInformtationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Book\BookManagement.xaml.cs">
       <DependentUpon>BookManagement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BorrowFormWindow.xaml.cs">
-      <DependentUpon>BorrowFormWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\CategoryManagement.xaml.cs">
-      <DependentUpon>CategoryManagement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\EditBookInformationWindow.xaml.cs">
+    <Compile Include="View\Book\EditBookInformationWindow.xaml.cs">
       <DependentUpon>EditBookInformationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditReaderInformationWindow.xaml.cs">
+    <Compile Include="View\Borrow\BorrowFormWindow.xaml.cs">
+      <DependentUpon>BorrowFormWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Borrow\BorrowManagement.xaml.cs">
+      <DependentUpon>BorrowManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Borrow\BorrowReturnSlipInformtationWindow.xaml.cs">
+      <DependentUpon>BorrowReturnSlipInformtationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Borrow\EditBorrowReturnSlipInformationWindow.xaml.cs">
+      <DependentUpon>EditBorrowReturnSlipInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Category\AddCategoryWindow.xaml.cs">
+      <DependentUpon>AddCategoryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Category\CategoryInformationWindow.xaml.cs">
+      <DependentUpon>CategoryInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Category\CategoryManagement.xaml.cs">
+      <DependentUpon>CategoryManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Category\EditCategoryInformationWindow.xaml.cs">
+      <DependentUpon>EditCategoryInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GroupUser\AddGroupUserWindow.xaml.cs">
+      <DependentUpon>AddGroupUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GroupUser\EditGroupUserInformationWindow.xaml.cs">
+      <DependentUpon>EditGroupUserInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GroupUser\GroupUserInformtationWindow.xaml.cs">
+      <DependentUpon>GroupUserInformtationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GroupUser\GroupUserManagement.xaml.cs">
+      <DependentUpon>GroupUserManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Internal\InternalManagement.xaml.cs">
+      <DependentUpon>InternalManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Reader\AddReaderWindow.xaml.cs">
+      <DependentUpon>AddReaderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Reader\EditReaderInformationWindow.xaml.cs">
       <DependentUpon>EditReaderInformationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\InternalManagement.xaml.cs">
-      <DependentUpon>InternalManagement.xaml</DependentUpon>
+    <Compile Include="View\Reader\ReaderInformationWindow.xaml.cs">
+      <DependentUpon>ReaderInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Reader\ReaderManagement.xaml.cs">
+      <DependentUpon>ReaderManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\Account.xaml.cs">
+      <DependentUpon>Account.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Author\AddAuthorWindow.xaml.cs">
+      <DependentUpon>AddAuthorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ReaderInformtationWindow.xaml.cs">
-      <DependentUpon>ReaderInformtationWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ReaderManagement.xaml.cs">
-      <DependentUpon>ReaderManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Rule.xaml.cs">
       <DependentUpon>Rule.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StatisticPage.xaml.cs">
       <DependentUpon>StatisticPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\AddUserWindow.xaml.cs">
+      <DependentUpon>AddUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\EditUserInformationWindow.xaml.cs">
+      <DependentUpon>EditUserInformationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\UserInformationWindow.xaml.cs">
+      <DependentUpon>UserInformationWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -356,67 +428,151 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\AddBookWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\Author\AuthorInformtationWindow.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddReaderWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\Author\AuthorManagement.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BookInformationWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\Author\EditAuthorInformationWindow.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BorrowFormWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\BookCopy\BookCopyInformtationWindow.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditBookInformationWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\BookCopy\BookCopyManagement.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditReaderInformationWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="View\BookCopy\EditBookCopyInformationWindow.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookReceiving\AddReceivingFormWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookReceiving\BookReceivingManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookReceiving\ReceivingFormInformtationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookTitle\AddBookTitleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookTitle\BookTitleInformtationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookTitle\BookTitleManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookTitle\EditBookTitleInformationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Book\AddBookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Book\BookInformtationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Book\BookManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Book\EditBookInformationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Borrow\BorrowFormWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Borrow\BorrowManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Borrow\BorrowReturnSlipInformtationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Borrow\EditBorrowReturnSlipInformationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Category\AddCategoryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Category\CategoryInformationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Category\CategoryManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Category\EditCategoryInformationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GroupUser\AddGroupUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GroupUser\EditGroupUserInformationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GroupUser\GroupUserInformtationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GroupUser\GroupUserManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Internal\InternalManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ReaderInformtationWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Account.xaml">
+    <Page Include="View\Reader\AddReaderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddAuthorWindow.xaml">
+    <Page Include="View\Reader\EditReaderInformationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddCategoryWindow.xaml">
+    <Page Include="View\Reader\ReaderInformationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AuthorManagement.xaml">
+    <Page Include="View\Reader\ReaderManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BookManagement.xaml">
+    <Page Include="View\Users\Account.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CategoryManagement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\InternalManagement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ReaderManagement.xaml">
+    <Page Include="View\Author\AddAuthorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -425,6 +581,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\StatisticPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\AddUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\EditUserInformationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\UserInformationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

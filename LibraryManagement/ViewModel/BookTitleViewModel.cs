@@ -1,6 +1,7 @@
 ﻿using LibraryManagement.BLL;
 using LibraryManagement.DTO;
 using LibraryManagement.View;
+using LibraryManagement.View.BookTitle;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +13,7 @@ using System.Windows.Input;
 
 namespace LibraryManagement.ViewModel
 {
-    public class BookTitleTitleViewModel : BaseViewModel
+    public class BookTitleViewModel : BaseViewModel
     {
         #region Properties
         private string _SearchText;
@@ -86,7 +87,7 @@ namespace LibraryManagement.ViewModel
         public ICommand CloseWindowCM { get; set; }
         #endregion
 
-        public BookTitleTitleViewModel()
+        public BookTitleViewModel()
         {
             SearchList = new ObservableCollection<string> { "Tên đầu s" };
             SearchProperties = SearchList.FirstOrDefault();

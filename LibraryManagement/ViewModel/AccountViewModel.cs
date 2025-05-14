@@ -1,6 +1,7 @@
 ﻿using LibraryManagement.BLL;
 using LibraryManagement.DTO;
 using LibraryManagement.View;
+using LibraryManagement.View.Users;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -159,7 +160,7 @@ namespace LibraryManagement.ViewModel
             });
             ViewUserCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                Window w1 = new UserInformtationWindow();
+                Window w1 = new UserInformationWindow();
                 w1.ShowDialog();
             });
             UpdateUserCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>

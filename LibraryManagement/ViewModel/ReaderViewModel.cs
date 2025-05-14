@@ -2,6 +2,7 @@
 using LibraryManagement.DAL;
 using LibraryManagement.DTO;
 using LibraryManagement.View;
+using LibraryManagement.View.Reader;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Xaml.Behaviors.Core;
 using System;
@@ -164,7 +165,7 @@ namespace LibraryManagement.ViewModel
             });
             ViewReaderCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                Window w1 = new ReaderInformtationWindow();
+                Window w1 = new ReaderInformationWindow();
                 w1.ShowDialog();
             });
             UpdateReaderCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>

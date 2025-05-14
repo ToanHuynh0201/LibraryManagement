@@ -1,6 +1,7 @@
 ﻿using LibraryManagement.BLL;
 using LibraryManagement.DTO;
 using LibraryManagement.View;
+using LibraryManagement.View.Author;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;

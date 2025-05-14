@@ -9,7 +9,6 @@
         xmlns:view="clr-namespace:LibraryManagement.View"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
         Style="{StaticResource MaterialDesignWindow}"
-        d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
         DataContext="{StaticResource MainVM}"
         Title="MainWindow" 
         Height="800" 
@@ -208,13 +207,9 @@
             <Frame x:Name="mainFrame" 
                    NavigationUIVisibility="Hidden" 
                    Grid.Row="1" 
-                   Width="auto" 
-                   Margin="30,10,30,10">
-                <Frame.Content>
-                    <view:ReaderManagement />
-                </Frame.Content>
-            </Frame>
-
+                   Width="Auto" 
+                   Margin="30,10,30,10"
+                   Source="View/Reader/ReaderManagement.xaml"/>
         </Grid>
     </Grid>
 </Window>

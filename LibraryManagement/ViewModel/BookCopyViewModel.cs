@@ -1,6 +1,7 @@
 ﻿using LibraryManagement.BLL;
 using LibraryManagement.DTO;
 using LibraryManagement.View;
+using LibraryManagement.View.BookCopy;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -132,12 +133,6 @@ namespace LibraryManagement.ViewModel
             {
                 SearchText = "";
                 ListBooks = new ObservableCollection<CUONSACH>(AllBooks);
-            });
-            OpenAddBookCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
-            {
-                cuonsach = new CUONSACH();
-                var w1 = new AddBookCopyWindow();
-                w1.ShowDialog();
             });
             OpenUpdateBookCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {

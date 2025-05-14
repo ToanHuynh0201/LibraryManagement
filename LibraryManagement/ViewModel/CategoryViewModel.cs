@@ -10,6 +10,7 @@ using System.Windows.Input;
 using LibraryManagement.View;
 using LibraryManagement.DTO;
 using LibraryManagement.BLL;
+using LibraryManagement.View.Category;
 
 namespace LibraryManagement.ViewModel
 {
@@ -150,13 +151,13 @@ namespace LibraryManagement.ViewModel
                 MessageBox.Show(res.Item2);
                 if (res.Item1)
                 {
-                    LoadDataCaregoryCM.Execute(null);
+                    LoadDataCategoryCM.Execute(null);
                     p.Close();
                 }
             });
             ViewCategoryCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                Window w1 = new CategoryInformtationWindow();
+                Window w1 = new CategoryInformationWindow();
                 w1.ShowDialog();
             });
             UpdateCategoryCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>

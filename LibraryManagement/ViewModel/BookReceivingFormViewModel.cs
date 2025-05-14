@@ -1,6 +1,7 @@
 ﻿using LibraryManagement.BLL;
 using LibraryManagement.DTO;
 using LibraryManagement.View;
+using LibraryManagement.View.BookReceiving;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -115,11 +116,6 @@ namespace LibraryManagement.ViewModel
             {
                 phieunhap = new PHIEUNHAPSACH();
                 var w1 = new AddReceivingFormWindow();
-                w1.ShowDialog();
-            });
-            OpenUpdateReceivingFormCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
-            {
-                Window w1 = new EditReceivingFormInformationWindow();
                 w1.ShowDialog();
             });
             AddNewReceivingFormCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
