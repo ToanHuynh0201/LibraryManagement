@@ -2,17 +2,15 @@
 using LibraryManagement.DTO;
 using LibraryManagement.View;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace LibraryManagement.ViewModel
 {
-    public class AccountViewModel : BaseViewModel
+    public class AuthorViewModel : BaseViewModel
     {
         #region Properties
         private string _SearchText;
@@ -41,64 +39,63 @@ namespace LibraryManagement.ViewModel
                 OnPropertyChanged();
             }
         }
-        private NGUOIDUNG _nguoidung { get; set; }
-        public NGUOIDUNG nguoidung
+        private TACGIA _tacgia { get; set; }
+        public TACGIA tacgia
         {
             get
             {
-                return _nguoidung;
+                return _tacgia;
             }
             set
             {
-                _nguoidung = value;
+                _tacgia = value;
                 OnPropertyChanged();
             }
         }
         public ObservableCollection<string> SearchList { get; set; }
-        private ObservableCollection<NGUOIDUNG> _ListUsers;
-        public ObservableCollection<NGUOIDUNG> ListUsers
+        private ObservableCollection<TACGIA> _ListAuthors;
+        public ObservableCollection<TACGIA> ListAuthors
         {
             get
             {
-                return _ListUsers;
+                return _ListAuthors;
             }
             set
             {
-                _ListUsers = value;
+                _ListAuthors = value;
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<NGUOIDUNG> AllUsers { get; set; }
-        public NGUOIDUNG UserSeleted { get; set; }
+        public ObservableCollection<TACGIA> AllAuthors { get; set; }
+        public TACGIA AuthorSeleted { get; set; }
         #endregion
 
         #region Commands
         public ICommand GetCurrentWindowCM { get; set; }
-        public ICommand LoadDataUserCM { get; set; }
-        public ICommand SearchUserCM { get; set; }
+        public ICommand LoadDataAuthorCM { get; set; }
+        public ICommand SearchAuthorCM { get; set; }
         public ICommand ResetDataCM { get; set; }
-        public ICommand OpenAddUserCM { get; set; }
-        public ICommand OpenUpdateUserCM { get; set; }
-        public ICommand AddNewUserCM { get; set; }
-        public ICommand ViewUserCM { get; set; }
-        public ICommand UpdateUserCM { get; set; }
-        public ICommand DeleteUserCM { get; set; }
+        public ICommand OpenAddAuthorCM { get; set; }
+        public ICommand OpenUpdateAuthorCM { get; set; }
+        public ICommand AddNewAuthorCM { get; set; }
+        public ICommand ViewAuthorCM { get; set; }
+        public ICommand UpdateAuthorCM { get; set; }
+        public ICommand DeleteAuthorCM { get; set; }
         public ICommand CloseWindowCM { get; set; }
         #endregion
 
-        public AccountViewModel()
+        public AuthorViewModel()
         {
-
-            SearchList = new ObservableCollection<string> { "Username" };
+            SearchList = new ObservableCollection<string> { "Tên tác giả" };
             SearchProperties = SearchList.FirstOrDefault();
 
-            LoadDataUserCM = new RelayCommand<NGUOIDUNG>((p) => { return true; }, async (p) =>
+            LoadDataAuthorCM = new RelayCommand<TACGIA>((p) => { return true; }, async (p) =>
             {
                 try
                 {
-                    var data = await Task.Run(async () => await NguoiDungBLL.Instance.GetAllUsers());
-                    ListUsers = new ObservableCollection<NGUOIDUNG>(data);
-                    AllUsers = new ObservableCollection<NGUOIDUNG>(data);
+                    var data = await Task.Run(async () => await TacGiaBLL.Instance.GetAllTacGia());
+                    ListAuthors = new ObservableCollection<TACGIA>(data);
+                    AllAuthors = new ObservableCollection<TACGIA>(data);
                 }
                 catch (Exception ex)
                 {
@@ -106,20 +103,21 @@ namespace LibraryManagement.ViewModel
                     return;
                 }
             });
-            SearchUserCM = new RelayCommand<object>((p) => true, async (p) =>
+            SearchAuthorCM = new RelayCommand<object>((p) => true, async (p) =>
             {
                 try
                 {
                     if (string.IsNullOrWhiteSpace(SearchText))
                     {
-                        ListUsers.Clear();
-                        ListUsers = AllUsers;
+                        ListAuthors.Clear();
+                        ListAuthors = AllAuthors;
                     }
                     else
                     {
-                        if (SearchProperties == "Username")
+                        if (SearchProperties == "Tên tác giả")
                         {
-                            nguoidung = await Task.Run(async () => await NguoiDungBLL.Instance.GetNguoiDungByTenDN(SearchText));
+                            var res = await Task.Run(async () => await TacGiaBLL.Instance.GetTacGiaByTen(SearchText));
+                            ListAuthors = new ObservableCollection<TACGIA>(res);
                         }
                     }
                 }
@@ -131,55 +129,52 @@ namespace LibraryManagement.ViewModel
             ResetDataCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 SearchText = "";
-                ListUsers = new ObservableCollection<NGUOIDUNG>(AllUsers);
+                ListAuthors = new ObservableCollection<TACGIA>(AllAuthors);
             });
-            OpenAddUserCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            OpenAddAuthorCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                nguoidung = new NGUOIDUNG()
-                {
-                    MaNhom = 1
-                };
-                var w1 = new AddUserWindow();
+                tacgia = new TACGIA();
+                var w1 = new AddAuthorWindow();
                 w1.ShowDialog();
             });
-            OpenUpdateUserCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            OpenUpdateAuthorCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                Window w1 = new EditUserInformationWindow();
+                Window w1 = new EditAuthorInformationWindow();
                 w1.ShowDialog();
             });
-            AddNewUserCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            AddNewAuthorCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
-                var res = await Task.Run(async () => await NguoiDungBLL.Instance.AddNguoiDung(nguoidung));
+                var res = await Task.Run(async () => await TacGiaBLL.Instance.AddTacGia(tacgia));
                 MessageBox.Show(res.Item2);
                 if (res.Item1)
                 {
-                    LoadDataUserCM.Execute(null);
+                    LoadDataAuthorCM.Execute(null);
                     p.Close();
                 }
             });
-            ViewUserCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            ViewAuthorCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                Window w1 = new UserInformtationWindow();
+                Window w1 = new AuthorInformtationWindow();
                 w1.ShowDialog();
             });
-            UpdateUserCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            UpdateAuthorCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
-                var res = await Task.Run(async () => await NguoiDungBLL.Instance.UpdateNguoiDung(UserSeleted));
+                var res = await Task.Run(async () => await TacGiaBLL.Instance.UpdateTacGia(AuthorSeleted));
                 MessageBox.Show(res.Item2);
                 if (res.Item1)
                 {
-                    LoadDataUserCM.Execute(null);
+                    LoadDataAuthorCM.Execute(null);
                     p.Close();
                 }
             });
-            DeleteUserCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            DeleteAuthorCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
-                var result = MessageBox.Show("Bạn có chắc muốn xóa người dùng này không?", "Xác nhận xóa",
+                var result = MessageBox.Show("Bạn có chắc muốn xóa tác giả này không?", "Xác nhận xóa",
                                           MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    var res = await Task.Run(async () => await NguoiDungBLL.Instance.DeleteNguoiDung(UserSeleted.TenDangNhap));
-                    LoadDataUserCM.Execute(null);
+                    var res = await Task.Run(async () => await TacGiaBLL.Instance.DeleteTacGia(AuthorSeleted.id));
+                    LoadDataAuthorCM.Execute(null);
                     MessageBox.Show(res.Item2);
                 }
             });

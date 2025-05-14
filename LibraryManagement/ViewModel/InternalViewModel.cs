@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace LibraryManagement.ViewModel
 {
-    public class InternalManagementViewModel : BaseViewModel
+    public class InternalViewModel : BaseViewModel
     {
         #region Properties
         public Frame NavigationFrame { get; set; }
@@ -19,7 +19,7 @@ namespace LibraryManagement.ViewModel
         public ICommand BookStatisticCM { get; set; }
         public ICommand ReaderStatisticCM { get; set; }
         #endregion
-        public InternalManagementViewModel()
+        public InternalViewModel()
         {
             GetNavigationFrameCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {

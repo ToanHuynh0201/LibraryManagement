@@ -9,7 +9,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
         Style="{StaticResource MaterialDesignWindow}"
-        d:DataContext="{d:DesignInstance Type=viewmodel:CategoryManagementViewModel}"
+        d:DataContext="{d:DesignInstance Type=viewmodel:CategoryViewModel}"
         DataContext="{StaticResource CategoryManagementVM}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"

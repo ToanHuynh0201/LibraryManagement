@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace LibraryManagement.ViewModel
 {
-    public class ReaderManagementViewModel : BaseViewModel
+    public class ReaderViewModel : BaseViewModel
     {
         #region Properties
         private string _SearchText;
@@ -89,7 +89,7 @@ namespace LibraryManagement.ViewModel
         public ICommand DeleteReaderCM { get; set; }
         public ICommand CloseWindowCM { get; set; }
         #endregion
-        public ReaderManagementViewModel()
+        public ReaderViewModel()
         {
             SearchList = new ObservableCollection<string> { "Tên độc giả" };
             SearchProperties = SearchList.FirstOrDefault();

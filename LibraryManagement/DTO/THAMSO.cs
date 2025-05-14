@@ -14,6 +14,13 @@ namespace LibraryManagement.DTO
     
     public partial class THAMSO
     {
+        private THAMSO data;
+
+        public THAMSO(THAMSO data)
+        {
+            this.data = data;
+        }
+
         public int TuoiDGToiDa { get; set; }
         public int TuoiDGToiThieu { get; set; }
         public int GiaTriThe { get; set; }

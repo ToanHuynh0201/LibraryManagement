@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace LibraryManagement.ViewModel
 {
-    public class AccountViewModel : BaseViewModel
+    public class BookCopyViewModel : BaseViewModel
     {
         #region Properties
         private string _SearchText;
@@ -41,64 +41,63 @@ namespace LibraryManagement.ViewModel
                 OnPropertyChanged();
             }
         }
-        private NGUOIDUNG _nguoidung { get; set; }
-        public NGUOIDUNG nguoidung
+        private CUONSACH _cuonsach { get; set; }
+        public CUONSACH cuonsach
         {
             get
             {
-                return _nguoidung;
+                return _cuonsach;
             }
             set
             {
-                _nguoidung = value;
+                _cuonsach = value;
                 OnPropertyChanged();
             }
         }
         public ObservableCollection<string> SearchList { get; set; }
-        private ObservableCollection<NGUOIDUNG> _ListUsers;
-        public ObservableCollection<NGUOIDUNG> ListUsers
+        private ObservableCollection<CUONSACH> _ListBooks;
+        public ObservableCollection<CUONSACH> ListBooks
         {
             get
             {
-                return _ListUsers;
+                return _ListBooks;
             }
             set
             {
-                _ListUsers = value;
+                _ListBooks = value;
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<NGUOIDUNG> AllUsers { get; set; }
-        public NGUOIDUNG UserSeleted { get; set; }
+        public ObservableCollection<CUONSACH> AllBooks { get; set; }
+        public CUONSACH BookSeleted { get; set; }
         #endregion
 
         #region Commands
         public ICommand GetCurrentWindowCM { get; set; }
-        public ICommand LoadDataUserCM { get; set; }
-        public ICommand SearchUserCM { get; set; }
+        public ICommand LoadDataBookCM { get; set; }
+        public ICommand SearchBookCM { get; set; }
         public ICommand ResetDataCM { get; set; }
-        public ICommand OpenAddUserCM { get; set; }
-        public ICommand OpenUpdateUserCM { get; set; }
-        public ICommand AddNewUserCM { get; set; }
-        public ICommand ViewUserCM { get; set; }
-        public ICommand UpdateUserCM { get; set; }
-        public ICommand DeleteUserCM { get; set; }
+        public ICommand OpenAddBookCM { get; set; }
+        public ICommand OpenUpdateBookCM { get; set; }
+        public ICommand AddNewBookCM { get; set; }
+        public ICommand ViewBookCM { get; set; }
+        public ICommand UpdateBookCM { get; set; }
+        public ICommand DeleteBookCM { get; set; }
         public ICommand CloseWindowCM { get; set; }
         #endregion
 
-        public AccountViewModel()
+        public BookCopyViewModel()
         {
-
-            SearchList = new ObservableCollection<string> { "Username" };
+            SearchList = new ObservableCollection<string> { "Tên bản copy sách" };
             SearchProperties = SearchList.FirstOrDefault();
 
-            LoadDataUserCM = new RelayCommand<NGUOIDUNG>((p) => { return true; }, async (p) =>
+            LoadDataBookCM = new RelayCommand<CUONSACH>((p) => { return true; }, async (p) =>
             {
                 try
                 {
-                    var data = await Task.Run(async () => await NguoiDungBLL.Instance.GetAllUsers());
-                    ListUsers = new ObservableCollection<NGUOIDUNG>(data);
-                    AllUsers = new ObservableCollection<NGUOIDUNG>(data);
+                    var data = await Task.Run(async () => await CuonSachBLL.Instance.GetAllCuonSach());
+                    ListBooks = new ObservableCollection<CUONSACH>(data);
+                    AllBooks = new ObservableCollection<CUONSACH>(data);
                 }
                 catch (Exception ex)
                 {
@@ -106,20 +105,21 @@ namespace LibraryManagement.ViewModel
                     return;
                 }
             });
-            SearchUserCM = new RelayCommand<object>((p) => true, async (p) =>
+            SearchBookCM = new RelayCommand<object>((p) => true, async (p) =>
             {
                 try
                 {
                     if (string.IsNullOrWhiteSpace(SearchText))
                     {
-                        ListUsers.Clear();
-                        ListUsers = AllUsers;
+                        ListBooks.Clear();
+                        ListBooks = AllBooks;
                     }
                     else
                     {
-                        if (SearchProperties == "Username")
+                        if (SearchProperties == "Mã sách")
                         {
-                            nguoidung = await Task.Run(async () => await NguoiDungBLL.Instance.GetNguoiDungByTenDN(SearchText));
+                            var res = await Task.Run(async () => await CuonSachBLL.Instance.GetCuonSachByMaSach(int.Parse(SearchText)));
+                            ListBooks = new ObservableCollection<CUONSACH>(res);
                         }
                     }
                 }
@@ -131,55 +131,52 @@ namespace LibraryManagement.ViewModel
             ResetDataCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 SearchText = "";
-                ListUsers = new ObservableCollection<NGUOIDUNG>(AllUsers);
+                ListBooks = new ObservableCollection<CUONSACH>(AllBooks);
             });
-            OpenAddUserCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            OpenAddBookCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                nguoidung = new NGUOIDUNG()
-                {
-                    MaNhom = 1
-                };
-                var w1 = new AddUserWindow();
+                cuonsach = new CUONSACH();
+                var w1 = new AddBookCopyWindow();
                 w1.ShowDialog();
             });
-            OpenUpdateUserCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            OpenUpdateBookCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                Window w1 = new EditUserInformationWindow();
+                Window w1 = new EditBookCopyInformationWindow();
                 w1.ShowDialog();
             });
-            AddNewUserCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+          /*  AddNewBookCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
-                var res = await Task.Run(async () => await NguoiDungBLL.Instance.AddNguoiDung(nguoidung));
+                var res = await Task.Run(async () => await CuonSachBLL.Instance.AddCuonSach(cuonsach));
                 MessageBox.Show(res.Item2);
                 if (res.Item1)
                 {
-                    LoadDataUserCM.Execute(null);
+                    LoadDataBookCM.Execute(null);
                     p.Close();
                 }
-            });
-            ViewUserCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            });*/
+            ViewBookCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                Window w1 = new UserInformtationWindow();
+                Window w1 = new BookCopyInformtationWindow();
                 w1.ShowDialog();
             });
-            UpdateUserCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            UpdateBookCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
-                var res = await Task.Run(async () => await NguoiDungBLL.Instance.UpdateNguoiDung(UserSeleted));
+                var res = await Task.Run(async () => await CuonSachBLL.Instance.UpdateCuonSach(BookSeleted));
                 MessageBox.Show(res.Item2);
                 if (res.Item1)
                 {
-                    LoadDataUserCM.Execute(null);
+                    LoadDataBookCM.Execute(null);
                     p.Close();
                 }
             });
-            DeleteUserCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            DeleteBookCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
-                var result = MessageBox.Show("Bạn có chắc muốn xóa người dùng này không?", "Xác nhận xóa",
+                var result = MessageBox.Show("Bạn có chắc muốn xóa cuốn sách này không?", "Xác nhận xóa",
                                           MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    var res = await Task.Run(async () => await NguoiDungBLL.Instance.DeleteNguoiDung(UserSeleted.TenDangNhap));
-                    LoadDataUserCM.Execute(null);
+                    var res = await Task.Run(async () => await CuonSachBLL.Instance.DeleteCuonSach(BookSeleted.id));
+                    LoadDataBookCM.Execute(null);
                     MessageBox.Show(res.Item2);
                 }
             });

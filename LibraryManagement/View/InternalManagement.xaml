@@ -7,7 +7,7 @@
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
-      d:DataContext="{d:DesignInstance Type=viewmodel:InternalManagementViewModel}"
+      d:DataContext="{d:DesignInstance Type=viewmodel:InternalViewModel}"
       DataContext="{StaticResource InternalManagementVM}"
       mc:Ignorable="d" 
       d:DesignHeight="740" 

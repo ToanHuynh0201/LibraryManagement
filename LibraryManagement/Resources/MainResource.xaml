@@ -17,7 +17,7 @@
     <viewmodel:InternalManagementViewModel x:Key="InternalManagementVM"/>
     <viewmodel:RuleViewModel x:Key="RuleVM"/>
     <viewmodel:AuthorManagementViewModel x:Key="AuthorManagementVM"/>
-    <viewmodel:AddAuthorViewModel x:Key="AddAuthorVM"/>
+    <viewmodel:AuthorViewModel x:Key="AddAuthorVM"/>
     <viewmodel:CategoryManagementViewModel x:Key="CategoryManagementVM"/>
     <viewmodel:AddCategoryViewModel x:Key="AddCategoryVM"/>
     

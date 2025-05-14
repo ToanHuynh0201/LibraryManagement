@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace LibraryManagement.ViewModel
 {
-    public class AccountViewModel : BaseViewModel
+    public class BookTitleTitleViewModel : BaseViewModel
     {
         #region Properties
         private string _SearchText;
@@ -41,64 +41,63 @@ namespace LibraryManagement.ViewModel
                 OnPropertyChanged();
             }
         }
-        private NGUOIDUNG _nguoidung { get; set; }
-        public NGUOIDUNG nguoidung
+        private DAUSACH _dausach { get; set; }
+        public DAUSACH dausach
         {
             get
             {
-                return _nguoidung;
+                return _dausach;
             }
             set
             {
-                _nguoidung = value;
+                _dausach = value;
                 OnPropertyChanged();
             }
         }
         public ObservableCollection<string> SearchList { get; set; }
-        private ObservableCollection<NGUOIDUNG> _ListUsers;
-        public ObservableCollection<NGUOIDUNG> ListUsers
+        private ObservableCollection<DAUSACH> _ListBookTitles;
+        public ObservableCollection<DAUSACH> ListBookTitles
         {
             get
             {
-                return _ListUsers;
+                return _ListBookTitles;
             }
             set
             {
-                _ListUsers = value;
+                _ListBookTitles = value;
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<NGUOIDUNG> AllUsers { get; set; }
-        public NGUOIDUNG UserSeleted { get; set; }
+        public ObservableCollection<DAUSACH> AllBookTitles { get; set; }
+        public DAUSACH BookTitleSeleted { get; set; }
         #endregion
 
         #region Commands
         public ICommand GetCurrentWindowCM { get; set; }
-        public ICommand LoadDataUserCM { get; set; }
-        public ICommand SearchUserCM { get; set; }
+        public ICommand LoadDataBookTitleCM { get; set; }
+        public ICommand SearchBookTitleCM { get; set; }
         public ICommand ResetDataCM { get; set; }
-        public ICommand OpenAddUserCM { get; set; }
-        public ICommand OpenUpdateUserCM { get; set; }
-        public ICommand AddNewUserCM { get; set; }
-        public ICommand ViewUserCM { get; set; }
-        public ICommand UpdateUserCM { get; set; }
-        public ICommand DeleteUserCM { get; set; }
+        public ICommand OpenAddBookTitleCM { get; set; }
+        public ICommand OpenUpdateBookTitleCM { get; set; }
+        public ICommand AddNewBookTitleCM { get; set; }
+        public ICommand ViewBookTitleCM { get; set; }
+        public ICommand UpdateBookTitleCM { get; set; }
+        public ICommand DeleteBookTitleCM { get; set; }
         public ICommand CloseWindowCM { get; set; }
         #endregion
 
-        public AccountViewModel()
+        public BookTitleTitleViewModel()
         {
-
-            SearchList = new ObservableCollection<string> { "Username" };
+            SearchList = new ObservableCollection<string> { "Tên đầu s" };
             SearchProperties = SearchList.FirstOrDefault();
 
-            LoadDataUserCM = new RelayCommand<NGUOIDUNG>((p) => { return true; }, async (p) =>
+            LoadDataBookTitleCM = new RelayCommand<DAUSACH>((p) => { return true; }, async (p) =>
             {
                 try
                 {
-                    var data = await Task.Run(async () => await NguoiDungBLL.Instance.GetAllUsers());
-                    ListUsers = new ObservableCollection<NGUOIDUNG>(data);
-                    AllUsers = new ObservableCollection<NGUOIDUNG>(data);
+                    var data = await Task.Run(async () => await DauSachBLL.Instance.GetAllDauSach());
+                    ListBookTitles = new ObservableCollection<DAUSACH>(data);
+                    AllBookTitles = new ObservableCollection<DAUSACH>(data);
                 }
                 catch (Exception ex)
                 {
@@ -106,20 +105,21 @@ namespace LibraryManagement.ViewModel
                     return;
                 }
             });
-            SearchUserCM = new RelayCommand<object>((p) => true, async (p) =>
+            SearchBookTitleCM = new RelayCommand<object>((p) => true, async (p) =>
             {
                 try
                 {
                     if (string.IsNullOrWhiteSpace(SearchText))
                     {
-                        ListUsers.Clear();
-                        ListUsers = AllUsers;
+                        ListBookTitles.Clear();
+                        ListBookTitles = AllBookTitles;
                     }
                     else
                     {
-                        if (SearchProperties == "Username")
+                        if (SearchProperties == "Mã đầu sách")
                         {
-                            nguoidung = await Task.Run(async () => await NguoiDungBLL.Instance.GetNguoiDungByTenDN(SearchText));
+                            var res = await Task.Run(async () => await DauSachBLL.Instance.GetDauSachByMa(SearchText));
+                            ListBookTitles = new ObservableCollection<DAUSACH>(res);
                         }
                     }
                 }
@@ -131,55 +131,52 @@ namespace LibraryManagement.ViewModel
             ResetDataCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 SearchText = "";
-                ListUsers = new ObservableCollection<NGUOIDUNG>(AllUsers);
+                ListBookTitles = new ObservableCollection<DAUSACH>(AllBookTitles);
             });
-            OpenAddUserCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            OpenAddBookTitleCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                nguoidung = new NGUOIDUNG()
-                {
-                    MaNhom = 1
-                };
-                var w1 = new AddUserWindow();
+                dausach = new DAUSACH();
+                var w1 = new AddBookTitleWindow();
                 w1.ShowDialog();
             });
-            OpenUpdateUserCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            OpenUpdateBookTitleCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                Window w1 = new EditUserInformationWindow();
+                Window w1 = new EditBookTitleInformationWindow();
                 w1.ShowDialog();
             });
-            AddNewUserCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            AddNewBookTitleCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
-                var res = await Task.Run(async () => await NguoiDungBLL.Instance.AddNguoiDung(nguoidung));
+                var res = await Task.Run(async () => await DauSachBLL.Instance.AddDauSach(dausach));
                 MessageBox.Show(res.Item2);
                 if (res.Item1)
                 {
-                    LoadDataUserCM.Execute(null);
+                    LoadDataBookTitleCM.Execute(null);
                     p.Close();
                 }
             });
-            ViewUserCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            ViewBookTitleCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                Window w1 = new UserInformtationWindow();
+                Window w1 = new BookTitleInformtationWindow();
                 w1.ShowDialog();
             });
-            UpdateUserCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            UpdateBookTitleCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
-                var res = await Task.Run(async () => await NguoiDungBLL.Instance.UpdateNguoiDung(UserSeleted));
+                var res = await Task.Run(async () => await DauSachBLL.Instance.UpdateDauSach(BookTitleSeleted));
                 MessageBox.Show(res.Item2);
                 if (res.Item1)
                 {
-                    LoadDataUserCM.Execute(null);
+                    LoadDataBookTitleCM.Execute(null);
                     p.Close();
                 }
             });
-            DeleteUserCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            DeleteBookTitleCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
-                var result = MessageBox.Show("Bạn có chắc muốn xóa người dùng này không?", "Xác nhận xóa",
+                var result = MessageBox.Show("Bạn có chắc muốn xóa đầu sách này không?", "Xác nhận xóa",
                                           MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    var res = await Task.Run(async () => await NguoiDungBLL.Instance.DeleteNguoiDung(UserSeleted.TenDangNhap));
-                    LoadDataUserCM.Execute(null);
+                    var res = await Task.Run(async () => await DauSachBLL.Instance.DeleteDauSach(BookTitleSeleted.id));
+                    LoadDataBookTitleCM.Execute(null);
                     MessageBox.Show(res.Item2);
                 }
             });

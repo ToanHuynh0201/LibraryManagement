@@ -10,7 +10,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="740" 
       d:DesignWidth="840"
-      d:DataContext="{d:DesignInstance Type=viewmodel:ReaderManagementViewModel}"
+      d:DataContext="{d:DesignInstance Type=viewmodel:ReaderViewModel}"
       DataContext="{StaticResource ReaderManagementVM}"
       Title="ReaderManagement"
       Background="Transparent"
