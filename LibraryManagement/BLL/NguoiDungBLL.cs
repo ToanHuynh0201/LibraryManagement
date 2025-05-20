@@ -42,6 +42,10 @@ namespace LibraryManagement.BLL
             {
                 return (false, "Tên đăng nhập đã tồn tại");
             }
+            if(nd.MaNhom == 3)
+            {
+                return (false, "Người dùng là độc giả phải được đăng ký thẻ trước khi thêm.");
+            }
             var res = CheckNguoiDung(nd);
             if (!res.Item1)
             {
@@ -85,7 +89,7 @@ namespace LibraryManagement.BLL
             }
             return await NguoiDungDAL.Instance.DeleteNguoiDung(tendangnhap);
         }
-        public (bool, string) CheckNguoiDung(NGUOIDUNG nd)
+        private (bool, string) CheckNguoiDung(NGUOIDUNG nd)
         {
             if (nd.TenDangNhap.Length > 64)
             {
@@ -96,7 +100,7 @@ namespace LibraryManagement.BLL
                 return (false, "Mật khẩu không được quá 256 ký tự");
             }
             var nhom = NhomNguoiDungBLL.Instance.GetNhomNguoiDungById(nd.MaNhom);
-            if (nhom == null)
+            if (nhom.Result == null)
             {
                 return (false, "Người dùng không thuộc nhóm người dùng nào/nhóm người dùng sai");
             }

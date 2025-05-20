@@ -55,20 +55,6 @@ namespace LibraryManagement.DAL
                 && cs.IsDeleted == false).ToListAsync();
             }
         }
-        public async Task<(bool, string)> AddCuonSach(CUONSACH cs)
-        {
-            using (var context = new LibraryManagementEntities())
-                try
-                {
-                    context.CUONSACHes.Add(cs);
-                    await context.SaveChangesAsync();
-                    return (true, "Thêm cuốn sách thành công.");
-                }
-                catch(Exception ex)
-                {
-                    return (false, ex.Message);
-                }
-        }
         public async Task<(bool, string)> UpdateCuonSach(CUONSACH cs)
         {
             using (var context = new LibraryManagementEntities())
@@ -90,7 +76,10 @@ namespace LibraryManagement.DAL
                 try
                 {
                     var cuonsach = await context.CUONSACHes.FindAsync(id);
+                    var sach = await context.SACHes.FindAsync(cuonsach.MaSach);
                     cuonsach.IsDeleted = true;
+                    sach.SoLuong--;
+                    sach.SoLuongCon--;
                     await context.SaveChangesAsync();
                     return (true, "Đã xoá cuốn sách.");
                 }

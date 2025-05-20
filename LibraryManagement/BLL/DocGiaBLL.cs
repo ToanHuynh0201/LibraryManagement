@@ -2,9 +2,12 @@
 using LibraryManagement.DTO;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LibraryManagement.BLL
 {
@@ -65,8 +68,7 @@ namespace LibraryManagement.BLL
                 return (false, "Tuổi độc giả không hợp lệ");
             }
 
-            dg.NgayLapThe = DateTime.Now;
-            dg.NgayHetHan = DateTime.Now.AddMonths(ThoiHanThe);
+            dg.NgayHetHan = dg.NgayLapThe.AddMonths(ThoiHanThe);
 
             dg.TongNo = 0;
             return await DocGiaDAL.Instance.AddDocGia(dg);
@@ -83,6 +85,8 @@ namespace LibraryManagement.BLL
             {
                 return (false, res.Item2);
             }
+            int ThoiHanThe = ThamSoBLL.Instance.GetThamSo().Result.GiaTriThe;
+            dg.NgayHetHan = dg.NgayLapThe.AddMonths(ThoiHanThe);
             return await DocGiaDAL.Instance.UpdateDocGia(dg);
         }
         public async Task<(bool, string)> DeleteDocGia(int id)
@@ -100,17 +104,12 @@ namespace LibraryManagement.BLL
         }
         private (bool, string) CheckDocGia(DOCGIA dg)
         {
-            var nguoidung = NguoiDungBLL.Instance.GetNguoiDungByTenDN(dg.TenDangNhap);
-            if (nguoidung == null)
-            {
-                return (false, "Độc giả chưa có tài khoản");
-            }
             if (string.IsNullOrEmpty(dg.TenDG))
             {
                 return (false, "Tên độc giả không được để trống");
             }
             var ldg = LoaiDocGiaBLL.Instance.GetLoaiDocGiaById(dg.MaLoaiDG);
-            if(ldg == null)
+            if(ldg.Result == null)
             {
                 return (false, "Loại độc giả không tồn tại");
             }

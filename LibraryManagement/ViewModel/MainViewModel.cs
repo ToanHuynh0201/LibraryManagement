@@ -1,6 +1,8 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using LibraryManagement.View;
+using LibraryManagement.View.Book;
+using LibraryManagement.View.Reader;
 
 namespace LibraryManagement.ViewModel
 {
@@ -37,7 +39,7 @@ namespace LibraryManagement.ViewModel
             });
             QuanLyNoiBoCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                NavigationFrame.Navigate(new InternalManagement());
+                NavigationFrame.Navigate(new InternalViewModel());
             });
             TaiKhoanCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

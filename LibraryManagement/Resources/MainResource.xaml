@@ -6,25 +6,26 @@
                     xmlns:local="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
                     xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
                     xmlns:internal="clr-namespace:MaterialDesignThemes.Wpf.Internal;assembly=MaterialDesignThemes.Wpf" 
-                    xmlns:converters1="http://schemas.microsoft.com/netfx/2009/xaml/presentation">
+                    xmlns:converters1="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+                    xmlns:utils="clr-namespace:LibraryManagement.Utils">
     <viewmodel:MainViewModel x:Key="MainVM"/>
     <viewmodel:LoginViewModel x:Key="LoginVM"/>
-    <viewmodel:ReaderManagementViewModel x:Key="ReaderManagementVM"/>
-    <viewmodel:BookManagementViewModel x:Key="BookManagementVM"/>
+    <viewmodel:ReaderViewModel x:Key="ReaderVM"/>
+    <viewmodel:BookViewModel x:Key="BookVM"/>
+    <viewmodel:BookTitleViewModel x:Key="BookTitleVM"/>
+    <viewmodel:BookCopyViewModel x:Key="BookCopyVM"/>
     <viewmodel:AccountViewModel x:Key="AccountVM"/>
     <viewmodel:StatisticViewModel x:Key="StatisticVM"/>
-    <viewmodel:InternalManagementViewModel x:Key="InternalManagementVM"/>
+    <viewmodel:InternalViewModel x:Key="InternalVM"/>
     <viewmodel:RuleViewModel x:Key="RuleVM"/>
-    <viewmodel:AuthorManagementViewModel x:Key="AuthorManagementVM"/>
-    <viewmodel:AddAuthorViewModel x:Key="AddAuthorVM"/>
-    <viewmodel:CategoryManagementViewModel x:Key="CategoryManagementVM"/>
-    <viewmodel:AddCategoryViewModel x:Key="AddCategoryVM"/>
-    
-    
+    <viewmodel:AuthorViewModel x:Key="AuthorVM"/>
+    <viewmodel:CategoryViewModel x:Key="CategoryVM"/>
+
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <converters:ListViewGridViewConverter x:Key="GridLinesVisibilityBorderToThicknessConverter"/>
 
-
+    <utils:DateToStringConverter x:Key="DateToStringConverter"/>
+    
     <!--#region SolidColorBrush-->
     <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
@@ -180,7 +181,6 @@
                 Value="#d32f2f"/>
         <Setter Property="BorderBrush" 
                 Value="#b71c1c"/>
-
         <Style.Triggers>
             <Trigger Property="IsMouseOver" 
                      Value="True">
@@ -243,7 +243,7 @@
     
     <!--#region PackIcon-->
     <Style x:Key="gridButtonIcon" 
-       TargetType="materialDesign:PackIcon">
+           TargetType="materialDesign:PackIcon">
         <Setter Property="Width" 
             Value="12"/>
         <Setter Property="Height" 
