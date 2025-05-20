@@ -3,12 +3,149 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:LibraryManagement.View.BookCopy"
+      xmlns:local="clr-namespace:LibraryManagement.View"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
+      d:DataContext="{d:DesignInstance Type=viewmodel:BookViewModel}"
+      DataContext="{StaticResource BookManagementVM}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="740" 
+      d:DesignWidth="840"
+      Background="Transparent"
       Title="BookCopyManagement">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadDataBookCM}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Page.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="BookManagementPage"
+                                 Storyboard.TargetProperty="Opacity"
+                                 From="0"
+                                 To="1"
+                                 Duration="0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
+    <Border Background="#eff2f7"
+        CornerRadius="30">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"
+              Margin="0 40 0 0">
+                <!--Search TextBox-->
+                <Grid Margin="30 0 0 0"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Left"
+                  Width="200">
+                    <TextBox Style="{StaticResource SearchTextBox}"
+                         Height="35"
+                         Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding SearchData}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                    <materialDesign:PackIcon Kind="Magnify"
+                                         Width="20"
+                                         Height="20"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Right"
+                                         Margin="0 0 10 0"/>
+                </Grid>
 
-    <Grid>
-        
-    </Grid>
+                <!--ComboBox-->
+                <ComboBox materialDesign:ComboBoxAssist.MaxLength="5"
+                      materialDesign:HintAssist.Hint="Tìm theo..."
+                      materialDesign:HintAssist.HintOpacity=".7"
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                      Padding="10 0 5 0"
+                      IsEditable="True"
+                      Margin="260 0 0 0" 
+                      VerticalAlignment="Center" 
+                      HorizontalAlignment="Left"
+                      Height="40"
+                      Width="200"
+                      ItemsSource="{Binding SearchList}" 
+                      SelectedItem="{Binding SearchProperties, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ResetData}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </Grid>
+
+            <DataGrid  Style="{DynamicResource DataGridStyle1}"
+                       CellStyle="{DynamicResource DataGridCellStyle1}"
+                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                       RowStyle="{DynamicResource DataGridRowStyle1}"
+                       x:Name="customerGrid" 
+                       ItemsSource="{Binding ListBooks}"
+                       SelectedItem="{Binding BookSeleted}"
+                       AutoGenerateColumns="False" 
+                       IsReadOnly="True"
+                       Grid.Row="1">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding ViewBookCM}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn CanUserResize="False" 
+                                        Width="Auto" 
+                                        ElementStyle="{StaticResource CheckBoxStyle1}">
+                        <DataGridCheckBoxColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
+                            </DataTemplate>
+                        </DataGridCheckBoxColumn.HeaderTemplate>
+                    </DataGridCheckBoxColumn>
+
+                    <DataGridTextColumn Header="" 
+                                        IsReadOnly="True" 
+                                        CanUserResize="False"
+                                        Width="Auto"/>
+                    <DataGridTextColumn Header="ID" 
+                                    IsReadOnly="True" 
+                                    Width="Auto" 
+                                    Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="Mã sách" 
+                                    IsReadOnly="True" 
+                                    Width="250" 
+                                    Binding="{Binding}"/>
+                    <DataGridTextColumn Header="Tên đầu sách" 
+                                    IsReadOnly="True" 
+                                    Width="Auto" 
+                                    Binding="{Binding}"/>
+                    <DataGridTextColumn Header="Tình trạng" 
+                                    IsReadOnly="True" 
+                                    Width="Auto" 
+                                    Binding="{Binding}"/>
+                    <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource gridEditButton}"
+                                        Command="{Binding ElementName=customerGrid, Path=DataContext.UpdateBookCM}"/>
+                                    <Button Style="{StaticResource gridRemoveButton}" 
+                                        Margin="5 0 0 0" 
+                                        Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteBookCM}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
 </Page>

@@ -65,7 +65,7 @@
                 </Grid>
 
                 <!--ComboBox-->
-                <ComboBox materialDesign:ComboBoxAssist.MaxLength="2"
+                <ComboBox materialDesign:ComboBoxAssist.MaxLength="5"
                           materialDesign:HintAssist.Hint="Tìm theo..."
                           materialDesign:HintAssist.HintOpacity=".7"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -86,7 +86,7 @@
                 </ComboBox>
 
                 <!--Add Button-->
-                <Button Margin="210 0 0 0"
+                <Button Margin="300 0 0 0"
                         Width="100"
                         Height="40"
                         Style="{StaticResource MaterialDesignRaisedButton}"
@@ -111,7 +111,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
-                <Button Margin="450 0 0 0"
+                <!--<Button Margin="450 0 0 0"
                         Width="100"
                         Height="40"
                         Style="{StaticResource MaterialDesignRaisedButton}"
@@ -160,7 +160,7 @@
                             <i:InvokeCommandAction Command="{Binding AddCategoryCM}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </Button>
+                </Button>-->
             </Grid>
 
             <DataGrid  Style="{DynamicResource DataGridStyle1}"

@@ -12,6 +12,8 @@
     <viewmodel:LoginViewModel x:Key="LoginVM"/>
     <viewmodel:ReaderViewModel x:Key="ReaderVM"/>
     <viewmodel:BookViewModel x:Key="BookVM"/>
+    <viewmodel:BookTitleViewModel x:Key="BookTitleVM"/>
+    <viewmodel:BookCopyViewModel x:Key="BookCopyVM"/>
     <viewmodel:AccountViewModel x:Key="AccountVM"/>
     <viewmodel:StatisticViewModel x:Key="StatisticVM"/>
     <viewmodel:InternalViewModel x:Key="InternalVM"/>
@@ -179,7 +181,6 @@
                 Value="#d32f2f"/>
         <Setter Property="BorderBrush" 
                 Value="#b71c1c"/>
-
         <Style.Triggers>
             <Trigger Property="IsMouseOver" 
                      Value="True">

@@ -6,7 +6,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:LibraryManagement.View"
         mc:Ignorable="d"
-        Title="AddBookWindow" WindowStyle="None"
+        Title="AddBookWindow" 
+        WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
         Height="400 " Width="821"
@@ -96,13 +97,17 @@
                     <!--Thể loại sách-->
                     <Grid
                         Grid.Row="2" Margin="10 10">
-                        <TextBox
+                        <ComboBox
                             VerticalAlignment="Center"
-                            materialDesign:HintAssist.Hint="Thể loại"
-                            FontSize="18" 
+                            materialDesign:HintAssist.Hint="Loại độc giả"
+                            FontSize="18"
                             Foreground="Black"
-                            Text=""
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            IsEditable="True"
+                            ItemsSource="{Binding LoaiDocGiaList}"
+                            DisplayMemberPath=""
+                            SelectedValuePath=""
+                            SelectedValue=""
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                     </Grid>
 
                     <!--Ngày nhập-->
@@ -112,8 +117,7 @@
                             materialDesign:HintAssist.Hint="Ngày nhâp"
                             materialDesign:TextFieldAssist.HasClearButton="True"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                            FontSize="18" 
-                            />
+                            FontSize="18"/>
                     </Grid>
 
                 </Grid>

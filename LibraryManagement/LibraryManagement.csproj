@@ -313,6 +313,9 @@
     <Compile Include="View\BookReceiving\ReceivingFormInformtationWindow.xaml.cs">
       <DependentUpon>ReceivingFormInformtationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\BookTab.xaml.cs">
+      <DependentUpon>BookTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BookTitle\AddBookTitleWindow.xaml.cs">
       <DependentUpon>AddBookTitleWindow.xaml</DependentUpon>
     </Compile>
@@ -461,6 +464,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BookReceiving\ReceivingFormInformtationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

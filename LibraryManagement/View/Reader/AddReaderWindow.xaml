@@ -107,14 +107,18 @@
 
                     <!--Loại độc giả-->
                     <Grid
-                    Grid.Row="2" Margin="10 10">
-                        <TextBox
-                        VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="Loại độc giả"
-                        FontSize="18" 
-                        Foreground="Black"
-                        Text="{Binding docgia.MaLoaiDG, Mode=TwoWay}"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        Grid.Row="2" Margin="10 10">
+                        <ComboBox
+                            VerticalAlignment="Center"
+                            materialDesign:HintAssist.Hint="Loại độc giả"
+                            FontSize="18"
+                            Foreground="Black"
+                            IsEditable="True"
+                            ItemsSource="{Binding LoaiDocGiaList}"
+                            DisplayMemberPath=""
+                            SelectedValuePath=""
+                            SelectedValue=""
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                     </Grid>
 
                     <!--Ngày tạo thẻ-->
