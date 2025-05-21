@@ -99,8 +99,8 @@
                                             Content="X" 
                                             Width="20" Height="20" 
                                             Margin="5,0,0,0"
-                                            Click="DeleteButton_Click"
                                             Tag="{Binding}" />
+                                            <!--Click="DeleteButton_Click"-->
                                     </Grid>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
@@ -135,8 +135,8 @@
                                             Content="X" 
                                             Width="20" Height="20" 
                                             Margin="5,0,0,0"
-                                            Click="DeleteButton_Click"
                                             Tag="{Binding}" />
+                                            <!--Click="DeleteButton_Click"-->
                                     </Grid>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>

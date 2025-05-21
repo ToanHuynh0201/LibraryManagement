@@ -391,6 +391,21 @@
     <Compile Include="View\Reader\ReaderManagement.xaml.cs">
       <DependentUpon>ReaderManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Receipt\AddPenaltyReceiptWindow.xaml.cs">
+      <DependentUpon>AddPenaltyReceiptWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Receipt\PenaltyReceiptManagement.xaml.cs">
+      <DependentUpon>PenaltyReceiptManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Report\CategoryLoanReportManagement.xaml.cs">
+      <DependentUpon>CategoryLoanReportManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Report\OverdueBooksReportManagement.xaml.cs">
+      <DependentUpon>OverdueBooksReportManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Report\ReportDetailsWindow.xaml.cs">
+      <DependentUpon>ReportDetailsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Users\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
     </Compile>
@@ -572,6 +587,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Reader\ReaderManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Receipt\AddPenaltyReceiptWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Receipt\PenaltyReceiptManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Report\CategoryLoanReportManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Report\OverdueBooksReportManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Report\ReportDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
