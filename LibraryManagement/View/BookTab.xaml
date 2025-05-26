@@ -7,25 +7,25 @@
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
-      d:DataContext="{d:DesignInstance Type=viewmodel:BookViewModel}"
+      d:DataContext="{d:DesignInstance Type=viewmodel:BookManagementViewModel}"
       DataContext="{StaticResource BookManagementVM}"
       mc:Ignorable="d" 
       d:DesignHeight="740" 
       d:DesignWidth="840"
       Background="Transparent"
-      x:Name="BookManagementPage"
+      x:Name="bookTab"
       Title="BookTab">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding GetNavigationFrameCM}"
-                               CommandParameter="{Binding ElementName=stasticFrame}"/>
+                               CommandParameter="{Binding ElementName=mainFrame}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Page.Triggers>
         <EventTrigger RoutedEvent="Page.Loaded">
             <BeginStoryboard>
                 <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="StatPage"
+                    <DoubleAnimation Storyboard.TargetName="bookTab"
                          Storyboard.TargetProperty="Opacity"
                          From="0"
                          To="1"
@@ -53,6 +53,7 @@
                         Margin="0 0 0 0">
                     <Button Style="{StaticResource barButton}"
                         Content="Đầu sách"
+                        Command="{Binding QuanLyDauSachCM}"
                         FontWeight="Bold"
                         Foreground="MediumPurple"
                         FontSize="24"
@@ -61,7 +62,7 @@
                         Height="50" 
                         Width="100"
                         Margin="0 0 20 0"/>
-                    <Button Style="{StaticResource barButton}"
+                    <Button Style="{StaticResource barButton}" Command="{Binding QuanLySachCM}"
                         Content="Sách"
                         FontWeight="Bold"
                         Foreground="#FF2ABF2B"
@@ -71,7 +72,7 @@
                         Height="50" 
                         Width="100"
                         Margin="0 0 20 0"/>
-                    <Button Style="{StaticResource barButton}"
+                    <Button Style="{StaticResource barButton}" Command="{Binding QuanLyCuonSachCM}"
                         Content="Cuốn sách"
                         FontWeight="Bold"
                         Foreground="MediumPurple"
@@ -81,7 +82,7 @@
                         Height="50" 
                         Width="120"
                         Margin="0 0 20 0"/>
-                    <Button Style="{StaticResource barButton}"
+                    <Button Style="{StaticResource barButton}" Command="{Binding QuanLyNhapSachCM}"
                         Content="Nhập sách"
                         FontWeight="Bold"
                         Foreground="#FF2ABF2B"
@@ -91,7 +92,7 @@
                         Height="50" 
                         Width="130"
                         Margin="0 0 20 0"/>
-                    <Button Style="{StaticResource barButton}"
+                    <Button Style="{StaticResource barButton}" Command="{Binding QuanLyTacGiaCM}"
                         Content="Tác giả"
                         FontWeight="Bold"
                         Foreground="MediumPurple"
@@ -101,7 +102,7 @@
                         Height="50" 
                         Width="100"
                         Margin="0 0 20 0"/>
-                    <Button Style="{StaticResource barButton}"
+                    <Button Style="{StaticResource barButton}" Command="{Binding QuanLyTheLoaiCM}"
                         Content="Thể loại"
                         FontWeight="Bold"
                         Foreground="#FF2ABF2B"

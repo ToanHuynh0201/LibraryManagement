@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.PHIEUNHAPSACHes.ToListAsync();
+                return await context.PHIEUNHAPSACHes.Where(pns => pns.TongTien > 0).ToListAsync();
             }
         }
         public async Task<PHIEUNHAPSACH> GetPhieuNhapSachById(int id)
@@ -40,20 +41,21 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.PHIEUNHAPSACHes.Where(pns => pns.SoPNS.Contains(sopns)).ToListAsync();
+                return await context.PHIEUNHAPSACHes.Where(pns => pns.SoPNS.Contains(sopns) && pns.TongTien > 0).ToListAsync();
             }
         }
         public async Task<List<PHIEUNHAPSACH>> GetPhieuNhapSachByNgayNhap(DateTime ngaynhap)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.PHIEUNHAPSACHes.Where(pns => pns.NgayNhap == ngaynhap).ToListAsync();
+                return await context.PHIEUNHAPSACHes.Where(pns => pns.NgayNhap == ngaynhap && pns.TongTien > 0).ToListAsync();
             }
         }
         public async Task<(bool, string)> AddPhieuNhapSach(PHIEUNHAPSACH pns)
         {
             using (var context = new LibraryManagementEntities())
             {
+                pns.TongTien = 0;
                 context.PHIEUNHAPSACHes.Add(pns);
                 await context.SaveChangesAsync();
                 return (true, "Thêm phiếu nhập sách thành công");

@@ -56,49 +56,43 @@ namespace LibraryManagement.ViewModel
             }
         }
         public ObservableCollection<string> SearchList { get; set; }
-        private ObservableCollection<CUONSACH> _ListBooks;
-        public ObservableCollection<CUONSACH> ListBooks
+        private ObservableCollection<CUONSACH> _listBookCopy { get; set; }
+        public ObservableCollection<CUONSACH> ListBookCopy
         {
             get
             {
-                return _ListBooks;
+                return _listBookCopy;
             }
             set
             {
-                _ListBooks = value;
+                _listBookCopy = value;
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<CUONSACH> AllBooks { get; set; }
-        public CUONSACH BookSeleted { get; set; }
+        public ObservableCollection<CUONSACH> AllBookCopy { get; set; }
+        public CUONSACH BookCopySelected { get; set; }
         #endregion
 
         #region Commands
-        public ICommand GetCurrentWindowCM { get; set; }
-        public ICommand LoadDataBookCM { get; set; }
-        public ICommand SearchBookCM { get; set; }
-        public ICommand ResetDataCM { get; set; }
-        public ICommand OpenAddBookCM { get; set; }
-        public ICommand OpenUpdateBookCM { get; set; }
-        public ICommand AddNewBookCM { get; set; }
-        public ICommand ViewBookCM { get; set; }
-        public ICommand UpdateBookCM { get; set; }
-        public ICommand DeleteBookCM { get; set; }
+        public ICommand LoadDataBookCopyCM { get; set; }
+        public ICommand ResetSearchDataCM { get; set; }
+        public ICommand SearchBookCopyCM { get; set; }
+        public ICommand DeleteBookCopyCM { get; set; }
         public ICommand CloseWindowCM { get; set; }
         #endregion
 
         public BookCopyViewModel()
         {
-            SearchList = new ObservableCollection<string> { "Tên bản copy sách" };
+            SearchList = new ObservableCollection<string> { "Mã sách", "Mã đầu sách", "Tên đầu sách" };
             SearchProperties = SearchList.FirstOrDefault();
 
-            LoadDataBookCM = new RelayCommand<CUONSACH>((p) => { return true; }, async (p) =>
+            LoadDataBookCopyCM = new RelayCommand<CUONSACH>((p) => { return true; }, async (p) =>
             {
                 try
                 {
                     var data = await Task.Run(async () => await CuonSachBLL.Instance.GetAllCuonSach());
-                    ListBooks = new ObservableCollection<CUONSACH>(data);
-                    AllBooks = new ObservableCollection<CUONSACH>(data);
+                    ListBookCopy = new ObservableCollection<CUONSACH>(data);
+                    AllBookCopy = new ObservableCollection<CUONSACH>(data);
                 }
                 catch (Exception ex)
                 {
@@ -106,21 +100,31 @@ namespace LibraryManagement.ViewModel
                     return;
                 }
             });
-            SearchBookCM = new RelayCommand<object>((p) => true, async (p) =>
+            SearchBookCopyCM = new RelayCommand<object>((p) => true, async (p) =>
             {
                 try
                 {
                     if (string.IsNullOrWhiteSpace(SearchText))
                     {
-                        ListBooks.Clear();
-                        ListBooks = AllBooks;
+                        ListBookCopy.Clear();
+                        ListBookCopy = AllBookCopy;
                     }
                     else
                     {
                         if (SearchProperties == "Mã sách")
                         {
-                            var res = await Task.Run(async () => await CuonSachBLL.Instance.GetCuonSachByMaSach(int.Parse(SearchText)));
-                            ListBooks = new ObservableCollection<CUONSACH>(res);
+                            var res = await Task.Run(async () => await CuonSachBLL.Instance.GetCuonSachByMaSach(SearchText));
+                            ListBookCopy = new ObservableCollection<CUONSACH>(res);
+                        }
+                        if (SearchProperties == "Mã đầu sách")
+                        {
+                            var res = await Task.Run(async () => await CuonSachBLL.Instance.GetCuonSachByMaDauSach(SearchText));
+                            ListBookCopy = new ObservableCollection<CUONSACH>(res);
+                        }
+                        if (SearchProperties == "Tên đầu sách")
+                        {
+                            var res = await Task.Run(async () => await CuonSachBLL.Instance.GetCuonSachByTenDauSach(SearchText));
+                            ListBookCopy = new ObservableCollection<CUONSACH>(res);
                         }
                     }
                 }
@@ -129,49 +133,19 @@ namespace LibraryManagement.ViewModel
                     MessageBox.Show("Lỗi khi tìm kiếm: " + ex.Message);
                 }
             });
-            ResetDataCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            ResetSearchDataCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 SearchText = "";
-                ListBooks = new ObservableCollection<CUONSACH>(AllBooks);
+                ListBookCopy = new ObservableCollection<CUONSACH>(AllBookCopy);
             });
-            OpenUpdateBookCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
-            {
-                Window w1 = new EditBookCopyInformationWindow();
-                w1.ShowDialog();
-            });
-          /*  AddNewBookCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
-            {
-                var res = await Task.Run(async () => await CuonSachBLL.Instance.AddCuonSach(cuonsach));
-                MessageBox.Show(res.Item2);
-                if (res.Item1)
-                {
-                    LoadDataBookCM.Execute(null);
-                    p.Close();
-                }
-            });*/
-            ViewBookCM = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                Window w1 = new BookCopyInformtationWindow();
-                w1.ShowDialog();
-            });
-            UpdateBookCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
-            {
-                var res = await Task.Run(async () => await CuonSachBLL.Instance.UpdateCuonSach(BookSeleted));
-                MessageBox.Show(res.Item2);
-                if (res.Item1)
-                {
-                    LoadDataBookCM.Execute(null);
-                    p.Close();
-                }
-            });
-            DeleteBookCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            DeleteBookCopyCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
                 var result = MessageBox.Show("Bạn có chắc muốn xóa cuốn sách này không?", "Xác nhận xóa",
                                           MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    var res = await Task.Run(async () => await CuonSachBLL.Instance.DeleteCuonSach(BookSeleted.id));
-                    LoadDataBookCM.Execute(null);
+                    var res = await Task.Run(async () => await CuonSachBLL.Instance.DeleteCuonSach(BookCopySelected.id));
+                    LoadDataBookCopyCM.Execute(null);
                     MessageBox.Show(res.Item2);
                 }
             });

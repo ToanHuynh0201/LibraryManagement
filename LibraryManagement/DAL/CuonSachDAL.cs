@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 
@@ -27,14 +28,14 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.CUONSACHes.AsNoTracking().Where(cs => cs.IsDeleted == false).ToListAsync();
+                return await context.CUONSACHes.AsNoTracking().Include(cs => cs.SACH).Include(cs => cs.SACH.DAUSACH).Where(cs => cs.IsDeleted == false).ToListAsync();
             }
         }
         public async Task<CUONSACH> GetCuonSachById(int id)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.CUONSACHes.AsNoTracking()
+                return await context.CUONSACHes.Include(cs => cs.SACH).Include(cs => cs.SACH.DAUSACH).AsNoTracking()
                 .FirstOrDefaultAsync(cs => cs.id == id && cs.IsDeleted == false);
             }
         }
@@ -42,7 +43,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.CUONSACHes.AsNoTracking()
+                return await context.CUONSACHes.Include(cs => cs.SACH).Include(cs => cs.SACH.DAUSACH).AsNoTracking()
                 .Where(cs => cs.MaSach == masach && cs.IsDeleted == false).ToListAsync();
             }
         }
@@ -50,9 +51,45 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.CUONSACHes.AsNoTracking()
+                return await context.CUONSACHes.Include(cs => cs.SACH).Include(cs => cs.SACH.DAUSACH).AsNoTracking()
                 .Where(cs => cs.MaSach == masach && cs.TinhTrang == false
                 && cs.IsDeleted == false).ToListAsync();
+            }
+        }
+        public async Task<List<CUONSACH>> GetCuonSachByMaSach(string masach)
+        {
+            using (var context = new LibraryManagementEntities())
+            {
+                List<SACH> dssach = await context.SACHes.Where(s => s.MaSach.Contains(masach)).ToListAsync();
+                List<int> maSachList = dssach.Select(s => s.id).ToList();
+                List<CUONSACH> dscs = await context.CUONSACHes.Include(cs => cs.SACH).Include(cs => cs.SACH.DAUSACH)
+                                            .Where(cs => maSachList.Contains(cs.MaSach) && cs.IsDeleted == false)
+                                            .ToListAsync();
+                return dscs;
+            }
+        }
+        public async Task<List<CUONSACH>> GetCuonSachByMaDauSach(string madausach)
+        {
+            using (var context = new LibraryManagementEntities())
+            {
+                List<DAUSACH> dsdausach = await context.DAUSACHes.Where(ds => ds.MaDauSach.Contains(madausach)).ToListAsync();
+                List<int> maDauSachList = dsdausach.Select(ds => ds.id).ToList();
+                List<CUONSACH> dscs = await context.CUONSACHes.Include(cs => cs.SACH).Include(cs => cs.SACH.DAUSACH)
+                                            .Where(cs => maDauSachList.Contains(cs.SACH.MaDauSach) && cs.IsDeleted == false)
+                                            .ToListAsync();
+                return dscs;
+            }
+        }
+        public async Task<List<CUONSACH>> GetCuonSachByTenDauSach(string tendausach)
+        {
+            using (var context = new LibraryManagementEntities())
+            {
+                List<DAUSACH> dsdausach = await context.DAUSACHes.Where(ds => ds.TenDauSach.Contains(tendausach)).ToListAsync();
+                List<int> maDauSachList = dsdausach.Select(ds => ds.id).ToList();
+                List<CUONSACH> dscs = await context.CUONSACHes.Include(cs => cs.SACH).Include(cs => cs.SACH.DAUSACH)
+                                            .Where(cs => maDauSachList.Contains(cs.SACH.MaDauSach) && cs.IsDeleted == false)
+                                            .ToListAsync();
+                return dscs;
             }
         }
         public async Task<(bool, string)> UpdateCuonSach(CUONSACH cs)

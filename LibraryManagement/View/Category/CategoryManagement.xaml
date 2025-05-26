@@ -8,19 +8,12 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
-        Style="{StaticResource MaterialDesignWindow}"
-        DataContext="{StaticResource CategoryManagementVM}"
+        DataContext="{StaticResource CategoryVM}"
         Background="Transparent"
         Height="550" 
         Width="1000"
         x:Name="mainWindow"
         Title="CategoryManagement">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding GetThisWindowCM}"
-                               CommandParameter="{Binding ElementName=mainWindow}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
     <Border CornerRadius="25"
             Background="#eff2f7"
             BorderThickness="3"
@@ -31,17 +24,6 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" 
-                    Style="{StaticResource buttonClose}" 
-                    Content="X" 
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Width="53"
-                    Height="43"
-                    Background="Red" 
-                    Foreground="White"
-                    Command="{Binding ExitCM}"/>
-
             <Grid Margin="30 30 0 0"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Left"
@@ -51,7 +33,7 @@
                          Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged">
-                            <i:InvokeCommandAction Command="{Binding SearchData}"/>
+                            <i:InvokeCommandAction Command="{Binding SearchCategoryCM}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBox>
@@ -73,11 +55,12 @@
                       HorizontalAlignment="Left"
                       Height="40"
                       Width="200"
+                      IsReadOnly="True"
                       ItemsSource="{Binding SearchList}" 
                       SelectedItem="{Binding SearchProperties, Mode=TwoWay}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding ResetData}"/>
+                        <i:InvokeCommandAction Command="{Binding ResetDataCM}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ComboBox>
@@ -103,7 +86,7 @@
                 </StackPanel>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction Command="{Binding AddCategoryCM}"/>
+                        <i:InvokeCommandAction Command="{Binding OpenAddCategoryCM}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
@@ -117,14 +100,14 @@
                           ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                           RowStyle="{DynamicResource DataGridRowStyle1}"
                           x:Name="categoryGrid" 
-                          ItemsSource="{Binding ListCategory}"
+                          ItemsSource="{Binding ListCategorys}"
                           SelectedItem="{Binding CategorySelected}"
                           AutoGenerateColumns="False" IsReadOnly="True"
                           Grid.Column="0"
                           Width="500">
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseDoubleClick">
-                            <i:InvokeCommandAction Command="{Binding ViewDetailCM}"/>
+                        <i:EventTrigger EventName="Loaded">
+                            <i:InvokeCommandAction Command="{Binding LoadDataCategoryCM}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <DataGrid.Columns>
@@ -145,18 +128,18 @@
                         <DataGridTextColumn Header="ID" 
                                             IsReadOnly="True" 
                                             Width="Auto" 
-                                            Binding="{Binding ID}"/>
+                                            Binding="{Binding MaTheLoai}"/>
                         <DataGridTextColumn Header="Tên thể loại" 
                                             IsReadOnly="True" 
                                             Width="250" 
-                                            Binding= "{Binding Name}"/>
+                                            Binding= "{Binding TenTheLoai}"/>
                         <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button Style="{StaticResource gridRemoveButton}" 
                                                 Margin="5 0 0 0" 
-                                                Command="{Binding ElementName=authorGrid, 
+                                                Command="{Binding ElementName=categoryGrid, 
                                                           Path=DataContext.DeleteCategoryCM}"/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -188,10 +171,10 @@
                                          materialDesign:TextFieldAssist.TextBoxViewMargin="0 0 10 0" 
                                          FontSize="20"
                                          Width="250"
-                                         Height="25"
+                                         Height="51"
                                          Margin="60 0 0 0"
-                                         IsReadOnly="True"
-                                         Text="{Binding ID}"/>
+                                         IsEnabled="False"
+                                         Text="{Binding CategoryEdit.MaTheLoai, Mode=TwoWay}"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"
                                         Margin="65 30 0 0">
@@ -202,10 +185,11 @@
                                          materialDesign:TextFieldAssist.TextBoxViewMargin="0 0 10 0" 
                                          FontSize="20"
                                          Width="250"
-                                         Height="25"
+                                         Height="60"
                                          Margin="60 0 0 0"
-                                         IsReadOnly="True"
-                                         Text="{Binding Name}"/>
+                                         IsEnabled="False"
+                                         x:Name="categoryEditName"
+                                         Text="{Binding CategoryEdit.TenTheLoai, Mode=TwoWay}"/>
                             </StackPanel>
 
                             <StackPanel Margin="0 200 0 0"
@@ -222,7 +206,8 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Margin="0 0 20 0"
-                                        Command="{Binding EditCM}"/>
+                                        Command="{Binding OpenUpdateCategoryCM}"
+                                        CommandParameter="{Binding ElementName=categoryEditName}"/>
                                 <Button Content="Lưu"
                                         materialDesign:ButtonAssist.CornerRadius="10"
                                         materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5"
@@ -234,7 +219,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Margin="0 0 0 0"
-                                        Command="{Binding SaveCM}"/>
+                                        Command="{Binding UpdateCategoryCM}"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>

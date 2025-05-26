@@ -18,7 +18,7 @@
         Title="AddAuthorWindow" 
         Height="300" 
         Width="500"
-        x:Name="mainWindow">
+        x:Name="addAuthorWindow">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding GetThisWindowCM}"
@@ -44,7 +44,7 @@
                         FontSize="20"
                         Background="Red" 
                         Foreground="White"
-                        Command="{Binding ExitCM}"/>
+                        Command="{Binding CloseWindowCM}"/>
             </Grid>
             <StackPanel Orientation="Vertical"
                         Grid.Row="1">
@@ -66,7 +66,7 @@
                              Height="35"
                              Margin="30 0 0 0"
                              Padding="0 0 0 0"
-                             Text="{Binding Name}"/>
+                             Text="{Binding tacgia.TenTG, Mode=TwoWay}"/>
                 </StackPanel>
 
                 <Button Content="Lưu tác giả"
@@ -80,7 +80,8 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Margin="0 70 0 0"
-                        Command="{Binding SaveCM}"/>
+                        Command="{Binding AddNewAuthorCM}"
+                        CommandParameter="{Binding ElementName=addAuthorWindow}"/>
             </StackPanel>
         </Grid>
     </Border>

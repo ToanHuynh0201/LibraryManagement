@@ -35,7 +35,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.THELOAIs.FindAsync(id);
+                return await context.THELOAIs.Where(tl => tl.id == id).FirstOrDefaultAsync();
             }
         }
 

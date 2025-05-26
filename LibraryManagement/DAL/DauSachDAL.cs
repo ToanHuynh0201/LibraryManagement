@@ -26,21 +26,21 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.AsNoTracking().ToListAsync();
+                return await context.DAUSACHes.AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).ToListAsync();
             }
         }
         public async Task<DAUSACH> GetDauSachById(int id)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.FindAsync(id);
+                return await context.DAUSACHes.Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).FirstOrDefaultAsync(ds => ds.id == id);
             }
         }
         public async Task<List<DAUSACH>> GetDauSachByMa(string madausach)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.AsNoTracking()
+                return await context.DAUSACHes.AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs)
                 .Where(ds => ds.MaDauSach.Contains(madausach)).ToListAsync();
             }
         }
@@ -48,7 +48,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.AsNoTracking()
+                return await context.DAUSACHes.AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs)
                 .Where(ds => ds.TenDauSach.Contains(tendausach)).ToListAsync();
             }
         }
@@ -56,7 +56,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.AsNoTracking()
+                return await context.DAUSACHes.AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs)
                 .Where(ds => ds.MaTheLoai == matheloai).ToListAsync();
             }
         }
@@ -67,7 +67,7 @@ namespace LibraryManagement.DAL
                 var dsds = new List<DAUSACH>();
                 foreach(TACGIA TG in dstg)
                 {
-                    var DS = await context.DAUSACHes.AsNoTracking()
+                    var DS = await context.DAUSACHes.AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs)
                     .Where(ds => ds.TACGIAs.Any(tg => tg.id == TG.id)).ToListAsync();
                     dsds.AddRange(DS);
                 }
@@ -79,6 +79,15 @@ namespace LibraryManagement.DAL
             using (var context = new LibraryManagementEntities())
                 try
                 {
+                    var tacGiaIds = ds.TACGIAs.Select(tg => tg.id).ToList();
+
+                    var tacgias = await context.TACGIAs.Where(tg => tacGiaIds.Contains(tg.id)).ToListAsync();
+
+                    ds.TACGIAs.Clear();
+                    foreach (var tg in tacgias)
+                    {
+                        ds.TACGIAs.Add(tg);
+                    }
                     context.DAUSACHes.Add(ds);
                     await context.SaveChangesAsync();
                     return (true, "Thêm đầu sách thành công");
@@ -91,19 +100,41 @@ namespace LibraryManagement.DAL
         public async Task<(bool, string)> UpdateDauSach(DAUSACH ds)
         {
             using (var context = new LibraryManagementEntities())
+            {
                 try
                 {
-                    var dausach = await context.DAUSACHes.FindAsync(ds.id);
+
+                    var dausach = await context.DAUSACHes.Include(d => d.TACGIAs).FirstOrDefaultAsync(d => d.id == ds.id);
+
+                    if (dausach == null)
+                        return (false, "Không tìm thấy đầu sách");
+
+
                     dausach.TenDauSach = ds.TenDauSach;
                     dausach.MaTheLoai = ds.MaTheLoai;
-                    dausach.TACGIAs = ds.TACGIAs;
+
+
+                    dausach.TACGIAs.Clear();
+
+                    var tacGiaIds = ds.TACGIAs.Select(t => t.id).ToList();
+
+                    var tacgias = await context.TACGIAs
+                        .Where(tg => tacGiaIds.Contains(tg.id))
+                        .ToListAsync();
+
+                    foreach (var tg in tacgias)
+                    {
+                        dausach.TACGIAs.Add(tg);
+                    }
+
                     await context.SaveChangesAsync();
-                    return (true, "Cập nhật đầu sách thành công");
+                    return (true, "Cập nhật đầu sách và tác giả thành công");
                 }
                 catch (Exception ex)
                 {
-                    return (false, ex.Message);
+                    return (false, $"Lỗi khi cập nhật: {ex.Message}");
                 }
+            }
         }
         public async Task<(bool, string)> DeleteDauSach(int id)
         {

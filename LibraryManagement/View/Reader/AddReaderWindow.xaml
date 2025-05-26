@@ -88,7 +88,7 @@
                     <!--Ngày sinh-->
                     <Grid
                     Grid.Row="1" Margin="10 19">
-                        <DatePicker 
+                        <DatePicker Language="vi-VN"
                         materialDesign:HintAssist.Hint="Ngày sinh"
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
@@ -116,7 +116,7 @@
                     <!--Ngày tạo thẻ-->
                     <Grid
                     Grid.Row="3" Margin="10 19">
-                        <DatePicker 
+                        <DatePicker Language="vi-VN"
                         materialDesign:HintAssist.Hint="Ngày lập thẻ"
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         Text="{Binding docgia.NgayLapThe, Mode=TwoWay}"

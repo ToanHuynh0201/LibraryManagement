@@ -11,9 +11,17 @@
     <viewmodel:MainViewModel x:Key="MainVM"/>
     <viewmodel:LoginViewModel x:Key="LoginVM"/>
     <viewmodel:ReaderViewModel x:Key="ReaderVM"/>
+    <viewmodel:BookManagementViewModel x:Key="BookManagementVM"/>
     <viewmodel:BookViewModel x:Key="BookVM"/>
+    <viewmodel:AddBookViewModel x:Key="AddBookVM"/>
+    <viewmodel:AddExistingBookViewModel x:Key="AddExisBookVM"/>
+    <viewmodel:BookInformationViewModel x:Key="BookInformationVM"/>
     <viewmodel:BookTitleViewModel x:Key="BookTitleVM"/>
+    <viewmodel:AddBookTitleViewModel x:Key="AddBookTitleVM"/>
+    <viewmodel:BookTitleInformationViewModel x:Key="BookTitleInformationVM"/>
     <viewmodel:BookCopyViewModel x:Key="BookCopyVM"/>
+    <viewmodel:BookReceivingViewModel x:Key="BookReceivingVM"/>
+    <viewmodel:BookReceivingInformationViewModel x:Key="BookReceivingInformationVM"/>
     <viewmodel:AccountViewModel x:Key="AccountVM"/>
     <viewmodel:StatisticViewModel x:Key="StatisticVM"/>
     <viewmodel:InternalViewModel x:Key="InternalVM"/>

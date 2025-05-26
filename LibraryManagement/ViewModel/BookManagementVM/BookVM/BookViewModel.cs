@@ -2,6 +2,7 @@
 using LibraryManagement.DTO;
 using LibraryManagement.View;
 using LibraryManagement.View.Book;
+using LibraryManagement.View.BookTitle;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -74,12 +75,12 @@ namespace LibraryManagement.ViewModel
         #endregion
 
         #region Commands
-        public ICommand GetCurrentWindowCM { get; set; }
         public ICommand LoadDataBookCM { get; set; }
         public ICommand SearchBookCM { get; set; }
         public ICommand ResetDataCM { get; set; }
+        public ICommand ResetSearchDataCM { get; set; }
         public ICommand OpenAddBookCM { get; set; }
-        public ICommand OpenUpdateBookCM { get; set; }
+        public ICommand OpenAddExistingBookCM { get; set; }
         public ICommand AddNewBookCM { get; set; }
         public ICommand ViewBookCM { get; set; }
         public ICommand UpdateBookCM { get; set; }
@@ -89,7 +90,7 @@ namespace LibraryManagement.ViewModel
 
         public BookViewModel()
         {
-            SearchList = new ObservableCollection<string> { "Tên sách" };
+            SearchList = new ObservableCollection<string> { "Tên đầu sách" };
             SearchProperties = SearchList.FirstOrDefault();
 
             LoadDataBookCM = new RelayCommand<SACH>((p) => { return true; }, async (p) =>
@@ -117,7 +118,7 @@ namespace LibraryManagement.ViewModel
                     }
                     else
                     {
-                        if (SearchProperties == "Tên Sách")
+                        if (SearchProperties == "Tên đầu sách")
                         {
                             var res = await Task.Run(async () => await SachBLL.Instance.GetSachByTenDauSach(SearchText));
                             ListBooks = new ObservableCollection<SACH>(res);
@@ -129,56 +130,32 @@ namespace LibraryManagement.ViewModel
                     MessageBox.Show("Lỗi khi tìm kiếm: " + ex.Message);
                 }
             });
-            ResetDataCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            ResetSearchDataCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 SearchText = "";
                 ListBooks = new ObservableCollection<SACH>(AllBooks);
             });
             OpenAddBookCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                sach = new SACH();
-                var w1 = new AddBookWindow();
+                var vm1 = new AddBookViewModel();
+                vm1.OnSuccess = () => LoadDataBookCM.Execute(null);
+                var w1 = new AddBookWindow { DataContext = vm1 };
                 w1.ShowDialog();
             });
-            OpenUpdateBookCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            OpenAddExistingBookCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                Window w1 = new EditBookInformationWindow();
+                var vm1 = new AddExistingBookViewModel();
+                vm1.OnSuccess = () => LoadDataBookCM.Execute(null);
+                var w1 = new AddExistingBookWindow { DataContext = vm1 };
                 w1.ShowDialog();
             });
-            AddNewBookCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            ViewBookCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                var res = await Task.Run(async () => await SachBLL.Instance.AddSach(sach));
-                MessageBox.Show(res.Item2);
-                if (res.Item1)
+                if (BookSeleted != null)
                 {
-                    LoadDataBookCM.Execute(null);
-                    p.Close();
-                }
-            });
-            ViewBookCM = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                Window w1 = new BookInformtationWindow();
-                w1.ShowDialog();
-            });
-            UpdateBookCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
-            {
-                var res = await Task.Run(async () => await SachBLL.Instance.UpdateSach(BookSeleted));
-                MessageBox.Show(res.Item2);
-                if (res.Item1)
-                {
-                    LoadDataBookCM.Execute(null);
-                    p.Close();
-                }
-            });
-            DeleteBookCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
-            {
-                var result = MessageBox.Show("Bạn có chắc muốn xóa sách này không?", "Xác nhận xóa",
-                                          MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    var res = await Task.Run(async () => await SachBLL.Instance.DeleteSach(BookSeleted.id));
-                    LoadDataBookCM.Execute(null);
-                    MessageBox.Show(res.Item2);
+                    var vm1 = new BookInformationViewModel(BookSeleted);
+                    var w1 = new BookInformtationWindow { DataContext = vm1 };
+                    w1.ShowDialog();
                 }
             });
             CloseWindowCM = new RelayCommand<Window>((p) => { return true; }, (p) =>

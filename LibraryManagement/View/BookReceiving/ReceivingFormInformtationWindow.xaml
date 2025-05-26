@@ -7,8 +7,8 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
-        d:DataContext="{d:DesignInstance Type=viewmodel:BookTitleViewModel}"
-        DataContext="{StaticResource BookTitleVM}"
+        d:DataContext="{d:DesignInstance Type=viewmodel:BookReceivingInformationViewModel}"
+        DataContext="{StaticResource BookReceivingInformationVM}"
         mc:Ignorable="d" 
         Height="700" 
         Width="800"
@@ -16,7 +16,13 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Title="ReceivingFormInformtationWindow">
+        Title="ReceivingFormInformtationWindow"
+        x:Name="receivingFormInformtationWindow">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadDataCM}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Border Background="#eff2f7"
             CornerRadius="30">
         <Grid>
@@ -43,7 +49,7 @@
                     FontSize="20"
                     Background="Red" 
                     Foreground="White"
-                    Command="{Binding ExitCM}"/>
+                    Command="{Binding CloseWindowCM}" CommandParameter="{Binding ElementName=receivingFormInformtationWindow}"/>
             </Grid>
 
             <Grid Grid.Row="1">
@@ -65,8 +71,8 @@
                              materialDesign:HintAssist.Hint="Số phiếu"
                              FontSize="18" Foreground="Black"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Text=""
-                             IsEnabled="{Binding isEnabled}"/>
+                             Text="{Binding phieunhapsach.SoPNS}"
+                             IsEnabled="False"/>
                     <TextBox Grid.Row="1"
                              VerticalAlignment="Center"
                              HorizontalAlignment="Left"
@@ -76,8 +82,9 @@
                              materialDesign:HintAssist.Hint="Ngày nhập"
                              FontSize="18" Foreground="Black"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Text=""
-                             IsEnabled="{Binding isEnabled}"/>
+                             Text="{Binding phieunhapsach.NgayNhap}"
+                             Language="vi-VN"
+                             IsEnabled="False"/>
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -90,8 +97,8 @@
                              materialDesign:HintAssist.Hint="Tổng tiền"
                              FontSize="18" Foreground="Black"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Text=""
-                             IsEnabled="{Binding isEnabled}"/>
+                             Text="{Binding phieunhapsach.TongTien, StringFormat=N0}"
+                             IsEnabled="False"/>
                 </Grid>
             </Grid>
 
@@ -100,17 +107,11 @@
                   ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                   RowStyle="{DynamicResource DataGridRowStyle1}"
                   x:Name="customerGrid" 
-                  ItemsSource="{Binding ListBooks}"
-                  SelectedItem="{Binding BookSeleted}"
+                  ItemsSource="{Binding ctpnsList}"
                   AutoGenerateColumns="False" 
                   IsReadOnly="True"
                   Grid.Row="2"
-                  IsEnabled="{Binding isEnabled}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding ViewBookCM}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
+                  IsEnabled="False">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn CanUserResize="False" 
                                     Width="Auto" 
@@ -126,74 +127,31 @@
                      IsReadOnly="True" 
                      CanUserResize="False"
                      Width="Auto"/>
-                    <DataGridTextColumn Header="ID" 
-                     IsReadOnly="True" 
-                     Width="Auto" 
-                     Binding="{Binding ID}"/>
-                    <DataGridTextColumn Header="Tác giả" 
-                     IsReadOnly="True" 
-                     Width="Auto" 
-                     Binding="{Binding Author}"/>
-                    <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource gridRemoveButton}" 
-                                            Margin="5 0 0 0"
-                                            Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteBookCM}">
-                                        <materialDesign:PackIcon Kind="Bin"/>
-                                    </Button>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Mã sách" 
+                                        IsReadOnly="True" 
+                                        Width="Auto" 
+                                        Binding="{Binding SACH.MaSach}"/>      
+                    <DataGridTextColumn Header="Đầu sách" 
+                                        IsReadOnly="True" 
+                                        Width="Auto" 
+                                        Binding="{Binding SACH.DAUSACH.DisplayName}"/>
+                    <DataGridTextColumn Header="Số lượng nhập" 
+                                        IsReadOnly="True" 
+                                        Width="Auto" 
+                                        Binding="{Binding SoLuongNhap}"/>
+                    <DataGridTextColumn Header="Đơn giá" 
+                                        IsReadOnly="True" 
+                                        Width="Auto" 
+                                        Binding="{Binding DonGia, StringFormat=N0}"/>
+                    <DataGridTextColumn Header="Thành tiền" 
+                                        IsReadOnly="True" 
+                                        Width="Auto" 
+                                        Binding="{Binding ThanhTien, StringFormat=N0}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
             <StackPanel Grid.Row="3"
-                Orientation="Horizontal">
-                <Button Margin="480 0 0 0"
-                        Width="150"
-                        Height="50"
-                        FontSize="20"
-                        VerticalAlignment="Center"
-                        Style="{StaticResource MaterialDesignRaisedButton}"
-                        Background="#473765"
-                        BorderBrush="#FFEDE7F8"
-                        materialDesign:ButtonAssist.CornerRadius="10">
-                    <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch">
-                        <materialDesign:PackIcon Kind="Add"
-                                         VerticalAlignment="Center"
-                                         HorizontalAlignment="Left"
-                                         Margin="-15 0 0 0"/>
-                        <TextBlock Text="Chỉnh sửa"
-                           Margin="10 0 0 0"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Button Margin="20 0 0 0"
-                        Width="140"
-                        Height="50"
-                        FontSize="20"
-                        VerticalAlignment="Center"
-                        Style="{StaticResource MaterialDesignRaisedButton}"
-                        Background="#473765"
-                        BorderBrush="#FFEDE7F8"
-                        materialDesign:ButtonAssist.CornerRadius="10"
-                        IsEnabled="{Binding isEnabled}">
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch">
-                        <TextBlock Text="Xác nhận"
-                                   Margin="0 0 0 0"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
+                Orientation="Horizontal"/>
         </Grid>
     </Border>
 </Window>

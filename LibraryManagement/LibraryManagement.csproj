@@ -186,9 +186,11 @@
     <Compile Include="DTO\CUONSACH.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\CUONSACHPartial.cs" />
     <Compile Include="DTO\DAUSACH.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\DAUSACHPartial.cs" />
     <Compile Include="DTO\DOCGIA.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
@@ -228,18 +230,23 @@
     <Compile Include="DTO\SACH.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\SACHPartial.cs" />
     <Compile Include="DTO\TACGIA.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\TACGIAPartial.cs" />
     <Compile Include="DTO\THAMSO.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\THELOAI.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\THELOAIPartial.cs" />
     <Compile Include="Utils\DateToStringConvert.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
-    <Compile Include="ViewModel\AuthorViewModel.cs" />
+    <Compile Include="ViewModel\BookManagementVM\BookReceivingVM\BookReceivingInformationViewModel.cs" />
+    <Compile Include="ViewModel\BookManagementVM\BookTitleVM\AddBookTitleViewModel.cs" />
+    <Compile Include="ViewModel\BookManagementVM\AuthorVM\AuthorViewModel.cs" />
     <Compile Include="BLL\ChucNangBLL.cs" />
     <Compile Include="BLL\CT_PhieuNhapSachBLL.cs" />
     <Compile Include="BLL\CuonSachBLL.cs" />
@@ -273,39 +280,32 @@
     <Compile Include="DAL\ThamSoDAL.cs" />
     <Compile Include="DAL\TheLoaiDAL.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\BookReceivingFormViewModel.cs" />
+    <Compile Include="ViewModel\BookManagementVM\BookManagementViewModel.cs" />
+    <Compile Include="ViewModel\BookManagementVM\BookVM\AddBookViewModel.cs" />
+    <Compile Include="ViewModel\BookManagementVM\BookVM\AddExistingBookViewModel.cs" />
+    <Compile Include="ViewModel\BookManagementVM\BookVM\BookInformationViewModel.cs" />
+    <Compile Include="ViewModel\BookManagementVM\BookReceivingVM\BookReceivingViewModel.cs" />
+    <Compile Include="ViewModel\BookManagementVM\BookTitleVM\BookTitleInformationViewModel.cs" />
     <Compile Include="ViewModel\UserGroupViewModel.cs" />
     <Compile Include="ViewModel\BorrowReturnSlipViewModel.cs" />
-    <Compile Include="ViewModel\BookTitleViewModel.cs" />
-    <Compile Include="ViewModel\BookCopyViewModel.cs" />
-    <Compile Include="ViewModel\BookViewModel.cs" />
-    <Compile Include="ViewModel\CategoryViewModel.cs" />
+    <Compile Include="ViewModel\BookManagementVM\BookTitleVM\BookTitleViewModel.cs" />
+    <Compile Include="ViewModel\BookManagementVM\BookCopyVM\BookCopyViewModel.cs" />
+    <Compile Include="ViewModel\BookManagementVM\BookVM\BookViewModel.cs" />
+    <Compile Include="ViewModel\BookManagementVM\CategoryVM\CategoryViewModel.cs" />
     <Compile Include="ViewModel\InternalViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ReaderViewModel.cs" />
     <Compile Include="ViewModel\RuleViewModel.cs" />
     <Compile Include="ViewModel\StatisticViewModel.cs" />
-    <Compile Include="View\Author\AuthorInformtationWindow.xaml.cs">
-      <DependentUpon>AuthorInformtationWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Author\AuthorManagement.xaml.cs">
       <DependentUpon>AuthorManagement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Author\EditAuthorInformationWindow.xaml.cs">
-      <DependentUpon>EditAuthorInformationWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\BookCopy\BookCopyInformtationWindow.xaml.cs">
-      <DependentUpon>BookCopyInformtationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BookCopy\BookCopyManagement.xaml.cs">
       <DependentUpon>BookCopyManagement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BookCopy\EditBookCopyInformationWindow.xaml.cs">
-      <DependentUpon>EditBookCopyInformationWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\BookReceiving\AddReceivingFormWindow.xaml.cs">
-      <DependentUpon>AddReceivingFormWindow.xaml</DependentUpon>
+    <Compile Include="View\Book\AddExistingBookWindow.xaml.cs">
+      <DependentUpon>AddExistingBookWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BookReceiving\BookReceivingManagement.xaml.cs">
       <DependentUpon>BookReceivingManagement.xaml</DependentUpon>
@@ -319,14 +319,11 @@
     <Compile Include="View\BookTitle\AddBookTitleWindow.xaml.cs">
       <DependentUpon>AddBookTitleWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BookTitle\BookTitleInformtationWindow.xaml.cs">
-      <DependentUpon>BookTitleInformtationWindow.xaml</DependentUpon>
+    <Compile Include="View\BookTitle\BookTitleInformation.xaml.cs">
+      <DependentUpon>BookTitleInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BookTitle\BookTitleManagement.xaml.cs">
       <DependentUpon>BookTitleManagement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\BookTitle\EditBookTitleInformationWindow.xaml.cs">
-      <DependentUpon>EditBookTitleInformationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Book\AddBookWindow.xaml.cs">
       <DependentUpon>AddBookWindow.xaml</DependentUpon>
@@ -336,9 +333,6 @@
     </Compile>
     <Compile Include="View\Book\BookManagement.xaml.cs">
       <DependentUpon>BookManagement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Book\EditBookInformationWindow.xaml.cs">
-      <DependentUpon>EditBookInformationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Borrow\BorrowFormWindow.xaml.cs">
       <DependentUpon>BorrowFormWindow.xaml</DependentUpon>
@@ -355,14 +349,8 @@
     <Compile Include="View\Category\AddCategoryWindow.xaml.cs">
       <DependentUpon>AddCategoryWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Category\CategoryInformationWindow.xaml.cs">
-      <DependentUpon>CategoryInformationWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Category\CategoryManagement.xaml.cs">
       <DependentUpon>CategoryManagement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Category\EditCategoryInformationWindow.xaml.cs">
-      <DependentUpon>EditCategoryInformationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GroupUser\AddGroupUserWindow.xaml.cs">
       <DependentUpon>AddGroupUserWindow.xaml</DependentUpon>
@@ -446,19 +434,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Author\AuthorInformtationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Author\AuthorManagement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Author\EditAuthorInformationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\BookCopy\BookCopyInformtationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -466,11 +442,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BookCopy\EditBookCopyInformationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\BookReceiving\AddReceivingFormWindow.xaml">
+    <Page Include="View\Book\AddExistingBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -490,15 +462,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BookTitle\BookTitleInformtationWindow.xaml">
+    <Page Include="View\BookTitle\BookTitleInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BookTitle\BookTitleManagement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\BookTitle\EditBookTitleInformationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -511,10 +479,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Book\BookManagement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Book\EditBookInformationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -538,15 +502,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Category\CategoryInformationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Category\CategoryManagement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Category\EditCategoryInformationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

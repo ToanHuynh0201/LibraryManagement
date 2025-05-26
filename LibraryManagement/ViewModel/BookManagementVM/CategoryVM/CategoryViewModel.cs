@@ -71,7 +71,34 @@ namespace LibraryManagement.ViewModel
             }
         }
         public ObservableCollection<THELOAI> AllCategorys { get; set; }
-        public THELOAI CategorySeleted { get; set; }
+        private THELOAI _categorySelected;
+        public THELOAI CategorySelected
+        {
+            get => _categorySelected;
+            set
+            {
+                _categorySelected = value;
+                CategoryEdit = value != null ? new THELOAI
+                {
+                    MaTheLoai = value.MaTheLoai,
+                    TenTheLoai = value.TenTheLoai
+                } : null;
+                OnPropertyChanged(nameof(CategorySelected));
+            }
+        }
+
+        private THELOAI _categoryEdit;
+        public THELOAI CategoryEdit
+        {
+            get => _categoryEdit;
+            set
+            {
+                _categoryEdit = value;
+                OnPropertyChanged(nameof(CategoryEdit));
+            }
+        }
+
+
         #endregion
 
         #region Commands
@@ -140,10 +167,10 @@ namespace LibraryManagement.ViewModel
                 var w1 = new AddCategoryWindow();
                 w1.ShowDialog();
             });
-            OpenUpdateCategoryCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            OpenUpdateCategoryCM = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
             {
-                Window w1 = new EditCategoryInformationWindow();
-                w1.ShowDialog();
+                if (p.IsEnabled) CategorySelected = null;
+                p.IsEnabled = !(p.IsEnabled);
             });
             AddNewCategoryCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
@@ -155,19 +182,14 @@ namespace LibraryManagement.ViewModel
                     p.Close();
                 }
             });
-            ViewCategoryCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            UpdateCategoryCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
-                Window w1 = new CategoryInformationWindow();
-                w1.ShowDialog();
-            });
-            UpdateCategoryCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
-            {
-                var res = await Task.Run(async () => await TheLoaiBLL.Instance.UpdateTheLoai(CategorySeleted));
+                CategorySelected.TenTheLoai = CategoryEdit.TenTheLoai;
+                var res = await Task.Run(async () => await TheLoaiBLL.Instance.UpdateTheLoai(CategorySelected));
                 MessageBox.Show(res.Item2);
                 if (res.Item1)
                 {
                     LoadDataCategoryCM.Execute(null);
-                    p.Close();
                 }
             });
             DeleteCategoryCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
@@ -176,7 +198,7 @@ namespace LibraryManagement.ViewModel
                                           MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    var res = await Task.Run(async () => await TheLoaiBLL.Instance.DeleteTheLoai(CategorySeleted.id));
+                    var res = await Task.Run(async () => await TheLoaiBLL.Instance.DeleteTheLoai(CategorySelected.id));
                     LoadDataCategoryCM.Execute(null);
                     MessageBox.Show(res.Item2);
                 }
