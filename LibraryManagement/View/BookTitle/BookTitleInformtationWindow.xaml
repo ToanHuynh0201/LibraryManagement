@@ -99,7 +99,6 @@
                                             Content="X" 
                                             Width="20" Height="20" 
                                             Margin="5,0,0,0"
-                                            Click="DeleteButton_Click"
                                             Tag="{Binding}" />
                                     </Grid>
                                 </DataTemplate>
@@ -135,7 +134,6 @@
                                             Content="X" 
                                             Width="20" Height="20" 
                                             Margin="5,0,0,0"
-                                            Click="DeleteButton_Click"
                                             Tag="{Binding}" />
                                     </Grid>
                                 </DataTemplate>
