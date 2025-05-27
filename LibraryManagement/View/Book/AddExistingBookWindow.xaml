@@ -64,7 +64,6 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.5*"/>
                         <RowDefinition Height="0.5*"/>
-                        <RowDefinition Height="0.5*"/>
                     </Grid.RowDefinitions>
                     <DatePicker SelectedDate="{Binding pns.NgayNhap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Language="vi-VN"
@@ -76,12 +75,13 @@
                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                                 FontSize="18"
-                                HorizontalAlignment="Left"/>
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
                     <TextBox Grid.Row="2"
                              VerticalAlignment="Center"
-                             HorizontalAlignment="Left"
+                             HorizontalAlignment="Center"
                              IsEnabled="False"
-                             Margin="15 0 0 0"
+                             Margin="10"
                              Height="50"
                              Padding="10"
                              Width="350"

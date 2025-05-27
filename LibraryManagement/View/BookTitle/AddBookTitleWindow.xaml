@@ -116,7 +116,7 @@
                         </ComboBox>
                     </Grid>
                 </Grid>
-                <Button FontSize="20"
+                <Button FontSize="18"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Background="#473765"
                         BorderBrush="#FFEDE7F8"

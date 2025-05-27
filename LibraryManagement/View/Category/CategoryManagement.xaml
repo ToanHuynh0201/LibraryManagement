@@ -166,13 +166,13 @@
                                         Margin="77 30 0 0">
                                 <TextBlock Text="ID: "
                                            FontSize="20"
-                                           FontWeight="DemiBold"/>
+                                           FontWeight="DemiBold"
+                                           VerticalAlignment="Center"/>
                                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          materialDesign:TextFieldAssist.TextBoxViewMargin="0 0 10 0" 
                                          FontSize="20"
                                          Width="250"
-                                         Height="51"
-                                         Margin="60 0 0 0"
+                                         Margin="60 10 10 10"
                                          IsEnabled="False"
                                          Text="{Binding CategoryEdit.MaTheLoai, Mode=TwoWay}"/>
                             </StackPanel>
@@ -180,19 +180,20 @@
                                         Margin="65 30 0 0">
                                 <TextBlock Text="Tên: "
                                            FontSize="20"
-                                           FontWeight="DemiBold"/>
+                                           FontWeight="DemiBold"
+                                           VerticalAlignment="Center"/>
                                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          materialDesign:TextFieldAssist.TextBoxViewMargin="0 0 10 0" 
                                          FontSize="20"
                                          Width="250"
-                                         Height="60"
-                                         Margin="60 0 0 0"
+                                         Margin="60 10 10 10"
                                          IsEnabled="False"
                                          x:Name="categoryEditName"
+                                         VerticalAlignment="Center"
                                          Text="{Binding CategoryEdit.TenTheLoai, Mode=TwoWay}"/>
                             </StackPanel>
 
-                            <StackPanel Margin="0 200 0 0"
+                            <StackPanel Margin="0 180 0 0"
                                         Orientation="Horizontal"
                                         HorizontalAlignment="Center">
                                 <Button Content="Chỉnh sửa"
@@ -206,6 +207,9 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Margin="0 0 20 0"
+                                        Background="#473765"
+                                        Foreground="#FFEDE7F8"
+                                        BorderBrush="#FFEDE7F8"
                                         Command="{Binding OpenUpdateCategoryCM}"
                                         CommandParameter="{Binding ElementName=categoryEditName}"/>
                                 <Button Content="Lưu"
@@ -216,6 +220,9 @@
                                         Height="40"
                                         FontSize="20"
                                         FontWeight="Bold"
+                                        BorderBrush="#FFEDE7F8"
+                                        Background="#473765"
+                                        Foreground="#FFEDE7F8"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Margin="0 0 0 0"
