@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LibraryManagement.BLL
 {
@@ -59,12 +60,7 @@ namespace LibraryManagement.BLL
         }
         public async Task<(bool, string)> UpdateDauSach(DAUSACH ds)
         {
-            var dausach = await DauSachDAL.Instance.GetDauSachById(ds.id);
             var res = CheckDauSach(ds);
-            if (dausach == null)
-            {
-                return (false, "Đầu sách không tồn tại");
-            }
             if (res.Item1 == false) return res;
             return await DauSachDAL.Instance.UpdateDauSach(ds);
         }
@@ -73,20 +69,24 @@ namespace LibraryManagement.BLL
             var dausach = await DauSachDAL.Instance.GetDauSachById(id);
             if (dausach == null)
             {
-                return (false, "Đầu sách không tồn tại");
+                return (false, "Đầu sách không hợp lệ");
             }
             return await DauSachDAL.Instance.DeleteDauSach(id);
         }
         private (bool, string) CheckDauSach(DAUSACH ds)
         {
             var theloai = TheLoaiBLL.Instance.GetTheLoaiById(ds.MaTheLoai);
-            if(theloai.Result == null)
+            if (theloai.Result == null)
             {
-                return (false, "Đầu sách không có thể loại");
+                return (false, "Thể loại đầu sách không hợp lệ");
             }
             if (String.IsNullOrEmpty(ds.TenDauSach))
             {
                 return (false, "Đầu sách không có tên");
+            }
+            if(ds.TACGIAs.Count() == 0)
+            {
+                return (false, "Đầu sách không có tác giả");
             }
             return (true, "");
         }

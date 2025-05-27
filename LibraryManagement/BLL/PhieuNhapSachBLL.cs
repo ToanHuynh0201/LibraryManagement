@@ -26,9 +26,12 @@ namespace LibraryManagement.BLL
         {
             return await PhieuNhapSachDAL.Instance.GetAllPhieuNhapSach();
         }
+        public async Task<List<PHIEUNHAPSACH>> GetPhieuNhapSachBySoPNS(string sophieu)
+        {
+            return await PhieuNhapSachDAL.Instance.GetPhieuNhapSachBySoPNS(sophieu);
+        }
         public async Task<(bool, string)> AddPhieuNhapSach(PHIEUNHAPSACH pns)
         {
-            pns.NgayNhap = DateTime.Now;
             pns.TongTien = 0;
             return await PhieuNhapSachDAL.Instance.AddPhieuNhapSach(pns);
         }

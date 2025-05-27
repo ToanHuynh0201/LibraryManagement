@@ -27,21 +27,29 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking().Where(s => s.IsDeleted == false).ToListAsync();
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH).Where(s => s.IsDeleted == false).ToListAsync();
             }
         }
         public async Task<SACH> GetSachById(int id)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking().FirstOrDefaultAsync(s => s.id == id && s.IsDeleted == false);
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH).FirstOrDefaultAsync(s => s.id == id && s.IsDeleted == false);
+            }
+        }
+        public async Task<List<SACH>> GetSachByMaSach(string masach)
+        {
+            using (var context = new LibraryManagementEntities())
+            {
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH)
+                .Where(s => s.MaSach.Contains(masach) && s.IsDeleted == false).ToListAsync();
             }
         }
         public async Task<List<SACH>> GetSachByMaDauSach(int madausach)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking()
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH)
                 .Where(s => s.MaDauSach == madausach && s.IsDeleted == false).ToListAsync();
             }
         }
@@ -49,7 +57,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking()
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH)
                 .Where(s => s.DAUSACH.TenDauSach.Contains(tendausach) && s.IsDeleted == false).ToListAsync();
             }
         }
@@ -57,7 +65,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking()
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH)
                 .Where(s => s.NhaXB.Contains(nhaxb) && s.IsDeleted == false).ToListAsync();
             }
         }
@@ -65,28 +73,51 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking()
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH)
                 .Where(s => s.NamXB == namxb && s.IsDeleted == false).ToListAsync();
             }
         }
-        public async Task<SACH> CheckExistingSach(SACH s)
+        public async Task<bool> CheckExistingSach(SACH s)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking()
+                var existingSach = await context.SACHes.AsNoTracking()
                 .FirstOrDefaultAsync(sach => sach.MaDauSach == s.MaDauSach
                 && sach.NhaXB == s.NhaXB && sach.NamXB == s.NamXB);
+                if (existingSach == null) return false;
+                return true;
             }
         }
-        public async Task<(bool, string)> AddNewSach(SACH s)
+        public async Task<(bool, string)> AddNewSach(SACH s, PHIEUNHAPSACH pns)
         {
             using (var context = new LibraryManagementEntities())
             {
                 try
                 {
                     context.SACHes.Add(s);
+                    for (int i = 0; i < s.SoLuong; i++)
+                    {
+                        var cuonsach = new CUONSACH
+                        {
+                            MaSach = s.id,
+                            TinhTrang = false,
+                            IsDeleted = false
+                        };
+                        context.CUONSACHes.Add(cuonsach);
+                    }
+                    var ctpns = new CT_PHIEUNHAPSACH
+                    {
+                        SoPNS = pns.id,
+                        MaSach = s.id,
+                        SoLuongNhap = (int)s.SoLuong,
+                        DonGia = s.TriGia
+                    };
+                    ctpns.ThanhTien = ctpns.SoLuongNhap * ctpns.DonGia;
+                    context.CT_PHIEUNHAPSACH.Add(ctpns);
+                    var phieunhapsach = await context.PHIEUNHAPSACHes.FindAsync(pns.id);
+                    phieunhapsach.TongTien += ctpns.ThanhTien;
                     await context.SaveChangesAsync();
-                    return (true, "Thêm sách thành công");
+                    return (true, "Nhập sách thành công");
                 }
                 catch (Exception ex)
                 {
@@ -94,28 +125,44 @@ namespace LibraryManagement.DAL
                 }
             }
         }
-        public async Task<(bool, string)> AddExistingSach(int id, int soluong)
+        public async Task<(bool, string)> AddExistingSach(List<(int, int)> dsnhap, PHIEUNHAPSACH pns)
         {
             using (var context = new LibraryManagementEntities())
             {
                 try
                 {
-                    var sach = await context.SACHes.FindAsync(id);
-                    sach.IsDeleted = false;
-                    sach.SoLuong += soluong;
-                    sach.SoLuongCon += soluong;
-                    for(int i = 1; i <= soluong; i++)
+                    foreach (var sachnhap in dsnhap)
                     {
-                        var cuonsach = new CUONSACH
+                        int id = sachnhap.Item1;
+                        int soluong = sachnhap.Item2;
+                        var sach = await context.SACHes.FindAsync(id);
+                        sach.IsDeleted = false;
+                        sach.SoLuong += soluong;
+                        sach.SoLuongCon += soluong;
+                        for (int i = 0; i < soluong; i++)
                         {
-                            MaSach = sach.id,
-                            TinhTrang = false,
-                            IsDeleted = false
+                            var cuonsach = new CUONSACH
+                            {
+                                MaSach = sach.id,
+                                TinhTrang = false,
+                                IsDeleted = false
+                            };
+                            context.CUONSACHes.Add(cuonsach);
+                        }
+                        var ctpns = new CT_PHIEUNHAPSACH
+                        {
+                            SoPNS = pns.id,
+                            MaSach = id,
+                            SoLuongNhap = soluong,
+                            DonGia = sach.TriGia
                         };
-                        context.CUONSACHes.Add(cuonsach);
+                        ctpns.ThanhTien = soluong * ctpns.DonGia;
+                        context.CT_PHIEUNHAPSACH.Add(ctpns);
+                        var phieunhapsach = await context.PHIEUNHAPSACHes.FindAsync(pns.id);
+                        phieunhapsach.TongTien += ctpns.ThanhTien;
                     }
                     await context.SaveChangesAsync();
-                    return (true, "Thêm sách thành công");
+                    return (true, "Nhập sách thành công");
                 }
                 catch (Exception ex)
                 {

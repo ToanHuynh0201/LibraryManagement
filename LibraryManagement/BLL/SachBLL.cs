@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using LibraryManagement.DAL;
 using LibraryManagement.DTO;
+using LibraryManagement.View.BookCopy;
 
 namespace LibraryManagement.BLL
 {
@@ -31,6 +33,10 @@ namespace LibraryManagement.BLL
         {
             return await SachDAL.Instance.GetSachById(id);
         }
+        public async Task<List<SACH>> GetSachByMaSach(string MaSach)
+        {
+            return await SachDAL.Instance.GetSachByMaSach(MaSach);
+        }
         public async Task<List<SACH>> GetSachByMaDauSach(int MaDauSach)
         {
             return await SachDAL.Instance.GetSachByMaDauSach(MaDauSach);
@@ -47,13 +53,12 @@ namespace LibraryManagement.BLL
         {
             return await SachDAL.Instance.GetSachByNamXB(NamXB);
         }
-        public async Task<(bool, string)> AddSach(SACH s)
+        public async Task<bool> CheckExistingSach(SACH s)
         {
-            var dausach = DauSachDAL.Instance.GetDauSachById(s.MaDauSach);
-            if (dausach == null)
-            {
-                return (false, "Đầu sách không tồn tại");
-            }
+            return await SachDAL.Instance.CheckExistingSach(s);
+        }
+        public async Task<(bool, string)> AddNewSach(SACH s, PHIEUNHAPSACH pns)
+        {
             if (CheckSach(s).Item1 == false)
             {
                 return (false, CheckSach(s).Item2);
@@ -64,26 +69,36 @@ namespace LibraryManagement.BLL
             {
                 return (false, "Chỉ nhận các sách xuất bản trong vòng " + kc + " năm.");
             }
-            var sach = await SachDAL.Instance.CheckExistingSach(s);
-            if (sach == null) return await AddNewSach(s);
-            else return await AddExistingSach(s);
+            bool checkRes = await SachDAL.Instance.CheckExistingSach(s);
+            if (checkRes)
+                return (false, "Thư viện đã có sách này, hãy dùng tính năng nhập sách đã có để nhập");
+            var phieunhapsach = await PhieuNhapSachDAL.Instance.GetPhieuNhapSachById(pns.id);
+            if (phieunhapsach == null)
+                return (false, "Phiếu nhập sách không hợp lệ");
+            s.IsDeleted = false;
+            s.SoLuongCon = (int)s.SoLuong;
+            return await SachDAL.Instance.AddNewSach(s, pns);
         }
-        public async Task<(bool, string)> AddNewSach(SACH s)
+        public async Task<(bool, string)> AddExistingSach(List<(int, int)> dsnhap, PHIEUNHAPSACH pns)
         {
-            s.SoLuongCon = 0;
-            s.SoLuong = 0;
-            return await SachDAL.Instance.AddNewSach(s);
-        }
-        public async Task<(bool, string)> AddExistingSach(SACH s)
-        {
-            return await SachDAL.Instance.AddExistingSach(s.id, (int)s.SoLuong);
+            foreach (var sachnhap in dsnhap)
+            {
+                SACH sach = await SachDAL.Instance.GetSachById(sachnhap.Item1);
+                bool checkRes = await SachDAL.Instance.CheckExistingSach(sach);
+                if (!checkRes)
+                    return (false, "Thư viện chưa có sách này, hãy dùng tính năng nhập sách mới để nhập");
+            }
+            var phieunhapsach = await PhieuNhapSachDAL.Instance.GetPhieuNhapSachById(pns.id);
+            if (phieunhapsach == null)
+                return (false, "Phiếu nhập sách không hợp lệ");
+            return await SachDAL.Instance.AddExistingSach(dsnhap, pns);
         }
         public async Task<(bool, string)> UpdateSach(SACH s)
         {
             var sach = await SachDAL.Instance.GetSachById(s.id);
             if (sach == null || sach.IsDeleted == true)
             {
-                return (false, "Sách không tồn tại"); 
+                return (false, "Sách không hợp lệ"); 
             }
             var res = CheckSach(s);
             if(res.Item1 == false)
@@ -97,7 +112,7 @@ namespace LibraryManagement.BLL
             SACH sach = await SachDAL.Instance.GetSachById(id);
             if (sach == null || sach.IsDeleted == true)
             {
-                return (false, "Sách không tồn tại");
+                return (false, "Sách không hợp lệ");
             }
             foreach(CUONSACH cuonsach in sach.CUONSACHes)
             {
@@ -110,6 +125,11 @@ namespace LibraryManagement.BLL
         }
         private (bool, string) CheckSach(SACH s)
         {
+            var dausach = DauSachBLL.Instance.GetDauSachById(s.MaDauSach);
+            if (dausach.Result == null)
+            {
+                return (false, "Đầu sách không hợp lệ");
+            }
             if (string.IsNullOrEmpty(s.NhaXB))
             {
                 return (false, "Sách không có nhà xuất bản.");
@@ -122,7 +142,7 @@ namespace LibraryManagement.BLL
             {
                 return (false, "Trị giá phải lớn hơn 0.");
             }
-            if (s.SoLuong < 0)
+            if (s.SoLuong < 0 || s.SoLuongCon < 0)
             {
                 return (false, "Số lượng không được âm.");
             }

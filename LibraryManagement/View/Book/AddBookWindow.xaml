@@ -4,14 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:LibraryManagement.View"
+        xmlns:local="clr-namespace:LibraryManagement.View" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        DataContext="{StaticResource AddBookVM}"
         mc:Ignorable="d"
         Title="AddBookWindow" 
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
         Height="400 " Width="821"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        x:Name="addbookWindow">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadOtherDataCM}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid >
             <Grid.RowDefinitions>
@@ -35,7 +42,7 @@
                     <ColumnDefinition Width="0.7*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock
-                     Text="Thêm sách"
+                     Text="Nhập sách mới"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center"
                      FontSize="22"
@@ -50,7 +57,9 @@
                      Background="Red" 
                      Foreground="#FFE7DDDD"
                      Height="40"
-                     Command="{Binding ThoatCM}" Margin="4,-1,0,1"/>
+                     Command="{Binding CloseWindowCM}"
+                     CommandParameter="{Binding ElementName=addbookWindow}" 
+                     Margin="4,-1,0,1"/>
             </Grid>
 
             <Grid
@@ -72,15 +81,7 @@
                     <!--Tên sách-->
                     <Grid
                          Grid.Row="0"
-                         Margin="10 10">
-                        <TextBox
-                             VerticalAlignment="Center"
-                             materialDesign:HintAssist.Hint="Tên sách"
-                             FontSize="18" Foreground="Black"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Text=""
-                             />
-                    </Grid>
+                         Margin="10 10"/>
 
                     <!--Nhà xuất bản-->
                     <Grid
@@ -90,36 +91,46 @@
                             materialDesign:HintAssist.Hint="Nhà xuất bản"
                             FontSize="18" Foreground="Black"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            Text=""
+                            Text="{Binding sach.NhaXB, Mode=TwoWay}"
                             />
                     </Grid>
 
                     <!--Thể loại sách-->
                     <Grid
                         Grid.Row="2" Margin="10 10">
-                        <ComboBox
-                            VerticalAlignment="Center"
-                            materialDesign:HintAssist.Hint="Loại độc giả"
-                            FontSize="18"
-                            Foreground="Black"
-                            IsEditable="True"
-                            ItemsSource="{Binding LoaiDocGiaList}"
-                            DisplayMemberPath=""
-                            SelectedValuePath=""
-                            SelectedValue=""
-                            Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                        <ComboBox x:Name="booktitleComboBox"
+                                  Margin="0,-145,20,0"
+                                  Padding="10 0 5 0"
+                                  Height="40"
+                                  IsTextSearchEnabled="False"
+                                  ItemsSource="{Binding ListBookTitle}"
+                                  SelectedItem="{Binding BookTitleSelected, Mode=TwoWay}"
+                                  Text="{Binding BookTitleText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                  materialDesign:HintAssist.HintOpacity=".7"
+                                  IsEditable="True"
+                                  materialDesign:HintAssist.Hint="Đầu sách"
+                                  FontSize="18" VerticalAlignment="Top">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayName}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </Grid>
 
-                    <!--Ngày nhập-->
-                    <Grid
-                        Grid.Row="3" Margin="10 19">
-                        <DatePicker 
-                            materialDesign:HintAssist.Hint="Ngày nhâp"
-                            materialDesign:TextFieldAssist.HasClearButton="True"
-                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                            FontSize="18"/>
-                    </Grid>
-
+                    <DatePicker SelectedDate="{Binding pns.NgayNhap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Language="vi-VN"
+                                materialDesign:HintAssist.Hint="Ngày nhập"
+                                Style="{StaticResource MaterialDesignDatePicker}"
+                                FontSize="18"
+                                Margin="10,20,10,79" Grid.RowSpan="2" Grid.Row="2"/>
+                    <TextBox    Text="{Binding TongTien, Mode=TwoWay, StringFormat=N0}"
+                                IsEnabled="False"
+                                FontSize="18"
+                                Foreground="Black"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                materialDesign:HintAssist.Hint="Tổng tiền" Margin="10,11,-10,-10" Grid.Row="3"/>
                 </Grid>
 
                 <Grid
@@ -134,49 +145,41 @@
                     <!--Tác giả-->
                     <Grid
                         Grid.Row="0"
-                        Margin="10 10">
-                        <TextBox
-                            VerticalAlignment="Center"
-                            materialDesign:HintAssist.Hint="Tác giả"
-                            FontSize="18" 
-                            Foreground="Black"
-                            Text=""
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    </Grid>
+                        Margin="10 10"/>
 
                     <!--Năm xuất bản-->
                     <Grid
                         Grid.Row="1" Margin="10 10">
-                        <TextBox
-                            VerticalAlignment="Center"
-                            materialDesign:HintAssist.Hint="Năm xuất bản"
-                            Text="" 
-                            FontSize="18" Foreground="Black"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        <ComboBox   VerticalAlignment="Top"
+                                    materialDesign:HintAssist.Hint="Năm xuất bản"
+                                    ItemsSource="{Binding YearList}"
+                                    Text="{Binding namxb, UpdateSourceTrigger=PropertyChanged}"
+                                    IsEditable="True"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="-6,-71,6,0"/>
                     </Grid>
 
                     <!--Trị giá-->
                     <Grid
                         Grid.Row="2" Margin="10 10">
                         <TextBox
-                            VerticalAlignment="Center"
+                            VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="Trị giá"
-                            Text="" 
+                            Text="{Binding GiaNhap, StringFormat=N0}" 
                             FontSize="18" Foreground="Black"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="-6,-70,6,0"/>
+                        <TextBox
+                            VerticalAlignment="Top"
+                            materialDesign:HintAssist.Hint="Số lượng nhập"
+                            Text="{Binding SoLuongNhap}" 
+                            FontSize="18" Foreground="Black"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,18,0,0"/>
                     </Grid>
 
                     <!--Tình trạng-->
                     <Grid
-                        Grid.Row="3" Margin="10 10">
-                        <TextBox
-                            VerticalAlignment="Center"
-                            materialDesign:HintAssist.Hint="Tình trạng"
-                            FontSize="18" 
-                            Text=""
-                            Foreground="Black"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    </Grid>
+                        Grid.Row="3" Margin="10 10"/>
                 </Grid>
             </Grid>
             <Grid
@@ -186,15 +189,18 @@
                     HorizontalAlignment="Right">
                     <Button
                         Margin="10 0"
-                        Content="Thêm mới"
+                        Content="Nhập sách"
                         Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonAssist.CornerRadius="10"/>
-
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Command="{Binding AddNewBookCM}"
+                        CommandParameter="{Binding ElementName=addbookWindow}"/>
                     <Button
                         Content="Thoát"
                         Margin="10 0"
                         Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonAssist.CornerRadius="10"/>
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Command="{Binding CloseWindowCM}"
+                        CommandParameter="{Binding ElementName=addbookWindow}"/>
                 </StackPanel>
             </Grid>
         </Grid>

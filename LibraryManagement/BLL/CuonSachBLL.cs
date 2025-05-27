@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace LibraryManagement.BLL
@@ -37,6 +38,18 @@ namespace LibraryManagement.BLL
         public async Task<List<CUONSACH>> GetCuonSachChuaDuocMuonByMaSach(int MaSach)
         {
             return await CuonSachDAL.Instance.GetCuonSachChuaDuocMuonByMaSach(MaSach);
+        }
+        public async Task<List<CUONSACH>> GetCuonSachByMaSach(string masach)
+        {
+            return await CuonSachDAL.Instance.GetCuonSachByMaSach(masach);
+        }
+        public async Task<List<CUONSACH>> GetCuonSachByMaDauSach(string madausach)
+        {
+            return await CuonSachDAL.Instance.GetCuonSachByMaDauSach(madausach);
+        }
+        public async Task<List<CUONSACH>> GetCuonSachByTenDauSach(string tendausach)
+        {
+            return await CuonSachDAL.Instance.GetCuonSachByTenDauSach(tendausach);
         }
         public async Task<(bool, string)> UpdateCuonSach(CUONSACH cs)
         {

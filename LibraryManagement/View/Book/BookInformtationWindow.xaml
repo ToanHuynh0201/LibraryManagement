@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:LibraryManagement.View"
+        DataContext="{StaticResource BookInformationVM}"
         mc:Ignorable="d"
         Title="BookInformationWindow" WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
         Height="450 " Width="821"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        x:Name="bookInformationWindow">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
@@ -48,7 +50,9 @@
                 Background="Red" 
                 Foreground="#FFE7DDDD"
                 Height="47"
-                Command="{Binding ThoatCM}" Margin="4,-1,0,1"/>
+                Command="{Binding CloseWindowCM}"
+                CommandParameter="{Binding ElementName=bookInformationWindow}"
+                Margin="4,-1,0,1"/>
         </Grid>
 
         <Grid
@@ -70,15 +74,7 @@
                 <!--Tên sách-->
                 <Grid
                 Grid.Row="0"
-                Margin="10 10">
-                    <TextBox
-                        VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="Tên sách"
-                        FontSize="18" Foreground="Black"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="Đắc nhân tâm"
-                        IsReadOnly="True"/>
-                </Grid>
+                Margin="10 10"/>
 
                 <!--Nhà xuất bản-->
                 <Grid
@@ -88,32 +84,32 @@
                         materialDesign:HintAssist.Hint="Nhà xuất bản"
                         FontSize="18" Foreground="Black"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="Nhà xuất bản giáo dục"
-                        IsReadOnly="True"/>
+                        Text="{Binding sach.NhaXB}"
+                        IsReadOnly="True"
+                        IsEnabled="False"/>
+                    <TextBox
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Hint="Mã sách"
+                        FontSize="18" Foreground="Black"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding sach.MaSach}"
+                        IsReadOnly="True" IsEnabled="False" Margin="0,-69,0,0"/>
+                    <TextBox
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Hint="Đầu sách"
+                        FontSize="18" Foreground="Black"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding sach.DAUSACH.DisplayName, Mode=OneWay}"
+                        IsReadOnly="True" IsEnabled="False" Margin="396,-69,-396,0"/>
                 </Grid>
 
                 <!--Thể loại sách-->
                 <Grid
-                Grid.Row="2" Margin="10 10">
-                    <TextBox
-                    VerticalAlignment="Center"
-                    materialDesign:HintAssist.Hint="Thể loại"
-                    FontSize="18" IsReadOnly="True"
-                    Foreground="Black"
-                    Text="Self-help"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                </Grid>
+                Grid.Row="2" Margin="10 10"/>
 
                 <!--Ngày nhập-->
                 <Grid
-                Grid.Row="3" Margin="0 15">
-                    <DatePicker Margin="10 10"
-                        materialDesign:HintAssist.Hint="Ngày nhâp"
-                        materialDesign:TextFieldAssist.HasClearButton="True"
-                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                        FontSize="18" IsEnabled="False"
-                        Text="12/3/2025"/>
-                </Grid>
+                Grid.Row="3" Margin="0 15"/>
 
             </Grid>
 
@@ -129,15 +125,7 @@
                 <!--Tác giả-->
                 <Grid
                  Grid.Row="0"
-                 Margin="10 10">
-                    <TextBox
-                        VerticalAlignment="Center"
-                        materialDesign:HintAssist.Hint="Tác giả"
-                        FontSize="18" IsReadOnly="True"
-                        Foreground="Black"
-                        Text="Tác giả sách"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                </Grid>
+                 Margin="10 10"/>
 
                 <!--Năm xuất bản-->
                 <Grid
@@ -145,32 +133,37 @@
                     <TextBox
                     VerticalAlignment="Center"
                     materialDesign:HintAssist.Hint="Năm xuất bản"
-                    Text="2000" IsReadOnly="True"
+                    Text="{Binding sach.NamXB}" IsReadOnly="True" IsEnabled="False"
                     FontSize="18" Foreground="Black"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,-10,0"/>
                 </Grid>
 
                 <!--Trị giá-->
                 <Grid
                 Grid.Row="2" Margin="10 10">
                     <TextBox
-                        VerticalAlignment="Center"
+                        VerticalAlignment="Top"
                         materialDesign:HintAssist.Hint="Trị giá"
-                        Text="20.000đ" IsReadOnly="True"
+                        Text="{Binding sach.TriGia, StringFormat=N0}" Language="VI-vn" IsReadOnly="True" IsEnabled="False"
                         FontSize="18" Foreground="Black"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="-401,30,400,0"/>
+                    <TextBox
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Số lượng"
+                    Text="{Binding sach.SoLuong}" IsReadOnly="True" IsEnabled="False"
+                    FontSize="18" Foreground="Black"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 </Grid>
 
                 <!--Tình trạng-->
                 <Grid
                 Grid.Row="3" Margin="10 10">
                     <TextBox
-                    VerticalAlignment="Center"
-                    materialDesign:HintAssist.Hint="Tình trạng"
-                    FontSize="18" IsReadOnly="True"
-                    Text="Hàng mới"
-                    Foreground="Black"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Hint="Số lượng còn"
+                        Text="{Binding sach.SoLuongCon}" IsReadOnly="True" IsEnabled="False"
+                        FontSize="18" Foreground="Black"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,-5,0,0"/>
                 </Grid>
             </Grid>
         </Grid>

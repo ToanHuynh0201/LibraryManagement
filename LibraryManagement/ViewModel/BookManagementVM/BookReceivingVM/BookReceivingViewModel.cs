@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace LibraryManagement.ViewModel
 {
-    public class BookReceivingFormViewModel : BaseViewModel
+    public class BookReceivingViewModel : BaseViewModel
     {
         #region Properties
         private string _SearchText;
@@ -56,16 +56,16 @@ namespace LibraryManagement.ViewModel
             }
         }
         public ObservableCollection<string> SearchList { get; set; }
-        private ObservableCollection<PHIEUNHAPSACH> _RecevingForm;
-        public ObservableCollection<PHIEUNHAPSACH> RecevingForm
+        private ObservableCollection<PHIEUNHAPSACH> _ReceivingForm;
+        public ObservableCollection<PHIEUNHAPSACH> ReceivingForm
         {
             get
             {
-                return _RecevingForm;
+                return _ReceivingForm;
             }
             set
             {
-                _RecevingForm = value;
+                _ReceivingForm = value;
                 OnPropertyChanged();
             }
         }
@@ -87,17 +87,17 @@ namespace LibraryManagement.ViewModel
         public ICommand CloseWindowCM { get; set; }
         #endregion
 
-        public BookReceivingFormViewModel()
+        public BookReceivingViewModel()
         {
-            SearchList = new ObservableCollection<string> { "Tên phiêu nhập sách" };
+            SearchList = new ObservableCollection<string> { "Số phiếu nhập" };
             SearchProperties = SearchList.FirstOrDefault();
 
-            LoadDataReceivingFormCM = new RelayCommand<PHIEUNHAPSACH>((p) => { return true; }, async (p) =>
+            LoadDataReceivingFormCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
                 try
                 {
                     var data = await Task.Run(async () => await PhieuNhapSachBLL.Instance.GetAllPhieuNhapSach());
-                    RecevingForm = new ObservableCollection<PHIEUNHAPSACH>(data);
+                    ReceivingForm = new ObservableCollection<PHIEUNHAPSACH>(data);
                     AllReceivingForms = new ObservableCollection<PHIEUNHAPSACH>(data);
                 }
                 catch (Exception ex)
@@ -106,44 +106,43 @@ namespace LibraryManagement.ViewModel
                     return;
                 }
             });
-           
+            SearchReceivingFormCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                try
+                {
+                if (string.IsNullOrWhiteSpace(SearchText))
+                {
+                        ReceivingForm.Clear();
+                        ReceivingForm = AllReceivingForms;
+                }
+                else
+                {
+                    if (SearchProperties == "Số phiếu nhập")
+                    {
+                        var res = await Task.Run(async () => await PhieuNhapSachBLL.Instance.GetPhieuNhapSachBySoPNS(SearchText));
+                        ReceivingForm = new ObservableCollection<PHIEUNHAPSACH>(res);
+                    }
+                }
+            }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi tìm kiếm: " + ex.Message);
+                }
+            });
             ResetDataCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 SearchText = "";
-                RecevingForm = new ObservableCollection<PHIEUNHAPSACH>(AllReceivingForms);
-            });
-            OpenAddReceivingFormCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
-            {
-                phieunhap = new PHIEUNHAPSACH();
-                var w1 = new AddReceivingFormWindow();
-                w1.ShowDialog();
-            });
-            AddNewReceivingFormCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
-            {
-                var res = await Task.Run(async () => await PhieuNhapSachBLL.Instance.AddPhieuNhapSach(phieunhap));
-                MessageBox.Show(res.Item2);
-                if (res.Item1)
-                {
-                    LoadDataReceivingFormCM.Execute(null);
-                    p.Close();
-                }
+                ReceivingForm = new ObservableCollection<PHIEUNHAPSACH>(AllReceivingForms);
             });
             ViewReceivingFormCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                Window w1 = new ReceivingFormInformtationWindow();
-                w1.ShowDialog();
-            });
-            UpdateReceivingFormCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
-            {
-                var res = await Task.Run(async () => await PhieuNhapSachBLL.Instance.UpdatePhieuNhapSach(ReceivingFormSeleted));
-                MessageBox.Show(res.Item2);
-                if (res.Item1)
+                if (ReceivingFormSeleted != null)
                 {
-                    LoadDataReceivingFormCM.Execute(null);
-                    p.Close();
+                    var vm1 = new BookReceivingInformationViewModel(ReceivingFormSeleted);
+                    Window w1 = new ReceivingFormInformtationWindow() { DataContext = vm1};
+                    w1.ShowDialog();
                 }
             });
-            
             CloseWindowCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 p.Close();

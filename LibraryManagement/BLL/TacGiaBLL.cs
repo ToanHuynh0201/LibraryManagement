@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using LibraryManagement.DAL;
 using LibraryManagement.DTO;
 
@@ -49,7 +50,7 @@ namespace LibraryManagement.BLL
         public async Task<(bool, string)> UpdateTacGia(TACGIA tg)
         {
             var tacgia = await TacGiaDAL.Instance.GetTacGiaById(tg.id);
-            if(String.IsNullOrEmpty(tacgia.TenTG))
+            if(String.IsNullOrEmpty(tg.TenTG))
             {
                 return (false, "Tên tác giả không được để trống");
             }

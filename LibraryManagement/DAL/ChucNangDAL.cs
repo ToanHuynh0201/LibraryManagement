@@ -27,14 +27,14 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.CHUCNANGs.AsNoTracking().ToListAsync();
+                return await context.CHUCNANGs.Include(cn => cn.NHOMNGUOIDUNGs).AsNoTracking().ToListAsync();
             }
         }
         public async Task<CHUCNANG> GetChucNangById(int id)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.CHUCNANGs.FindAsync(id);
+                return await context.CHUCNANGs.Include(cn => cn.NHOMNGUOIDUNGs).Where(cn => cn.id == id).FirstOrDefaultAsync();
             }
         }
     }

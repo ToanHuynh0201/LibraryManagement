@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace LibraryManagement.View.BookCopy
+namespace LibraryManagement.View.Receipt
 {
     /// <summary>
-    /// Interaction logic for EditBookCopyInformationWindow.xaml
+    /// Interaction logic for AddPenaltyReceiptWindow.xaml
     /// </summary>
-    public partial class EditBookCopyInformationWindow : Window
+    public partial class AddPenaltyReceiptWindow : Window
     {
-        public EditBookCopyInformationWindow()
+        public AddPenaltyReceiptWindow()
         {
             InitializeComponent();
         }

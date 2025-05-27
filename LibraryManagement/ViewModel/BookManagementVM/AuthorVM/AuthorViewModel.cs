@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LibraryManagement.ViewModel
@@ -68,7 +69,32 @@ namespace LibraryManagement.ViewModel
             }
         }
         public ObservableCollection<TACGIA> AllAuthors { get; set; }
-        public TACGIA AuthorSeleted { get; set; }
+        private TACGIA _authorSelected;
+        public TACGIA AuthorSelected
+        {
+            get => _authorSelected;
+            set
+            {
+                _authorSelected = value;
+                AuthorEdit = value != null ? new TACGIA
+                {
+                    MaTG = value.MaTG,
+                    TenTG = value.TenTG
+                } : null;
+                OnPropertyChanged(nameof(AuthorSelected)); 
+            }
+        }
+
+        private TACGIA _authorEdit;
+        public TACGIA AuthorEdit
+        {
+            get => _authorEdit;
+            set
+            {
+                _authorEdit = value;
+                OnPropertyChanged(nameof(AuthorEdit));
+            }
+        }
         #endregion
 
         #region Commands
@@ -138,10 +164,10 @@ namespace LibraryManagement.ViewModel
                 var w1 = new AddAuthorWindow();
                 w1.ShowDialog();
             });
-            OpenUpdateAuthorCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            OpenUpdateAuthorCM = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
             {
-                Window w1 = new EditAuthorInformationWindow();
-                w1.ShowDialog();
+                if (p.IsEnabled) AuthorSelected = null;
+                p.IsEnabled = !(p.IsEnabled);
             });
             AddNewAuthorCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
@@ -153,28 +179,23 @@ namespace LibraryManagement.ViewModel
                     p.Close();
                 }
             });
-            ViewAuthorCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            UpdateAuthorCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
-                Window w1 = new AuthorInformtationWindow();
-                w1.ShowDialog();
-            });
-            UpdateAuthorCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
-            {
-                var res = await Task.Run(async () => await TacGiaBLL.Instance.UpdateTacGia(AuthorSeleted));
+                AuthorSelected.TenTG = AuthorEdit.TenTG;
+                var res = await Task.Run(async () => await TacGiaBLL.Instance.UpdateTacGia(AuthorSelected));
                 MessageBox.Show(res.Item2);
                 if (res.Item1)
                 {
                     LoadDataAuthorCM.Execute(null);
-                    p.Close();
                 }
             });
             DeleteAuthorCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
                 var result = MessageBox.Show("Bạn có chắc muốn xóa tác giả này không?", "Xác nhận xóa",
-                                          MessageBoxButton.YesNo, MessageBoxImage.Question);
+                                            MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    var res = await Task.Run(async () => await TacGiaBLL.Instance.DeleteTacGia(AuthorSeleted.id));
+                    var res = await Task.Run(async () => await TacGiaBLL.Instance.DeleteTacGia(AuthorSelected.id));
                     LoadDataAuthorCM.Execute(null);
                     MessageBox.Show(res.Item2);
                 }

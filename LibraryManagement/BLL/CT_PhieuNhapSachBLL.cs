@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using LibraryManagement.DAL;
@@ -25,6 +26,10 @@ namespace LibraryManagement.BLL
         public async Task<List<CT_PHIEUNHAPSACH>> GetAllCT_PhieuNhapSach()
         {
             return await CT_PhieuNhapSachDAL.Instance.GetAllCT_PhieuNhapSach();
+        }
+        public async Task<List<CT_PHIEUNHAPSACH>> GetCT_PNSByPhieuNhapSach(PHIEUNHAPSACH pns)
+        {
+            return await CT_PhieuNhapSachDAL.Instance.GetCT_PNSByPhieuNhapSach(pns);
         }
         public async Task<(bool, string)> AddCT_PhieuNhapSach(CT_PHIEUNHAPSACH ctpns)
         {

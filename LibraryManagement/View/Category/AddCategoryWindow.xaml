@@ -18,7 +18,7 @@
         Height="300" 
         Width="500"
         Title="AddCategoryWindow"
-        x:Name="mainWindow">
+        x:Name="addCategoryWindow">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding GetThisWindowCM}"
@@ -66,7 +66,7 @@
                              Height="35"
                              Padding="0"
                              Margin="30 0 0 0"
-                             Text="{Binding Name}"/>
+                             Text="{Binding theloai.TenTheLoai, Mode=TwoWay}"/>
                 </StackPanel>
 
                 <Button Content="Lưu thể loại"
@@ -80,7 +80,8 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Margin="0 70 0 0"
-                        Command="{Binding SaveCM}"/>
+                        Command="{Binding AddNewCategoryCM}"
+                        CommandParameter="{Binding ElementName=addCategoryWindow}"/>
             </StackPanel>
         </Grid>
     </Border>

@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace LibraryManagement.View.Author
+namespace LibraryManagement.View.Book
 {
     /// <summary>
-    /// Interaction logic for AuthorInformtationWindow.xaml
+    /// Interaction logic for AddReceivingFormWindow.xaml
     /// </summary>
-    public partial class AuthorInformtationWindow : Window
+    public partial class AddExistingBookWindow : Window
     {
-        public AuthorInformtationWindow()
+        public AddExistingBookWindow()
         {
             InitializeComponent();
         }

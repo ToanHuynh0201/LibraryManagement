@@ -7,23 +7,24 @@
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
-      d:DataContext="{d:DesignInstance Type=viewmodel:BookViewModel}"
-      DataContext="{StaticResource BookManagementVM}"
+      d:DataContext="{d:DesignInstance Type=viewmodel:BookCopyViewModel}"
+      DataContext="{StaticResource BookCopyVM}"
       mc:Ignorable="d" 
       d:DesignHeight="740" 
       d:DesignWidth="840"
       Background="Transparent"
-      Title="BookCopyManagement">
+      Title="BookCopyManagement"
+      x:Name="bookCopyManagement">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadDataBookCM}" />
+            <i:InvokeCommandAction Command="{Binding LoadDataBookCopyCM}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Page.Triggers>
         <EventTrigger RoutedEvent="Page.Loaded">
             <BeginStoryboard>
                 <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="BookManagementPage"
+                    <DoubleAnimation Storyboard.TargetName="bookCopyManagement"
                                  Storyboard.TargetProperty="Opacity"
                                  From="0"
                                  To="1"
@@ -51,7 +52,7 @@
                          Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="TextChanged">
-                                <i:InvokeCommandAction Command="{Binding SearchData}"/>
+                                <i:InvokeCommandAction Command="{Binding SearchBookCopyCM}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </TextBox>
@@ -79,7 +80,7 @@
                       SelectedItem="{Binding SearchProperties, Mode=TwoWay}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding ResetData}"/>
+                            <i:InvokeCommandAction Command="{Binding ResetSearchDataCM}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
@@ -90,16 +91,11 @@
                        ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                        RowStyle="{DynamicResource DataGridRowStyle1}"
                        x:Name="customerGrid" 
-                       ItemsSource="{Binding ListBooks}"
-                       SelectedItem="{Binding BookSeleted}"
+                       ItemsSource="{Binding ListBookCopy}"
+                       SelectedItem="{Binding BookCopySelected}"
                        AutoGenerateColumns="False" 
                        IsReadOnly="True"
                        Grid.Row="1">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding ViewBookCM}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn CanUserResize="False" 
                                         Width="Auto" 
@@ -118,25 +114,23 @@
                     <DataGridTextColumn Header="ID" 
                                     IsReadOnly="True" 
                                     Width="Auto" 
-                                    Binding="{Binding ID}"/>
+                                    Binding="{Binding MaCuonSach}"/>
                     <DataGridTextColumn Header="Mã sách" 
                                     IsReadOnly="True" 
                                     Width="250" 
-                                    Binding="{Binding}"/>
-                    <DataGridTextColumn Header="Tên đầu sách" 
+                                    Binding="{Binding SACH.MaSach}"/>
+                    <DataGridTextColumn Header="Đầu sách" 
                                     IsReadOnly="True" 
                                     Width="Auto" 
-                                    Binding="{Binding}"/>
+                                    Binding="{Binding SACH.DAUSACH.DisplayName}"/>
                     <DataGridTextColumn Header="Tình trạng" 
                                     IsReadOnly="True" 
                                     Width="Auto" 
-                                    Binding="{Binding}"/>
+                                    Binding="{Binding DisplayTinhTrang}"/>
                     <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource gridEditButton}"
-                                        Command="{Binding ElementName=customerGrid, Path=DataContext.UpdateBookCM}"/>
                                     <Button Style="{StaticResource gridRemoveButton}" 
                                         Margin="5 0 0 0" 
                                         Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteBookCM}"/>

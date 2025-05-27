@@ -23,16 +23,8 @@
             </Grid.RowDefinitions>
 
             <Border Grid.RowSpan="3"
-     CornerRadius="5">
+                CornerRadius="5">
                 <Border.Background>
-                    <!--<LinearGradientBrush 
-         StartPoint="0,0" 
-         EndPoint="0,1">
-         <GradientStop Color="#8681B6" 
-       Offset="0"/>
-         <GradientStop Color="#917CB8" 
-       Offset="1"/>
-     </LinearGradientBrush>-->
                     <SolidColorBrush>White</SolidColorBrush>
                 </Border.Background>
             </Border>
@@ -96,7 +88,7 @@
                     <!--Ngày sinh-->
                     <Grid
                     Grid.Row="1" Margin="10 19">
-                        <DatePicker 
+                        <DatePicker Language="vi-VN"
                         materialDesign:HintAssist.Hint="Ngày sinh"
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
@@ -124,7 +116,7 @@
                     <!--Ngày tạo thẻ-->
                     <Grid
                     Grid.Row="3" Margin="10 19">
-                        <DatePicker 
+                        <DatePicker Language="vi-VN"
                         materialDesign:HintAssist.Hint="Ngày lập thẻ"
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         Text="{Binding docgia.NgayLapThe, Mode=TwoWay}"

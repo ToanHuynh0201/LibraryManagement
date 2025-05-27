@@ -24,21 +24,21 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.PHIEUTHUTIENPHATs.ToListAsync();
+                return await context.PHIEUTHUTIENPHATs.Include(pt => pt.DOCGIA).ToListAsync();
             }
         }
         public async Task<PHIEUTHUTIENPHAT> GetPhieuPhatById(int id)
         {
             using(var context = new LibraryManagementEntities())
             {
-                return await context.PHIEUTHUTIENPHATs.FindAsync(id);
+                return await context.PHIEUTHUTIENPHATs.Include(pt => pt.DOCGIA).Where(pt => pt.id == id).FirstOrDefaultAsync();
             }
         }
         public async Task<List<PHIEUTHUTIENPHAT>> GetPhieuPhatByDG(int madg)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.PHIEUTHUTIENPHATs.Where(pp => pp.MaDG == madg).ToListAsync();
+                return await context.PHIEUTHUTIENPHATs.Include(pt => pt.DOCGIA).Where(pp => pp.MaDG == madg).ToListAsync();
             }
         }
         public async Task<(bool, string)> AddPhieuPhat(PHIEUTHUTIENPHAT phieuthu)

@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace LibraryManagement.View.Book
+namespace LibraryManagement.View.Report
 {
     /// <summary>
-    /// Interaction logic for EditBookInformationWindow.xaml
+    /// Interaction logic for ReportDetailsWindow.xaml
     /// </summary>
-    public partial class EditBookInformationWindow : Window
+    public partial class ReportDetailsWindow : Window
     {
-        public EditBookInformationWindow()
+        public ReportDetailsWindow()
         {
             InitializeComponent();
         }

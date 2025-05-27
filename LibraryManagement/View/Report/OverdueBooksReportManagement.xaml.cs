@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LibraryManagement.View.Category
+namespace LibraryManagement.View.Report
 {
     /// <summary>
-    /// Interaction logic for EditCategoryInformationWindow.xaml
+    /// Interaction logic for OverdueBooksReportManagement.xaml
     /// </summary>
-    public partial class EditCategoryInformationWindow : Window
+    public partial class OverdueBooksReportManagement : Page
     {
-        public EditCategoryInformationWindow()
+        public OverdueBooksReportManagement()
         {
             InitializeComponent();
         }

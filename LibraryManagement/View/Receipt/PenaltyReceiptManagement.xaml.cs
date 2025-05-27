@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LibraryManagement.View.BookTitle
+namespace LibraryManagement.View.Receipt
 {
     /// <summary>
-    /// Interaction logic for EditBookTitleInformationWindow.xaml
+    /// Interaction logic for PenaltyReceiptManagement.xaml
     /// </summary>
-    public partial class EditBookTitleInformationWindow : Window
+    public partial class PenaltyReceiptManagement : Page
     {
-        public EditBookTitleInformationWindow()
+        public PenaltyReceiptManagement()
         {
             InitializeComponent();
         }

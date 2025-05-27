@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LibraryManagement.View.Category
+namespace LibraryManagement.View.Report
 {
     /// <summary>
-    /// Interaction logic for CategoryInformationWindow.xaml
+    /// Interaction logic for CategoryLoanReportManagement.xaml
     /// </summary>
-    public partial class CategoryInformationWindow : Window
+    public partial class CategoryLoanReportManagement : Page
     {
-        public CategoryInformationWindow()
+        public CategoryLoanReportManagement()
         {
             InitializeComponent();
         }

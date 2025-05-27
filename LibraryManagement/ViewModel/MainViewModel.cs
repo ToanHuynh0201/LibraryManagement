@@ -31,7 +31,7 @@ namespace LibraryManagement.ViewModel
             });
             QuanLySachCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {   
-                NavigationFrame.Navigate(new BookManagement());
+                NavigationFrame.Navigate(new BookTab());
             });
             ThongKeCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
