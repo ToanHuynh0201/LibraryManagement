@@ -22,7 +22,7 @@
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding GetThisWindowCM}"
-                                   CommandParameter="{Binding ElementName=mainWindow}"/>
+                                   CommandParameter="{Binding ElementName=addCategoryWindow}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Border CornerRadius="25"

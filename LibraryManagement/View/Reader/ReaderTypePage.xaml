@@ -1,0 +1,237 @@
+﻿<Page x:Class="LibraryManagement.View.Reader.ReaderTypePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LibraryManagement.View.Reader"
+      mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
+      DataContext="{StaticResource CategoryVM}"
+      Background="Transparent"
+      Height="550" 
+      Width="1000"
+      Title="ReaderTypePage"
+      x:Name="readerTypePage">
+    <Border CornerRadius="25"
+        Background="#eff2f7"
+        BorderThickness="3"
+        BorderBrush="Black">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Margin="30 30 0 0"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Left"
+              Width="200">
+                <TextBox Style="{StaticResource SearchTextBox}"
+                     Height="35"
+                     Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding SearchCategoryCM}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <materialDesign:PackIcon Kind="Magnify"
+                                     Width="20"
+                                     Height="20"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Right"
+                                     Margin="0 0 10 0"/>
+            </Grid>
+            <ComboBox materialDesign:ComboBoxAssist.MaxLength="2"
+                  materialDesign:HintAssist.Hint="Tìm theo..."
+                  materialDesign:HintAssist.HintOpacity=".7"
+                  Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                  Padding="10 0 5 0"
+                  IsEditable="True"
+                  Margin="260 30 0 0" 
+                  VerticalAlignment="Center" 
+                  HorizontalAlignment="Left"
+                  Height="40"
+                  Width="200"
+                  IsReadOnly="True"
+                  ItemsSource="{Binding SearchList}" 
+                  SelectedItem="{Binding SearchProperties, Mode=TwoWay}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding ResetDataCM}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+
+            <Button Margin="210 30 0 0"
+                Width="200"
+                Height="40"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Background="#473765"
+                BorderBrush="#FFEDE7F8"
+                materialDesign:ButtonAssist.CornerRadius="10">
+                <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                    <materialDesign:PackIcon Kind="Add"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Left"
+                                         Margin="-15 0 0 0"/>
+                    <TextBlock Text="Thêm loạt độc giả"
+                           Margin="10 0 0 0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+                </StackPanel>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding OpenAddCategoryCM}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <DataGrid Style="{DynamicResource DataGridStyle1}"
+                      CellStyle="{DynamicResource DataGridCellStyle1}"
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                      x:Name="categoryGrid" 
+                      ItemsSource="{Binding ListCategorys}"
+                      SelectedItem="{Binding CategorySelected}"
+                      AutoGenerateColumns="False" IsReadOnly="True"
+                      Grid.Column="0"
+                      Width="500">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Loaded">
+                            <i:InvokeCommandAction Command="{Binding LoadDataCategoryCM}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn CanUserResize="False" 
+                                            Width="Auto" 
+                                            ElementStyle="{StaticResource CheckBoxStyle1}">
+                            <DataGridCheckBoxColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
+                                </DataTemplate>
+                            </DataGridCheckBoxColumn.HeaderTemplate>
+                        </DataGridCheckBoxColumn>
+
+                        <DataGridTextColumn Header="" 
+                                        IsReadOnly="True" 
+                                        CanUserResize="False"
+                                        Width="Auto"/>
+                        <DataGridTextColumn Header="ID" 
+                                        IsReadOnly="True" 
+                                        Width="Auto" 
+                                        Binding="{Binding MaLoaiDocGia}"/>
+                        <DataGridTextColumn Header="Loại độc giả" 
+                                        IsReadOnly="True" 
+                                        Width="250" 
+                                        Binding= "{Binding LoaiDocGia}"/>
+                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource gridRemoveButton}" 
+                                            Margin="5 0 0 0" 
+                                            Command="{Binding ElementName=categoryGrid, 
+                                                      Path=DataContext.DeleteCategoryCM}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Grid Grid.Column="1"
+                  Height="450"
+                  Width="470"
+                  x:Name="categoryDetailFrame"
+                  Margin="10 10 10 10">
+                    <Border Background="#eff2f7"
+                        BorderThickness="3 0 0 0"
+                        BorderBrush="Black">
+                        <StackPanel>
+                            <TextBlock Text="Thông tin loại độc giả"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="36"
+                                   FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal"
+                                    Margin="77 30 0 0">
+                                <TextBlock Text="ID: "
+                                       FontSize="20"
+                                       FontWeight="DemiBold"
+                                       VerticalAlignment="Center"/>
+                                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     materialDesign:TextFieldAssist.TextBoxViewMargin="0 0 10 0" 
+                                     FontSize="20"
+                                     Width="250"
+                                     Margin="60 10 10 10"
+                                     IsEnabled="False"
+                                     Text="{Binding CategoryEdit.MaTheLoai, Mode=TwoWay}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                    Margin="65 30 0 0">
+                                <TextBlock Text="Loại: "
+                                       FontSize="20"
+                                       FontWeight="DemiBold"
+                                       VerticalAlignment="Center"/>
+                                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     materialDesign:TextFieldAssist.TextBoxViewMargin="0 0 10 0" 
+                                     FontSize="20"
+                                     Width="250"
+                                     Margin="60 10 10 10"
+                                     IsEnabled="False"
+                                     x:Name="categoryEditName"
+                                     VerticalAlignment="Center"
+                                     Text="{Binding CategoryEdit.TenTheLoai, Mode=TwoWay}"/>
+                            </StackPanel>
+
+                            <StackPanel Margin="0 150 0 0"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Center">
+                                <Button Content="Chỉnh sửa"
+                                    materialDesign:ButtonAssist.CornerRadius="10"
+                                    materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5"
+                                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                    Width="130"
+                                    Height="40"
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Margin="0 0 20 0"
+                                    Background="#473765"
+                                    Foreground="#FFEDE7F8"
+                                    BorderBrush="#FFEDE7F8"
+                                    Command="{Binding OpenUpdateCategoryCM}"
+                                    CommandParameter="{Binding ElementName=categoryEditName}"/>
+                                <Button Content="Lưu"
+                                    materialDesign:ButtonAssist.CornerRadius="10"
+                                    materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5"
+                                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                    Width="130"
+                                    Height="40"
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    BorderBrush="#FFEDE7F8"
+                                    Background="#473765"
+                                    Foreground="#FFEDE7F8"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Margin="0 0 0 0"
+                                    Command="{Binding UpdateCategoryCM}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Page>

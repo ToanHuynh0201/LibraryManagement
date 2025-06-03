@@ -367,6 +367,12 @@
     <Compile Include="View\Internal\InternalManagement.xaml.cs">
       <DependentUpon>InternalManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ReaderTab.xaml.cs">
+      <DependentUpon>ReaderTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Reader\AddReaderTypeWindow.xaml.cs">
+      <DependentUpon>AddReaderTypeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Reader\AddReaderWindow.xaml.cs">
       <DependentUpon>AddReaderWindow.xaml</DependentUpon>
     </Compile>
@@ -378,6 +384,9 @@
     </Compile>
     <Compile Include="View\Reader\ReaderManagement.xaml.cs">
       <DependentUpon>ReaderManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Reader\ReaderTypePage.xaml.cs">
+      <DependentUpon>ReaderTypePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Receipt\AddPenaltyReceiptWindow.xaml.cs">
       <DependentUpon>AddPenaltyReceiptWindow.xaml</DependentUpon>
@@ -530,6 +539,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\ReaderTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Reader\AddReaderTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Reader\AddReaderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -543,6 +560,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Reader\ReaderManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Reader\ReaderTypePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
