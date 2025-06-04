@@ -116,10 +116,11 @@
                 Grid.Row="3" Margin="10 14">
                 <DatePicker 
                     Text="12/3/2024"
-                    materialDesign:HintAssist.Hint="Ngày trả"
+                    materialDesign:HintAssist.Hint="Hạn trả"
                     materialDesign:TextFieldAssist.HasClearButton="True"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     FontSize="15" 
+                    IsEnabled="False"
                     />
             </Grid>
 
