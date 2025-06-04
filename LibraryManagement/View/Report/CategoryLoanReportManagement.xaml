@@ -67,7 +67,7 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{Binding}"/>
-                                <!-- ADD COMMENT RIGHT HERE -->
+                                <!-- ADD COMMAND RIGHT HERE -->
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
@@ -97,7 +97,7 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{Binding}"/>
-                                <!-- ADD COMMENT RIGHT HERE -->
+                                <!-- ADD COMMAND RIGHT HERE -->
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
@@ -118,7 +118,7 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
                                 <i:InvokeCommandAction Command="{Binding}"/>
-                                <!-- ADD COMMENT RIGHT HERE -->
+                                <!-- ADD COMMAND RIGHT HERE -->
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <DataGrid.Columns>

@@ -113,17 +113,6 @@
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                     </Grid>
 
-                    <!--Ngày tạo thẻ-->
-                    <Grid
-                        Grid.Row="3" Margin="10 19">
-                        <DatePicker 
-                            materialDesign:HintAssist.Hint="Ngày tạo thẻ"
-                            materialDesign:TextFieldAssist.HasClearButton="True"
-                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                            FontSize="18" 
-                            Text="{Binding ReaderSeleted.NgayLapThe, Mode=TwoWay}"
-                    />
-                    </Grid>
 
                 </Grid>
 
@@ -135,6 +124,17 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+                    <!--Ngày tạo thẻ-->
+                    <Grid
+                        Grid.Row="0" Margin="10 19">
+                        <DatePicker 
+                            materialDesign:HintAssist.Hint="Ngày tạo thẻ"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                            FontSize="18" 
+                            Text="{Binding ReaderSeleted.NgayLapThe, Mode=TwoWay}"
+                    />
+                    </Grid>
 
                     <!--CMND/CCCD-->
                     <Grid

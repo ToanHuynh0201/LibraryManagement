@@ -63,13 +63,20 @@
             <Grid
                  Grid.Row="0"
                  Margin="10 10">
-                <TextBox
-                     VerticalAlignment="Center"
-                     materialDesign:HintAssist.Hint="Tên độc giả"
-                     FontSize="15" Foreground="Black"
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     IsEnabled="false"
-                     Text=""/>
+                <ComboBox
+                    MinWidth="72"
+                    materialDesign:HintAssist.Hint="Chọn độc giả"
+                    IsEditable="True"
+                    FontSize="15"
+                    ItemsSource="{Binding LongIntegerList}">    
+                    <ComboBox.Text>
+                        <Binding
+                            Mode="TwoWay"
+                            Path="SelectedTextTwo"
+                            UpdateSourceTrigger="PropertyChanged">      
+                        </Binding>
+                    </ComboBox.Text>
+                </ComboBox>
                 <!--Chỗ này kh nhập nhé, binding từ dữ liệu để lấy tên độc giả-->
 
             </Grid>
@@ -97,7 +104,7 @@
             <Grid
                 Grid.Row="2" Margin="10 14">
                 <DatePicker 
-                    materialDesign:HintAssist.Hint="Ngày nhâp"
+                    materialDesign:HintAssist.Hint="Ngày mượn"
                     materialDesign:TextFieldAssist.HasClearButton="True"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     FontSize="15" 
