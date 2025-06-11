@@ -66,7 +66,7 @@
                        FontWeight="Bold" 
                        Foreground="White" 
                        VerticalAlignment="Center" 
-                       Margin="20 50 20 40"/>
+                       Margin="20 30 20 30"/>
             <!--Quan ly doc gia -->
             <Button Command="{Binding QuanLyDocGiaCM}" 
                     Style="{StaticResource NavigationButton}">
@@ -107,6 +107,45 @@
                                              Style="{StaticResource IconExpandedButton}"/>
                 </Grid>
             </Button>
+
+            <Button Command="{Binding }" 
+                    Style="{StaticResource NavigationButton}">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Left">
+                        <materialDesign:PackIcon Kind="BookCheck"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Style="{StaticResource IconButton}"/>
+                        <TextBlock Style="{StaticResource TextButton }"
+                                   Text="Phiếu mượn trả"/>
+                    </StackPanel>
+                    <materialDesign:PackIcon Kind="ChevronRight"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Center"
+                                             Visibility="Visible"
+                                             Style="{StaticResource IconExpandedButton}"/>
+                </Grid>
+            </Button>
+            <Button Command="{Binding QuanLyNoiBoCM}" 
+                    Style="{StaticResource NavigationButton}">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Left">
+                        <materialDesign:PackIcon Kind="Cash"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Style="{StaticResource IconButton}"/>
+                        <TextBlock Style="{StaticResource TextButton }"
+                                   Text="Phiếu phạt"/>
+                    </StackPanel>
+                    <materialDesign:PackIcon Kind="ChevronRight"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Center"
+                                             Visibility="Visible"
+                                             Style="{StaticResource IconExpandedButton}"/>
+                </Grid>
+            </Button>
             <!--Muon sach -->
             <Button Command="{Binding ThongKeCM}" 
                     Style="{StaticResource NavigationButton}">
@@ -133,7 +172,7 @@
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
-                        <materialDesign:PackIcon Kind="AccountGroupOutline"
+                        <materialDesign:PackIcon Kind="Cog"
                                                  HorizontalAlignment="Center"
                                                  VerticalAlignment="Center"
                                                  Style="{StaticResource IconButton}"/>
@@ -171,7 +210,7 @@
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
-                        <materialDesign:PackIcon Kind="AccountGroupOutline"
+                        <materialDesign:PackIcon Kind="AccountBoxMultiple"
                                                  HorizontalAlignment="Center"
                                                  VerticalAlignment="Center"
                                                  Style="{StaticResource IconButton}"/>
@@ -189,7 +228,7 @@
 
             <Button Command="{Binding TaiKhoanCM}" 
                     Style="{StaticResource NavigationButton}"
-                    Margin="0 50 0 20">
+                    Margin="0 55 0 0">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
@@ -208,7 +247,8 @@
                 </Grid>
             </Button>
             <Button Command="{Binding DangXuatCM}" 
-                    Style="{StaticResource NavigationButton}">
+                    Style="{StaticResource NavigationButton}"
+                    Margin="0">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
