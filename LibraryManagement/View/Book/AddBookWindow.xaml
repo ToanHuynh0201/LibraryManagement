@@ -19,6 +19,7 @@
             <i:InvokeCommandAction Command="{Binding LoadOtherDataCM}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    
     <Grid>
         <Grid >
             <Grid.RowDefinitions>
@@ -167,7 +168,7 @@
                     <!--Trị giá-->
 
                     <TextBox
-                        Grid.Row="1"
+                            Grid.Row="1"
                             VerticalAlignment="Center"
                             materialDesign:HintAssist.Hint="Trị giá"
                             Text="{Binding GiaNhap, StringFormat=N0}" 

@@ -424,6 +424,9 @@
     <Compile Include="View\StatisticPage.xaml.cs">
       <DependentUpon>StatisticPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Users\AddUserWindow.xaml.cs">
+      <DependentUpon>AddUserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Users\UserManagementPage.xaml.cs">
       <DependentUpon>UserManagementPage.xaml</DependentUpon>
     </Compile>
@@ -611,6 +614,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\StatisticPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\AddUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,7 +10,6 @@
       xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
       d:DataContext="{d:DesignInstance Type=viewmodel:BookViewModel}"
       DataContext="{StaticResource BookVM}"
-      mc:Ignorable="d" 
       d:DesignHeight="740" 
       d:DesignWidth="840"
       Background="Transparent"
