@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LibraryManagement.View.Users
+namespace LibraryManagement.View
 {
     /// <summary>
-    /// Interaction logic for EditUserInformationWindow.xaml
+    /// Interaction logic for UserTab.xaml
     /// </summary>
-    public partial class EditUserInformationWindow : Window
+    public partial class UserTab : Page
     {
-        public EditUserInformationWindow()
+        public UserTab()
         {
             InitializeComponent();
         }

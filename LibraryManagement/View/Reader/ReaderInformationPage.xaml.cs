@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace LibraryManagement.View.Reader
 {
     /// <summary>
-    /// Interaction logic for ReaderInformationWindow.xaml
+    /// Interaction logic for ReaderInformationPage.xaml
     /// </summary>
-    public partial class ReaderInformationWindow : Window
+    public partial class ReaderInformationPage : Page
     {
-        public ReaderInformationWindow()
+        public ReaderInformationPage()
         {
             InitializeComponent();
         }

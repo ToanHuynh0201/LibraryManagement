@@ -134,20 +134,20 @@ namespace LibraryManagement.ViewModel
                 SearchText = "";
                 ListUsers = new ObservableCollection<NGUOIDUNG>(AllUsers);
             });
-            OpenAddUserCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
-            {
-                nguoidung = new NGUOIDUNG()
-                {
-                    MaNhom = 1
-                };
-                var w1 = new AddUserWindow();
-                w1.ShowDialog();
-            });
-            OpenUpdateUserCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
-            {
-                Window w1 = new EditUserInformationWindow();
-                w1.ShowDialog();
-            });
+            //OpenAddUserCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            //{
+            //    nguoidung = new NGUOIDUNG()
+            //    {
+            //        MaNhom = 1
+            //    };
+            //    var w1 = new AddUserWindow();
+            //    w1.ShowDialog();
+            //});
+            //OpenUpdateUserCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            //{
+            //    Window w1 = new EditUserInformationWindow();
+            //    w1.ShowDialog();
+            //});
             AddNewUserCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
                 var res = await Task.Run(async () => await NguoiDungBLL.Instance.AddNguoiDung(nguoidung));
@@ -158,11 +158,11 @@ namespace LibraryManagement.ViewModel
                     p.Close();
                 }
             });
-            ViewUserCM = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                Window w1 = new UserInformationWindow();
-                w1.ShowDialog();
-            });
+            //ViewUserCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            //{
+            //    Window w1 = new UserInformationWindow();
+            //    w1.ShowDialog();
+            //});
             UpdateUserCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
                 var res = await Task.Run(async () => await NguoiDungBLL.Instance.UpdateNguoiDung(UserSeleted));

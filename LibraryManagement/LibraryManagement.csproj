@@ -379,8 +379,8 @@
     <Compile Include="View\Reader\EditReaderInformationWindow.xaml.cs">
       <DependentUpon>EditReaderInformationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Reader\ReaderInformationWindow.xaml.cs">
-      <DependentUpon>ReaderInformationWindow.xaml</DependentUpon>
+    <Compile Include="View\Reader\ReaderInformationPage.xaml.cs">
+      <DependentUpon>ReaderInformationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Reader\ReaderManagement.xaml.cs">
       <DependentUpon>ReaderManagement.xaml</DependentUpon>
@@ -403,6 +403,12 @@
     <Compile Include="View\Report\ReportDetailsWindow.xaml.cs">
       <DependentUpon>ReportDetailsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserReaderTab.xaml.cs">
+      <DependentUpon>UserReaderTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserReader\BookSearchPage.xaml.cs">
+      <DependentUpon>BookSearchPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Users\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
     </Compile>
@@ -418,14 +424,11 @@
     <Compile Include="View\StatisticPage.xaml.cs">
       <DependentUpon>StatisticPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Users\AddUserWindow.xaml.cs">
-      <DependentUpon>AddUserWindow.xaml</DependentUpon>
+    <Compile Include="View\Users\UserManagementPage.xaml.cs">
+      <DependentUpon>UserManagementPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Users\EditUserInformationWindow.xaml.cs">
-      <DependentUpon>EditUserInformationWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Users\UserInformationWindow.xaml.cs">
-      <DependentUpon>UserInformationWindow.xaml</DependentUpon>
+    <Compile Include="View\UserTab.xaml.cs">
+      <DependentUpon>UserTab.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -555,7 +558,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Reader\ReaderInformationWindow.xaml">
+    <Page Include="View\Reader\ReaderInformationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -587,6 +590,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserReaderTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserReader\BookSearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Users\Account.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -603,15 +614,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Users\AddUserWindow.xaml">
+    <Page Include="View\Users\UserManagementPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Users\EditUserInformationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Users\UserInformationWindow.xaml">
+    <Page Include="View\UserTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

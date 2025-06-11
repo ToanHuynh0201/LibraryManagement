@@ -138,7 +138,45 @@
                                                  VerticalAlignment="Center"
                                                  Style="{StaticResource IconButton}"/>
                         <TextBlock Style="{StaticResource TextButton }"
-                                   Text="Quản lý nhân sự"/>
+                                   Text="Quản lý quy định"/>
+                    </StackPanel>
+                    <materialDesign:PackIcon Kind="ChevronRight"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Center"
+                                             Visibility="Visible"
+                                             Style="{StaticResource IconExpandedButton}"/>
+                </Grid>
+            </Button>
+            <Button Command="{Binding QuanLyNoiBoCM}" 
+                    Style="{StaticResource NavigationButton}">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Left">
+                        <materialDesign:PackIcon Kind="AccountGroupOutline"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Style="{StaticResource IconButton}"/>
+                        <TextBlock Style="{StaticResource TextButton }"
+                                   Text="Độc giả"/>
+                    </StackPanel>
+                    <materialDesign:PackIcon Kind="ChevronRight"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Center"
+                                             Visibility="Visible"
+                                             Style="{StaticResource IconExpandedButton}"/>
+                </Grid>
+            </Button>
+            <Button Command="{Binding QuanLyNoiBoCM}" 
+                    Style="{StaticResource NavigationButton}">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Left">
+                        <materialDesign:PackIcon Kind="AccountGroupOutline"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Style="{StaticResource IconButton}"/>
+                        <TextBlock Style="{StaticResource TextButton }"
+                                   Text="Quản lý người dùng"/>
                     </StackPanel>
                     <materialDesign:PackIcon Kind="ChevronRight"
                                              HorizontalAlignment="Right"
@@ -151,7 +189,7 @@
 
             <Button Command="{Binding TaiKhoanCM}" 
                     Style="{StaticResource NavigationButton}"
-                    Margin="0 200 0 20">
+                    Margin="0 50 0 20">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">

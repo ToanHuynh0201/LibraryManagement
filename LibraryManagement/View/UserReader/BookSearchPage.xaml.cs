@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LibraryManagement.View.Users
+namespace LibraryManagement.View.UserReader
 {
     /// <summary>
-    /// Interaction logic for UserInformationWindow.xaml
+    /// Interaction logic for BookSearchPage.xaml
     /// </summary>
-    public partial class UserInformationWindow : Window
+    public partial class BookSearchPage : Page
     {
-        public UserInformationWindow()
+        public BookSearchPage()
         {
             InitializeComponent();
         }
