@@ -15,7 +15,8 @@
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True"
-        Title="AddUserWindow" Height="450" Width="800"
+        Title="AddUserWindow"
+        Height="450" Width="800"
         x:Name="addUserWindow">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
