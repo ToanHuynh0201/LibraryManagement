@@ -8,7 +8,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
-      DataContext="{StaticResource CategoryVM}"
+      DataContext="{StaticResource ReaderTypeVM}"
       Background="Transparent"
       Height="550" 
       Width="1000"

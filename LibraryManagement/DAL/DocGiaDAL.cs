@@ -72,7 +72,7 @@ namespace LibraryManagement.DAL
                     context.NGUOIDUNGs.Add(nd);
                     context.DOCGIAs.Add(dg);
                     await context.SaveChangesAsync();
-                    return (true, "Thêm độc giả thành công");
+                    return (true, "Thêm độc giả thành công, mật khẩu mặc định là 123456");
                 }
                 catch (Exception ex)
                 {

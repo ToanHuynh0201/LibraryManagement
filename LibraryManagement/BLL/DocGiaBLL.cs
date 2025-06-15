@@ -47,7 +47,7 @@ namespace LibraryManagement.BLL
         }
         public async Task<(bool, string)> AddDocGia(DOCGIA dg)
         {
-            var docgia = await DocGiaDAL.Instance.GetDocGiaByTenDangNhap(dg.TenDangNhap);
+            var docgia = await NguoiDungDAL.Instance.GetNguoiDungByTenDN(dg.TenDangNhap);
             if (docgia != null)
             {
                 return (false, "Tên đăng nhập đã tồn tại");
@@ -96,6 +96,7 @@ namespace LibraryManagement.BLL
             {
                 return (false, "Độc giả không tồn tại");
             }
+            if (docgia.TongNo > 0) return (false, "Độc giả còn tiền nợ, không thể xoá");
             List<PHIEUMUONTRA> dspmt = await PhieuMuonTraDAL.Instance.GetPMTByMaDG(id);
             foreach (PHIEUMUONTRA pmt in dspmt)
                 if (pmt.NgayTra == null)

@@ -163,11 +163,10 @@ namespace LibraryManagement.ViewModel
                     p.Close();
                 }
             });
-            //ViewReaderCM = new RelayCommand<object>((p) => { return true; }, (p) =>
-            //{
-            //    Window w1 = new ReaderInformationWindow();
-            //    w1.ShowDialog();
-            //});
+            ViewReaderCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                
+            });
             UpdateReaderCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
                 var res = await Task.Run(async () => await DocGiaBLL.Instance.UpdateDocGia(ReaderSeleted));

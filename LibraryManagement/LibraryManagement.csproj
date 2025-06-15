@@ -286,6 +286,7 @@
     <Compile Include="ViewModel\BookManagementVM\BookVM\BookInformationViewModel.cs" />
     <Compile Include="ViewModel\BookManagementVM\BookReceivingVM\BookReceivingViewModel.cs" />
     <Compile Include="ViewModel\BookManagementVM\BookTitleVM\BookTitleInformationViewModel.cs" />
+    <Compile Include="ViewModel\ReaderTypeViewModel.cs" />
     <Compile Include="ViewModel\UserGroupViewModel.cs" />
     <Compile Include="ViewModel\BorrowReturnSlipViewModel.cs" />
     <Compile Include="ViewModel\BookManagementVM\BookTitleVM\BookTitleViewModel.cs" />
