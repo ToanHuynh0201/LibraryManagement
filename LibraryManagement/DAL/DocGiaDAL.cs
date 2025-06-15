@@ -26,35 +26,36 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DOCGIAs.ToListAsync();
+                return await context.DOCGIAs.Include(dg => dg.LOAIDOCGIA).Where(dg => dg.IsDeleted == false).ToListAsync();
             }
         }
         public async Task<DOCGIA> GetDocGiaById(int id)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DOCGIAs.FindAsync(id);
+                return await context.DOCGIAs.Include(dg => dg.LOAIDOCGIA).Where(dg => dg.IsDeleted == false).FirstOrDefaultAsync(dg => dg.id == id);
             }
         }
+
         public async Task<List<DOCGIA>> GetDocGiaByMaDG(string madg)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DOCGIAs.Where(dg => dg.MaDG.Contains(madg)).ToListAsync();
+                return await context.DOCGIAs.Include(dg => dg.LOAIDOCGIA).Where(dg => dg.MaDG.Contains(madg)).Include(dg => dg.LOAIDOCGIA).ToListAsync();
             }
         }
         public async Task<List<DOCGIA>> GetDocGiaByTenDG(string tendg)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DOCGIAs.Where(dg => dg.TenDG.Contains(tendg)).ToListAsync();
+                return await context.DOCGIAs.Include(dg => dg.LOAIDOCGIA).Where(dg => dg.IsDeleted == false).Where(dg => dg.TenDG.Contains(tendg)).Include(dg => dg.LOAIDOCGIA).ToListAsync();
             }
         }
         public async Task<DOCGIA> GetDocGiaByTenDangNhap(string tendangnhap)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DOCGIAs.FirstOrDefaultAsync(dg => dg.TenDangNhap == tendangnhap);
+                return await context.DOCGIAs.Include(dg => dg.LOAIDOCGIA).Where(dg => dg.IsDeleted == false).Include(dg => dg.LOAIDOCGIA).Where(dg => dg.IsDeleted == false).FirstOrDefaultAsync(dg => dg.TenDangNhap == tendangnhap);
             }
         }
         public async Task<(bool, string)> AddDocGia(DOCGIA dg)
@@ -69,6 +70,8 @@ namespace LibraryManagement.DAL
                     nd.TenNguoiDung = dg.TenDG;
                     nd.MaNhom = 3;
 
+                    if (dg.TongNo == null) dg.TongNo = 0;
+                    dg.IsDeleted = false;
                     context.NGUOIDUNGs.Add(nd);
                     context.DOCGIAs.Add(dg);
                     await context.SaveChangesAsync();
@@ -94,7 +97,6 @@ namespace LibraryManagement.DAL
                     docgia.Email = dg.Email;
                     docgia.NgayLapThe = dg.NgayLapThe;
                     docgia.NgayHetHan = dg.NgayHetHan;
-                    docgia.TongNo = dg.TongNo;
                     await context.SaveChangesAsync();
                     return (true, "Cập nhật độc giả thành công");
                 }
@@ -111,13 +113,13 @@ namespace LibraryManagement.DAL
                 try
                 {
                     DOCGIA docgia = await context.DOCGIAs.FindAsync(id);
-                    context.DOCGIAs.Remove(docgia);
+                    docgia.IsDeleted = true;
                     await context.SaveChangesAsync();
-                    return (true, "Xóa độc giả thành công");
+                    return (true, "Đã ẩn độc giả");
                 }
                 catch (Exception ex)
                 {
-                    return (false, "Xóa độc giả thất bại: " + ex.Message);
+                    return (false, "Ẩn độc giả thất bại: " + ex.ToString());
                 }
             }
         }

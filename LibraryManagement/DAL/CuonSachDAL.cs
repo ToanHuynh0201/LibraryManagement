@@ -31,6 +31,20 @@ namespace LibraryManagement.DAL
                 return await context.CUONSACHes.AsNoTracking().Include(cs => cs.SACH).Include(cs => cs.SACH.DAUSACH).Where(cs => cs.IsDeleted == false).ToListAsync();
             }
         }
+        public async Task<List<CUONSACH>> GetAllCuonSachChuaMuon()
+        {
+            using (var context = new LibraryManagementEntities())
+            {
+                return await context.CUONSACHes.AsNoTracking().Include(cs => cs.SACH).Include(cs => cs.SACH.DAUSACH).Where(cs => cs.IsDeleted == false && cs.TinhTrang == false).ToListAsync();
+            }
+        }
+        public async Task<List<CUONSACH>> GetAllCuonSachChuaMuonByMaCuonSach(string macuonsach)
+        {
+            using (var context = new LibraryManagementEntities())
+            {
+                return await context.CUONSACHes.AsNoTracking().Include(cs => cs.SACH).Include(cs => cs.SACH.DAUSACH).Where(cs => cs.IsDeleted == false && cs.TinhTrang == false && cs.MaCuonSach.Contains(macuonsach)).ToListAsync();
+            }
+        }
         public async Task<CUONSACH> GetCuonSachById(int id)
         {
             using (var context = new LibraryManagementEntities())
@@ -118,7 +132,7 @@ namespace LibraryManagement.DAL
                     sach.SoLuong--;
                     sach.SoLuongCon--;
                     await context.SaveChangesAsync();
-                    return (true, "Đã xoá cuốn sách.");
+                    return (true, "Đã ẩn cuốn sách.");
                 }
                 catch (Exception ex)
                 {

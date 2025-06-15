@@ -24,41 +24,87 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.PHIEUMUONTRAs.FindAsync(id);
+                return await context.PHIEUMUONTRAs.Include(pmt => pmt.CUONSACH.SACH.DAUSACH).
+                                     Include(pmt => pmt.DOCGIA).FirstOrDefaultAsync(pmt => pmt.id == id);
             }
         }
         public async Task<List<PHIEUMUONTRA>> GetAllPMT()
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.PHIEUMUONTRAs.ToListAsync();
+                return await context.PHIEUMUONTRAs.Include(pmt => pmt.CUONSACH.SACH.DAUSACH).
+                                     Include(pmt => pmt.DOCGIA).ToListAsync();
+            }
+        }
+        public async Task<List<PHIEUMUONTRA>> GetPMTByMaPhieu(string maphieu)
+        {
+            using (var context = new LibraryManagementEntities())
+            {
+                return await context.PHIEUMUONTRAs.Include(pmt => pmt.CUONSACH.SACH.DAUSACH).
+                                     Include(pmt => pmt.DOCGIA).Where(pmt => pmt.SoPhieu.Contains(maphieu)).ToListAsync();
+            }
+        }
+        public async Task<List<PHIEUMUONTRA>> GetPMTByMaDocGia(string madocgia)
+        {
+            using (var context = new LibraryManagementEntities())
+            {
+                return await context.PHIEUMUONTRAs.Include(pmt => pmt.CUONSACH.SACH.DAUSACH).
+                                     Include(pmt => pmt.DOCGIA).Where(pmt => pmt.DOCGIA.MaDG.Contains(madocgia)).ToListAsync();
+            }
+        }
+        public async Task<List<PHIEUMUONTRA>> GetPMTByMaCuonSach(string macuonsach)
+        {
+            using (var context = new LibraryManagementEntities())
+            {
+                return await context.PHIEUMUONTRAs.Include(pmt => pmt.CUONSACH.SACH.DAUSACH).
+                                     Include(pmt => pmt.DOCGIA).Where(pmt => pmt.CUONSACH.MaCuonSach.Contains(macuonsach)).ToListAsync();
+            }
+        }
+        public async Task<List<PHIEUMUONTRA>> GetPMTByTenSach(string tensach)
+        {
+            using (var context = new LibraryManagementEntities())
+            {
+                return await context.PHIEUMUONTRAs.Include(pmt => pmt.CUONSACH.SACH.DAUSACH).
+                                     Include(pmt => pmt.DOCGIA).Where(pmt => pmt.CUONSACH.SACH.DAUSACH.TenDauSach.Contains(tensach)).ToListAsync();
             }
         }
         public async Task<List<PHIEUMUONTRA>> GetPMTByMaDG(int madg)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.PHIEUMUONTRAs.Where(pmt => pmt.MaDG == madg).ToListAsync();
+                return await context.PHIEUMUONTRAs.Where(pmt => pmt.MaDG == madg).Include(pmt => pmt.CUONSACH.SACH.DAUSACH).
+                                     Include(pmt => pmt.DOCGIA).ToListAsync();
             }
         }
         public async Task<List<PHIEUMUONTRA>> GetPMTByThoiGianMuon(int? ngay, int? thang, int? nam)
         {
             using (var context = new LibraryManagementEntities())
             {
-                List<PHIEUMUONTRA> dspmt = await GetAllPMT();
-                if (ngay != null) dspmt = dspmt.Where(pmt => pmt.NgayMuon.Day == ngay).ToList();
-                if (thang != null) dspmt = dspmt.Where(pmt => pmt.NgayMuon.Month == thang).ToList();
-                if (nam != null) dspmt = dspmt.Where(pmt => pmt.NgayMuon.Year == nam).ToList();
-                return dspmt;
+                var query = context.PHIEUMUONTRAs
+                                    .Include(pmt => pmt.CUONSACH.SACH.DAUSACH)
+                                    .Include(pmt => pmt.DOCGIA)
+                                    .AsQueryable();
+
+                if (ngay != null)
+                    query = query.Where(pmt => pmt.NgayMuon.Day == ngay.Value);
+
+                if (thang != null)
+                    query = query.Where(pmt => pmt.NgayMuon.Month == thang.Value);
+
+                if (nam != null)
+                    query = query.Where(pmt => pmt.NgayMuon.Year == nam.Value);
+
+                return await query.ToListAsync();
             }
         }
+
         public async Task<List<PHIEUMUONTRA>> GetPhieuMuonTre()
         {
             using (var context = new LibraryManagementEntities())
             {
                 DateTime today = DateTime.Now;
                 return await context.PHIEUMUONTRAs.Where(pmt => pmt.NgayTra == null
-                && pmt.HanTra < today).ToListAsync();
+                && pmt.HanTra < today).Include(pmt => pmt.CUONSACH.SACH.DAUSACH).Include(pmt => pmt.DOCGIA).ToListAsync();
             }
         }
         public async Task<(bool, string)> AddPhieuMuonTra(PHIEUMUONTRA phieumt)

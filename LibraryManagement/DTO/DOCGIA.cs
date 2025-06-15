@@ -32,6 +32,7 @@ namespace LibraryManagement.DTO
         public System.DateTime NgayHetHan { get; set; }
         public Nullable<int> TongNo { get; set; }
         public string TenDangNhap { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual LOAIDOCGIA LOAIDOCGIA { get; set; }
         public virtual NGUOIDUNG NGUOIDUNG { get; set; }

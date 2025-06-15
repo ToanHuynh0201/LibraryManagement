@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:LibraryManagement.View"
+        xmlns:local="clr-namespace:LibraryManagement.View" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        DataContext="{StaticResource UpdateReaderVM}"
         mc:Ignorable="d"
         Title="EditReaderInformationWindow" WindowStyle="None"
         ResizeMode="NoResize"
@@ -12,6 +13,12 @@
         Height="400 " Width="821"
         WindowStartupLocation="CenterScreen"
         Name="editReaderWindow">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadOtherDataCM}"/>
+            <i:InvokeCommandAction Command="{Binding GetSelectedDataCM}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid >
             <Grid.RowDefinitions>
@@ -50,7 +57,7 @@
                     Background="Red" 
                     Foreground="#FFE7DDDD"
                     Height="40"
-                    Command="{Binding UpdateReaderCM}"
+                    Command="{Binding CloseWindowCM}"
                     CommandParameter="{Binding ElementName=editReaderWindow}"
                     Margin="4,-1,0,0" VerticalAlignment="Top"/>
             </Grid>
@@ -77,10 +84,18 @@
                         Margin="10 10">
                         <TextBox
                             VerticalAlignment="Center"
+                            materialDesign:HintAssist.Hint="Mã độc giả"
+                            FontSize="18" Foreground="Black"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding docgia.MaDG, Mode=TwoWay}"
+                            IsEnabled="False"
+                     />
+                        <TextBox
+                            VerticalAlignment="Center"
                             materialDesign:HintAssist.Hint="Họ và tên"
                             FontSize="18" Foreground="Black"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            Text="{Binding ReaderSeleted.TenDG, Mode=TwoWay}"
+                            Text="{Binding docgia.TenDG, Mode=TwoWay}" Margin="396,0,-396,0"
                      />
                     </Grid>
 
@@ -88,11 +103,13 @@
                     <Grid
                         Grid.Row="1" Margin="10 19">
                         <DatePicker 
+                            Language="vi-VN"
                             materialDesign:HintAssist.Hint="Ngày sinh"
                             materialDesign:TextFieldAssist.HasClearButton="True"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                             FontSize="18" 
-                            Text="{Binding ReaderSeleted.NgaySinhDG, Mode=TwoWay}"
+                            SelectedDate="{Binding docgia.NgaySinhDG, Mode=TwoWay}"
+                            SelectedDateFormat="Short"
                     />
                     </Grid>
 
@@ -105,11 +122,17 @@
                             FontSize="18"
                             Foreground="Black"
                             IsEditable="True"
-                            ItemsSource="{Binding LoaiDocGiaList}"
-                            DisplayMemberPath=""
-                            SelectedValuePath=""
-                            SelectedValue=""
-                            Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                            IsTextSearchEnabled="False"
+                            ItemsSource="{Binding ListReaderType}"
+                            SelectedItem="{Binding ReaderTypeSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding ReaderTypeText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayName}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </Grid>
 
 
@@ -127,18 +150,14 @@
                     <Grid
                         Grid.Row="0" Margin="10 19">
                         <DatePicker 
-                            materialDesign:HintAssist.Hint="Ngày tạo thẻ"
+                            Language="vi-VN"
+                            materialDesign:HintAssist.Hint="Ngày hết hạn"
                             materialDesign:TextFieldAssist.HasClearButton="True"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                             FontSize="18" 
-                            Text="{Binding ReaderSeleted.NgayLapThe, Mode=TwoWay}"
+                            Text="{Binding docgia.NgayHetHan, Mode=TwoWay}" Margin="-6,229,6,-229"
                     />
                     </Grid>
-
-                    <!--CMND/CCCD-->
-                    <Grid
-                        Grid.Row="0"
-                        Margin="10 10"/>
 
                     <!--Email-->
                     <Grid
@@ -146,7 +165,7 @@
                         <TextBox
                             VerticalAlignment="Center"
                             materialDesign:HintAssist.Hint="Email"
-                            Text="{Binding ReaderSeleted.Email, Mode=TwoWay}"
+                            Text="{Binding docgia.Email, Mode=TwoWay}"
                             FontSize="18" Foreground="Black"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                     </Grid>
@@ -157,7 +176,7 @@
                         <TextBox
                             VerticalAlignment="Center"
                             materialDesign:HintAssist.Hint="Địa chỉ"
-                            Text="{Binding ReaderSeleted.DiaChiDG, Mode=TwoWay}"
+                            Text="{Binding docgia.DiaChiDG, Mode=TwoWay}"
                             FontSize="18" Foreground="Black"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                     </Grid>
@@ -185,5 +204,15 @@
                 </StackPanel>
             </Grid>
         </Grid>
+        <DatePicker 
+            Language="vi-VN"
+            materialDesign:HintAssist.Hint="Ngày tạo thẻ"
+            materialDesign:TextFieldAssist.HasClearButton="True"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+            FontSize="18" 
+            SelectedDate="{Binding docgia.NgayLapThe, Mode=TwoWay}" SelectedDateFormat="Short"
+            Margin="20,289,411,70"
+            IsEnabled="False"
+                    />
     </Grid>
 </Window>

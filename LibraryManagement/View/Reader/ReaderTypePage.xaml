@@ -33,7 +33,7 @@
                      Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged">
-                            <i:InvokeCommandAction Command="{Binding SearchCategoryCM}"/>
+                            <i:InvokeCommandAction Command="{Binding SearchReaderTypeCM}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBox>
@@ -79,14 +79,14 @@
                                          VerticalAlignment="Center"
                                          HorizontalAlignment="Left"
                                          Margin="-15 0 0 0"/>
-                    <TextBlock Text="Thêm loạt độc giả"
+                    <TextBlock Text="Thêm loại độc giả"
                            Margin="10 0 0 0"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"/>
                 </StackPanel>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction Command="{Binding OpenAddCategoryCM}"/>
+                        <i:InvokeCommandAction Command="{Binding OpenAddReaderTypeCM}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
@@ -100,14 +100,14 @@
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       RowStyle="{DynamicResource DataGridRowStyle1}"
                       x:Name="categoryGrid" 
-                      ItemsSource="{Binding ListCategorys}"
-                      SelectedItem="{Binding CategorySelected}"
+                      ItemsSource="{Binding ListReaderType}"
+                      SelectedItem="{Binding ReaderTypeSelected}"
                       AutoGenerateColumns="False" IsReadOnly="True"
                       Grid.Column="0"
                       Width="500">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Loaded">
-                            <i:InvokeCommandAction Command="{Binding LoadDataCategoryCM}"/>
+                            <i:InvokeCommandAction Command="{Binding LoadDataReaderTypeCM}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <DataGrid.Columns>
@@ -128,23 +128,11 @@
                         <DataGridTextColumn Header="ID" 
                                         IsReadOnly="True" 
                                         Width="Auto" 
-                                        Binding="{Binding MaLoaiDocGia}"/>
+                                        Binding="{Binding MaLoaiDG}"/>
                         <DataGridTextColumn Header="Loại độc giả" 
                                         IsReadOnly="True" 
                                         Width="250" 
-                                        Binding= "{Binding LoaiDocGia}"/>
-                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource gridRemoveButton}" 
-                                            Margin="5 0 0 0" 
-                                            Command="{Binding ElementName=categoryGrid, 
-                                                      Path=DataContext.DeleteCategoryCM}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                                        Binding= "{Binding TenLoaiDG}"/>
                     </DataGrid.Columns>
                 </DataGrid>
 
@@ -174,11 +162,11 @@
                                      Width="250"
                                      Margin="60 10 10 10"
                                      IsEnabled="False"
-                                     Text="{Binding CategoryEdit.MaTheLoai, Mode=TwoWay}"/>
+                                     Text="{Binding ReaderTypeEdit.MaLoaiDG, Mode=TwoWay}"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"
                                     Margin="65 30 0 0">
-                                <TextBlock Text="Loại: "
+                                <TextBlock Text="Tên loại: "
                                        FontSize="20"
                                        FontWeight="DemiBold"
                                        VerticalAlignment="Center"/>
@@ -190,7 +178,7 @@
                                      IsEnabled="False"
                                      x:Name="categoryEditName"
                                      VerticalAlignment="Center"
-                                     Text="{Binding CategoryEdit.TenTheLoai, Mode=TwoWay}"/>
+                                     Text="{Binding ReaderTypeEdit.TenLoaiDG, Mode=TwoWay}"/>
                             </StackPanel>
 
                             <StackPanel Margin="0 150 0 0"
@@ -210,7 +198,7 @@
                                     Background="#473765"
                                     Foreground="#FFEDE7F8"
                                     BorderBrush="#FFEDE7F8"
-                                    Command="{Binding OpenUpdateCategoryCM}"
+                                    Command="{Binding OpenUpdateReaderTypeCM}"
                                     CommandParameter="{Binding ElementName=categoryEditName}"/>
                                 <Button Content="Lưu"
                                     materialDesign:ButtonAssist.CornerRadius="10"
@@ -226,7 +214,7 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Margin="0 0 0 0"
-                                    Command="{Binding UpdateCategoryCM}"/>
+                                    Command="{Binding UpdateReaderTypeCM}"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>

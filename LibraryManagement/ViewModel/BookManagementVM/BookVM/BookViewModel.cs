@@ -1,4 +1,5 @@
 ﻿using LibraryManagement.BLL;
+using LibraryManagement.DAL;
 using LibraryManagement.DTO;
 using LibraryManagement.View;
 using LibraryManagement.View.Book;
@@ -156,6 +157,17 @@ namespace LibraryManagement.ViewModel
                     var vm1 = new BookInformationViewModel(BookSeleted);
                     var w1 = new BookInformtationWindow { DataContext = vm1 };
                     w1.ShowDialog();
+                }
+            });
+            DeleteBookCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                var result = MessageBox.Show("Bạn có chắc muốn ẩn sách này không?", "Xác nhận xóa",
+                                          MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    var res = await Task.Run(async () => await SachBLL.Instance.DeleteSach(BookSeleted.id));
+                    LoadDataBookCM.Execute(null);
+                    MessageBox.Show(res.Item2);
                 }
             });
             CloseWindowCM = new RelayCommand<Window>((p) => { return true; }, (p) =>

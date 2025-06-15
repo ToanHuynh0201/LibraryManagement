@@ -42,6 +42,20 @@ namespace LibraryManagement.ViewModel
                 OnPropertyChanged();
             }
         }
+        private DateTime? _SelectedDate;
+        public DateTime? SelectedDate
+        {
+            get
+            {
+                return _SelectedDate;
+            }
+            set
+            {
+                _SelectedDate = value;
+                OnPropertyChanged();
+                _ = ApplyFilters();
+            }
+        }
         private PHIEUNHAPSACH _phieunhap { get; set; }
         public PHIEUNHAPSACH phieunhap
         {
@@ -106,47 +120,71 @@ namespace LibraryManagement.ViewModel
                     return;
                 }
             });
+
             SearchReceivingFormCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
                 try
                 {
-                if (string.IsNullOrWhiteSpace(SearchText))
-                {
-                        ReceivingForm.Clear();
-                        ReceivingForm = AllReceivingForms;
+                    await ApplyFilters();
                 }
-                else
-                {
-                    if (SearchProperties == "Số phiếu nhập")
-                    {
-                        var res = await Task.Run(async () => await PhieuNhapSachBLL.Instance.GetPhieuNhapSachBySoPNS(SearchText));
-                        ReceivingForm = new ObservableCollection<PHIEUNHAPSACH>(res);
-                    }
-                }
-            }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Lỗi khi tìm kiếm: " + ex.Message);
                 }
             });
+
             ResetDataCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 SearchText = "";
+                SelectedDate = null;
                 ReceivingForm = new ObservableCollection<PHIEUNHAPSACH>(AllReceivingForms);
             });
+
             ViewReceivingFormCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 if (ReceivingFormSeleted != null)
                 {
                     var vm1 = new BookReceivingInformationViewModel(ReceivingFormSeleted);
-                    Window w1 = new ReceivingFormInformtationWindow() { DataContext = vm1};
+                    Window w1 = new ReceivingFormInformtationWindow() { DataContext = vm1 };
                     w1.ShowDialog();
                 }
             });
+
             CloseWindowCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 p.Close();
             });
+        }
+        private async Task ApplyFilters()
+        {
+            ObservableCollection<PHIEUNHAPSACH> filteredData = new ObservableCollection<PHIEUNHAPSACH>();
+
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                filteredData = new ObservableCollection<PHIEUNHAPSACH>(AllReceivingForms);
+            }
+            else
+            {
+                List<PHIEUNHAPSACH> res = new List<PHIEUNHAPSACH>();
+
+                if (SearchProperties == "Số phiếu nhập")
+                {
+                    res = await Task.Run(async () => await PhieuNhapSachBLL.Instance.GetPhieuNhapSachBySoPNS(SearchText));
+                }
+
+                filteredData = new ObservableCollection<PHIEUNHAPSACH>(res);
+            }
+
+            if (SelectedDate.HasValue)
+            {
+                var res = filteredData.Where(pns =>
+                    pns.NgayNhap.Date == SelectedDate.Value.Date
+                ).ToList();
+
+                filteredData = new ObservableCollection<PHIEUNHAPSACH>(res);
+            }
+
+            ReceivingForm = filteredData;
         }
     }
 }

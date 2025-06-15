@@ -118,7 +118,7 @@ namespace LibraryManagement.BLL
             {
                 if (cuonsach.TinhTrang == true && cuonsach.IsDeleted == false)
                 {
-                    return (false, "Không thể xoá sách vì đang có cuốn sách được mượn.");
+                    return (false, "Không thể ẩn sách vì đang có cuốn sách được mượn.");
                 }
             }
             return await SachDAL.Instance.DeleteSach(id);

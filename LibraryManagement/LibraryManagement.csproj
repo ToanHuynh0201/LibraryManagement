@@ -168,6 +168,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BLL\PhieuThuTienPhatBLL.cs" />
     <Compile Include="DTO\BCLUOTMUONTHEOTHELOAI.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
@@ -194,6 +195,7 @@
     <Compile Include="DTO\DOCGIA.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\DOCGIAPartial.cs" />
     <Compile Include="DTO\LibraryManagementModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -212,6 +214,7 @@
     <Compile Include="DTO\LOAIDOCGIA.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\LOAIDOCGIAParital.cs" />
     <Compile Include="DTO\NGUOIDUNG.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
@@ -221,6 +224,7 @@
     <Compile Include="DTO\PHIEUMUONTRA.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\PHIEUMUONTRAPartial.cs" />
     <Compile Include="DTO\PHIEUNHAPSACH.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
@@ -286,9 +290,16 @@
     <Compile Include="ViewModel\BookManagementVM\BookVM\BookInformationViewModel.cs" />
     <Compile Include="ViewModel\BookManagementVM\BookReceivingVM\BookReceivingViewModel.cs" />
     <Compile Include="ViewModel\BookManagementVM\BookTitleVM\BookTitleInformationViewModel.cs" />
-    <Compile Include="ViewModel\ReaderTypeViewModel.cs" />
+    <Compile Include="ViewModel\BorrowVM\AddNewBorrowViewModel.cs" />
+    <Compile Include="ViewModel\PenaltyVM\AddPenaltyReceiptViewModel.cs" />
+    <Compile Include="ViewModel\PenaltyVM\PenaltyReceiptManagementVM.cs" />
+    <Compile Include="ViewModel\ReaderManagementViewModel.cs" />
+    <Compile Include="ViewModel\ReaderVM\AddReaderVM.cs" />
+    <Compile Include="ViewModel\ReaderVM\ReaderInformationVM.cs" />
+    <Compile Include="ViewModel\ReaderVM\ReaderTypeViewModel.cs" />
+    <Compile Include="ViewModel\ReaderVM\UpdateReaderViewModel.cs" />
     <Compile Include="ViewModel\UserGroupViewModel.cs" />
-    <Compile Include="ViewModel\BorrowReturnSlipViewModel.cs" />
+    <Compile Include="ViewModel\BorrowVM\BorrowReturnSlipViewModel.cs" />
     <Compile Include="ViewModel\BookManagementVM\BookTitleVM\BookTitleViewModel.cs" />
     <Compile Include="ViewModel\BookManagementVM\BookCopyVM\BookCopyViewModel.cs" />
     <Compile Include="ViewModel\BookManagementVM\BookVM\BookViewModel.cs" />
@@ -296,7 +307,7 @@
     <Compile Include="ViewModel\InternalViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ReaderViewModel.cs" />
+    <Compile Include="ViewModel\ReaderVM\ReaderViewModel.cs" />
     <Compile Include="ViewModel\RuleViewModel.cs" />
     <Compile Include="ViewModel\StatisticViewModel.cs" />
     <Compile Include="View\Author\AuthorManagement.xaml.cs">

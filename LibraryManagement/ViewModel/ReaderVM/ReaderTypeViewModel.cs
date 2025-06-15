@@ -113,7 +113,7 @@ namespace LibraryManagement.ViewModel
 
         public ReaderTypeViewModel()
         {
-            SearchList = new ObservableCollection<string> { "Tên tác giả" };
+            SearchList = new ObservableCollection<string> { "Tên loại độc giả" };
             SearchProperties = SearchList.FirstOrDefault();
 
             LoadDataReaderTypeCM = new RelayCommand<LOAIDOCGIA>((p) => { return true; }, async (p) =>

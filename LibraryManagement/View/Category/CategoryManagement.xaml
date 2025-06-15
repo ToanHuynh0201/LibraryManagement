@@ -134,18 +134,6 @@
                                             IsReadOnly="True" 
                                             Width="auto" 
                                             Binding= "{Binding TenTheLoai}"/>
-                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource gridRemoveButton}" 
-                                                Margin="5 0 0 0" 
-                                                Command="{Binding ElementName=categoryGrid, 
-                                                          Path=DataContext.DeleteCategoryCM}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
 

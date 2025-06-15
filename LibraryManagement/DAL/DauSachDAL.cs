@@ -26,21 +26,21 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).ToListAsync();
+                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes).ToListAsync();
             }
         }
         public async Task<DAUSACH> GetDauSachById(int id)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).FirstOrDefaultAsync(ds => ds.id == id);
+                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false).Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes).FirstOrDefaultAsync(ds => ds.id == id);
             }
         }
         public async Task<List<DAUSACH>> GetDauSachByMa(string madausach)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs)
+                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes)
                 .Where(ds => ds.MaDauSach.Contains(madausach)).ToListAsync();
             }
         }
@@ -48,7 +48,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs)
+                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes)
                 .Where(ds => ds.TenDauSach.Contains(tendausach)).ToListAsync();
             }
         }
@@ -56,7 +56,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs)
+                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes)
                 .Where(ds => ds.MaTheLoai == matheloai).ToListAsync();
             }
         }
@@ -67,7 +67,7 @@ namespace LibraryManagement.DAL
                 var dsds = new List<DAUSACH>();
                 foreach(TACGIA TG in dstg)
                 {
-                    var DS = await context.DAUSACHes.AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs)
+                    var DS = await context.DAUSACHes.Where(ds => ds.IsDeleted == false).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes)
                     .Where(ds => ds.TACGIAs.Any(tg => tg.id == TG.id)).ToListAsync();
                     dsds.AddRange(DS);
                 }
@@ -104,7 +104,7 @@ namespace LibraryManagement.DAL
                 try
                 {
 
-                    var dausach = await context.DAUSACHes.Include(d => d.TACGIAs).FirstOrDefaultAsync(d => d.id == ds.id);
+                    var dausach = await context.DAUSACHes.Where(ds1 => ds1.IsDeleted == false).Include(d => d.TACGIAs).FirstOrDefaultAsync(d => d.id == ds.id);
 
                     if (dausach == null)
                         return (false, "Không tìm thấy đầu sách");
@@ -141,10 +141,10 @@ namespace LibraryManagement.DAL
             using (var context = new LibraryManagementEntities())
                 try
                 {
-                    var dausach = await context.DAUSACHes.FindAsync(id);
-                    context.DAUSACHes.Remove(dausach);
+                    var dausach = await context.DAUSACHes.Where(ds => ds.IsDeleted == false).FirstOrDefaultAsync(ds => ds.id == id);
+                    dausach.IsDeleted = true;
                     await context.SaveChangesAsync();
-                    return (true, "Xoá đầu sách thành công");
+                    return (true, "Ẩn đầu sách thành công");
                 }
                 catch (Exception ex)
                 {

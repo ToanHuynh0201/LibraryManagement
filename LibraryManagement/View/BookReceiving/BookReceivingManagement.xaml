@@ -92,10 +92,17 @@
                             materialDesign:DatePickerAssist.OutlinedBorderActiveThickness="3"
                             materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="1"
                             Style="{StaticResource MaterialDesignOutlinedDatePicker}"
-                            Margin="350 0 0 0"
+                            Margin="490 0 0 0"
                             Width="200"
                             Height="40"
-                            Padding="10 0 10 0"/>
+                            Padding="10 0 10 0"
+                            SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedDateChanged">
+                            <i:InvokeCommandAction Command="{Binding SearchReceivingFormCM}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DatePicker>
             </Grid>
 
             <DataGrid  Style="{DynamicResource DataGridStyle1}"

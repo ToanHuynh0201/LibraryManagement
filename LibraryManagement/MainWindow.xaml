@@ -108,7 +108,7 @@
                 </Grid>
             </Button>
 
-            <Button Command="{Binding }" 
+            <Button Command="{Binding QuanLyMuonTraCM}" 
                     Style="{StaticResource NavigationButton}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
@@ -127,7 +127,7 @@
                                              Style="{StaticResource IconExpandedButton}"/>
                 </Grid>
             </Button>
-            <Button Command="{Binding QuanLyNoiBoCM}" 
+            <Button Command="{Binding QuanLyPhatCM}" 
                     Style="{StaticResource NavigationButton}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 

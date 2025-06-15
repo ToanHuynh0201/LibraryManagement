@@ -23,7 +23,8 @@ CREATE TABLE DOCGIA
     NgayLapThe datetime NOT NULL,
     NgayHetHan datetime NOT NULL,
     TongNo int DEFAULT 0,
-    TenDangNhap varchar(64) NOT NULL
+    TenDangNhap varchar(64) NOT NULL,
+	IsDeleted bit DEFAULT 0
 )
 
 CREATE TABLE LOAIDOCGIA
@@ -51,7 +52,8 @@ CREATE TABLE DAUSACH
     id int IDENTITY(1,1) PRIMARY KEY,
     MaDauSach as cast('DS' + format(id,'00000') as char(7)),
     TenDauSach nvarchar(max) NOT NULL,
-    MaTheLoai int NOT NULL
+    MaTheLoai int NOT NULL,
+	IsDeleted bit DEFAULT 0
 )
 
 CREATE TABLE CUONSACH

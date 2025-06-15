@@ -7,8 +7,8 @@
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
-      d:DataContext="{d:DesignInstance Type=viewmodel:BookManagementViewModel}"
-      DataContext="{StaticResource BookManagementVM}"
+      d:DataContext="{d:DesignInstance Type=viewmodel:ReaderManagementVM}"
+      DataContext="{StaticResource ReaderManagementVM}"
       mc:Ignorable="d" 
       d:DesignHeight="740" 
       d:DesignWidth="840"
@@ -54,7 +54,7 @@
                             Margin="0 0 0 0">
                     <Button Style="{StaticResource barButton}"
                             Content="Độc giả"
-                            Command="{Binding QuanLyDauSachCM}"
+                            Command="{Binding QuanLyDocGiaCM}"
                             FontWeight="Bold"
                             Foreground="MediumPurple"
                             FontSize="24"
@@ -63,7 +63,7 @@
                             Height="50" 
                             Width="200"
                             Margin="0 0 0 0"/>
-                    <Button Style="{StaticResource barButton}" Command="{Binding QuanLySachCM}"
+                    <Button Style="{StaticResource barButton}" Command="{Binding QuanLyLoaiDocGiaCM}"
                             Content="Loại độc giả"
                             FontWeight="Bold"
                             Foreground="#FF2ABF2B"

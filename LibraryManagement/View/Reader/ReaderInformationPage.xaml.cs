@@ -18,7 +18,7 @@ namespace LibraryManagement.View.Reader
     /// <summary>
     /// Interaction logic for ReaderInformationPage.xaml
     /// </summary>
-    public partial class ReaderInformationPage : Page
+    public partial class ReaderInformationPage : Window
     {
         public ReaderInformationPage()
         {

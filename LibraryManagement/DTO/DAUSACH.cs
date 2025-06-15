@@ -25,6 +25,7 @@ namespace LibraryManagement.DTO
         public string MaDauSach { get; set; }
         public string TenDauSach { get; set; }
         public int MaTheLoai { get; set; }
+        public bool IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SACH> SACHes { get; set; }

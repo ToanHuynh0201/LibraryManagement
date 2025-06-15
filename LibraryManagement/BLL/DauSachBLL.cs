@@ -84,10 +84,6 @@ namespace LibraryManagement.BLL
             {
                 return (false, "Đầu sách không có tên");
             }
-            if(ds.TACGIAs.Count() == 0)
-            {
-                return (false, "Đầu sách không có tác giả");
-            }
             return (true, "");
         }
     }

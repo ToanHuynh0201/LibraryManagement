@@ -27,9 +27,17 @@ namespace LibraryManagement.BLL
         {
             return await CuonSachDAL.Instance.GetAllCuonSach();
         }
+        public async Task<List<CUONSACH>> GetAllCuonSachChuaMuon()
+        {
+            return await CuonSachDAL.Instance.GetAllCuonSachChuaMuon();
+        }
         public async Task<CUONSACH> GetCuonSachById(int id)
         {
             return await CuonSachDAL.Instance.GetCuonSachById(id);
+        }
+        public async Task<List<CUONSACH>> GetCuonSachChuaDuocMuonByMaCuonSach(string macuonsach)
+        {
+            return await CuonSachDAL.Instance.GetAllCuonSachChuaMuonByMaCuonSach(macuonsach);
         }
         public async Task<List<CUONSACH>> GetCuonSachByMaSach(int MaSach)
         {
@@ -74,7 +82,7 @@ namespace LibraryManagement.BLL
             }
             if (cuonsach.TinhTrang == true)
             {
-                return (false, "Cuốn sách đang được mượn, không thể xoá.");
+                return (false, "Cuốn sách đang được mượn, không thể ẩn.");
             }
             return await CuonSachDAL.Instance.DeleteCuonSach(id);
         }

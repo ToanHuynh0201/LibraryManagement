@@ -6,7 +6,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:LibraryManagement.View" xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
-        DataContext="{StaticResource ReaderVM}"
+        DataContext="{StaticResource AddReaderVM}"
         mc:Ignorable="d"
         Title="AddReaderWindow" WindowStyle="None"
         ResizeMode="NoResize"
@@ -14,6 +14,11 @@
         Height="400 " Width="821"
         WindowStartupLocation="CenterScreen"
         Name="addReaderWindow">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadOtherDataCM}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid >
             <Grid.RowDefinitions>
@@ -106,11 +111,17 @@
                             FontSize="18"
                             Foreground="Black"
                             IsEditable="True"
-                            ItemsSource="{Binding LoaiDocGiaList}"
-                            DisplayMemberPath=""
-                            SelectedValuePath=""
-                            SelectedValue=""
-                            Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                            IsTextSearchEnabled="False"
+                            ItemsSource="{Binding ListReaderType}"
+                            SelectedItem="{Binding ReaderTypeSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding ReaderTypeText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayName}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </Grid>
 
                     <!--Ngày tạo thẻ-->

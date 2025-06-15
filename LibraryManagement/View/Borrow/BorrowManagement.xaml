@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryManagement.View.Borrow"
+      DataContext="{StaticResource BorrowVM}"
       mc:Ignorable="d" 
       Background="Transparent"
       d:DesignHeight="740" 
@@ -11,6 +12,11 @@
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       Title="BorrowManagement">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadDataBorrowSlipCM}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Border CornerRadius="10">
         <Border.Background>
             <SolidColorBrush>White</SolidColorBrush>
@@ -30,10 +36,16 @@
                 <TextBox
                     VerticalAlignment="Center"
                     materialDesign:HintAssist.Hint="Tìm kiếm phiếu mượn"
-                    Text="" 
+                    Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     Width="200"
                     FontSize="18" Foreground="Black"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding SearchBorrowSlipCM}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
                 <materialDesign:PackIcon 
                     Kind="Magnify"
                     Width="20"
@@ -41,35 +53,6 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
                     Margin="0 10 0 0"/>
-
-                <Button
-                    Margin="30 5 0 0"
-                    Width="120"
-                    Height="40"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    Background="#473765"
-                    BorderBrush="#FFEDE7F8"
-                    materialDesign:ButtonAssist.CornerRadius="10">
-                    <StackPanel 
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch">
-                        <materialDesign:PackIcon Kind="Book"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Left"
-                            Margin="-15 2 0 0"/>
-                        <TextBlock Text="Trả sách"
-                            Margin="10 0 0 0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding}"/>
-                            <!-- ADD COMMAND RIGHT HERE -->
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
 
                 <Button
                     Margin="30 5 0 0"
@@ -95,7 +78,7 @@
                     </StackPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding}"/>
+                            <i:InvokeCommandAction Command="{Binding OpenAddBorrowSlipCM}"/>
                             <!-- ADD COMMAND RIGHT HERE -->
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
@@ -141,31 +124,29 @@
                     materialDesign:HintAssist.Hint="Tình trạng mượn"
                     IsEditable="True"
                     FontSize="18"
-                    ItemsSource="{Binding LongIntegerList}">        
-                    <ComboBox.Text>
-                        <Binding
-                        Mode="TwoWay"
-                        Path="SelectedTextTwo"
-                        UpdateSourceTrigger="PropertyChanged">
-                        </Binding>
-                    </ComboBox.Text>
+                    ItemsSource="{Binding StatusList}"
+                    SelectedItem="{Binding StatusProperties, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding FilterStatusCM}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ComboBox>
 
                 <ComboBox
                     Margin="30 0 0 0 "
                     MinWidth="180"
                     Height="40"
-                    materialDesign:HintAssist.Hint="Thời gian đến hạn"
+                    materialDesign:HintAssist.Hint="Tìm theo..."
                     IsEditable="True"
                     FontSize="18"
-                    ItemsSource="{Binding LongIntegerList}">
-                    <ComboBox.Text>
-                        <Binding
-                        Mode="TwoWay"
-                        Path="SelectedTextTwo"
-                        UpdateSourceTrigger="PropertyChanged">  
-                        </Binding>
-                    </ComboBox.Text>
+                    ItemsSource="{Binding SearchList}" 
+                    SelectedItem="{Binding SearchProperties, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ResetDataCM}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </ComboBox>
             </StackPanel>
 
@@ -177,7 +158,8 @@
                     ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                     RowStyle="{DynamicResource DataGridRowStyle1}"
                     x:Name="customerGrid" 
-                    ItemsSource="{Binding}" 
+                    ItemsSource="{Binding ListBorrowSlips}"
+                    SelectedItem="{Binding BorrowSlipSelected}"
                     AutoGenerateColumns="False" 
                     IsReadOnly="True"
                     Grid.Row="1">
@@ -201,43 +183,48 @@
                         <DataGridTextColumn Header="Số phiếu" 
                             IsReadOnly="True" 
                             Width="Auto" 
-                            Binding="{Binding}"/>
+                            Binding="{Binding SoPhieu}"/>
                         <!-- BINDING DATA RIGHT HERE -->
 
                         <DataGridTextColumn Header="Độc giả" 
+                            Binding="{Binding DOCGIA.MaDG}"
                             IsReadOnly="True" 
                             CanUserResize="False"
                             Width="Auto"/>
                         <!-- BINDING DATA RIGHT HERE -->
 
+                        <DataGridTextColumn Header="Cuốn sách" 
+                            IsReadOnly="True" 
+                            Width="Auto" 
+                            Binding="{Binding CUONSACH.MaCuonSach}"/>
                         <DataGridTextColumn Header="Tên sách" 
                             IsReadOnly="True" 
                             Width="Auto" 
-                            Binding="{Binding}"/>
+                            Binding="{Binding CUONSACH.SACH.DAUSACH.TenDauSach}"/>
                         <!-- BINDING DATA RIGHT HERE -->
 
                         <DataGridTextColumn Header="Ngày mượn" 
                             IsReadOnly="True" 
                             Width="Auto" 
-                            Binding="{Binding}"/>
+                            Binding="{Binding NgayMuon, StringFormat=dd/MM/yyyy}"/>
                         <!-- BINDING DATA RIGHT HERE -->
 
                         <DataGridTextColumn Header="Hạn trả" 
                             IsReadOnly="True" 
                             Width="Auto" 
-                            Binding="{Binding}"/>
+                            Binding="{Binding HanTra, StringFormat=dd/MM/yyyy}"/>
                         <!-- BINDING DATA RIGHT HERE -->
                         
                         <DataGridTextColumn Header="Ngày trả" 
                             IsReadOnly="True" 
                             Width="Auto" 
-                            Binding="{Binding}"/>
+                            Binding="{Binding NgayTra, StringFormat=dd/MM/yyyy}"/>
                         <!-- BINDING DATA RIGHT HERE -->
 
                         <DataGridTextColumn Header="Số tiền phạt" 
                             IsReadOnly="True" 
                             Width="Auto" 
-                            Binding="{Binding}"/>       
+                            Binding="{Binding TienPhat, StringFormat=N0}"/>       
                         <!-- BINDING DATA RIGHT HERE -->
 
                         <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
@@ -245,10 +232,7 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button Style="{StaticResource gridEditButton}"
-                                            Command="{Binding ElementName=customerGrid, Path=DataContext.UpdateBookCM}"/>
-                                        <Button Style="{StaticResource gridRemoveButton}" 
-                                            Margin="5 0 0 0" 
-                                            Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteBookCM}"/>
+                                            Command="{Binding ElementName=customerGrid, Path=DataContext.UpdateBorrowSlipCM}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

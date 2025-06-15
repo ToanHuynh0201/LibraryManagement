@@ -16,5 +16,10 @@ namespace LibraryManagement.DTO
                 return ("Đã được mượn");
             }
         }
+        public string DisplayName => $"{MaCuonSach} ({SACH.DAUSACH.TenDauSach})";
+        public override string ToString()
+        {
+            return DisplayName.ToString();
+        }
     }
 }

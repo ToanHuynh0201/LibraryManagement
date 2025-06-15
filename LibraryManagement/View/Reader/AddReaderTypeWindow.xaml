@@ -9,7 +9,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
         Style="{StaticResource MaterialDesignWindow}"
-        DataContext="{StaticResource CategoryVM}"
+        DataContext="{StaticResource ReaderTypeVM}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -66,7 +66,7 @@
                          Height="35"
                          Padding="0"
                          Margin="30 0 0 0"
-                         Text="{Binding theloai.TenTheLoai, Mode=TwoWay}"/>
+                         Text="{Binding loaidocgia.TenLoaiDG, Mode=TwoWay}"/>
                 </StackPanel>
 
                 <Button Content="Thêm"
@@ -80,8 +80,8 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="0 70 0 0"
-                    Command="{Binding AddNewCategoryCM}"
-                    CommandParameter="{Binding ElementName=addCategoryWindow}"/>
+                    Command="{Binding AddNewReaderTypeCM}"
+                    CommandParameter="{Binding ElementName=addReaderTypeWindow}"/>
             </StackPanel>
         </Grid>
     </Border>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LibraryManagement.BLL
 {
@@ -24,6 +25,22 @@ namespace LibraryManagement.BLL
         public async Task<PHIEUMUONTRA> GetPMTById(int id)
         {
             return await PhieuMuonTraDAL.Instance.GetPMTById(id);
+        }
+        public async Task<List<PHIEUMUONTRA>> GetPMTByMaPhieu(string maphieu)
+        {
+            return await PhieuMuonTraDAL.Instance.GetPMTByMaPhieu(maphieu);
+        }
+        public async Task<List<PHIEUMUONTRA>> GetPMTByMaDocGia(string madg)
+        {
+            return await PhieuMuonTraDAL.Instance.GetPMTByMaDocGia(madg);
+        }
+        public async Task<List<PHIEUMUONTRA>> GetPMTByMaCuonSach(string macuonsach)
+        {
+            return await PhieuMuonTraDAL.Instance.GetPMTByMaCuonSach(macuonsach);
+        }
+        public async Task<List<PHIEUMUONTRA>> GetPMTByTenSach(string tensach)
+        {
+            return await PhieuMuonTraDAL.Instance.GetPMTByTenSach(tensach);
         }
         public async Task<List<PHIEUMUONTRA>> GetAllPMT()
         {
@@ -47,15 +64,20 @@ namespace LibraryManagement.BLL
             if (docgia == null) return (false, "Phiếu mượn không có độc giả.");
             CUONSACH cuonsach = await CuonSachDAL.Instance.GetCuonSachById(phieumt.MaCuonSach);
             if (cuonsach == null) return (false, "Phiếu mượn không có cuốn sách muốn mượn.");
-            SACH sach = await SachDAL.Instance.GetSachById(cuonsach.MaSach);
-            if (cuonsach == null) return (false, "Phiếu mượn không sách.");
 
+            if(phieumt.NgayMuon == null || phieumt.HanTra == null)
+            {
+                return (false, "Phiếu mượn chưa có ngày mượn hoặc hạn trả");
+            }
             DateTime today = DateTime.Now;
+
+            if (phieumt.NgayMuon > today) return (false, "Ngày mượn không được sau ngày hôm nay");
+                
             List<PHIEUMUONTRA> dspmt = await PhieuMuonTraDAL.Instance.GetPMTByMaDG(phieumt.MaDG);
             int slsachdangmuon = 0;
             foreach(PHIEUMUONTRA pmt in dspmt)
             {
-                if (pmt.NgayTra != null)
+                if (pmt.NgayTra == null)
                 {
                     slsachdangmuon++;
                     if (pmt.HanTra > today)
@@ -69,8 +91,7 @@ namespace LibraryManagement.BLL
             if (slsachdangmuon > sosaschmuontoida)
                 return (false, "Độc giả đã mượn tối đa số lượng có thể mượn, hãy trả sách cũ trước khi mượn thêm sách mới.");
 
-            phieumt.NgayMuon = today;
-            phieumt.HanTra = phieumt.NgayMuon.AddDays(songaymuontoida);
+            phieumt.NgayTra = null;
 
             if(docgia.NgayHetHan < phieumt.HanTra)
                 return (false, "Thẻ hết hạn trước hạn trả, không thể mượn.");
@@ -82,25 +103,25 @@ namespace LibraryManagement.BLL
         public async Task<(bool, string)> UpdatePhieuMuonTra(PHIEUMUONTRA phieumt)
         {
             PHIEUMUONTRA pmt = await PhieuMuonTraDAL.Instance.GetPMTById(phieumt.id);
+            pmt.NgayTra = DateTime.Today;
             if (pmt == null)
                 return (false, "Phiếu mượn không hợp lệ.");
-            if (phieumt.HanTra < pmt.NgayMuon)
-                return (false, "Hạn trả phải sau ngày mượn.");
-            if (phieumt.NgayTra != null)
-            {
-                if(phieumt.NgayTra < pmt.NgayMuon)
-                    return (false, "Ngày trả phải sau ngày mượn.");
 
-                int songaymuon = (phieumt.NgayTra - pmt.NgayMuon).Value.Days;
-                int songaymuontoida = ThamSoBLL.Instance.GetThamSo().Result.SoNgayMuonToiDa;
-                int tienphat = ThamSoBLL.Instance.GetThamSo().Result.TienPhatTre;
+            if (pmt.HanTra < pmt.NgayMuon)
+                return (false, "Hạn trả phải sau hoặc bằng ngày mượn.");
 
-                phieumt.SoNgayMuon = songaymuon;
-                if (phieumt.SoNgayMuon > songaymuontoida)
-                    phieumt.TienPhat = (phieumt.SoNgayMuon - songaymuontoida) * tienphat;
-                else phieumt.TienPhat = 0;
-            }
-            return await PhieuMuonTraDAL.Instance.UpdatePhieuMuonTra(phieumt);
+            if (DateTime.Today.Date < pmt.NgayMuon.Date)
+                return (false, "Ngày trả không được trước ngày mượn.");
+
+            int songaymuon = (pmt.NgayTra - pmt.NgayMuon).Value.Days;
+            int songaymuontoida = ThamSoBLL.Instance.GetThamSo().Result.SoNgayMuonToiDa;
+            int tienphat = ThamSoBLL.Instance.GetThamSo().Result.TienPhatTre;
+
+            pmt.SoNgayMuon = songaymuon;
+            if (pmt.SoNgayMuon > songaymuontoida)
+                pmt.TienPhat = (pmt.SoNgayMuon - songaymuontoida) * tienphat;
+            else pmt.TienPhat = 0;
+            return await PhieuMuonTraDAL.Instance.UpdatePhieuMuonTra(pmt);
         }
         public async Task<(bool, string)> DeletePhieuMuonTra(int id)
         {

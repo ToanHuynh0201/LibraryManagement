@@ -2,7 +2,9 @@
 using System.Windows.Input;
 using LibraryManagement.View;
 using LibraryManagement.View.Book;
+using LibraryManagement.View.Borrow;
 using LibraryManagement.View.Reader;
+using LibraryManagement.View.Receipt;
 
 namespace LibraryManagement.ViewModel
 {
@@ -11,6 +13,8 @@ namespace LibraryManagement.ViewModel
         public ICommand GetNavigationFrameCM { get; set; }
         public ICommand QuanLyDocGiaCM { get; set; }
         public ICommand QuanLySachCM { get; set; }
+        public ICommand QuanLyMuonTraCM { get; set; }
+        public ICommand QuanLyPhatCM { get; set; }
         public ICommand QuanLyNoiBoCM { get; set; }
         public ICommand ThongKeCM { get; set; }
         public ICommand TaiKhoanCM { get; set; }
@@ -27,11 +31,19 @@ namespace LibraryManagement.ViewModel
             });
             QuanLyDocGiaCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                NavigationFrame.Navigate(new ReaderManagement());
+                NavigationFrame.Navigate(new ReaderTab());
             });
             QuanLySachCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {   
                 NavigationFrame.Navigate(new BookTab());
+            });
+            QuanLyMuonTraCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                NavigationFrame.Navigate(new BorrowManagement());
+            });
+            QuanLyPhatCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                NavigationFrame.Navigate(new PenaltyReceiptManagement());
             });
             ThongKeCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

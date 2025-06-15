@@ -95,11 +95,11 @@
                           HorizontalAlignment="Left"
                           Height="40"
                           Width="200"
-                          ItemsSource="{Binding SearchList}" 
-                          SelectedItem="{Binding SearchProperties, Mode=TwoWay}">
+                          ItemsSource="{Binding StatusList}" 
+                          SelectedItem="{Binding StatusProperties, Mode=TwoWay}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding ResetDataCM}"/>
+                            <i:InvokeCommandAction Command="{Binding FilterStatus}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
@@ -153,7 +153,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Button Style="{StaticResource gridRemoveButton}" 
                                         Margin="5 0 0 0" 
-                                        Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteBookCM}"/>
+                                        Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteBookCopyCM}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

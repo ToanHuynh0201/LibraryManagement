@@ -11,7 +11,12 @@
     <viewmodel:MainViewModel x:Key="MainVM"/>
     <viewmodel:LoginViewModel x:Key="LoginVM"/>
     <viewmodel:ReaderViewModel x:Key="ReaderVM"/>
+    <viewmodel:AddReaderViewModel x:Key="AddReaderVM"/>
+    <viewmodel:ReaderInformationViewModel x:Key="ReaderInformationVM"/>
+    <viewmodel:UpdateReaderViewModel x:Key="UpdateReaderVM"/>
     <viewmodel:BookManagementViewModel x:Key="BookManagementVM"/>
+    <viewmodel:ReaderManagementVM x:Key="ReaderManagementVM"/>
+    <viewmodel:ReaderTypeViewModel x:Key="ReaderTypeVM"/>
     <viewmodel:BookViewModel x:Key="BookVM"/>
     <viewmodel:AddBookViewModel x:Key="AddBookVM"/>
     <viewmodel:AddExistingBookViewModel x:Key="AddExisBookVM"/>
@@ -28,7 +33,10 @@
     <viewmodel:RuleViewModel x:Key="RuleVM"/>
     <viewmodel:AuthorViewModel x:Key="AuthorVM"/>
     <viewmodel:CategoryViewModel x:Key="CategoryVM"/>
-
+    <viewmodel:BorrowSlipViewModel x:Key="BorrowVM"/>
+    <viewmodel:AddNewBorrowViewModel x:Key="AddBorrowVM"/>
+    <viewmodel:PenaltyRecepitManagementVM x:Key="PenaltyVM"/>
+    <viewmodel:AddPenaltyRecepit x:Key="AddPenaltyVM"/>
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <converters:ListViewGridViewConverter x:Key="GridLinesVisibilityBorderToThicknessConverter"/>
 

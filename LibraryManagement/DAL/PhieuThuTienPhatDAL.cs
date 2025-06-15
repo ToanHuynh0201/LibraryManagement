@@ -46,7 +46,8 @@ namespace LibraryManagement.DAL
             using (var context = new LibraryManagementEntities())
                 try
                 {
-                    DOCGIA dg = await DocGiaDAL.Instance.GetDocGiaById(phieuthu.MaDG);
+                    DOCGIA dg = await context.DOCGIAs.FindAsync(phieuthu.MaDG);
+                    if (dg.TongNo == null) dg.TongNo = 0;
                     dg.TongNo -= phieuthu.SoTienThu;
                     context.PHIEUTHUTIENPHATs.Add(phieuthu);
                     await context.SaveChangesAsync();

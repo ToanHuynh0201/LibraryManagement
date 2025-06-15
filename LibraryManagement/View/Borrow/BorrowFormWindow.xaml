@@ -5,12 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:LibraryManagement.View"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
+        DataContext="{StaticResource AddBorrowVM}"
         Title="BorrowFormWindow" WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
         Height="400 " Width="500"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        x:Name="addBorrowWindow">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadOtherDataCM}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.8*"/>
@@ -46,7 +54,9 @@
                 Height="28"
                 Background="Red" 
                 Foreground="#FFE7DDDD"
-                Command="{Binding ThoatCM}" Margin="0,-1,0,0" Grid.Column="1"/>
+                Command="{Binding CloseWindowCM}"
+                CommandParameter="{Binding ElementName=addBorrowWindow}"
+                Margin="0,-1,0,0" Grid.Column="1"/>
         </Grid>
 
         <Grid
@@ -68,14 +78,9 @@
                     materialDesign:HintAssist.Hint="Chọn độc giả"
                     IsEditable="True"
                     FontSize="15"
-                    ItemsSource="{Binding LongIntegerList}">    
-                    <ComboBox.Text>
-                        <Binding
-                            Mode="TwoWay"
-                            Path="SelectedTextTwo"
-                            UpdateSourceTrigger="PropertyChanged">      
-                        </Binding>
-                    </ComboBox.Text>
+                    ItemsSource="{Binding ListReader}"
+                    SelectedItem="{Binding ReaderSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding ReaderText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">    
                 </ComboBox>
                 <!--Chỗ này kh nhập nhé, binding từ dữ liệu để lấy tên độc giả-->
 
@@ -89,14 +94,9 @@
                     materialDesign:HintAssist.Hint="Chọn sách"
                     IsEditable="True"
                     FontSize="15"
-                    ItemsSource="{Binding LongIntegerList}">
-                    <ComboBox.Text>
-                        <Binding
-                            Mode="TwoWay"
-                            Path="SelectedTextTwo"
-                            UpdateSourceTrigger="PropertyChanged">
-                        </Binding>
-                    </ComboBox.Text>
+                    ItemsSource="{Binding ListBookCopy}"
+                    SelectedItem="{Binding BookCopySelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding BookCopyText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 </ComboBox>
             </Grid>
 
@@ -108,6 +108,8 @@
                     materialDesign:TextFieldAssist.HasClearButton="True"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     FontSize="15" 
+                    SelectedDate="{Binding NgayMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Language="vi-VN" SelectedDateFormat="Short"
                     />
             </Grid>
 
@@ -121,6 +123,8 @@
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     FontSize="15" 
                     IsEnabled="False"
+                    SelectedDate="{Binding HanTra, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Language="vi-VN" SelectedDateFormat="Short"
                     />
             </Grid>
 
@@ -134,12 +138,16 @@
                 <Button
                     Margin="10 0"
                     Content="Lưu thông tin"
+                    Command="{Binding AddNewBorrowCM}"
+                    CommandParameter="{Binding ElementName=addBorrowWindow}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     materialDesign:ButtonAssist.CornerRadius="10"
                     />
                 <Button
                     Content="Thoát"
                     Margin="10 0"
+                    Command="{Binding CloseWindowCM}"
+                    CommandParameter="{Binding ElementName=addBorrowWindow}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     materialDesign:ButtonAssist.CornerRadius="10"/>
             </StackPanel>

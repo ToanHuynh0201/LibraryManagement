@@ -133,18 +133,6 @@
                                             IsReadOnly="True" 
                                             Width="auto" 
                                             Binding= "{Binding TenTG}"/>
-                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource gridRemoveButton}" 
-                                                Margin="5 0 0 0" 
-                                                Command="{Binding ElementName=authorGrid, 
-                                                                  Path=DataContext.DeleteAuthorCM}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
 

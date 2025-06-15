@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LibraryManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LibraryManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BCLUOTMUONTHEOTHELOAI">
           <Key>
             <PropertyRef Name="MaBaoCao" />
@@ -80,6 +80,7 @@
           <Property Name="MaDauSach" Type="char" MaxLength="7" StoreGeneratedPattern="Computed" />
           <Property Name="TenDauSach" Type="nvarchar(max)" Nullable="false" />
           <Property Name="MaTheLoai" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="DOCGIA">
           <Key>
@@ -96,6 +97,7 @@
           <Property Name="NgayHetHan" Type="datetime" Nullable="false" />
           <Property Name="TongNo" Type="int" />
           <Property Name="TenDangNhap" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="LOAIDOCGIA">
           <Key>
@@ -556,8 +558,7 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
             <End Role="DAUSACH" EntitySet="DAUSACH" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LibraryManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -641,6 +642,7 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           <NavigationProperty Name="SACHes" Relationship="Self.fk_s_tts" FromRole="DAUSACH" ToRole="SACH" />
           <NavigationProperty Name="THELOAI" Relationship="Self.fk_tts_tl" FromRole="DAUSACH" ToRole="THELOAI" />
           <NavigationProperty Name="TACGIAs" Relationship="Self.CT_TGSACH" FromRole="DAUSACH" ToRole="TACGIA" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="DOCGIA">
           <Key>
@@ -661,6 +663,7 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           <NavigationProperty Name="NGUOIDUNG" Relationship="Self.fk_dg_nd" FromRole="DOCGIA" ToRole="NGUOIDUNG" />
           <NavigationProperty Name="PHIEUMUONTRAs" Relationship="Self.fk_pmt_dg" FromRole="DOCGIA" ToRole="PHIEUMUONTRA" />
           <NavigationProperty Name="PHIEUTHUTIENPHATs" Relationship="Self.fk_pttp_dg" FromRole="DOCGIA" ToRole="PHIEUTHUTIENPHAT" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="LOAIDOCGIA">
           <Key>
@@ -1129,6 +1132,7 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           <EntitySetMapping Name="DAUSACHes">
             <EntityTypeMapping TypeName="LibraryManagementModel.DAUSACH">
               <MappingFragment StoreEntitySet="DAUSACH">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="MaDauSach" ColumnName="MaDauSach" />
                 <ScalarProperty Name="TenDauSach" ColumnName="TenDauSach" />
@@ -1139,6 +1143,7 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           <EntitySetMapping Name="DOCGIAs">
             <EntityTypeMapping TypeName="LibraryManagementModel.DOCGIA">
               <MappingFragment StoreEntitySet="DOCGIA">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="MaDG" ColumnName="MaDG" />
                 <ScalarProperty Name="MaLoaiDG" ColumnName="MaLoaiDG" />
