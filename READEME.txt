@@ -1,0 +1,4 @@
+Hướng dẫn sử dụng ứng dụng:
+Chạy file LibraryManagement.sql để tạo csdl, connect database với visual studio
+Tạo file appconfig trong project với mẫu giống file appconfigsample
+Tìm thuộc tính datasource trong connection string, đổi giá trị thành tên database đã dùng để khởi tạo csdl
