@@ -1,0 +1,100 @@
+﻿<Window x:Class="LibraryManagement.View.GroupUser.EditGroupUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        DataContext="{StaticResource EditGroupUserVM}"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Title="AddGroupUserWindow" Height="500" Width="700"
+        x:Name="editGroupUserWindow">
+    <Grid>
+        <Border CornerRadius="20"
+                Background="#eff2f7"
+                BorderThickness="2"
+                BorderBrush="Black"
+                Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Title -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Group name -->
+                    <RowDefinition Height="*"/>
+                    <!-- Function grid -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Buttons -->
+                </Grid.RowDefinitions>
+
+                <!-- Tiêu đề -->
+                <DockPanel Grid.Row="0">
+                    <TextBlock Text="Thêm nhóm người dùng"
+                               FontSize="30"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0 0 0 10"
+                               DockPanel.Dock="Left" />
+                    <Button Content="X"
+                            Style="{StaticResource buttonClose}"
+                            Command="{Binding CloseWindowCM}"
+                            CommandParameter="{Binding ElementName=editGroupUserWindow}"
+                            HorizontalAlignment="Right"
+                            Background="Red"
+                            Foreground="White"
+                            FontSize="18"
+                            Width="35" Height="30"/>
+                </DockPanel>
+
+                <!-- Tên nhóm -->
+                <TextBox Grid.Row="1"
+                         materialDesign:HintAssist.Hint="Tên nhóm"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         FontSize="20"
+                         Height="50"
+                         Margin="0 10"
+                         Text="{Binding NhomNguoiDung.TenNhom, Mode=TwoWay}" />
+
+                <!-- Danh sách chức năng -->
+                <DataGrid Grid.Row="2"
+                          Margin="0 10"
+                          ItemsSource="{Binding dsChucNang}"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          HeadersVisibility="Column"
+                          RowHeight="40"
+                          SelectionMode="Single"
+                          Background="White"
+                          BorderThickness="1"
+                          BorderBrush="Gray">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn Binding="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                        <DataGridTextColumn Header="Mã chức năng" Binding="{Binding MaChucNang}" Width="*"/>
+                        <DataGridTextColumn Header="Tên chức năng" Binding="{Binding TenChucNang}" Width="*"/>
+                        <DataGridTextColumn Header="Tên màn hình" Binding="{Binding TenManHinh}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Grid.Row="3"
+                        Content="Lưu"
+                        Command="{Binding SaveGroupUserCM}"
+                        CommandParameter="{Binding ElementName=editGroupUserWindow}"
+                        Width="150"
+                        Height="45"
+                        Background="#473765"
+                        Foreground="White"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        HorizontalAlignment="Center"
+                        Margin="0 20 0 0"
+                        Style="{StaticResource MaterialDesignRaisedButton}" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -307,6 +307,7 @@
     <Compile Include="ViewModel\ReaderVM\ReaderInformationVM.cs" />
     <Compile Include="ViewModel\ReaderVM\ReaderTypeViewModel.cs" />
     <Compile Include="ViewModel\ReaderVM\UpdateReaderViewModel.cs" />
+    <Compile Include="ViewModel\UserVM\EditGroupUserVM.cs" />
     <Compile Include="ViewModel\UserVM\UserGroupViewModel.cs" />
     <Compile Include="ViewModel\BorrowVM\BorrowReturnSlipViewModel.cs" />
     <Compile Include="ViewModel\BookManagementVM\BookTitleVM\BookTitleViewModel.cs" />
@@ -380,8 +381,8 @@
     <Compile Include="View\GroupUser\AddGroupUserWindow.xaml.cs">
       <DependentUpon>AddGroupUserWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GroupUser\EditGroupUserInformationWindow.xaml.cs">
-      <DependentUpon>EditGroupUserInformationWindow.xaml</DependentUpon>
+    <Compile Include="View\GroupUser\EditGroupUserWindow.xaml.cs">
+      <DependentUpon>EditGroupUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GroupUser\GroupUserInformtationWindow.xaml.cs">
       <DependentUpon>GroupUserInformtationWindow.xaml</DependentUpon>
@@ -556,7 +557,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\GroupUser\EditGroupUserInformationWindow.xaml">
+    <Page Include="View\GroupUser\EditGroupUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

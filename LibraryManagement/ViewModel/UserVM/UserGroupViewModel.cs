@@ -90,13 +90,13 @@ namespace LibraryManagement.ViewModel
                 w1.ShowDialog();
             });
 
-            //OpenUpdateGroupUserCM = new RelayCommand<Window>((p) => GroupUserSelected != null, (p) =>
-            //{
-            //    var vm1 = new UpdateGroupUserViewModel(GroupUserSelected);
-            //    vm1.OnSuccess = () => LoadDataGroupUserCM.Execute(null);
-            //    var w1 = new EditGroupUserWindow() { DataContext = vm1 };
-            //    w1.ShowDialog();
-            //});
+            OpenUpdateGroupUserCM = new RelayCommand<Window>((p) => GroupUserSelected != null, (p) =>
+            {
+                var vm1 = new EditGroupUserViewModel(GroupUserSelected);
+                vm1.OnSuccess = () => LoadDataGroupUserCM.Execute(null);
+                var w1 = new EditGroupUserWindow() { DataContext = vm1 };
+                w1.ShowDialog();
+            });
 
             DeleteGroupUserCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
