@@ -5,6 +5,7 @@ using LibraryManagement.View.Book;
 using LibraryManagement.View.Borrow;
 using LibraryManagement.View.Reader;
 using LibraryManagement.View.Receipt;
+using LibraryManagement.View.Report;
 
 namespace LibraryManagement.ViewModel
 {
@@ -47,7 +48,7 @@ namespace LibraryManagement.ViewModel
             });
             ThongKeCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                NavigationFrame.Navigate(new StatisticPage());
+                NavigationFrame.Navigate(new ReportPage());
             });
             QuanLyNoiBoCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

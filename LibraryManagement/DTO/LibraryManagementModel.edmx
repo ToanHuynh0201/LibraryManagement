@@ -21,7 +21,7 @@
           </Key>
           <Property Name="Ngay" Type="datetime" Nullable="false" />
           <Property Name="MaCuonSach" Type="int" Nullable="false" />
-          <Property Name="NgayMuon" Type="int" Nullable="false" />
+          <Property Name="NgayMuon" Type="datetime" Nullable="false" />
           <Property Name="SoNgayTraTre" Type="int" />
         </EntityType>
         <EntityType Name="BCTONGLUOTMUON">
@@ -580,7 +580,7 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           </Key>
           <Property Name="Ngay" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MaCuonSach" Type="Int32" Nullable="false" />
-          <Property Name="NgayMuon" Type="Int32" Nullable="false" />
+          <Property Name="NgayMuon" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="SoNgayTraTre" Type="Int32" />
           <NavigationProperty Name="CUONSACH" Relationship="Self.fk_bcstt_s" FromRole="BCSACHTRATRE" ToRole="CUONSACH" />
         </EntityType>

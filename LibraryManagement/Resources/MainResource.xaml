@@ -37,6 +37,10 @@
     <viewmodel:AddNewBorrowViewModel x:Key="AddBorrowVM"/>
     <viewmodel:PenaltyRecepitManagementVM x:Key="PenaltyVM"/>
     <viewmodel:AddPenaltyRecepit x:Key="AddPenaltyVM"/>
+    <viewmodel:CategoryLoanReportVM x:Key="CategoryLoanReportVM"/>
+    <viewmodel:CategoryLoanReportDetailVM x:Key="CategoryReportDetailVM"/>
+    <viewmodel:ReportManagementVM x:Key="ReportVM"/>
+    
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <converters:ListViewGridViewConverter x:Key="GridLinesVisibilityBorderToThicknessConverter"/>
 

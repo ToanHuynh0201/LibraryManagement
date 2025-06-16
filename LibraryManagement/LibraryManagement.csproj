@@ -168,6 +168,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BLL\BaoCaoThongKeBLL.cs" />
     <Compile Include="BLL\PhieuThuTienPhatBLL.cs" />
     <Compile Include="DTO\BCLUOTMUONTHEOTHELOAI.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
@@ -248,6 +249,8 @@
     <Compile Include="DTO\THELOAIPartial.cs" />
     <Compile Include="Utils\DateToStringConvert.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\ReportManagementVM.cs" />
+    <Compile Include="ViewModel\ReportVM\CategoryLoanReportDetailVM.cs" />
     <Compile Include="ViewModel\BookManagementVM\BookReceivingVM\BookReceivingInformationViewModel.cs" />
     <Compile Include="ViewModel\BookManagementVM\BookTitleVM\AddBookTitleViewModel.cs" />
     <Compile Include="ViewModel\BookManagementVM\AuthorVM\AuthorViewModel.cs" />
@@ -291,6 +294,8 @@
     <Compile Include="ViewModel\BookManagementVM\BookReceivingVM\BookReceivingViewModel.cs" />
     <Compile Include="ViewModel\BookManagementVM\BookTitleVM\BookTitleInformationViewModel.cs" />
     <Compile Include="ViewModel\BorrowVM\AddNewBorrowViewModel.cs" />
+    <Compile Include="ViewModel\ReportVM\OverdueBookVM.cs" />
+    <Compile Include="ViewModel\ReportVM\CategoryLoanReportVM.cs" />
     <Compile Include="ViewModel\PenaltyVM\AddPenaltyReceiptViewModel.cs" />
     <Compile Include="ViewModel\PenaltyVM\PenaltyReceiptManagementVM.cs" />
     <Compile Include="ViewModel\ReaderManagementViewModel.cs" />
@@ -414,6 +419,9 @@
     </Compile>
     <Compile Include="View\Report\ReportDetailsWindow.xaml.cs">
       <DependentUpon>ReportDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Report\ReportPage.xaml.cs">
+      <DependentUpon>ReportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserReaderTab.xaml.cs">
       <DependentUpon>UserReaderTab.xaml</DependentUpon>
@@ -602,6 +610,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Report\ReportDetailsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Report\ReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

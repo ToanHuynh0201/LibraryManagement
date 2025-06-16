@@ -7,12 +7,19 @@
         mc:Ignorable="d"
         Title="ReportDetailsWindow" 
         WindowStyle="None"
+        DataContext="{StaticResource CategoryReportDetailVM}"
         ResizeMode="NoResize"
         Background="Transparent"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         Height="550 " Width="700"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        x:Name="detailreportWindow">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadDataCM}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Border 
         CornerRadius="10">
         <Border.Background>
@@ -48,7 +55,7 @@
                     Foreground="#FFE7DDDD"
                     Height="38"
                     Command="{Binding CloseWindowCM}"
-                    CommandParameter="{Binding ElementName=addReaderWindow}"
+                    CommandParameter="{Binding ElementName=detailreportWindow}"
                     Margin="4,-1,0,0" VerticalAlignment="Top"/>     
             </Grid>
 
@@ -66,6 +73,7 @@
                         FontSize="18"
                         Width="100" 
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        Text="{Binding BaoCaoTongLuotMuon.Thang}"
                         IsEnabled="False"/>
 
                     <ComboBox
@@ -74,6 +82,14 @@
                         Width="100"
                         FontSize="18"
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        Text="{Binding BaoCaoTongLuotMuon.Nam}"
+                        IsEnabled="False"/>
+                    <ComboBox
+                        materialDesign:HintAssist.Hint="Mã báo cáo"
+                        FontSize="18"
+                        Width="100" 
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        Text="{Binding BaoCaoTongLuotMuon.MaBaoCao}"
                         IsEnabled="False"/>
                 </StackPanel>
 
@@ -96,7 +112,7 @@
                         VerticalAlignment="Center"
                         FontSize="18"
                         FontFamily="A"
-                        Text="123"/>
+                        Text="{Binding BaoCaoTongLuotMuon.TongSoLuotMuon}"/>
 
                 </StackPanel>
             </Grid>
@@ -108,16 +124,10 @@
                     ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                     RowStyle="{DynamicResource DataGridRowStyle1}"
                     x:Name="customerGrid" 
-                    ItemsSource="{Binding}" 
+                    ItemsSource="{Binding ListCategoryDetails}" 
                     AutoGenerateColumns="False" 
                     IsReadOnly="True"
                     Grid.Row="1">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseDoubleClick">
-                            <i:InvokeCommandAction Command="{Binding}"/>
-                            <!-- ADD COMMENT RIGHT HERE -->
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn CanUserResize="False" 
                             Width="Auto" 
@@ -132,39 +142,27 @@
                         <DataGridTextColumn Header="ID" 
                             IsReadOnly="True" 
                             Width="Auto" 
-                            Binding="{Binding}"/>
+                            Binding="{Binding THELOAI.MaTheLoai}"/>
                         <!-- BINDING DATA RIGHT HERE -->
 
                         <DataGridTextColumn Header="Tên thể loại" 
                             IsReadOnly="True" 
                             CanUserResize="False"
-                            Width="Auto"/>      
+                            Width="Auto"
+                            Binding="{Binding THELOAI.TenTheLoai}"/>      
                         <!-- BINDING DATA RIGHT HERE -->
 
                         <DataGridTextColumn Header="Số lượt mượn" 
                             IsReadOnly="True" 
                             Width="Auto" 
-                            Binding="{Binding}"/>
+                            Binding="{Binding SoLuotMuon}"/>
                         <!-- BINDING DATA RIGHT HERE -->
 
                         <DataGridTextColumn Header="Tỷ lệ" 
                             IsReadOnly="True" 
                             Width="Auto" 
-                            Binding="{Binding}"/>
+                            Binding="{Binding TyLe, StringFormat={}{0:0.##}%}"/>
                         <!-- BINDING DATA RIGHT HERE -->
-                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource gridEditButton}"
-                                            Command="{Binding ElementName=customerGrid, Path=DataContext.UpdateBookCM}"/>
-                                        <Button Style="{StaticResource gridRemoveButton}" 
-                                            Margin="5 0 0 0" 
-                                            Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteBookCM}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

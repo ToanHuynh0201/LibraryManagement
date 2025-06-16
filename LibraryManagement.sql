@@ -112,7 +112,7 @@ CREATE TABLE BCSACHTRATRE
 (
     Ngay datetime PRIMARY KEY,
     MaCuonSach int NOT NULL,
-    NgayMuon int NOT NULL,
+    NgayMuon datetime NOT NULL,
     SoNgayTraTre int DEFAULT 0
 )
 

@@ -38,6 +38,8 @@ namespace LibraryManagement.BLL
             DOCGIA dg = await DocGiaDAL.Instance.GetDocGiaById(phieuthu.MaDG);
             if (dg == null)
                 return (false, "Độc giả không hợp lệ.");
+            if (phieuthu.SoTienThu <= 0)
+                return (false, "Giá trị số tiền thu không hợp lệ");
             if (dg.TongNo == null) dg.TongNo = 0;
             bool apdungqdthuphat = ThamSoDAL.Instance.GetThamSo().Result.ApDungQDThuPhat;
             if (phieuthu.SoTienThu > dg.TongNo && apdungqdthuphat == true)

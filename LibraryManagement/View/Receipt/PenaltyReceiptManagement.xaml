@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryManagement.View.Receipt"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:sys="clr-namespace:System.Globalization;assembly=mscorlib"
       DataContext="{StaticResource PenaltyVM}"
       mc:Ignorable="d" 
       d:DesignHeight="740" 
@@ -13,6 +13,9 @@
       Background="Transparent"
       Title="PenaltyReceiptManagement"
       x:Name="penaltyRecepitWindow">
+    <Page.Resources>
+        <sys:CultureInfo x:Key="VietnameseCulture">vi-VN</sys:CultureInfo>
+    </Page.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadDataPenaltyReceiptCM}"/>
@@ -38,7 +41,28 @@
                         Width="200" 
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                        FontSize="18"/>
+                        FontSize="18"
+                        SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Language="vi-VN">
+                        <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <TextBox x:Name="Date_TextBox" 
+                                                Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}, StringFormat='{}{0:dd/MM/yyyy}', ConverterCulture=vi-VN}" 
+                                                IsReadOnly="True"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DatePicker.Resources>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectedDateChanged">
+                                <i:InvokeCommandAction Command="{Binding FilterByDateCM}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </DatePicker>
 
                     <Grid Margin="30 5 0 0">
                         <TextBox

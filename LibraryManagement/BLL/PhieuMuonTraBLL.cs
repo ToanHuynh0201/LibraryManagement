@@ -71,7 +71,7 @@ namespace LibraryManagement.BLL
             }
             DateTime today = DateTime.Now;
 
-            if (phieumt.NgayMuon > today) return (false, "Ngày mượn không được sau ngày hôm nay");
+            if (phieumt.NgayMuon.Date > today.Date) return (false, "Ngày mượn không được sau ngày hôm nay");
                 
             List<PHIEUMUONTRA> dspmt = await PhieuMuonTraDAL.Instance.GetPMTByMaDG(phieumt.MaDG);
             int slsachdangmuon = 0;
@@ -80,7 +80,7 @@ namespace LibraryManagement.BLL
                 if (pmt.NgayTra == null)
                 {
                     slsachdangmuon++;
-                    if (pmt.HanTra > today)
+                    if (pmt.HanTra < today)
                         return (false, "Độc giả đang có sách trả trễ, không thể mượn thêm sách mới.");
                 }
             }
@@ -88,12 +88,12 @@ namespace LibraryManagement.BLL
             int songaymuontoida = ThamSoBLL.Instance.GetThamSo().Result.SoNgayMuonToiDa;
             int sosaschmuontoida = ThamSoBLL.Instance.GetThamSo().Result.SoSachMuonToiDa;
 
-            if (slsachdangmuon > sosaschmuontoida)
+            if (slsachdangmuon + 1 > sosaschmuontoida)
                 return (false, "Độc giả đã mượn tối đa số lượng có thể mượn, hãy trả sách cũ trước khi mượn thêm sách mới.");
 
             phieumt.NgayTra = null;
 
-            if(docgia.NgayHetHan < phieumt.HanTra)
+            if(docgia.NgayHetHan.Date < phieumt.HanTra.Date)
                 return (false, "Thẻ hết hạn trước hạn trả, không thể mượn.");
 
             if (cuonsach.TinhTrang == true)
@@ -107,7 +107,7 @@ namespace LibraryManagement.BLL
             if (pmt == null)
                 return (false, "Phiếu mượn không hợp lệ.");
 
-            if (pmt.HanTra < pmt.NgayMuon)
+            if (pmt.HanTra.Date < pmt.NgayMuon.Date)
                 return (false, "Hạn trả phải sau hoặc bằng ngày mượn.");
 
             if (DateTime.Today.Date < pmt.NgayMuon.Date)

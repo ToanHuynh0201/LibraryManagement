@@ -16,7 +16,7 @@ namespace LibraryManagement.DTO
     {
         public System.DateTime Ngay { get; set; }
         public int MaCuonSach { get; set; }
-        public int NgayMuon { get; set; }
+        public System.DateTime NgayMuon { get; set; }
         public Nullable<int> SoNgayTraTre { get; set; }
     
         public virtual CUONSACH CUONSACH { get; set; }

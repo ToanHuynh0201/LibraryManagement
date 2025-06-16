@@ -7,11 +7,16 @@
       mc:Ignorable="d" 
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      DataContext="{StaticResource CategoryLoanReportVM}"
       d:DesignHeight="740" 
       d:DesignWidth="840"
-      
-      Title="CategoryLoanReportManagement">
-
+      Title="CategoryLoanReportManagement"
+      x:Name="categoryloanreportPage">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadDataCM}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Border CornerRadius="25"
          Background="#eff2f7"
@@ -32,12 +37,16 @@
                     <ComboBox
                         Margin="0 5 0 0 "
                         materialDesign:HintAssist.Hint="Tháng"
+                        ItemsSource="{Binding ListMonths}"
+                        SelectedItem="{Binding SelectedMonth}"
                         Width="100"
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
 
                     <ComboBox
                         Margin="30 5 0 0 "
                         materialDesign:HintAssist.Hint="Năm"
+                        ItemsSource="{Binding ListYears}"
+                        SelectedItem="{Binding SelectedYear}"
                         Width="100"
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
 
@@ -66,37 +75,7 @@
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding}"/>
-                                <!-- ADD COMMAND RIGHT HERE -->
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-
-                    <Button
-                        Margin="30 5 0 0"
-                        Width="170"
-                        Height="40"
-                        Style="{StaticResource MaterialDesignRaisedButton}"
-                        Background="#DC143C"
-                        BorderBrush="#FFEDE7F8"
-                        materialDesign:ButtonAssist.CornerRadius="10">
-                        <StackPanel 
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch">
-
-                            <materialDesign:PackIcon Kind="Trash"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Left"
-                                Margin="-15 0 0 0"/>
-                            <TextBlock Text="Xóa báo cáo"
-                                Margin="10 0 0 0"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"/>
-                        </StackPanel>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding}"/>
+                                <i:InvokeCommandAction Command="{Binding AddReportCM}"/>
                                 <!-- ADD COMMAND RIGHT HERE -->
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
@@ -111,13 +90,14 @@
                         ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                         RowStyle="{DynamicResource DataGridRowStyle1}"
                         x:Name="customerGrid" 
-                        ItemsSource="{Binding}" 
+                        ItemsSource="{Binding ListReports}" 
+                        SelectedItem="{Binding SelectedReport}"
                         AutoGenerateColumns="False" 
                         IsReadOnly="True"
                         Grid.Row="1">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
-                                <i:InvokeCommandAction Command="{Binding}"/>
+                                <i:InvokeCommandAction Command="{Binding ViewReportDetailCM}"/>
                                 <!-- ADD COMMAND RIGHT HERE -->
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
@@ -135,39 +115,27 @@
                             <DataGridTextColumn Header="ID" 
                                 IsReadOnly="True" 
                                 Width="Auto" 
-                                Binding="{Binding}"/>
+                                Binding="{Binding MaBaoCao}"/>
                             <!-- BINDING DATA RIGHT HERE -->
 
                             <DataGridTextColumn Header="Tháng báo cáo" 
                                 IsReadOnly="True" 
                                 CanUserResize="False"
-                                Width="Auto"/>
+                                Width="Auto"
+                                Binding="{Binding Thang}"/>
                             <!-- BINDING DATA RIGHT HERE -->
 
                             <DataGridTextColumn Header="Năm báo cáo" 
                                 IsReadOnly="True" 
                                 Width="Auto" 
-                                Binding="{Binding}"/>
+                                Binding="{Binding Nam}"/>
                             <!-- BINDING DATA RIGHT HERE -->
 
                             <DataGridTextColumn Header="Tổng số lượt mượn" 
                                 IsReadOnly="True" 
                                 Width="Auto" 
-                                Binding="{Binding}"/>
+                                Binding="{Binding TongSoLuotMuon}"/>
                             <!-- BINDING DATA RIGHT HERE -->
-                            <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button Style="{StaticResource gridEditButton}"
-                                                    Command="{Binding ElementName=customerGrid, Path=DataContext.UpdateBookCM}"/>
-                                            <Button Style="{StaticResource gridRemoveButton}" 
-                                                    Margin="5 0 0 0" 
-                                                    Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteBookCM}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

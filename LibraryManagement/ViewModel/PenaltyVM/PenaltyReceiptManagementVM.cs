@@ -6,9 +6,11 @@ using LibraryManagement.View.Receipt;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 
@@ -30,6 +32,30 @@ namespace LibraryManagement.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private DateTime? _SelectedDate;
+        public DateTime? SelectedDate
+        {
+            get
+            {
+                return _SelectedDate;
+            }
+            set
+            {
+                _SelectedDate = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(SelectedDateString));
+            }
+        }
+
+        public string SelectedDateString
+        {
+            get
+            {
+                return SelectedDate?.ToString("dd/MM/yyyy") ?? "";
+            }
+        }
+
         private string _SearchProperties;
         public string SearchProperties
         {
@@ -78,6 +104,7 @@ namespace LibraryManagement.ViewModel
         public ICommand GetCurrentWindowCM { get; set; }
         public ICommand LoadDataPenaltyReceiptCM { get; set; }
         public ICommand SearchPenaltyReceiptCM { get; set; }
+        public ICommand FilterByDateCM { get; set; }
         public ICommand ResetDataCM { get; set; }
         public ICommand OpenAddPenaltyReceiptCM { get; set; }
         public ICommand CloseWindowCM { get; set; }
@@ -112,9 +139,21 @@ namespace LibraryManagement.ViewModel
                     MessageBox.Show("Lỗi khi tìm kiếm: " + ex.Message);
                 }
             });
+            FilterByDateCM = new RelayCommand<object>((p) => true, (p) =>
+            {
+                try
+                {
+                    ApplyFilterAndSearch();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi lọc theo ngày: " + ex.Message);
+                }
+            });
             ResetDataCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 SearchText = "";
+                SelectedDate = null;
                 ListPenaltyReceipt = new ObservableCollection<PHIEUTHUTIENPHAT>(AllPenaltyReceipt);
             });
             OpenAddPenaltyReceiptCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -129,17 +168,24 @@ namespace LibraryManagement.ViewModel
                 p.Close();
             });
         }
+
         private void ApplyFilterAndSearch()
         {
             var result = AllPenaltyReceipt.AsEnumerable();
+
+            if (SelectedDate.HasValue)
+            {
+                var selectedDateOnly = SelectedDate.Value.Date;
+                result = result.Where(pt => pt.NgayThu.Date == selectedDateOnly);
+            }
 
             if (!string.IsNullOrWhiteSpace(SearchText))
             {
                 if (SearchProperties == SearchList[0])
                     result = result.Where(pt => pt.SoPhieuThu.Contains(SearchText) || pt.DOCGIA.MaDG.Contains(SearchText));
             }
+
             ListPenaltyReceipt = new ObservableCollection<PHIEUTHUTIENPHAT>(result);
         }
-
     }
 }

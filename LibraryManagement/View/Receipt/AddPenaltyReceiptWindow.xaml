@@ -66,14 +66,15 @@
                     Margin="20 10">
 
                     <ComboBox
-    MinWidth="72"
-    materialDesign:HintAssist.Hint="Chọn độc giả"
-    IsTextSearchEnabled="True"
-    IsEditable="True"
-    FontSize="15"
-    ItemsSource="{Binding ListReader}"
-    SelectedItem="{Binding ReaderSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-    DisplayMemberPath="DisplayName">
+                        MinWidth="72"
+                        materialDesign:HintAssist.Hint="Chọn độc giả"
+                        IsTextSearchEnabled="True"
+                        IsEditable="True"
+                        FontSize="15"
+                        ItemsSource="{Binding ListReader}"
+                        SelectedItem="{Binding ReaderSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding ReaderText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        DisplayMemberPath="DisplayName">        
                     </ComboBox>
 
                     <TextBox
