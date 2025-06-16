@@ -70,7 +70,7 @@
                              Height="40"
                              TextAlignment="Center"
                              Margin="84 0 0 0"
-                             Text="{Binding CurrentRule.TuoiDGToiThieu}"/>
+                             Text="{Binding CurrentRule.TuoiDGToiThieu, StringFormat={}{0} tuổi}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10 30 0 0">
@@ -86,7 +86,7 @@
                              Height="40"
                              Margin="108 0 0 0"
                              TextAlignment="Center"
-                             Text="{Binding CurrentRule.TuoiDGToiDa}"/>
+                             Text="{Binding CurrentRule.TuoiDGToiDa, StringFormat={}{0} tuổi}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10 30 0 0">
@@ -102,7 +102,7 @@
                              Height="40"
                              Margin="20 0 0 0"
                              TextAlignment="Center"
-                             Text="{Binding CurrentRule.SoNgayMuonToiDa}"/>
+                             Text="{Binding CurrentRule.SoNgayMuonToiDa, StringFormat={}{0} ngày}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10 30 0 0">
@@ -118,7 +118,7 @@
                              Height="44"
                              Margin="24 0 0 0"
                              TextAlignment="Center"
-                             Text="{Binding CurrentRule.SoSachMuonToiDa}"/>
+                             Text="{Binding CurrentRule.SoSachMuonToiDa, StringFormat={}{0} sách}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" 
                             Margin="10 30 0 0">
@@ -149,13 +149,13 @@
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
                     <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                               materialDesign:TextFieldAssist.TextBoxViewMargin="0 0 10 0" 
-                               FontSize="20"
-                               Width="100"
-                               Margin="24 0 0 0"
-                               Height="40"
-                               TextAlignment="Center"
-                               Text="{Binding CurrentRule.GiaTriThe}"/>
+                             materialDesign:TextFieldAssist.TextBoxViewMargin="0 0 10 0" 
+                             FontSize="20"
+                             Width="100"
+                             Margin="24 0 0 0"
+                             Height="40"
+                             TextAlignment="Center"
+                             Text="{Binding CurrentRule.GiaTriThe, StringFormat={}{0} tháng}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Column="1" 
@@ -183,7 +183,7 @@
                              Height="49"
                              Margin="40 0 0 0"
                              TextAlignment="Center"
-                             Text="{Binding CurrentRule.KhoangCachNamXB}"/>
+                             Text="{Binding CurrentRule.KhoangCachNamXB , StringFormat={}{0} năm}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10 30 0 0">
@@ -199,7 +199,7 @@
                              Height="50"
                              Margin="115 0 0 0"
                              TextAlignment="Center"
-                             Text="{Binding CurrentRule.TienPhatTre}"/>
+                             Text="{Binding CurrentRule.TienPhatTre, StringFormat={}{0} đồng}"/>
                 </StackPanel>
             </StackPanel>
 

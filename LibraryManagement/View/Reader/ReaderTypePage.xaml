@@ -10,8 +10,8 @@
       xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
       DataContext="{StaticResource ReaderTypeVM}"
       Background="Transparent"
-      Height="550" 
-      Width="1000"
+      d:DesignHeight="740" 
+d:DesignWidth="840"
       Title="ReaderTypePage"
       x:Name="readerTypePage">
     <Border CornerRadius="25"
@@ -65,7 +65,7 @@
                 </i:Interaction.Triggers>
             </ComboBox>
 
-            <Button Margin="210 30 0 0"
+            <Button Margin="350 30 0 0"
                 Width="200"
                 Height="40"
                 Style="{StaticResource MaterialDesignRaisedButton}"
@@ -92,8 +92,8 @@
             </Button>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <DataGrid Style="{DynamicResource DataGridStyle1}"
                       CellStyle="{DynamicResource DataGridCellStyle1}"
@@ -103,8 +103,7 @@
                       ItemsSource="{Binding ListReaderType}"
                       SelectedItem="{Binding ReaderTypeSelected}"
                       AutoGenerateColumns="False" IsReadOnly="True"
-                      Grid.Column="0"
-                      Width="500">
+                      Grid.Column="0">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Loaded">
                             <i:InvokeCommandAction Command="{Binding LoadDataReaderTypeCM}"/>
@@ -137,10 +136,9 @@
                 </DataGrid>
 
                 <Grid Grid.Column="1"
-                  Height="450"
-                  Width="470"
-                  x:Name="categoryDetailFrame"
-                  Margin="10 10 10 10">
+                      Height="450"
+                      x:Name="categoryDetailFrame"
+                      Margin="10 10 10 10">
                     <Border Background="#eff2f7"
                         BorderThickness="3 0 0 0"
                         BorderBrush="Black">
@@ -151,7 +149,7 @@
                                    FontSize="36"
                                    FontWeight="Bold"/>
                             <StackPanel Orientation="Horizontal"
-                                    Margin="77 30 0 0">
+                                    Margin="30 30 0 0">
                                 <TextBlock Text="ID: "
                                        FontSize="20"
                                        FontWeight="DemiBold"
@@ -159,13 +157,13 @@
                                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      materialDesign:TextFieldAssist.TextBoxViewMargin="0 0 10 0" 
                                      FontSize="20"
-                                     Width="250"
-                                     Margin="60 10 10 10"
+                                     Width="200"
+                                     Margin="111 10 10 10"
                                      IsEnabled="False"
                                      Text="{Binding ReaderTypeEdit.MaLoaiDG, Mode=TwoWay}"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"
-                                    Margin="65 30 0 0">
+                                    Margin="30 30 0 0">
                                 <TextBlock Text="Tên loại: "
                                        FontSize="20"
                                        FontWeight="DemiBold"
@@ -173,7 +171,7 @@
                                 <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      materialDesign:TextFieldAssist.TextBoxViewMargin="0 0 10 0" 
                                      FontSize="20"
-                                     Width="250"
+                                     Width="200"
                                      Margin="60 10 10 10"
                                      IsEnabled="False"
                                      x:Name="categoryEditName"

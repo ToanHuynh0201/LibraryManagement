@@ -137,7 +137,7 @@
                                     Binding="{Binding MaCuonSach}"/>
                     <DataGridTextColumn Header="Mã sách" 
                                     IsReadOnly="True" 
-                                    Width="250" 
+                                    Width="150" 
                                     Binding="{Binding SACH.MaSach}"/>
                     <DataGridTextColumn Header="Đầu sách" 
                                     IsReadOnly="True" 

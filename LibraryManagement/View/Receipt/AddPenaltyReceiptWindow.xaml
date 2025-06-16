@@ -107,6 +107,7 @@
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                         Margin="0 20 0 0"
                         FontSize="18" 
+                        IsEnabled="False"
                             SelectedDate="{Binding phieuthu.NgayThu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             SelectedDateFormat="Short"
                             Language="vi-VN"  />

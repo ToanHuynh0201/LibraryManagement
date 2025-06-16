@@ -169,6 +169,23 @@
                                 IsReadOnly="True" 
                                 Width="Auto" 
                                 Binding="{Binding NgayThu, StringFormat=dd/MM/yyyy}"/> <!-- BINDING DATA RIGHT HERE -->
+                            <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Style="{StaticResource gridRemoveButton}" 
+                                                    Margin="5 0 0 0" 
+                                                    Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteBookCM}">
+                                                <materialDesign:PackIcon Kind="Delete"
+                                                                         VerticalAlignment="Center"
+                                                                         HorizontalAlignment="Center"
+                                                                         Width="16"
+                                                                         Height="16"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

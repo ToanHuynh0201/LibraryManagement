@@ -44,7 +44,8 @@
                     FontSize="20"
                     Background="Red" 
                     Foreground="White"
-                    Command="{Binding ExitCM}"/>
+                     Command="{Binding CloseWindowCM}"
+    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
             </Grid>
             <StackPanel Orientation="Vertical"
                     Grid.Row="1">
