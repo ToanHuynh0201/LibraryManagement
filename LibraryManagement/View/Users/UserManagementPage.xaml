@@ -8,23 +8,23 @@
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
-      d:DataContext="{d:DesignInstance Type=viewmodel:BookViewModel}"
-      DataContext="{StaticResource BookVM}"
+      DataContext="{StaticResource UserManagementVM}"
       d:DesignHeight="740" 
       d:DesignWidth="840"
       Background="Transparent"
-      Title="UserManagementPage">
+      Title="UserManagementPage"
+      Name="userManagementPage">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadDataBookCM}" />
+            <i:InvokeCommandAction Command="{Binding LoadDataUserCM}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Page.Triggers>
         <EventTrigger RoutedEvent="Page.Loaded">
             <BeginStoryboard>
                 <Storyboard>
-                    <DoubleAnimation Storyboard.TargetName="bookManagementPage"
+                    <DoubleAnimation Storyboard.TargetName="userManagementPage"
                                  Storyboard.TargetProperty="Opacity"
                                  From="0"
                                  To="1"
@@ -52,7 +52,7 @@
                          Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="TextChanged">
-                                <i:InvokeCommandAction Command="{Binding SearchBookCM}"/>
+                                <i:InvokeCommandAction Command="{Binding SearchUserCM}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </TextBox>
@@ -65,25 +65,6 @@
                 </Grid>
 
                 <!--ComboBox-->
-                <ComboBox materialDesign:ComboBoxAssist.MaxLength="5"
-                      materialDesign:HintAssist.Hint="Tìm theo..."
-                      materialDesign:HintAssist.HintOpacity=".7"
-                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                      Padding="10 0 5 0"
-                      IsEditable="True"
-                      Margin="260 0 0 0" 
-                      VerticalAlignment="Center" 
-                      HorizontalAlignment="Left"
-                      Height="40"
-                      Width="200"
-                      ItemsSource="{Binding SearchList}" 
-                      SelectedItem="{Binding SearchProperties, Mode=TwoWay}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding ResetSearchDataCM}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ComboBox>
 
                 <!--Add Button-->
                 <Button Margin="300 0 0 0"
@@ -104,7 +85,7 @@
                     </StackPanel>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding}"/>
+                            <i:InvokeCommandAction Command="{Binding OpenAddUserCM}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button> 
@@ -115,16 +96,11 @@
                    ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                    RowStyle="{DynamicResource DataGridRowStyle1}"
                    x:Name="customerGrid" 
-                   ItemsSource="{Binding ListBooks}"
-                   SelectedItem="{Binding BookSeleted}"
+                   ItemsSource="{Binding ListUsers}"
+                   SelectedItem="{Binding UserSelected}"
                    AutoGenerateColumns="False" 
                    IsReadOnly="True"
                    Grid.Row="1">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding ViewBookCM}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn CanUserResize="False" 
                                         Width="Auto" 
@@ -138,26 +114,29 @@
                     <DataGridTextColumn Header="Tên đăng nhập" 
                                     IsReadOnly="True" 
                                     Width="Auto" 
-                                    Binding="{Binding}"/>
-                    <DataGridTextColumn Header="Mật khẩu" 
-                                    IsReadOnly="True" 
-                                    Width="auto" 
-                                    Binding= "{Binding}"/>
+                                    Binding="{Binding TenDangNhap}"/>
                     <DataGridTextColumn Header="Tên người dùng" 
                                     IsReadOnly="True" 
                                     Width="Auto" 
-                                    Binding= "{Binding}"/>
-                    <DataGridTextColumn Header="Nhóm người dùng" 
+                                    Binding= "{Binding TenNguoiDung}"/>
+                    <DataGridTextColumn Header="Mã nhóm" 
                                     IsReadOnly="True" 
                                     Width="Auto" 
-                                    Binding= "{Binding}"/>
+                                    Binding= "{Binding NHOMNGUOIDUNG.MaNhom}"/>
+                    <DataGridTextColumn Header="Tên nhóm" 
+                                    IsReadOnly="True" 
+                                    Width="Auto" 
+                                    Binding= "{Binding NHOMNGUOIDUNG.TenNhom}"/>
                     <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource gridEditButton}" 
+                                        Margin="5 0 0 0" 
+                                        Command="{Binding ElementName=customerGrid, Path=DataContext.OpenUpdateUserCM}"/>
                                     <Button Style="{StaticResource gridRemoveButton}" 
                                         Margin="5 0 0 0" 
-                                        Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteBookCM}"/>
+                                        Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteUserCM}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

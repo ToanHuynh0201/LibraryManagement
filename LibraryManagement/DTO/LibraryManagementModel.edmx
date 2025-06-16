@@ -116,6 +116,7 @@
           <Property Name="MatKhau" Type="varchar" MaxLength="256" Nullable="false" />
           <Property Name="TenNguoiDung" Type="nvarchar(max)" />
           <Property Name="MaNhom" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="NHOMNGUOIDUNG">
           <Key>
@@ -667,6 +668,7 @@
           <Property Name="MaNhom" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DOCGIAs" Relationship="Self.fk_dg_nd" FromRole="NGUOIDUNG" ToRole="DOCGIA" />
           <NavigationProperty Name="NHOMNGUOIDUNG" Relationship="Self.fk_nd_nnd" FromRole="NGUOIDUNG" ToRole="NHOMNGUOIDUNG" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="NHOMNGUOIDUNG">
           <Key>
@@ -1147,6 +1149,7 @@
           <EntitySetMapping Name="NGUOIDUNGs">
             <EntityTypeMapping TypeName="LibraryManagementModel.NGUOIDUNG">
               <MappingFragment StoreEntitySet="NGUOIDUNG">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
                 <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
                 <ScalarProperty Name="TenNguoiDung" ColumnName="TenNguoiDung" />

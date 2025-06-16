@@ -158,7 +158,8 @@ CREATE TABLE NGUOIDUNG
     TenDangNhap varchar(64) PRIMARY KEY,
     MatKhau varchar(256) NOT NULL,
     TenNguoiDung nvarchar(max),
-    MaNhom int NOT NULL
+    MaNhom int NOT NULL,
+	IsDeleted bit DEFAULT 0
 )
 
 CREATE TABLE NHOMNGUOIDUNG

@@ -8,6 +8,7 @@ using LibraryManagement.View.BookCopy;
 using LibraryManagement.View.BookReceiving;
 using LibraryManagement.View.BookTitle;
 using LibraryManagement.View.Category;
+using LibraryManagement.View.GroupUser;
 using LibraryManagement.View.Reader;
 using LibraryManagement.View.Report;
 using LibraryManagement.View.Users;
@@ -35,7 +36,7 @@ namespace LibraryManagement.ViewModel
             });
             QuanLyNhomNguoiDung = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                NavigationFrame.Navigate(new UserSettingsGroup());
+                NavigationFrame.Navigate(new GroupUserManagement());
             });
         }
     }

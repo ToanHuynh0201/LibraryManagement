@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LibraryManagement.DTO;
 using LibraryManagement.DAL;
 using ControlzEx;
+using System.Windows;
 
 namespace LibraryManagement.BLL
 {
@@ -42,16 +43,24 @@ namespace LibraryManagement.BLL
             {
                 return (false, "Tên đăng nhập đã tồn tại");
             }
-            if(nd.MaNhom == 3)
+            NHOMNGUOIDUNG nnd = await NhomNguoiDungBLL.Instance.GetNhomNguoiDungById(nd.MaNhom);
+            foreach(var cn in nnd.CHUCNANGs)
+            if(cn.id == 8)
             {
-                return (false, "Người dùng là độc giả phải được đăng ký thẻ trước khi thêm.");
+                return (false, "Người dùng là độc giả phải được đăng ký thẻ qua trang quản lý độc giả.");
+            }
+            if (nd.MaNhom == 3)
+            {
+                return (false, "Người dùng là độc giả phải được đăng ký thẻ qua trang quản lý độc giả.");
             }
             var res = CheckNguoiDung(nd);
             if (!res.Item1)
             {
                 return (false, res.Item2);
             }
-            return await NguoiDungDAL.Instance.AddNguoiDung(nd);
+            int manhom;
+            manhom = nd.MaNhom;
+            return await NguoiDungDAL.Instance.AddNguoiDung(nd, manhom);
         }
         public async Task<(bool, string)> UpdateNguoiDung(NGUOIDUNG nd)
         {
@@ -69,6 +78,10 @@ namespace LibraryManagement.BLL
             {
                 return (false, res.Item2);
             }
+            if(nd.MaNhom == 3)
+            {
+                return (false, "Nhóm độc giả phải được đăng ký thẻ, không thể đổi nhóm");
+            }
             return await NguoiDungDAL.Instance.UpdateNguoiDung(nd);
         }
         public async Task<(bool, string)> DeleteNguoiDung(string tendangnhap)
@@ -83,9 +96,9 @@ namespace LibraryManagement.BLL
                 return (false, "Không thể xóa người dùng Admin");
             }
             var docgia = DocGiaBLL.Instance.GetDocGiaByTenDangNhap(tendangnhap);
-            if (docgia != null)
+            if (docgia.Result != null)
             {
-                return (false, "Người dùng là độc giả, không thể xoá");
+                return (false, "Người dùng là độc giả, hãy xoá thẻ của người dùng trước");
             }
             return await NguoiDungDAL.Instance.DeleteNguoiDung(tendangnhap);
         }
