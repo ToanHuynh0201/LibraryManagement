@@ -40,10 +40,13 @@
     <viewmodel:CategoryLoanReportVM x:Key="CategoryLoanReportVM"/>
     <viewmodel:CategoryLoanReportDetailVM x:Key="CategoryReportDetailVM"/>
     <viewmodel:ReportManagementVM x:Key="ReportVM"/>
-    
+    <viewmodel:OverdueBookVM x:Key="OverdueBookVM"/>
+    <viewmodel:UserTabViewModel x:Key="UserTabVM"/>
+
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <converters:ListViewGridViewConverter x:Key="GridLinesVisibilityBorderToThicknessConverter"/>
 
+    <utils:BoolToYesNoConverter x:Key="BoolToYesNoConverter"/>
     <utils:DateToStringConverter x:Key="DateToStringConverter"/>
     
     <!--#region SolidColorBrush-->

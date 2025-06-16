@@ -18,6 +18,7 @@
         <EntityType Name="BCSACHTRATRE">
           <Key>
             <PropertyRef Name="Ngay" />
+            <PropertyRef Name="MaCuonSach" />
           </Key>
           <Property Name="Ngay" Type="datetime" Nullable="false" />
           <Property Name="MaCuonSach" Type="int" Nullable="false" />
@@ -80,7 +81,7 @@
           <Property Name="MaDauSach" Type="char" MaxLength="7" StoreGeneratedPattern="Computed" />
           <Property Name="TenDauSach" Type="nvarchar(max)" Nullable="false" />
           <Property Name="MaTheLoai" Type="int" Nullable="false" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="DOCGIA">
           <Key>
@@ -97,7 +98,7 @@
           <Property Name="NgayHetHan" Type="datetime" Nullable="false" />
           <Property Name="TongNo" Type="int" />
           <Property Name="TenDangNhap" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="LOAIDOCGIA">
           <Key>
@@ -187,19 +188,11 @@
           <Property Name="MaTG" Type="char" MaxLength="6" StoreGeneratedPattern="Computed" />
           <Property Name="TenTG" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="THAMSO">
           <Key>
-            <PropertyRef Name="TuoiDGToiDa" />
-            <PropertyRef Name="TuoiDGToiThieu" />
-            <PropertyRef Name="GiaTriThe" />
-            <PropertyRef Name="KhoangCachNamXB" />
-            <PropertyRef Name="SoSachMuonToiDa" />
-            <PropertyRef Name="SoNgayMuonToiDa" />
-            <PropertyRef Name="TienPhatTre" />
-            <PropertyRef Name="ApDungQDThuPhat" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" Nullable="false" />
           <Property Name="TuoiDGToiDa" Type="int" Nullable="false" />
           <Property Name="TuoiDGToiThieu" Type="int" Nullable="false" />
           <Property Name="GiaTriThe" Type="int" Nullable="false" />
@@ -472,19 +465,8 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           <EntitySet Name="PHIEUTHUTIENPHAT" EntityType="Self.PHIEUTHUTIENPHAT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SACH" EntityType="Self.SACH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TACGIA" EntityType="Self.TACGIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THAMSO" EntityType="Self.THAMSO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THELOAI" EntityType="Self.THELOAI" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="THAMSO" EntityType="Self.THAMSO" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [THAMSO].[TuoiDGToiDa] AS [TuoiDGToiDa], 
-    [THAMSO].[TuoiDGToiThieu] AS [TuoiDGToiThieu], 
-    [THAMSO].[GiaTriThe] AS [GiaTriThe], 
-    [THAMSO].[KhoangCachNamXB] AS [KhoangCachNamXB], 
-    [THAMSO].[SoSachMuonToiDa] AS [SoSachMuonToiDa], 
-    [THAMSO].[SoNgayMuonToiDa] AS [SoNgayMuonToiDa], 
-    [THAMSO].[TienPhatTre] AS [TienPhatTre], 
-    [THAMSO].[ApDungQDThuPhat] AS [ApDungQDThuPhat]
-    FROM [dbo].[THAMSO] AS [THAMSO]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="fk_bcstt_s" Association="Self.fk_bcstt_s">
             <End Role="CUONSACH" EntitySet="CUONSACH" />
             <End Role="BCSACHTRATRE" EntitySet="BCSACHTRATRE" />
@@ -577,6 +559,7 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
         <EntityType Name="BCSACHTRATRE">
           <Key>
             <PropertyRef Name="Ngay" />
+            <PropertyRef Name="MaCuonSach" />
           </Key>
           <Property Name="Ngay" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MaCuonSach" Type="Int32" Nullable="false" />
@@ -642,7 +625,7 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           <NavigationProperty Name="SACHes" Relationship="Self.fk_s_tts" FromRole="DAUSACH" ToRole="SACH" />
           <NavigationProperty Name="THELOAI" Relationship="Self.fk_tts_tl" FromRole="DAUSACH" ToRole="THELOAI" />
           <NavigationProperty Name="TACGIAs" Relationship="Self.CT_TGSACH" FromRole="DAUSACH" ToRole="TACGIA" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="DOCGIA">
           <Key>
@@ -663,7 +646,7 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           <NavigationProperty Name="NGUOIDUNG" Relationship="Self.fk_dg_nd" FromRole="DOCGIA" ToRole="NGUOIDUNG" />
           <NavigationProperty Name="PHIEUMUONTRAs" Relationship="Self.fk_pmt_dg" FromRole="DOCGIA" ToRole="PHIEUMUONTRA" />
           <NavigationProperty Name="PHIEUTHUTIENPHATs" Relationship="Self.fk_pttp_dg" FromRole="DOCGIA" ToRole="PHIEUTHUTIENPHAT" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="LOAIDOCGIA">
           <Key>
@@ -770,14 +753,7 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
         </EntityType>
         <EntityType Name="THAMSO">
           <Key>
-            <PropertyRef Name="TuoiDGToiDa" />
-            <PropertyRef Name="TuoiDGToiThieu" />
-            <PropertyRef Name="GiaTriThe" />
-            <PropertyRef Name="KhoangCachNamXB" />
-            <PropertyRef Name="SoSachMuonToiDa" />
-            <PropertyRef Name="SoNgayMuonToiDa" />
-            <PropertyRef Name="TienPhatTre" />
-            <PropertyRef Name="ApDungQDThuPhat" />
+            <PropertyRef Name="id" />
           </Key>
           <Property Name="TuoiDGToiDa" Type="Int32" Nullable="false" />
           <Property Name="TuoiDGToiThieu" Type="Int32" Nullable="false" />
@@ -787,6 +763,7 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           <Property Name="SoNgayMuonToiDa" Type="Int32" Nullable="false" />
           <Property Name="TienPhatTre" Type="Int32" Nullable="false" />
           <Property Name="ApDungQDThuPhat" Type="Boolean" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="fk_blmtl_bctlm">
           <End Role="BCTONGLUOTMUON" Type="Self.BCTONGLUOTMUON" Multiplicity="1" />
@@ -1258,6 +1235,7 @@ warning 6002: The table/view 'LibraryManagement.dbo.THAMSO' does not have a prim
           <EntitySetMapping Name="THAMSOes">
             <EntityTypeMapping TypeName="LibraryManagementModel.THAMSO">
               <MappingFragment StoreEntitySet="THAMSO">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="TuoiDGToiDa" ColumnName="TuoiDGToiDa" />
                 <ScalarProperty Name="TuoiDGToiThieu" ColumnName="TuoiDGToiThieu" />
                 <ScalarProperty Name="GiaTriThe" ColumnName="GiaTriThe" />

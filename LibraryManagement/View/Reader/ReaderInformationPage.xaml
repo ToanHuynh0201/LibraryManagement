@@ -6,11 +6,14 @@
       xmlns:local="clr-namespace:LibraryManagement.View.Reader"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      DataContext="{StaticResource ReaderInformationVM}"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:sys="clr-namespace:System.Globalization;assembly=mscorlib"
+         DataContext="{StaticResource ReaderInformationVM}"
       d:DesignHeight="740" 
       d:DesignWidth="840"
       Title="ReaderInformationPage">
+    <Window.Resources>
+        <sys:CultureInfo x:Key="VietnameseCulture">vi-VN</sys:CultureInfo>
+    </Window.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadDataCM}"/>
@@ -237,25 +240,26 @@
                     <DataGridTextColumn Header="Ngày mượn" 
                                         IsReadOnly="True" 
                                         Width="Auto" 
-                                        Binding="{Binding NgayMuon}"/>
+                                        Binding="{Binding NgayMuon, StringFormat=dd/MM/yyyy}"
+                                        />
                     <!-- BINDING DATA RIGHT HERE -->
 
                     <DataGridTextColumn Header="Hạn trả" 
                                         IsReadOnly="True" 
                                         Width="Auto" 
-                                        Binding="{Binding HanTra}"/>
+                                        Binding="{Binding HanTra, StringFormat=dd/MM/yyyy}"/>
                     <!-- BINDING DATA RIGHT HERE -->
 
                     <DataGridTextColumn Header="Ngày trả" 
                                         IsReadOnly="True" 
                                         Width="Auto" 
-                                        Binding="{Binding NgayTra}"/>
+                                        Binding="{Binding NgayTra,StringFormat=dd/MM/yyyy}"/>
                     <!-- BINDING DATA RIGHT HERE -->
 
                     <DataGridTextColumn Header="Số tiền phạt" 
                                         IsReadOnly="True" 
                                         Width="Auto" 
-                                        Binding="{Binding TienPhat}"/>
+                                        Binding="{Binding TienPhat, StringFormat=N0}"/>
                     <!-- BINDING DATA RIGHT HERE -->
                 </DataGrid.Columns>
             </DataGrid>

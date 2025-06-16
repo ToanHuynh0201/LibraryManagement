@@ -36,8 +36,10 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
+                var startDate = ngay.Date;
+                var endDate = ngay.AddDays(1).Date;
                 return await context.BCSACHTRATREs.Include(bc => bc.CUONSACH.SACH.DAUSACH)
-                                    .Where(bc => bc.Ngay.Date == ngay.Date)
+                                    .Where(bc => bc.Ngay >= startDate && bc.Ngay < endDate)
                                     .OrderByDescending(bc => bc.SoNgayTraTre).ToListAsync();
             }
         }
@@ -48,15 +50,19 @@ namespace LibraryManagement.DAL
             {
                 using (var context = new LibraryManagementEntities())
                 {
-                    var baocao = context.BCSACHTRATREs.Where(bc => bc.Ngay.Date == ngay.Date);
+                    var startDate = ngay.Date;
+                    var endDate = ngay.AddDays(1).Date;
+                    var baocao = await context.BCSACHTRATREs
+                        .Where(bc => bc.Ngay >= startDate && bc.Ngay < endDate)
+                        .ToListAsync();
                     context.BCSACHTRATREs.RemoveRange(baocao);
 
                     var phieumuontre = await context.PHIEUMUONTRAs.Where(pmt => pmt.NgayTra == null && 
-                                             pmt.HanTra.Date < ngay.Date) .ToListAsync();
+                                             pmt.HanTra < startDate) .ToListAsync();
 
                     foreach (var pmt in phieumuontre)
                     {
-                        int songaytratre = (ngay.Date - pmt.HanTra.Date).Days;
+                        int songaytratre = (startDate - pmt.HanTra.Date).Days;
 
                         var bcsachtratre = new BCSACHTRATRE
                         {

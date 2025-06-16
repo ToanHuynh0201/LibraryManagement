@@ -6,11 +6,20 @@
       xmlns:local="clr-namespace:LibraryManagement.View.Report"
       mc:Ignorable="d" 
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:sys="clr-namespace:System.Globalization;assembly=mscorlib"
       d:DesignHeight="740" 
       d:DesignWidth="840"
-      Title="OverdueBooksReportManagement">
-
+      Title="OverdueBooksReportManagement"
+      x:Name="overduebookWindow"
+      DataContext="{StaticResource OverdueBookVM}">
+    <Page.Resources>
+        <sys:CultureInfo x:Key="VietnameseCulture">vi-VN</sys:CultureInfo>
+    </Page.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadCurrentDataReportCM}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Border CornerRadius="25"
             Background="#eff2f7"
@@ -26,11 +35,49 @@
                     Orientation="Horizontal"
                     Margin="30 5">
                     <DatePicker 
-                         materialDesign:HintAssist.Hint="Thời gian báo cáo"
-                         Width="200" 
-                         materialDesign:TextFieldAssist.HasClearButton="True"
-                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                         FontSize="18"/>
+                        materialDesign:HintAssist.Hint="Thời gian báo cáo"
+                        Width="200" 
+                        SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Language="vi-VN"
+                        FontSize="18">
+                        <DatePicker.Template>
+                            <ControlTemplate TargetType="DatePicker">
+                                <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="4">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0"
+                               Text="{Binding SelectedDate, RelativeSource={RelativeSource TemplatedParent}, StringFormat=dd/MM/yyyy, FallbackValue='Chọn ngày'}"
+                               VerticalAlignment="Center"
+                               Margin="10,0,0,0"
+                               FontSize="{TemplateBinding FontSize}"/>
+
+                                        <!-- Calendar button -->
+                                        <Button Grid.Column="1" 
+                                                Name="PART_Button"
+                                                Background="Transparent"
+                                                BorderThickness="0"
+                                                Padding="8">
+                                            <materialDesign:PackIcon Kind="Calendar" Foreground="Black"/>
+                                        </Button>
+
+                                        <!-- Calendar popup -->
+                                        <Popup Name="PART_Popup"
+                           AllowsTransparency="True"
+                           Placement="Bottom"
+                           PlacementTarget="{Binding ElementName=PART_Button}"
+                           StaysOpen="False"/>
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </DatePicker.Template>
+                    </DatePicker>
 
                     <Button
                         Margin="30 5 0 0"
@@ -56,7 +103,7 @@
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding}"/>
+                                <i:InvokeCommandAction Command="{Binding CreateReportCM}"/>
                                 <!-- ADD COMMENT RIGHT HERE -->
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
@@ -71,16 +118,11 @@
                         ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                         RowStyle="{DynamicResource DataGridRowStyle1}"
                         x:Name="customerGrid" 
-                        ItemsSource="{Binding}" 
+                        ItemsSource="{Binding ListOverdueReport}" 
                         AutoGenerateColumns="False" 
                         IsReadOnly="True"
-                        Grid.Row="1">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseDoubleClick">
-                                <i:InvokeCommandAction Command="{Binding}"/>
-                                <!-- ADD COMMENT RIGHT HERE -->
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
+                        Grid.Row="1"
+                        AlternationCount="2147483647">
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn CanUserResize="False" 
                                 Width="Auto" 
@@ -92,42 +134,42 @@
                                 </DataGridCheckBoxColumn.HeaderTemplate>
                             </DataGridCheckBoxColumn>
 
-                            <DataGridTextColumn Header="ID" 
-                                IsReadOnly="True" 
-                                Width="Auto" 
-                                Binding="{Binding}"/>       
+                            <DataGridTemplateColumn Header="STT" Width="60">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=AlternationIndex, StringFormat={}{0}}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <!-- BINDING DATA RIGHT HERE -->
 
-                            <DataGridTextColumn Header="Tên cuốn sách" 
+
+                            <DataGridTextColumn Header="Mã cuốn sách" 
                                 IsReadOnly="True" 
                                 CanUserResize="False"
-                                Width="Auto"/>
+                                Width="Auto"
+                                Binding="{Binding CUONSACH.MaCuonSach}"/>
+                            <!-- BINDING DATA RIGHT HERE -->
+
+                            
+                            <DataGridTextColumn Header="Tên sách" 
+                                IsReadOnly="True" 
+                                CanUserResize="False"
+                                Width="Auto"
+                                Binding="{Binding CUONSACH.SACH.DAUSACH.TenDauSach}"/>
                             <!-- BINDING DATA RIGHT HERE -->
 
                             <DataGridTextColumn Header="Ngày mượn" 
                                 IsReadOnly="True" 
                                 Width="Auto" 
-                                Binding="{Binding}"/>
+                                Binding="{Binding NgayMuon, StringFormat=dd/MM/yyyy}"/>
                             <!-- BINDING DATA RIGHT HERE -->
 
                             <DataGridTextColumn Header="Số ngày trả trễ" 
                                 IsReadOnly="True" 
                                 Width="Auto" 
-                                Binding="{Binding}"/>       
+                                Binding="{Binding SoNgayTraTre}"/>       
                             <!-- BINDING DATA RIGHT HERE -->
-                            <DataGridTemplateColumn Header="" IsReadOnly="True" Width="Auto">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button Style="{StaticResource gridEditButton}"
-                                                Command="{Binding ElementName=customerGrid, Path=DataContext.UpdateBookCM}"/>
-                                            <Button Style="{StaticResource gridRemoveButton}" 
-                                                Margin="5 0 0 0" 
-                                                Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteBookCM}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

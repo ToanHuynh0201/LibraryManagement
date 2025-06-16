@@ -91,26 +91,33 @@ namespace LibraryManagement.ViewModel
 
             AddReportCM = new RelayCommand<Window>((p) => true, async (p) =>
             {
-                if (SelectedMonth == 0 || SelectedYear == 0)
+                try
                 {
-                    MessageBox.Show("Vui lòng chọn tháng và năm!");
-                    return;
-                }
-
-                var result = MessageBox.Show(
-                             "Lưu ý: Nếu đã có báo cáo cùng tháng năm, báo cáo cũ sẽ bị xóa và thay thế bằng báo cáo mới.",
-                             "Xác nhận lập báo cáo",
-                             MessageBoxButton.YesNo,
-                             MessageBoxImage.Question);
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    var res = await Task.Run(async () => await BaoCaoThongKeBLL.Instance.AddBaoCao(SelectedMonth, SelectedYear));
-                    MessageBox.Show(res.Item2);
-                    if (res.Item1)
+                    if (SelectedMonth == 0 || SelectedYear == 0)
                     {
-                        LoadDataCM.Execute(null);
+                        MessageBox.Show("Vui lòng chọn tháng và năm để lập báo cáo");
+                        return;
                     }
+
+                    var result = MessageBox.Show(
+                                 "Lưu ý: Nếu đã có báo cáo cùng tháng năm, báo cáo cũ sẽ bị xóa và thay thế bằng báo cáo mới.",
+                                 "Xác nhận lập báo cáo",
+                                 MessageBoxButton.YesNo,
+                                 MessageBoxImage.Question);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        var res = await Task.Run(async () => await BaoCaoThongKeBLL.Instance.AddBaoCao(SelectedMonth, SelectedYear));
+                        MessageBox.Show(res.Item2);
+                        if (res.Item1)
+                        {
+                            LoadDataCM.Execute(null);
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Đã có lỗi khi lập báo cáo, vui lòng thao tác lại : " + ex.Message.ToString());
                 }
             });
 

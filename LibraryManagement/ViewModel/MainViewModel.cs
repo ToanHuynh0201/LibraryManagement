@@ -16,11 +16,13 @@ namespace LibraryManagement.ViewModel
         public ICommand QuanLySachCM { get; set; }
         public ICommand QuanLyMuonTraCM { get; set; }
         public ICommand QuanLyPhatCM { get; set; }
-        public ICommand QuanLyNoiBoCM { get; set; }
+        public ICommand QuanLyNguoiDungCM { get; set; }
         public ICommand ThongKeCM { get; set; }
         public ICommand TaiKhoanCM { get; set; }
+        public ICommand QuyDinhCM { get; set; }
         public ICommand DangXuatCM { get; set; }
         public ICommand ThoatCM { get; set; }
+        public ICommand TrangDocGiaCM { get; set; }
 
         public Frame NavigationFrame { get; set; }
 
@@ -50,11 +52,19 @@ namespace LibraryManagement.ViewModel
             {
                 NavigationFrame.Navigate(new ReportPage());
             });
-            QuanLyNoiBoCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            QuyDinhCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                NavigationFrame.Navigate(new InternalViewModel());
+                NavigationFrame.Navigate(new Rule());
             });
-            TaiKhoanCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            QuanLyNguoiDungCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                NavigationFrame.Navigate(new UserTab());
+            });
+            TrangDocGiaCM = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                NavigationFrame.Navigate(new UserReaderTab());
+            });
+            DangXuatCM = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 NavigationFrame.Navigate(new Account());
             });

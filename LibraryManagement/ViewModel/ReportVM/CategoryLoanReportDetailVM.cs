@@ -55,8 +55,7 @@ namespace LibraryManagement.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Lỗi khi lập báo cáo : " + ex.ToString());
                 }
             });
             CloseWindowCM = new RelayCommand<Window>((p) => p != null, (p) =>

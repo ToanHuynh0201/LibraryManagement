@@ -84,6 +84,10 @@ namespace LibraryManagement.BLL
                     return (false, "Không thể xoá nhóm người dùng Độc giả");
                 }
             }
+            var ND = await NguoiDungDAL.Instance.GetAllUsers();
+            foreach (var nd in ND)
+                if (nd.MaNhom == id)
+                    return (false, "Không thể xoá nhóm người dùng vẫn còn người dùng");
             return await NhomNguoiDungDAL.Instance.DeleteNhomNguoiDung(id);
         }
         private (bool, string) CheckNhomND(NHOMNGUOIDUNG nnd)

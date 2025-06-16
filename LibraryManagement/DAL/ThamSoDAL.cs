@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LibraryManagement.DAL
 {
@@ -36,7 +37,7 @@ namespace LibraryManagement.DAL
             using (var context = new LibraryManagementEntities())
                 try
                 {
-                    THAMSO thamso = await context.THAMSOes.AsNoTracking().FirstOrDefaultAsync();
+                    THAMSO thamso = await context.THAMSOes.FirstOrDefaultAsync();
                     thamso.TuoiDGToiDa = ts.TuoiDGToiDa;
                     thamso.TuoiDGToiThieu = ts.TuoiDGToiThieu;
                     thamso.GiaTriThe = ts.GiaTriThe;
@@ -45,7 +46,6 @@ namespace LibraryManagement.DAL
                     thamso.SoNgayMuonToiDa = ts.SoNgayMuonToiDa;
                     thamso.TienPhatTre = ts.TienPhatTre;
                     thamso.ApDungQDThuPhat = ts.ApDungQDThuPhat;
-
                     await context.SaveChangesAsync();
                     return (true, "Cập nhật tham số thành công");
                 }

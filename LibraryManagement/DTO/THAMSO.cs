@@ -22,5 +22,6 @@ namespace LibraryManagement.DTO
         public int SoNgayMuonToiDa { get; set; }
         public int TienPhatTre { get; set; }
         public bool ApDungQDThuPhat { get; set; }
+        public int id { get; set; }
     }
 }

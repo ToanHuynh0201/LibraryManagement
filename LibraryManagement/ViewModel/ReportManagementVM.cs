@@ -32,7 +32,7 @@ namespace LibraryManagement.ViewModel
         });
         BaoCaoSachTraTreCM = new RelayCommand<object>((p) => { return true; }, (p) =>
         {
-            //NavigationFrame.Navigate(new ReaderTypePage());
+            NavigationFrame.Navigate(new OverdueBooksReportManagement());
         });
         }
     }

@@ -39,6 +39,7 @@ namespace LibraryManagement.ViewModel
                 docgia = docgiaSelected;
                 var data = await Task.Run(async () => await PhieuMuonTraBLL.Instance.GetPMTByMaDG(docgia.id));
                 dsPMT = new ObservableCollection<PHIEUMUONTRA>(data);
+                OnPropertyChanged(nameof(dsPMT));
             });
         }
     }

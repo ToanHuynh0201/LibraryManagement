@@ -110,10 +110,11 @@ CREATE TABLE PHIEUTHUTIENPHAT
 
 CREATE TABLE BCSACHTRATRE
 (
-    Ngay datetime PRIMARY KEY,
+    Ngay datetime,
     MaCuonSach int NOT NULL,
     NgayMuon datetime NOT NULL,
-    SoNgayTraTre int DEFAULT 0
+    SoNgayTraTre int DEFAULT 0,
+    PRIMARY KEY(Ngay, MaCuonSach)
 )
 
 CREATE TABLE BCTONGLUOTMUON
@@ -184,6 +185,7 @@ CREATE TABLE PHANQUYEN
 
 CREATE TABLE THAMSO
 (
+	id int NOT NULL DEFAULT 1 PRIMARY KEY,
     TuoiDGToiDa int NOT NULL,
     TuoiDGToiThieu int NOT NULL,
     GiaTriThe int NOT NULL,
@@ -243,8 +245,6 @@ insert into CHUCNANG (TenChucNang, TenManHinh) VALUES ('QLPMT', N'Quản lý phi
 insert into CHUCNANG (TenChucNang, TenManHinh) VALUES ('QLPT', N'Quản lý phiếu thu')
 insert into CHUCNANG (TenChucNang, TenManHinh) VALUES ('BCTK', N'Báo cáo - Thống kê')
 insert into CHUCNANG (TenChucNang, TenManHinh) VALUES ('TDQD', N'Thay đổi quy định')
-insert into CHUCNANG (TenChucNang, TenManHinh) VALUES ('TCS', N'Tra cứu sách')
-insert into CHUCNANG (TenChucNang, TenManHinh) VALUES ('LSMT', N'Lịch sử mượn trả')
 insert into CHUCNANG (TenChucNang, TenManHinh) VALUES ('TTDG', N'Thông tin độc giả')
 
 GO
@@ -264,8 +264,6 @@ INSERT INTO PHANQUYEN VALUES (2, 5)
 INSERT INTO PHANQUYEN VALUES (2, 6)
 
 INSERT INTO PHANQUYEN VALUES (3, 8)
-INSERT INTO PHANQUYEN VALUES (3, 9)
-INSERT INTO PHANQUYEN VALUES (3, 10)
 
 GO
 

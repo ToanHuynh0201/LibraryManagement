@@ -243,10 +243,12 @@
     <Compile Include="DTO\THAMSO.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\THAMSOPartial.cs" />
     <Compile Include="DTO\THELOAI.cs">
       <DependentUpon>LibraryManagementModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\THELOAIPartial.cs" />
+    <Compile Include="Utils\BoolToYesConvert.cs" />
     <Compile Include="Utils\DateToStringConvert.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\ReportManagementVM.cs" />
@@ -315,6 +317,7 @@
     <Compile Include="ViewModel\ReaderVM\ReaderViewModel.cs" />
     <Compile Include="ViewModel\RuleViewModel.cs" />
     <Compile Include="ViewModel\StatisticViewModel.cs" />
+    <Compile Include="ViewModel\UserTabViewModel.cs" />
     <Compile Include="View\Author\AuthorManagement.xaml.cs">
       <DependentUpon>AuthorManagement.xaml</DependentUpon>
     </Compile>
@@ -676,7 +679,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LibraryManagementModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="DTO\LibraryManagementModel.edmx.diagram">
       <DependentUpon>LibraryManagementModel.edmx</DependentUpon>
     </None>
@@ -689,7 +694,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModel\UserVM\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="DTO\LibraryManagementModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
