@@ -87,7 +87,7 @@ namespace LibraryManagement.DAL
                                                      pmt.NgayMuon.Year == nam &&
                                                      pmt.CUONSACH.SACH.DAUSACH.THELOAI.id == theloai.id)
                                                      .CountAsync();
-                        float tyle = TongLuotMuon > 0 ? (float)SoLuotMuonTheoTL / TongLuotMuon * 100 : 0;
+                        float tyle = TongLuotMuon > 0 ? (float)SoLuotMuonTheoTL / TongLuotMuon : 0;
 
                         if (tyle > 0)
                         {
@@ -96,7 +96,7 @@ namespace LibraryManagement.DAL
                                 MaBaoCao = BaoCaoTong.id,
                                 MaTheLoai = theloai.id,
                                 SoLuotMuon = SoLuotMuonTheoTL,
-                                TyLe = (decimal?)Math.Round(tyle, 2)
+                                TyLe = (decimal?)Math.Round(tyle, 4)
                             };
 
                             context.BCLUOTMUONTHEOTHELOAIs.Add(bctheotheloai);

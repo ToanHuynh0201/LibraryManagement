@@ -45,6 +45,7 @@ namespace LibraryManagement.ViewModel
         {
             ListCategoryDetails = new ObservableCollection<BCLUOTMUONTHEOTHELOAI>();
             BaoCaoTongLuotMuon = SelectedReport;
+            OnPropertyChanged(nameof(BaoCaoTongLuotMuon));
             LoadDataCM = new RelayCommand<Window>((p) => SelectedReport != null, async (p) =>
             {
                 try

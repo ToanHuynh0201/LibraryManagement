@@ -68,27 +68,27 @@
                     Margin="30,0"
                     Width="auto">
 
-                    <ComboBox
+                    <TextBox
                         materialDesign:HintAssist.Hint="Tháng"
+                        materialDesign:HintAssist.IsFloating="True"
                         FontSize="18"
                         Width="100" 
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                         Text="{Binding BaoCaoTongLuotMuon.Thang}"
                         IsEnabled="False"/>
 
-                    <ComboBox
+                    <TextBox
                         Margin="30 0 "
                         materialDesign:HintAssist.Hint="Năm"
+                        materialDesign:HintAssist.IsFloating="True"
                         Width="100"
                         FontSize="18"
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                         Text="{Binding BaoCaoTongLuotMuon.Nam}"
                         IsEnabled="False"/>
-                    <ComboBox
+                    <TextBox
                         materialDesign:HintAssist.Hint="Mã báo cáo"
+                        materialDesign:HintAssist.IsFloating="True"
                         FontSize="18"
                         Width="100" 
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                         Text="{Binding BaoCaoTongLuotMuon.MaBaoCao}"
                         IsEnabled="False"/>
                 </StackPanel>
@@ -161,7 +161,7 @@
                         <DataGridTextColumn Header="Tỷ lệ" 
                             IsReadOnly="True" 
                             Width="Auto" 
-                            Binding="{Binding TyLe, StringFormat={}{0:0.##}%}"/>
+                            Binding="{Binding TyLe, StringFormat=P2}"/>
                         <!-- BINDING DATA RIGHT HERE -->
                     </DataGrid.Columns>
                 </DataGrid>
