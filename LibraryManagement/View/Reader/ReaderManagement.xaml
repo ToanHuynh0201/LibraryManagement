@@ -114,32 +114,6 @@
                     </i:Interaction.Triggers>
                 </Button>
 
-                <!--Export Button-->
-                <Button Margin="680 0 0 0"
-                        Width="150"
-                        Height="40"
-                        Style="{StaticResource MaterialDesignRaisedButton}"
-                        Background="#FF2ABF2B"
-                        BorderBrush="#FFEDE7F8"
-                        materialDesign:ButtonAssist.CornerRadius="10">
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch">
-                        <materialDesign:PackIcon Kind="BookAccount"
-                                                 VerticalAlignment="Center"
-                                                 HorizontalAlignment="Left"
-                                                 Margin="-15 0 0 0"/>
-                        <TextBlock Text="Xuất excel"
-                                   Margin="10 0 0 0"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding ExportExcelCM}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
             </Grid>
             <DataGrid  Style="{DynamicResource DataGridStyle1}"
                        CellStyle="{DynamicResource DataGridCellStyle1}"
