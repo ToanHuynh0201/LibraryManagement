@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace LibraryManagement.View.GroupUser
 {
     /// <summary>
-    /// Interaction logic for EditGroupUserInformationWindow.xaml
+    /// Interaction logic for EditGroupUserWindow.xaml
     /// </summary>
-    public partial class EditGroupUserInformationWindow : Window
+    public partial class EditGroupUserWindow : Window
     {
-        public EditGroupUserInformationWindow()
+        public EditGroupUserWindow()
         {
             InitializeComponent();
         }

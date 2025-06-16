@@ -47,6 +47,7 @@
     <viewmodel:UpdateUserViewModel x:Key="UpdateUserVM"/>
     <viewmodel:UserGroupViewModel x:Key="UserGroupVM"/>
     <viewmodel:AddGroupUserViewModel x:Key="AddGroupUserVM"/>
+    <viewmodel:EditGroupUserViewModel x:Key="EditGroupUserVM"/>
 
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <converters:ListViewGridViewConverter x:Key="GridLinesVisibilityBorderToThicknessConverter"/>
