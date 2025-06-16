@@ -26,28 +26,29 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.NGUOIDUNGs.ToListAsync();
+                return await context.NGUOIDUNGs.Include(nd => nd.NHOMNGUOIDUNG.CHUCNANGs).Where(nd => (nd.IsDeleted == false || nd.IsDeleted == null)).ToListAsync();
             }
         }
         public async Task<NGUOIDUNG> GetNguoiDungByTenDN(string tendangnhap)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.NGUOIDUNGs.FirstOrDefaultAsync(nd => nd.TenDangNhap == tendangnhap);
+                return await context.NGUOIDUNGs.Include(nd => nd.NHOMNGUOIDUNG.CHUCNANGs).FirstOrDefaultAsync(nd => nd.TenDangNhap == tendangnhap && (nd.IsDeleted == false || nd.IsDeleted == null));
             }
         }
         public async Task<List<NGUOIDUNG>> GetNguoiDungByMaNhom(int manhom)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.NGUOIDUNGs.Where(nd => nd.MaNhom == manhom).ToListAsync();
+                return await context.NGUOIDUNGs.Include(nd => nd.NHOMNGUOIDUNG.CHUCNANGs).Where(nd => nd.MaNhom == manhom && (nd.IsDeleted == false || nd.IsDeleted == null)).ToListAsync();
             }
         }
-        public async Task<(bool, string)> AddNguoiDung(NGUOIDUNG nd)
+        public async Task<(bool, string)> AddNguoiDung(NGUOIDUNG nd, int manhom)
         {
             using (var context = new LibraryManagementEntities())
                 try
                 {
+                    nd.MaNhom = manhom;
                     context.NGUOIDUNGs.Add(nd);
                     await context.SaveChangesAsync();
                     return (true, "Thêm người dùng thành công");
@@ -62,7 +63,7 @@ namespace LibraryManagement.DAL
             using (var context = new LibraryManagementEntities())
                 try
                 {
-                    NGUOIDUNG nguoidung = await context.NGUOIDUNGs.FindAsync(nd.TenDangNhap);
+                    NGUOIDUNG nguoidung = await context.NGUOIDUNGs.Where(ngd => ngd.IsDeleted == false || ngd.IsDeleted == null).FirstOrDefaultAsync(ngd => ngd.TenDangNhap == nd.TenDangNhap);
                     nguoidung.MatKhau = nd.MatKhau;
                     nguoidung.TenNguoiDung = nd.TenNguoiDung;
                     nguoidung.MaNhom = nd.MaNhom;
@@ -80,12 +81,13 @@ namespace LibraryManagement.DAL
                 try
                 {
                     NGUOIDUNG nguoidung = await context.NGUOIDUNGs.FindAsync(tendangnhap);
+                    nguoidung.IsDeleted = true;
                     await context.SaveChangesAsync();
                     return (true, "Xoá người dùng thành công");
                 }
                 catch (Exception ex)
                 {
-                    return (false, "Xoá thất bại: " + ex.Message);
+                    return (false, "Xoá thất bại: " + ex.ToString());
                 }
         }
     }

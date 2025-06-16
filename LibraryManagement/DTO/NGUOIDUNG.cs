@@ -24,6 +24,7 @@ namespace LibraryManagement.DTO
         public string MatKhau { get; set; }
         public string TenNguoiDung { get; set; }
         public int MaNhom { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DOCGIA> DOCGIAs { get; set; }

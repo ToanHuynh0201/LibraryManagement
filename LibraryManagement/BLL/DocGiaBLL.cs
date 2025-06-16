@@ -85,8 +85,6 @@ namespace LibraryManagement.BLL
             {
                 return (false, res.Item2);
             }
-            int ThoiHanThe = ThamSoBLL.Instance.GetThamSo().Result.GiaTriThe;
-            dg.NgayHetHan = dg.NgayLapThe.AddMonths(ThoiHanThe);
             return await DocGiaDAL.Instance.UpdateDocGia(dg);
         }
         public async Task<(bool, string)> DeleteDocGia(int id)

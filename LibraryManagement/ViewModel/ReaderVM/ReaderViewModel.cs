@@ -173,7 +173,7 @@ namespace LibraryManagement.ViewModel
             });
             DeleteReaderCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
-                var result = MessageBox.Show("Bạn có chắc muốn Ẩn độc giả không?","Xác nhận xóa",
+                var result = MessageBox.Show("Bạn có chắc muốn xoá độc giả không?","Xác nhận xóa",
                                           MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if(result == MessageBoxResult.Yes)
                 {

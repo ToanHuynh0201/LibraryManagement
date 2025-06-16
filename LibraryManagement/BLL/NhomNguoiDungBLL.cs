@@ -55,7 +55,7 @@ namespace LibraryManagement.BLL
             {
                 return(false, "Nhóm người dùng không tồn tại");
             }
-            if(String.Equals(NND.TenNhom, "Admin"))
+            if(NND.id == 1)
             {
                 return (false, "Không thể chỉnh sửa nhóm người dùng Admin");
             }
@@ -64,7 +64,7 @@ namespace LibraryManagement.BLL
             {
                 return res;
             }
-            return await NhomNguoiDungDAL.Instance.AddNhomNguoiDung(nnd);
+            return await NhomNguoiDungDAL.Instance.UpdateNhomNguoiDung(nnd);
         }
         public async Task<(bool, string)> DeleteNhomNguoiDung(int id)
         {
@@ -73,7 +73,7 @@ namespace LibraryManagement.BLL
             {
                 return (false, "Nhóm người dùng không tồn tại");
             }
-            if (NND.TenNhom == "Admin")
+            if (id == 1)
             {
                 return (false, "Không thể xoá nhóm người dùng Admin");
             }
@@ -86,7 +86,7 @@ namespace LibraryManagement.BLL
             }
             var ND = await NguoiDungDAL.Instance.GetAllUsers();
             foreach (var nd in ND)
-                if (nd.MaNhom == id)
+                if (nd.MaNhom == id && (nd.IsDeleted == false || nd.IsDeleted == null))
                     return (false, "Không thể xoá nhóm người dùng vẫn còn người dùng");
             return await NhomNguoiDungDAL.Instance.DeleteNhomNguoiDung(id);
         }
@@ -101,6 +101,14 @@ namespace LibraryManagement.BLL
                 if (ChucNangDAL.Instance.GetChucNangById(cn.id) == null)
                 {
                     return (false, "Nhóm người dùng có phân quyền không hợp lệ");
+                }
+                else if(cn.id == 1)
+                {
+                    return (false, "Chỉ nhóm người dùng Admin mới có quyền quản lý người dùng");
+                }
+                else if(cn.id == 7)
+                {       
+                    return (false, "Chỉ nhóm người dùng Admin mới có quyền thay đổi quy định");
                 }
             }
             if(String.Equals("Admin", nnd.TenNhom))

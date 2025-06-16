@@ -42,6 +42,11 @@
     <viewmodel:ReportManagementVM x:Key="ReportVM"/>
     <viewmodel:OverdueBookVM x:Key="OverdueBookVM"/>
     <viewmodel:UserTabViewModel x:Key="UserTabVM"/>
+    <viewmodel:UserManagementViewModel x:Key="UserManagementVM"/>
+    <viewmodel:AddUserViewModel x:Key="AddUserVM"/>
+    <viewmodel:UpdateUserViewModel x:Key="UpdateUserVM"/>
+    <viewmodel:UserGroupViewModel x:Key="UserGroupVM"/>
+    <viewmodel:AddGroupUserViewModel x:Key="AddGroupUserVM"/>
 
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <converters:ListViewGridViewConverter x:Key="GridLinesVisibilityBorderToThicknessConverter"/>

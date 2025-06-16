@@ -115,11 +115,11 @@ namespace LibraryManagement.DAL
                     DOCGIA docgia = await context.DOCGIAs.FindAsync(id);
                     docgia.IsDeleted = true;
                     await context.SaveChangesAsync();
-                    return (true, "Đã ẩn độc giả");
+                    return (true, "Đã xoá độc giả");
                 }
                 catch (Exception ex)
                 {
-                    return (false, "Ẩn độc giả thất bại: " + ex.ToString());
+                    return (false, "Xoá độc giả thất bại: " + ex.ToString());
                 }
             }
         }
