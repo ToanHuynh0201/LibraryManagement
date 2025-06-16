@@ -36,7 +36,6 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0"
@@ -71,7 +70,7 @@
 
             </Grid>
 
-            <TextBox Grid.Row="2"
+            <TextBox Grid.Row="1"
                      Grid.Column="0"
                      VerticalAlignment="Center"
                      materialDesign:HintAssist.Hint="Tên người dùng"
@@ -81,7 +80,7 @@
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      Margin="10"/>
 
-            <ComboBox Grid.Row="2"
+            <ComboBox Grid.Row="1"
                       Grid.Column="1"
                       materialDesign:ComboBoxAssist.MaxLength="5"
                       materialDesign:HintAssist.Hint="Nhóm người dùng"

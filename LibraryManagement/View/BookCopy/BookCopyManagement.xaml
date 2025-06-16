@@ -153,7 +153,13 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Button Style="{StaticResource gridRemoveButton}" 
                                         Margin="5 0 0 0" 
-                                        Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteBookCopyCM}"/>
+                                        Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteBookCopyCM}">
+                                        <materialDesign:PackIcon Kind="Delete"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"
+                         Width="16"
+                         Height="16"/>
+                                    </Button>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

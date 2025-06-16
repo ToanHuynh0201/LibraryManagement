@@ -12,7 +12,8 @@
         Background="Transparent"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        Height="550 " Width="700"
+        Height="650 " 
+        Width="700"
         WindowStartupLocation="CenterScreen"
         x:Name="detailreportWindow">
     <i:Interaction.Triggers>
@@ -21,7 +22,9 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Border 
-        CornerRadius="10">
+        CornerRadius="10"
+        BorderThickness="1"
+        BorderBrush="Black">
         <Border.Background>
             <SolidColorBrush>White</SolidColorBrush>
         </Border.Background>

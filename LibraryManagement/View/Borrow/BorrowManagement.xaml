@@ -232,7 +232,13 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button Style="{StaticResource gridEditButton}"
-                                            Command="{Binding ElementName=customerGrid, Path=DataContext.UpdateBorrowSlipCM}"/>
+                                            Command="{Binding ElementName=customerGrid, Path=DataContext.UpdateBorrowSlipCM}">
+                                            <materialDesign:PackIcon Kind="AssignmentReturn"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"
+                         Width="16"
+                         Height="16"/>
+                                        </Button>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

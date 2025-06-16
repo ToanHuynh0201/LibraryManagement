@@ -37,8 +37,8 @@
         CornerRadius="30">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="33*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0"
               Margin="0 40 0 0">
@@ -88,7 +88,7 @@
                             <i:InvokeCommandAction Command="{Binding OpenAddUserCM}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </Button> 
+                </Button>
             </Grid>
 
             <DataGrid  Style="{DynamicResource DataGridStyle1}"
@@ -133,10 +133,22 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Button Style="{StaticResource gridEditButton}" 
                                         Margin="5 0 0 0" 
-                                        Command="{Binding ElementName=customerGrid, Path=DataContext.OpenUpdateUserCM}"/>
+                                        Command="{Binding ElementName=customerGrid, Path=DataContext.OpenUpdateUserCM}">
+                                        <materialDesign:PackIcon Kind="Edit"
+                                                                 VerticalAlignment="Center"
+                                                                 HorizontalAlignment="Center"
+                                                                 Width="16"
+                                                                 Height="16"/>
+                                    </Button>
                                     <Button Style="{StaticResource gridRemoveButton}" 
                                         Margin="5 0 0 0" 
-                                        Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteUserCM}"/>
+                                        Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteUserCM}">
+                                        <materialDesign:PackIcon Kind="Delete"
+                                                                 VerticalAlignment="Center"
+                                                                 HorizontalAlignment="Center"
+                                                                 Width="16"
+                                                                 Height="16"/>
+                                    </Button>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

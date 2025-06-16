@@ -99,10 +99,22 @@
                                     <StackPanel Orientation="Horizontal">
                                         <Button Style="{StaticResource gridEditButton}" 
                                                 Margin="5 0 0 0" 
-                                                Command="{Binding ElementName=customerGrid, Path=DataContext.OpenUpdateGroupUserCM}"/>
+                                                Command="{Binding ElementName=customerGrid, Path=DataContext.OpenUpdateGroupUserCM}">
+                                            <materialDesign:PackIcon Kind="Edit"
+                                                                     VerticalAlignment="Center"
+                                                                     HorizontalAlignment="Center"
+                                                                     Width="16"
+                                                                     Height="16"/>
+                                        </Button>
                                         <Button Style="{StaticResource gridRemoveButton}" 
-                                    Margin="5 0 0 0" 
-                                    Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteGroupUserCM}"/>
+                                                Margin="5 0 0 0" 
+                                                Command="{Binding ElementName=customerGrid, Path=DataContext.DeleteGroupUserCM}">
+                                            <materialDesign:PackIcon Kind="Delete"
+                                                                     VerticalAlignment="Center"
+                                                                     HorizontalAlignment="Center"
+                                                                     Width="16"
+                                                                     Height="16"/>
+                                        </Button>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

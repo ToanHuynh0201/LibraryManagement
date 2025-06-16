@@ -268,15 +268,15 @@ INSERT INTO PHANQUYEN VALUES (3, 8)
 
 GO
 
-INSERT INTO NGUOIDUNG VALUES ('admin', '123456', N'Admin', 1)
+INSERT INTO NGUOIDUNG(TenDangNhap, MatKhau, TenNguoiDung, MaNhom) VALUES ('admin', '123456', N'Admin', 1)
 
-INSERT INTO NGUOIDUNG VALUES ('tt1', '123456', N'Thủ thư A', 2)
+INSERT INTO NGUOIDUNG(TenDangNhap, MatKhau, TenNguoiDung, MaNhom) VALUES ('tt1', '123456', N'Thủ thư A', 2)
 
-INSERT INTO NGUOIDUNG VALUES ('dg1', '123456', N'Ngô Quang Tiến', 3)
-INSERT INTO NGUOIDUNG VALUES ('dg2', '123456', N'Bùi Lê Nhật Tri', 3)
-INSERT INTO NGUOIDUNG VALUES ('dg3', '123456', N'Võ Minh Tiến', 3)
-INSERT INTO NGUOIDUNG VALUES ('dg4', '123456', N'Huỳnh Nhật Toàn', 3)
-INSERT INTO NGUOIDUNG VALUES ('dg5', '123456', N'Nguyễn Văn Linh', 3)
+INSERT INTO NGUOIDUNG(TenDangNhap, MatKhau, TenNguoiDung, MaNhom) VALUES ('dg1', '123456', N'Ngô Quang Tiến', 3)
+INSERT INTO NGUOIDUNG(TenDangNhap, MatKhau, TenNguoiDung, MaNhom) VALUES ('dg2', '123456', N'Bùi Lê Nhật Tri', 3)
+INSERT INTO NGUOIDUNG(TenDangNhap, MatKhau, TenNguoiDung, MaNhom) VALUES ('dg3', '123456', N'Võ Minh Tiến', 3)
+INSERT INTO NGUOIDUNG(TenDangNhap, MatKhau, TenNguoiDung, MaNhom) VALUES ('dg4', '123456', N'Huỳnh Nhật Toàn', 3)
+INSERT INTO NGUOIDUNG(TenDangNhap, MatKhau, TenNguoiDung, MaNhom) VALUES ('dg5', '123456', N'Nguyễn Văn Linh', 3)
 
 GO
 

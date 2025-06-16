@@ -15,11 +15,10 @@
         Title="AddGroupUserWindow" Height="500" Width="700"
         x:Name="addGroupUserWindow">
     <Grid>
-        <Border CornerRadius="20"
+        <Border CornerRadius="30"
                 Background="#eff2f7"
                 BorderThickness="2"
-                BorderBrush="Black"
-                Padding="20">
+                BorderBrush="Black">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -41,7 +40,9 @@
                                VerticalAlignment="Center"
                                Margin="0 0 0 10"
                                DockPanel.Dock="Left" />
-                    <Button Content="X"
+                </DockPanel>
+
+                <Button Content="X"
                             Style="{StaticResource buttonClose}"
                             Command="{Binding CloseWindowCM}"
                             CommandParameter="{Binding ElementName=addGroupUserWindow}"
@@ -49,21 +50,20 @@
                             Background="Red"
                             Foreground="White"
                             FontSize="18"
-                            Width="35" Height="30"/>
-                </DockPanel>
-
+                            Width="35" Height="30"
+                            Margin="660 -20 0 0"/>
                 <!-- Tên nhóm -->
                 <TextBox Grid.Row="1"
                          materialDesign:HintAssist.Hint="Tên nhóm"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          FontSize="20"
                          Height="50"
-                         Margin="0 10"
+                         Margin="20 10"
                          Text="{Binding NhomNguoiDung.TenNhom, Mode=TwoWay}" />
 
                 <!-- Danh sách chức năng -->
                 <DataGrid Grid.Row="2"
-                          Margin="0 10"
+                          Margin="20 10"
                           ItemsSource="{Binding dsChucNang}"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
@@ -92,7 +92,7 @@
                         FontSize="18"
                         FontWeight="Bold"
                         HorizontalAlignment="Center"
-                        Margin="0 20 0 0"
+                        Margin="0 10 0 20"
                         Style="{StaticResource MaterialDesignRaisedButton}" />
             </Grid>
         </Border>
