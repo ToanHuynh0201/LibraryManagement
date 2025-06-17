@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManagement.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,5 +24,13 @@ namespace LibraryManagement.View
         {
             InitializeComponent();
         }
+        private void LoginPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is LoginViewModel vm)
+            {
+                vm.Password = LoginPasswordBox.Password;
+            }
+        }
+
     }
 }

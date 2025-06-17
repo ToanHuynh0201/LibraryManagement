@@ -13,5 +13,8 @@ namespace LibraryManagement.DTO
         {
             return DisplayName.ToString();
         }
+        public string TacGiaDaiDien => TACGIAs?.FirstOrDefault()?.TenTG ?? "";
+
+        public string TacGiaDisplay => TACGIAs == null? "" : string.Join(", ", TACGIAs.Select(t => t.TenTG));
     }
 }

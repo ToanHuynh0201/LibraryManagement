@@ -27,21 +27,21 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH).Include(s => s.CUONSACHes).Where(s => s.IsDeleted == false).ToListAsync();
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH.TACGIAs).Include(s => s.DAUSACH.THELOAI).Include(s => s.CUONSACHes).Where(s => s.IsDeleted == false).ToListAsync();
             }
         }
         public async Task<SACH> GetSachById(int id)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH).Include(s => s.CUONSACHes).FirstOrDefaultAsync(s => s.id == id && s.IsDeleted == false);
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH.TACGIAs).Include(s => s.DAUSACH.THELOAI).Include(s => s.CUONSACHes).FirstOrDefaultAsync(s => s.id == id && s.IsDeleted == false);
             }
         }
         public async Task<List<SACH>> GetSachByMaSach(string masach)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH).Include(s => s.CUONSACHes)
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH.TACGIAs).Include(s => s.DAUSACH.THELOAI).Include(s => s.CUONSACHes)
                 .Where(s => s.MaSach.Contains(masach) && s.IsDeleted == false).ToListAsync();
             }
         }
@@ -49,7 +49,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH).Include(s => s.CUONSACHes)
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH.TACGIAs).Include(s => s.DAUSACH.THELOAI).Include(s => s.CUONSACHes)
                 .Where(s => s.MaDauSach == madausach && s.IsDeleted == false).ToListAsync();
             }
         }
@@ -57,7 +57,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH).Include(s => s.CUONSACHes)
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH.TACGIAs).Include(s => s.DAUSACH.THELOAI).Include(s => s.CUONSACHes)
                 .Where(s => s.DAUSACH.TenDauSach.Contains(tendausach) && s.IsDeleted == false).ToListAsync();
             }
         }
@@ -65,7 +65,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH).Include(s => s.CUONSACHes)
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH.TACGIAs).Include(s => s.DAUSACH.THELOAI).Include(s => s.CUONSACHes)
                 .Where(s => s.NhaXB.Contains(nhaxb) && s.IsDeleted == false).ToListAsync();
             }
         }
@@ -73,7 +73,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH).Include(s => s.CUONSACHes)
+                return await context.SACHes.AsNoTracking().Include(s => s.DAUSACH.TACGIAs).Include(s => s.DAUSACH.THELOAI).Include(s => s.CUONSACHes)
                 .Where(s => s.NamXB == namxb && s.IsDeleted == false).ToListAsync();
             }
         }

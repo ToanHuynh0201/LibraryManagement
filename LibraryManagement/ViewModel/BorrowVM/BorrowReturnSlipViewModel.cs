@@ -165,8 +165,11 @@ namespace LibraryManagement.ViewModel
                 if (result == MessageBoxResult.No) return;
                 var res = await Task.Run(async () => await PhieuMuonTraBLL.Instance.UpdatePhieuMuonTra(BorrowSlipSelected));
                 MessageBox.Show(res.Item2);
-                if (res.Item1) LoadDataBorrowSlipCM.Execute(null);
-
+                if (res.Item1)
+                {
+                    ResetDataCM.Execute(null);
+                    LoadDataBorrowSlipCM.Execute(null);
+                }    
             });
             CloseWindowCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {

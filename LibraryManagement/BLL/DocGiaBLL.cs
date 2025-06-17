@@ -61,13 +61,13 @@ namespace LibraryManagement.BLL
             int ThoiHanThe = ThamSoBLL.Instance.GetThamSo().Result.GiaTriThe;
             int TuoiDGToiThieu = ThamSoBLL.Instance.GetThamSo().Result.TuoiDGToiThieu;
             int TuoiDGToiDa = ThamSoBLL.Instance.GetThamSo().Result.TuoiDGToiDa;
+            int TuoiDG = dg.NgayLapThe.Year - dg.NgaySinhDG.Year;
+            if (dg.NgaySinhDG.Date > dg.NgayLapThe.AddYears(-TuoiDG)) TuoiDG--;
 
-            int TuoiDG = DateTime.Now.Year - dg.NgaySinhDG.Year;
             if (TuoiDG < TuoiDGToiThieu || TuoiDG > TuoiDGToiDa)
             {
-                return (false, "Tuổi độc giả không hợp lệ");
+                return (false, $"Tuổi độc giả hiện tại là {TuoiDG}. Tuổi hợp lệ phải từ {TuoiDGToiThieu} đến {TuoiDGToiDa}.");
             }
-
             dg.NgayHetHan = dg.NgayLapThe.AddMonths(ThoiHanThe);
 
             dg.TongNo = 0;
@@ -84,6 +84,16 @@ namespace LibraryManagement.BLL
             if (!res.Item1)
             {
                 return (false, res.Item2);
+            }
+            int ThoiHanThe = ThamSoBLL.Instance.GetThamSo().Result.GiaTriThe;
+            int TuoiDGToiThieu = ThamSoBLL.Instance.GetThamSo().Result.TuoiDGToiThieu;
+            int TuoiDGToiDa = ThamSoBLL.Instance.GetThamSo().Result.TuoiDGToiDa;
+            int TuoiDG = dg.NgayLapThe.Year - dg.NgaySinhDG.Year;
+            if (dg.NgaySinhDG.Date > dg.NgayLapThe.AddYears(-TuoiDG)) TuoiDG--;
+
+            if (TuoiDG < TuoiDGToiThieu || TuoiDG > TuoiDGToiDa)
+            {
+                return (false, $"Tuổi độc giả hiện tại là {TuoiDG}. Tuổi hợp lệ phải từ {TuoiDGToiThieu} đến {TuoiDGToiDa}.");
             }
             return await DocGiaDAL.Instance.UpdateDocGia(dg);
         }

@@ -48,7 +48,8 @@
     <viewmodel:UserGroupViewModel x:Key="UserGroupVM"/>
     <viewmodel:AddGroupUserViewModel x:Key="AddGroupUserVM"/>
     <viewmodel:EditGroupUserViewModel x:Key="EditGroupUserVM"/>
-
+    <viewmodel:ReaderTabViewModel x:Key="ReaederTabVM"/>
+    <viewmodel:BookSearchViewModel x:Key="BookSearchVM"/>
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <converters:ListViewGridViewConverter x:Key="GridLinesVisibilityBorderToThicknessConverter"/>
 

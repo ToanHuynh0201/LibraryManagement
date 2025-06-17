@@ -23,7 +23,6 @@ namespace LibraryManagement.ViewModel
         public ICommand DanhSachChucNang { get; set; }
 
         public Frame NavigationFrame { get; set; }
-
         public UserTabViewModel()
         {
             GetNavigationFrameCM = new RelayCommand<Frame>((p) => { return true; }, (p) =>

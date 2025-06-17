@@ -8,8 +8,7 @@
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
-      d:DataContext="{d:DesignInstance Type=viewmodel:BookViewModel}"
-      DataContext="{StaticResource BookVM}"
+      DataContext="{StaticResource ReaderInformationVM}"
       d:DesignHeight="740" 
       d:DesignWidth="840"
       Title="ReaderPage"
@@ -205,19 +204,19 @@
             />
 
                     <DatePicker
-Grid.Column="1"
-                materialDesign:HintAssist.Hint="Ngày hết hạn"
-                Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-FontSize="18" 
-IsEnabled="False"
-Height="50" 
-Width="300"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                VerticalContentAlignment="Bottom"
-Language="vi-VN" 
-SelectedDateFormat="Short"
-SelectedDate="{Binding docgia.NgayHetHan}"/>
+                    Grid.Column="1"
+                                    materialDesign:HintAssist.Hint="Ngày hết hạn"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                    FontSize="18" 
+                    IsEnabled="False"
+                    Height="50" 
+                    Width="300"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    VerticalContentAlignment="Bottom"
+                    Language="vi-VN" 
+                    SelectedDateFormat="Short"
+                    SelectedDate="{Binding docgia.NgayHetHan}"/>
 
 
                 </Grid>

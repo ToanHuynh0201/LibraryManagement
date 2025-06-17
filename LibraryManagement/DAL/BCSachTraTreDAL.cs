@@ -52,10 +52,9 @@ namespace LibraryManagement.DAL
                 {
                     var startDate = ngay.Date;
                     var endDate = ngay.AddDays(1).Date;
-                    var baocao = await context.BCSACHTRATREs
-                        .Where(bc => bc.Ngay >= startDate && bc.Ngay < endDate)
-                        .ToListAsync();
-                    context.BCSACHTRATREs.RemoveRange(baocao);
+                    await context.Database.ExecuteSqlCommandAsync(
+                        "DELETE FROM BCSACHTRATRE WHERE Ngay >= @p0 AND Ngay < @p1",
+                        startDate, endDate);
 
                     var phieumuontre = await context.PHIEUMUONTRAs.Where(pmt => pmt.NgayTra == null && 
                                              pmt.HanTra < startDate) .ToListAsync();

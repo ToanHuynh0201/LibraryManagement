@@ -133,7 +133,7 @@
                              Height="44"
                              Margin="24 0 0 0"
                              TextAlignment="Center"
-                             Text="{Binding CurrentRule}"/>
+                             Text="{Binding CurrentRule.SoSachMuonToiDa}"/>
                     <TextBlock Text="sách"
                                FontSize="20"
                                FontWeight="DemiBold"

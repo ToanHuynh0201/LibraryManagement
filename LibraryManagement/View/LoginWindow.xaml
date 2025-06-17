@@ -17,7 +17,8 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        x:Name="loginWindow">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
@@ -80,6 +81,7 @@
                                          Height="20"
                                          Width="20"/>
                 <PasswordBox x:Name="LoginPasswordBox"
+                             PasswordChanged="LoginPasswordBox_PasswordChanged"
                              materialDesign:HintAssist.Hint="  Mật khẩu"
                              Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                              FontSize="18"
@@ -87,12 +89,6 @@
                              Width="350"
                              materialDesign:TextFieldAssist.UnderlineBrush="DarkBlue"
                              materialDesign:TextFieldAssist.HasOutlinedTextField="True">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="PasswordChanged">
-                            <i:InvokeCommandAction Command="{Binding PasswordChangedCM}" 
-                                                   CommandParameter="{Binding ElementName=LoginPasswordBox}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
                 </PasswordBox>
             </StackPanel>
             <Button materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:0.5"
@@ -103,7 +99,10 @@
                     FontSize="18"
                     Height="40"
                     Width="200"
-                    materialDesign:ButtonAssist.CornerRadius="20 0 20 0"/>
+                    materialDesign:ButtonAssist.CornerRadius="20 0 20 0"
+                    Command="{Binding LoginCM}"
+                    CommandParameter="{Binding ElementName=loginWindow}"
+                    x:Name="loginBtn"/>
         </Grid>
     </Grid>
 </Window>

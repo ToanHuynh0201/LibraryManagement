@@ -19,6 +19,9 @@
         Background="Transparent"
         AllowsTransparency="True"
         Name="MainNavigationWindow">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Window.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding GetNavigationFrameCM}"
@@ -69,7 +72,8 @@
                        Margin="20 30 20 30"/>
             <!--Quan ly doc gia -->
             <Button Command="{Binding QuanLyDocGiaCM}" 
-                    Style="{StaticResource NavigationButton}">
+                    Style="{StaticResource NavigationButton}"
+                    Visibility="{Binding ShowQuanLyDocGia, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
@@ -89,7 +93,8 @@
             </Button>
             <!--Quan ly sach -->
             <Button Command="{Binding QuanLySachCM}" 
-                    Style="{StaticResource NavigationButton}">
+                    Style="{StaticResource NavigationButton}"
+                    Visibility="{Binding ShowQuanLySach, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
@@ -109,7 +114,8 @@
             </Button>
 
             <Button Command="{Binding QuanLyMuonTraCM}" 
-                    Style="{StaticResource NavigationButton}">
+                    Style="{StaticResource NavigationButton}"
+                    Visibility="{Binding ShowQuanLyMuonTra, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
@@ -128,7 +134,8 @@
                 </Grid>
             </Button>
             <Button Command="{Binding QuanLyPhatCM}" 
-                    Style="{StaticResource NavigationButton}">
+                    Style="{StaticResource NavigationButton}"
+                    Visibility="{Binding ShowQuanLyPhat, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
@@ -148,7 +155,8 @@
             </Button>
             <!--Muon sach -->
             <Button Command="{Binding ThongKeCM}" 
-                    Style="{StaticResource NavigationButton}">
+                    Style="{StaticResource NavigationButton}"
+                    Visibility="{Binding ShowThongKe, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
@@ -168,7 +176,8 @@
             </Button>
             <!--Tra sach -->
             <Button Command="{Binding QuyDinhCM}" 
-                    Style="{StaticResource NavigationButton}">
+                    Style="{StaticResource NavigationButton}"
+                    Visibility="{Binding ShowQuyDinh, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
@@ -187,7 +196,8 @@
                 </Grid>
             </Button>
             <Button Command="{Binding QuanLyNguoiDungCM}" 
-                    Style="{StaticResource NavigationButton}">
+                    Style="{StaticResource NavigationButton}"
+                    Visibility="{Binding ShowQuanLyNguoiDung, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
@@ -206,7 +216,8 @@
                 </Grid>
             </Button>
             <Button Command="{Binding TrangDocGiaCM}" 
-                    Style="{StaticResource NavigationButton}">
+                    Style="{StaticResource NavigationButton}"
+                    Visibility="{Binding ShowTrangDocGia, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
@@ -228,7 +239,8 @@
 
             <Button Command="{Binding TaiKhoanCM}" 
                     Style="{StaticResource NavigationButton}"
-                    Margin="0 55 0 0">
+                    Margin="0 55 0 0"
+                    Visibility="{Binding ShowTaiKhoan, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left">
@@ -247,6 +259,7 @@
                 </Grid>
             </Button>
             <Button Command="{Binding DangXuatCM}" 
+                    CommandParameter="{Binding ElementName=MainNavigationWindow}"
                     Style="{StaticResource NavigationButton}"
                     Margin="0">
                 <Grid>

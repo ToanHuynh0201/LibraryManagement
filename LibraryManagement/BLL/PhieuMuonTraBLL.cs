@@ -80,7 +80,7 @@ namespace LibraryManagement.BLL
                 if (pmt.NgayTra == null)
                 {
                     slsachdangmuon++;
-                    if (pmt.HanTra < today)
+                    if (pmt.HanTra.Date < today.Date)
                         return (false, "Độc giả đang có sách trả trễ, không thể mượn thêm sách mới.");
                 }
             }

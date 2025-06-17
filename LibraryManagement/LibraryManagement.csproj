@@ -252,6 +252,8 @@
     <Compile Include="Utils\BoolToYesConvert.cs" />
     <Compile Include="Utils\DateToStringConvert.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\BookSearchViewModel.cs" />
+    <Compile Include="ViewModel\ReaderTabVM.cs" />
     <Compile Include="ViewModel\UserVM\AddGroupUserViewModel.cs" />
     <Compile Include="ViewModel\ReportManagementVM.cs" />
     <Compile Include="ViewModel\ReportVM\CategoryLoanReportDetailVM.cs" />

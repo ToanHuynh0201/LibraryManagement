@@ -65,9 +65,15 @@ namespace LibraryManagement.BLL
             }
             var thamso = await ThamSoBLL.Instance.GetThamSo();
             int kc = thamso.KhoangCachNamXB;
-            if (s.NamXB + kc < DateTime.Now.Year)
+            if (s.NamXB > pns.NgayNhap.Year)
+                return (false, "Năm xuất bản không được quá năm hiện giờ");
+            if (s.NamXB + kc < pns.NgayNhap.Year)
             {
                 return (false, "Chỉ nhận các sách xuất bản trong vòng " + kc + " năm.");
+            }
+            if(s.SoLuong <= 0)
+            {
+                return (false, "Số lượng nhập phải  là số dương.");
             }
             bool checkRes = await SachDAL.Instance.CheckExistingSach(s);
             if (checkRes)
