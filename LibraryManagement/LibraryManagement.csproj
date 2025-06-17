@@ -458,6 +458,9 @@
     <Compile Include="View\Users\EditUserWindow.xaml.cs">
       <DependentUpon>EditUserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Users\ForgetPasswordWindow.xaml.cs">
+      <DependentUpon>ForgetPasswordWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Users\UserManagementPage.xaml.cs">
       <DependentUpon>UserManagementPage.xaml</DependentUpon>
     </Compile>
@@ -653,6 +656,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Users\EditUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\ForgetPasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
