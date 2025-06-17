@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LibraryManagement.View.Borrow
+namespace LibraryManagement.View.Reader
 {
     /// <summary>
-    /// Interaction logic for EditBorrowReturnSlipInformationWindow.xaml
+    /// Interaction logic for ReaderPage.xaml
     /// </summary>
-    public partial class EditBorrowReturnSlipInformationWindow : Window
+    public partial class ReaderPage : Page
     {
-        public EditBorrowReturnSlipInformationWindow()
+        public ReaderPage()
         {
             InitializeComponent();
         }

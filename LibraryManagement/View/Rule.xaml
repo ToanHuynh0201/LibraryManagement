@@ -70,7 +70,12 @@
                              Height="40"
                              TextAlignment="Center"
                              Margin="84 0 0 0"
-                             Text="{Binding CurrentRule.TuoiDGToiThieu, StringFormat={}{0} tuổi}"/>
+                             Text="{Binding CurrentRule.TuoiDGToiThieu}"/>
+                    <TextBlock Text="tuổi"
+                               FontSize="20"
+                               FontWeight="DemiBold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10 30 0 0">
@@ -86,7 +91,12 @@
                              Height="40"
                              Margin="108 0 0 0"
                              TextAlignment="Center"
-                             Text="{Binding CurrentRule.TuoiDGToiDa, StringFormat={}{0} tuổi}"/>
+                             Text="{Binding CurrentRule.TuoiDGToiDa}"/>
+                    <TextBlock Text="tuổi"
+                               FontSize="20"
+                               FontWeight="DemiBold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10 30 0 0">
@@ -102,7 +112,12 @@
                              Height="40"
                              Margin="20 0 0 0"
                              TextAlignment="Center"
-                             Text="{Binding CurrentRule.SoNgayMuonToiDa, StringFormat={}{0} ngày}"/>
+                             Text="{Binding CurrentRule.SoNgayMuonToiDa}"/>
+                    <TextBlock Text="ngày"
+                               FontSize="20"
+                               FontWeight="DemiBold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10 30 0 0">
@@ -118,7 +133,12 @@
                              Height="44"
                              Margin="24 0 0 0"
                              TextAlignment="Center"
-                             Text="{Binding CurrentRule.SoSachMuonToiDa, StringFormat={}{0} sách}"/>
+                             Text="{Binding CurrentRule}"/>
+                    <TextBlock Text="sách"
+                               FontSize="20"
+                               FontWeight="DemiBold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" 
                             Margin="10 30 0 0">
@@ -155,7 +175,12 @@
                              Margin="24 0 0 0"
                              Height="40"
                              TextAlignment="Center"
-                             Text="{Binding CurrentRule.GiaTriThe, StringFormat={}{0} tháng}"/>
+                             Text="{Binding CurrentRule.GiaTriThe}"/>
+                    <TextBlock Text="tháng"
+                               FontSize="20"
+                               FontWeight="DemiBold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Column="1" 
@@ -183,7 +208,12 @@
                              Height="49"
                              Margin="40 0 0 0"
                              TextAlignment="Center"
-                             Text="{Binding CurrentRule.KhoangCachNamXB , StringFormat={}{0} năm}"/>
+                             Text="{Binding CurrentRule.KhoangCachNamXB}"/>
+                    <TextBlock Text="năm"
+                               FontSize="20"
+                               FontWeight="DemiBold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Margin="10 30 0 0">
@@ -199,7 +229,12 @@
                              Height="50"
                              Margin="115 0 0 0"
                              TextAlignment="Center"
-                             Text="{Binding CurrentRule.TienPhatTre, StringFormat={}{0} đồng}"/>
+                             Text="{Binding CurrentRule.TienPhatTre}"/>
+                    <TextBlock Text="đồng"
+                               FontSize="20"
+                               FontWeight="DemiBold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
 
@@ -215,6 +250,8 @@
                         Width="200"
                         Height="50"
                         FontSize="25"
+                        Background="#473765"
+                        Foreground="White"
                         FontWeight="Bold"
                         Margin="20 0 0 0"
                         HorizontalAlignment="Center"

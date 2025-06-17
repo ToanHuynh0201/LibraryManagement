@@ -77,6 +77,8 @@
                     Width="150"
                     Height="40"
                     FontSize="20"
+                    Background="#473765"
+                        Foreground="White"
                     FontWeight="Bold"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"

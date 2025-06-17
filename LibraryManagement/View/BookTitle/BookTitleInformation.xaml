@@ -11,6 +11,7 @@
         DataContext="{StaticResource BookTitleInformationVM}"
         mc:Ignorable="d" 
         Height="700" 
+        AllowsTransparency="True"
         Width="800"
         Background="Transparent"
         ResizeMode="NoResize"

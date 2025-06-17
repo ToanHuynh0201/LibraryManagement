@@ -10,6 +10,7 @@
         DataContext="{StaticResource AddPenaltyVM}"
         mc:Ignorable="d"
         WindowStyle="None"
+        AllowsTransparency="True"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" 
         Title="AddPenaltyReceiptWindow" Height="550" Width="480 "
@@ -19,12 +20,10 @@
             <i:InvokeCommandAction Command="{Binding LoadOtherDataCM}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid>
-        <Border
-            CornerRadius="10">
-            <Border.Background>
-                <SolidColorBrush>White</SolidColorBrush>
-            </Border.Background>
+
+    <Border Background="#eff2f7"
+        CornerRadius="30">
+        <Grid>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -38,93 +37,94 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock
-                        Grid.Column="0"
-                        Text="Thêm phiếu thu phạt"
-                        HorizontalAlignment="Center"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Margin="50 10 0 5"/>
+                    Grid.Column="0"
+                    Text="Thêm phiếu thu phạt"
+                    HorizontalAlignment="Center"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Margin="50 10 0 5"/>
 
                     <Button Grid.Column="1" 
-                        Content="X" 
-                        HorizontalAlignment="Right"
-                        FontSize="15"
-                        Width="43" 
-                        Background="Red" 
-                        Foreground="#FFE7DDDD"
-                        Height="35"
-                        Command="{Binding CloseWindowCM}"
-                        CommandParameter="{Binding ElementName=addPenaltyReceiptWindow}"
-                        Margin="4,-1,0,0" VerticalAlignment="Top"/>
+                            Style="{StaticResource buttonClose}"
+                    Content="X" 
+                    HorizontalAlignment="Right"
+                    FontSize="15"
+                    Width="43" 
+                    Background="Red" 
+                    Foreground="#FFE7DDDD"
+                    Height="35"
+                    Command="{Binding CloseWindowCM}"
+                    CommandParameter="{Binding ElementName=addPenaltyReceiptWindow}"
+                    Margin="4,-1,0,0" VerticalAlignment="Top"/>
                 </Grid>
-                
-               
+
+
 
                 <StackPanel
-                    Grid.Row="1"
-                    Orientation="Vertical"
-                    Margin="20 10">
+                Grid.Row="1"
+                Orientation="Vertical"
+                Margin="20 10">
 
                     <ComboBox
-                        MinWidth="72"
-                        materialDesign:HintAssist.Hint="Chọn độc giả"
-                        IsTextSearchEnabled="True"
-                        IsEditable="True"
-                        FontSize="15"
-                        ItemsSource="{Binding ListReader}"
-                        SelectedItem="{Binding ReaderSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Text="{Binding ReaderText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        DisplayMemberPath="DisplayName">        
+                    MinWidth="72"
+                    materialDesign:HintAssist.Hint="Chọn độc giả"
+                    IsTextSearchEnabled="True"
+                    IsEditable="True"
+                    FontSize="15"
+                    ItemsSource="{Binding ListReader}"
+                    SelectedItem="{Binding ReaderSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding ReaderText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    DisplayMemberPath="DisplayName">
                     </ComboBox>
 
                     <TextBox
-                        materialDesign:HintAssist.Hint="Tổng nợ hiện tại"
-                        FontSize="18" Foreground="Black"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Margin="0 20"
-                        Text="{Binding ReaderSelected.TongNo}"
-                        IsEnabled="False"
-                        IsReadOnly="True"/>
+                    materialDesign:HintAssist.Hint="Tổng nợ hiện tại"
+                    FontSize="18" Foreground="Black"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Margin="0 20"
+                    Text="{Binding ReaderSelected.TongNo}"
+                    IsEnabled="False"
+                    IsReadOnly="True"/>
 
                     <TextBox
-                        materialDesign:HintAssist.Hint="Số tiền thu"
-                        FontSize="18" Foreground="Black"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Margin="0 20"
-                        Text="{Binding SoTienThu, StringFormat=N0}"
-                        />
+                    materialDesign:HintAssist.Hint="Số tiền thu"
+                    FontSize="18" Foreground="Black"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Margin="0 20"
+                    Text="{Binding SoTienThu, StringFormat=N0}"
+                    />
 
                     <TextBox
-                        materialDesign:HintAssist.Hint="Còn lại"
-                        FontSize="18" Foreground="Black"
-                        Margin="0 20"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding TongNoMoi, StringFormat=N0}"/>
+                    materialDesign:HintAssist.Hint="Còn lại"
+                    FontSize="18" Foreground="Black"
+                    Margin="0 20"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding TongNoMoi, StringFormat=N0}"/>
 
                     <DatePicker 
-                        materialDesign:HintAssist.Hint="Ngày thu"
-                        materialDesign:TextFieldAssist.HasClearButton="True"
-                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                        Margin="0 20 0 0"
-                        FontSize="18" 
-                        IsEnabled="False"
-                            SelectedDate="{Binding phieuthu.NgayThu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            SelectedDateFormat="Short"
-                            Language="vi-VN"  />
+                    materialDesign:HintAssist.Hint="Ngày thu"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                    Margin="0 20 0 0"
+                    FontSize="18" 
+                    IsEnabled="False"
+                        SelectedDate="{Binding phieuthu.NgayThu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedDateFormat="Short"
+                        Language="vi-VN"  />
                 </StackPanel>
 
                 <Button 
-                    Grid.Row="2"
-                    Margin="30 0" 
-                    Content="Thêm mới" 
-                    materialDesign:ButtonAssist.CornerRadius="10"
-                    Command="{Binding AddNewPenaltyReceiptCM}"
-                    CommandParameter="{Binding ElementName=addPenaltyReceiptWindow}"/>
+                Grid.Row="2"
+                Margin="30 0" 
+                Content="Thêm mới" 
+                    Width="150"
+                        Background="#473765"
+                materialDesign:ButtonAssist.CornerRadius="10"
+                Command="{Binding AddNewPenaltyReceiptCM}"
+                CommandParameter="{Binding ElementName=addPenaltyReceiptWindow}"/>
                 <!-- ADD COMMENT RIGHT HERE -->
 
             </Grid>
-        </Border>
-
-        
-    </Grid>
+        </Grid>
+    </Border>
 </Window>

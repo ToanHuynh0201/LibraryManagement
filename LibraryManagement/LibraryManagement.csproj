@@ -366,12 +366,6 @@
     <Compile Include="View\Borrow\BorrowManagement.xaml.cs">
       <DependentUpon>BorrowManagement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Borrow\BorrowReturnSlipInformtationWindow.xaml.cs">
-      <DependentUpon>BorrowReturnSlipInformtationWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Borrow\EditBorrowReturnSlipInformationWindow.xaml.cs">
-      <DependentUpon>EditBorrowReturnSlipInformationWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Category\AddCategoryWindow.xaml.cs">
       <DependentUpon>AddCategoryWindow.xaml</DependentUpon>
     </Compile>
@@ -410,6 +404,9 @@
     </Compile>
     <Compile Include="View\Reader\ReaderManagement.xaml.cs">
       <DependentUpon>ReaderManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Reader\ReaderPage.xaml.cs">
+      <DependentUpon>ReaderPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Reader\ReaderTypePage.xaml.cs">
       <DependentUpon>ReaderTypePage.xaml</DependentUpon>
@@ -537,14 +534,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Borrow\BorrowReturnSlipInformtationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Borrow\EditBorrowReturnSlipInformationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Category\AddCategoryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -598,6 +587,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Reader\ReaderManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Reader\ReaderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,23 +1,33 @@
-﻿<Window  x:Class="LibraryManagement.View.Reader.ReaderInformationPage"
-         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-         xmlns:local="clr-namespace:LibraryManagement.View.Reader"
-         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-         mc:Ignorable="d" 
-         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:sys="clr-namespace:System.Globalization;assembly=mscorlib"
-         DataContext="{StaticResource ReaderInformationVM}"
-         Height="840" 
-         Width="840"
-         x:Name="readerInformationPage"
-         Background="Transparent"
-         WindowStartupLocation="CenterScreen"
-         WindowStyle="None"
-         Title="ReaderInformationPage">
-    <Window.Resources>
-        <sys:CultureInfo x:Key="VietnameseCulture">vi-VN</sys:CultureInfo>
-    </Window.Resources>
+﻿<Page x:Class="LibraryManagement.View.Reader.ReaderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LibraryManagement.View.Reader"
+      mc:Ignorable="d" 
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      xmlns:viewmodel="clr-namespace:LibraryManagement.ViewModel"
+      d:DataContext="{d:DesignInstance Type=viewmodel:BookViewModel}"
+      DataContext="{StaticResource BookVM}"
+      d:DesignHeight="740" 
+      d:DesignWidth="840"
+      Title="ReaderPage"
+      x:Name="readerPage"
+      Background="Transparent">
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Page.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="readerPage"
+                                 Storyboard.TargetProperty="Opacity"
+                                 From="0"
+                                 To="1"
+                                 Duration="0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadDataCM}"/>
@@ -42,18 +52,6 @@
                         Margin="60 0 0 0"
                         FontWeight="Bold"/>
 
-                <Button
-                Style="{StaticResource buttonClose}" 
-                Content="X" 
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Width="45"
-                Height="35"
-                FontSize="20"
-                Background="Red" 
-                Foreground="White"
-                Command="{Binding CloseWindowCM}"
-                CommandParameter="{Binding ElementName=readerInformationPage}"/>
             </Grid>
             <Grid
     Grid.Row="1">
@@ -292,5 +290,4 @@ SelectedDate="{Binding docgia.NgayHetHan}"/>
 
         </Grid>
     </Border>
-        
-</Window>
+</Page>

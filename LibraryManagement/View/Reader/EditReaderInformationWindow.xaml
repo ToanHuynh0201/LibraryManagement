@@ -7,10 +7,13 @@
         xmlns:local="clr-namespace:LibraryManagement.View" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         DataContext="{StaticResource UpdateReaderVM}"
         mc:Ignorable="d"
-        Title="EditReaderInformationWindow" WindowStyle="None"
+        Title="EditReaderInformationWindow" 
+        WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
-        Height="400 " Width="821"
+        Height="400 "
+        AllowsTransparency="True"
+        Width="821"
         WindowStartupLocation="CenterScreen"
         Name="editReaderWindow">
     <i:Interaction.Triggers>
@@ -19,200 +22,197 @@
             <i:InvokeCommandAction Command="{Binding GetSelectedDataCM}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid>
-        <Grid >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.5*"/>
-                <RowDefinition Height="3.8*"/>
-                <RowDefinition Height="0.5*"/>
-            </Grid.RowDefinitions>
 
-            <Border 
-                Grid.RowSpan="3"
-                CornerRadius="5">
-                <Border.Background>
-                    <SolidColorBrush>White</SolidColorBrush>
-                </Border.Background>
-            </Border>
+    <Border Background="#eff2f7"
+            CornerRadius="30">
+        <Grid>
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="3.8*"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
 
-            <!--Header-->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="9.5*"/>
-                    <ColumnDefinition Width="0.7*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock
-                     Text="Sửa thông tin thẻ độc giả"
-                     VerticalAlignment="Center"
-                     HorizontalAlignment="Center"
-                     FontSize="22"
-                     Margin="60 0 0 0"
-                     FontWeight="Bold"/>
+                <!--Header-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9.5*"/>
+                        <ColumnDefinition Width="0.7*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                 Text="Sửa thông tin thẻ độc giả"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Center"
+                 FontSize="22"
+                 Margin="60 0 0 0"
+                 FontWeight="Bold"/>
 
-                <Button Grid.Column="1" 
-                    Content="X" 
-                    HorizontalAlignment="Left"
-                    FontSize="20"
-                    Width="53" 
-                    Background="Red" 
-                    Foreground="#FFE7DDDD"
-                    Height="40"
+                    <Button Grid.Column="1" 
+                            Style="{StaticResource buttonClose}"
+                Content="X" 
+                HorizontalAlignment="Left"
+                FontSize="20"
+                Width="53" 
+                Background="Red" 
+                Foreground="#FFE7DDDD"
+                Height="40"
+                Command="{Binding CloseWindowCM}"
+                CommandParameter="{Binding ElementName=editReaderWindow}"
+                Margin="4,-1,0,0" VerticalAlignment="Top"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="3" >
+                            <DatePicker Language="vi-VN"
+                                        materialDesign:HintAssist.Hint="Ngày lập thẻ"
+                                        materialDesign:TextFieldAssist.HasClearButton="True"
+                                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                        FontSize="18" 
+                                        VerticalAlignment="Center"
+                                        VerticalContentAlignment="Bottom"
+                                        SelectedDate="{Binding docgia.NgayLapThe, Mode=TwoWay}" 
+                                        SelectedDateFormat="Short"         
+/>
+                        </Grid>
+                        <Grid
+                            Grid.Row="0"
+                            Margin="10 10">
+                            <TextBox
+                        VerticalAlignment="Center"
+                        materialDesign:HintAssist.Hint="Mã độc giả"
+                        FontSize="18" Foreground="Black"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding docgia.MaDG, Mode=TwoWay}"
+                        IsEnabled="False"
+                 />
+                            <TextBox
+                        VerticalAlignment="Center"
+                        materialDesign:HintAssist.Hint="Họ và tên"
+                        FontSize="18" Foreground="Black"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding docgia.TenDG, Mode=TwoWay}" Margin="396,0,-396,0"
+                 />
+                        </Grid>
+
+                        <!--Ngày sinh-->
+                        <Grid
+                    Grid.Row="1" Margin="10 19">
+                            <DatePicker 
+                        Language="vi-VN"
+                        materialDesign:HintAssist.Hint="Ngày sinh"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        FontSize="18" 
+                        SelectedDate="{Binding docgia.NgaySinhDG, Mode=TwoWay}"
+                        SelectedDateFormat="Short"
+                />
+                        </Grid>
+
+                        <!--Loại độc giả-->
+                        <Grid
+                    Grid.Row="2" Margin="10 10">
+                            <ComboBox
+                        VerticalAlignment="Center"
+                        materialDesign:HintAssist.Hint="Loại độc giả"
+                        FontSize="18"
+                        Foreground="Black"
+                        IsEditable="True"
+                        IsTextSearchEnabled="False"
+                        ItemsSource="{Binding ListReaderType}"
+                        SelectedItem="{Binding ReaderTypeSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding ReaderTypeText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding DisplayName}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+
+
+                    </Grid>
+
+                    <Grid
+                Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <!--Ngày tạo thẻ-->
+                        <Grid
+                    Grid.Row="3" Margin="10 19">
+                            <DatePicker Language="vi-VN"
+                                        materialDesign:HintAssist.Hint="Ngày hết hạn"
+                                        materialDesign:TextFieldAssist.HasClearButton="True"
+                                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                        FontSize="18" 
+                                        Text="{Binding docgia.NgayHetHan, Mode=TwoWay}"
+                />
+                        </Grid>
+
+                        <!--Email-->
+                        <Grid
+                    Grid.Row="1" Margin="10 10">
+                            <TextBox
+                        VerticalAlignment="Center"
+                        materialDesign:HintAssist.Hint="Email"
+                        Text="{Binding docgia.Email, Mode=TwoWay}"
+                        FontSize="18" Foreground="Black"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        </Grid>
+
+                        <!--Địa chỉ-->
+                        <Grid
+                    Grid.Row="2" Margin="10 10">
+                            <TextBox
+                        VerticalAlignment="Center"
+                        materialDesign:HintAssist.Hint="Địa chỉ"
+                        Text="{Binding docgia.DiaChiDG, Mode=TwoWay}"
+                        FontSize="18" Foreground="Black"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <StackPanel 
+                Margin="0 0 0 10"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right">
+                        <Button
+                    Margin="10 0"
+                    Content="Lưu thông tin"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    materialDesign:ButtonAssist.CornerRadius="10"
+                    Command="{Binding UpdateReaderCM}"
+                    Background="#473765"
+                    CommandParameter="{Binding ElementName=editReaderWindow}"/>
+                        <Button
+                    Content="Thoát"
+                    Margin="10 0"
+                    Background="#473765"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    materialDesign:ButtonAssist.CornerRadius="10"
                     Command="{Binding CloseWindowCM}"
-                    CommandParameter="{Binding ElementName=editReaderWindow}"
-                    Margin="4,-1,0,0" VerticalAlignment="Top"/>
-            </Grid>
-
-            <Grid
-        Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <Grid
-            Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <!--Họ và ten-->
-                    <Grid
-                        Grid.Row="0"
-                        Margin="10 10">
-                        <TextBox
-                            VerticalAlignment="Center"
-                            materialDesign:HintAssist.Hint="Mã độc giả"
-                            FontSize="18" Foreground="Black"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            Text="{Binding docgia.MaDG, Mode=TwoWay}"
-                            IsEnabled="False"
-                     />
-                        <TextBox
-                            VerticalAlignment="Center"
-                            materialDesign:HintAssist.Hint="Họ và tên"
-                            FontSize="18" Foreground="Black"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            Text="{Binding docgia.TenDG, Mode=TwoWay}" Margin="396,0,-396,0"
-                     />
-                    </Grid>
-
-                    <!--Ngày sinh-->
-                    <Grid
-                        Grid.Row="1" Margin="10 19">
-                        <DatePicker 
-                            Language="vi-VN"
-                            materialDesign:HintAssist.Hint="Ngày sinh"
-                            materialDesign:TextFieldAssist.HasClearButton="True"
-                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                            FontSize="18" 
-                            SelectedDate="{Binding docgia.NgaySinhDG, Mode=TwoWay}"
-                            SelectedDateFormat="Short"
-                    />
-                    </Grid>
-
-                    <!--Loại độc giả-->
-                    <Grid
-                        Grid.Row="2" Margin="10 10">
-                        <ComboBox
-                            VerticalAlignment="Center"
-                            materialDesign:HintAssist.Hint="Loại độc giả"
-                            FontSize="18"
-                            Foreground="Black"
-                            IsEditable="True"
-                            IsTextSearchEnabled="False"
-                            ItemsSource="{Binding ListReaderType}"
-                            SelectedItem="{Binding ReaderTypeSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            Text="{Binding ReaderTypeText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding DisplayName}" />
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                    </Grid>
-
-
+                    CommandParameter="{Binding ElementName=editReaderWindow}"/>
+                    </StackPanel>
                 </Grid>
-
-                <Grid
-                    Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <!--Ngày tạo thẻ-->
-                    <Grid
-                        Grid.Row="0" Margin="10 19">
-                        <DatePicker 
-                            Language="vi-VN"
-                            materialDesign:HintAssist.Hint="Ngày hết hạn"
-                            materialDesign:TextFieldAssist.HasClearButton="True"
-                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                            FontSize="18" 
-                            Text="{Binding docgia.NgayHetHan, Mode=TwoWay}" Margin="-6,229,6,-229"
-                    />
-                    </Grid>
-
-                    <!--Email-->
-                    <Grid
-                        Grid.Row="1" Margin="10 10">
-                        <TextBox
-                            VerticalAlignment="Center"
-                            materialDesign:HintAssist.Hint="Email"
-                            Text="{Binding docgia.Email, Mode=TwoWay}"
-                            FontSize="18" Foreground="Black"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                    </Grid>
-
-                    <!--Địa chỉ-->
-                    <Grid
-                        Grid.Row="2" Margin="10 10">
-                        <TextBox
-                            VerticalAlignment="Center"
-                            materialDesign:HintAssist.Hint="Địa chỉ"
-                            Text="{Binding docgia.DiaChiDG, Mode=TwoWay}"
-                            FontSize="18" Foreground="Black"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid Grid.Row="2">
-                <StackPanel 
-                    Margin="0 0 0 10"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-                    <Button
-                        Margin="10 0"
-                        Content="Lưu thông tin"
-                        Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonAssist.CornerRadius="10"
-                        Command="{Binding UpdateReaderCM}"
-                        CommandParameter="{Binding ElementName=editReaderWindow}"/>
-                    <Button
-                        Content="Thoát"
-                        Margin="10 0"
-                        Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonAssist.CornerRadius="10"
-                        Command="{Binding CloseWindowCM}"
-                        CommandParameter="{Binding ElementName=editReaderWindow}"/>
-                </StackPanel>
             </Grid>
         </Grid>
-        <DatePicker 
-            Language="vi-VN"
-            materialDesign:HintAssist.Hint="Ngày tạo thẻ"
-            materialDesign:TextFieldAssist.HasClearButton="True"
-            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-            FontSize="18" 
-            SelectedDate="{Binding docgia.NgayLapThe, Mode=TwoWay}" SelectedDateFormat="Short"
-            Margin="20,289,411,70"
-            IsEnabled="False"
-                    />
-    </Grid>
+    </Border>
+    
 </Window>

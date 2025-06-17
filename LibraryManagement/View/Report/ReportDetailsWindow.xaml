@@ -12,8 +12,9 @@
         Background="Transparent"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        Height="650 " 
+        Height="650" 
         Width="700"
+        AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         x:Name="detailreportWindow">
     <i:Interaction.Triggers>
@@ -22,14 +23,9 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Border 
-        CornerRadius="10"
-        BorderThickness="1"
-        BorderBrush="Black">
-        <Border.Background>
-            <SolidColorBrush>White</SolidColorBrush>
-        </Border.Background>
-
-        <Grid>
+       Background="#eff2f7"
+        CornerRadius="30">
+        <Grid> 
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -50,6 +46,7 @@
                     Margin="50 10 0 5"/>
 
                 <Button Grid.Column="1" 
+                        Style="{StaticResource buttonClose}"
                     Content="X" 
                     HorizontalAlignment="Right"
                     FontSize="15"
@@ -62,7 +59,7 @@
                     Margin="4,-1,0,0" VerticalAlignment="Top"/>     
             </Grid>
 
-            <Grid
+            <Grid Margin="0 10 0 0"
                 Grid.Row="1">
                 <StackPanel
                     HorizontalAlignment="Left"
@@ -120,7 +117,7 @@
                 </StackPanel>
             </Grid>
 
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2" Margin="0 10 0 0">
                 <DataGrid 
                     Style="{DynamicResource DataGridStyle1}"
                     CellStyle="{DynamicResource DataGridCellStyle1}"

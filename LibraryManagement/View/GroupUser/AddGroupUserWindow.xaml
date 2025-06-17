@@ -9,9 +9,9 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
+        AllowsTransparency="True"
         ResizeMode="NoResize"
         Background="Transparent"
-        AllowsTransparency="True"
         Title="AddGroupUserWindow" Height="500" Width="700"
         x:Name="addGroupUserWindow">
     <Grid>

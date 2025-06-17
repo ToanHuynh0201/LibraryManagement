@@ -17,7 +17,7 @@
             <i:InvokeCommandAction Command="{Binding LoadDataBorrowSlipCM}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Border CornerRadius="10">
+    <Border CornerRadius="30">
         <Border.Background>
             <SolidColorBrush>White</SolidColorBrush>
         </Border.Background>
