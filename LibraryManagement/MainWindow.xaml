@@ -299,8 +299,7 @@
                    NavigationUIVisibility="Hidden" 
                    Grid.Row="1" 
                    Width="Auto" 
-                   Margin="30,10,30,10"
-                   Source="View/Reader/ReaderManagement.xaml"/>
+                   Margin="30,10,30,10"/>
         </Grid>
     </Grid>
 </Window>

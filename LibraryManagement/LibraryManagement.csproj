@@ -687,7 +687,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LibraryManagementModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="DTO\LibraryManagementModel.edmx.diagram">
       <DependentUpon>LibraryManagementModel.edmx</DependentUpon>
     </None>
