@@ -42,7 +42,7 @@ namespace LibraryManagement.ViewModel
         public bool ShowQuanLyPhat => dsChucNangND.Contains("QLPT");
         public bool ShowQuanLyNguoiDung => dsChucNangND.Contains("QLND");
         public bool ShowThongKe => dsChucNangND.Contains("BCTK");
-        public bool ShowQuyDinh => dsChucNangND.Contains("TDQG");
+        public bool ShowQuyDinh => dsChucNangND.Contains("TDQD");
         public bool ShowTaiKhoan => true;
         public bool ShowTrangDocGia => dsChucNangND.Contains("TTDG");
         public MainViewModel() { }
