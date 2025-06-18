@@ -160,5 +160,17 @@ namespace LibraryManagement.BLL
             }
             return (true, "");
         }
+
+        public async Task<(bool, string)> UpdateGiaSach(int id, int gia)
+        {
+            if (gia < 0)
+                return (false, "Giá sách không được âm");
+            var sach = await SachDAL.Instance.GetSachById(id);
+            if (sach == null || sach.IsDeleted == true)
+            {
+                return (false, "Sách không hợp lệ");
+            }
+            return await SachDAL.Instance.UpdateGiaSach(id, gia);
+        }
     }
 }

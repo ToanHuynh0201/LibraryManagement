@@ -217,5 +217,34 @@ namespace LibraryManagement.DAL
                 }
             }
         }
+
+        public async Task<(bool, string)> UpdateGiaSach(int id, int gia)
+        {
+            using (var context = new LibraryManagementEntities())
+            {
+                try
+                {
+                    var sach = await context.SACHes.FindAsync(id);
+                    sach.TriGia = gia;
+                    var dsCTPNS = await context.CT_PHIEUNHAPSACH.Include(pns => pns.PHIEUNHAPSACH).ToListAsync();
+                    foreach(var ctpns in dsCTPNS)
+                    {
+                        if(ctpns.MaSach == id)
+                        {
+                            ctpns.PHIEUNHAPSACH.TongTien -= ctpns.ThanhTien;
+                            ctpns.DonGia = gia;
+                            ctpns.ThanhTien = ctpns.DonGia * ctpns.SoLuongNhap;
+                            ctpns.PHIEUNHAPSACH.TongTien += ctpns.ThanhTien;
+                        }
+                    }
+                    await context.SaveChangesAsync();
+                    return (true, "Cập nhật sách thành công");
+                }
+                catch (Exception ex)
+                {
+                    return (false, ex.Message);
+                }
+            }
+        }
     }
 }
