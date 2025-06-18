@@ -166,7 +166,7 @@ namespace LibraryManagement.ViewModel
             });
             DeleteRecepitCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
-                var result = MessageBox.Show("Bạn có chắc muốn xoá phiếu thu này không? Tiền đã thu sẽ được cộng lại vào cho độc giả", "Xác nhận xóa",
+                var result = MessageBox.Show("Bạn có chắc muốn xoá phiếu thu này không? Tiền đã thu sẽ được cộng vào tổng nợ cho độc giả", "Xác nhận xóa",
                                           MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {

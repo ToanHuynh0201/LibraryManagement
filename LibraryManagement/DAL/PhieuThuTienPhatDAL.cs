@@ -66,7 +66,7 @@ namespace LibraryManagement.DAL
                     PHIEUTHUTIENPHAT pt = await context.PHIEUTHUTIENPHATs.FindAsync(id);
                     DOCGIA dg = await context.DOCGIAs.FindAsync(pt.MaDG);
                     if (dg != null)
-                        dg.TongNo -= pt.SoTienThu;
+                        dg.TongNo += pt.SoTienThu;
                     context.PHIEUTHUTIENPHATs.Remove(pt);
                     await context.SaveChangesAsync();
                     return (true, "Đã xoá.");
