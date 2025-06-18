@@ -47,7 +47,7 @@ namespace LibraryManagement.BLL
         }
         public async Task<(bool, string)> AddDocGia(DOCGIA dg)
         {
-            var docgia = await NguoiDungDAL.Instance.GetNguoiDungByTenDN(dg.TenDangNhap);
+            var docgia = await NguoiDungDAL.Instance.GetNguoiDungByTenDNHasDeleted(dg.TenDangNhap);
             if (docgia != null)
             {
                 return (false, "Tên đăng nhập đã tồn tại");

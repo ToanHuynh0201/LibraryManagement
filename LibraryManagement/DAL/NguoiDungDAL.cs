@@ -36,6 +36,13 @@ namespace LibraryManagement.DAL
                 return await context.NGUOIDUNGs.Include(nd => nd.NHOMNGUOIDUNG.CHUCNANGs).FirstOrDefaultAsync(nd => nd.TenDangNhap == tendangnhap && (nd.IsDeleted == false || nd.IsDeleted == null));
             }
         }
+        public async Task<NGUOIDUNG> GetNguoiDungByTenDNHasDeleted(string tendangnhap)
+        {
+            using (var context = new LibraryManagementEntities())
+            {
+                return await context.NGUOIDUNGs.Include(nd => nd.NHOMNGUOIDUNG.CHUCNANGs).FirstOrDefaultAsync(nd => nd.TenDangNhap == tendangnhap);
+            }
+        }
         public async Task<List<NGUOIDUNG>> GetNguoiDungByMaNhom(int manhom)
         {
             using (var context = new LibraryManagementEntities())
