@@ -157,6 +157,11 @@ namespace LibraryManagement.ViewModel
             });
             UpdateBorrowSlipCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
+                if (BorrowSlipSelected.NgayTra != null)
+                {
+                    MessageBox.Show("Sách đã được trả rồi.");
+                    return;
+                }
                 var result = MessageBox.Show(
                                             "Xác nhận trả sách?",
                                             "Trả sách",

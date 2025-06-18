@@ -38,9 +38,9 @@ namespace LibraryManagement.BLL
                 return (false, "Giá trị thẻ phải là số dương");
             if (ts.KhoangCachNamXB < 0)
                 return (false, "Khoảng cách năm xuất bản không được nhỏ hơn 0");
-            if (ts.SoSachMuonToiDa < 0)
+            if (ts.SoSachMuonToiDa <= 0)
                 return (false, "Số sách mượn tối đa không được nhỏ hơn 0");
-            if (ts.SoNgayMuonToiDa < 0)
+            if (ts.SoNgayMuonToiDa <= 0)
                 return (false, "Số ngày mượn tối đa không được nhỏ hơn 0");
             if (ts.TienPhatTre < 0)
                 return (false, "Tiền phạt trễ không được nhỏ hơn 0");
