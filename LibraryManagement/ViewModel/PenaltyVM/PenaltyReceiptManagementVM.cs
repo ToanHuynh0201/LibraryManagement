@@ -108,6 +108,7 @@ namespace LibraryManagement.ViewModel
         public ICommand ResetDataCM { get; set; }
         public ICommand OpenAddPenaltyReceiptCM { get; set; }
         public ICommand CloseWindowCM { get; set; }
+        public ICommand DeleteRecepitCM { get; set; }
         #endregion
 
         public PenaltyRecepitManagementVM()
@@ -162,6 +163,17 @@ namespace LibraryManagement.ViewModel
                 vm1.OnSuccess = () => LoadDataPenaltyReceiptCM.Execute(null);
                 var w1 = new AddPenaltyReceiptWindow() { DataContext = vm1 };
                 w1.ShowDialog();
+            });
+            DeleteRecepitCM = new RelayCommand<Window>((p) => { return true; }, async (p) =>
+            {
+                var result = MessageBox.Show("Bạn có chắc muốn xoá phiếu thu này không? Tiền đã thu sẽ được cộng lại vào cho độc giả", "Xác nhận xóa",
+                                          MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    var res = await Task.Run(async () => await PhieuThuTienPhatBLL.Instance.DeletePhieuPhat(PenaltyReceiptSelected.id));
+                    LoadDataPenaltyReceiptCM.Execute(null);
+                    MessageBox.Show(res.Item2);
+                }
             });
             CloseWindowCM = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
