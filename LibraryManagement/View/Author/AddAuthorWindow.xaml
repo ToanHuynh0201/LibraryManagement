@@ -44,7 +44,8 @@
                         FontSize="20"
                         Background="Red" 
                         Foreground="White"
-                        Command="{Binding CloseWindowCM}"/>
+                        Command="{Binding CloseWindowCM}"
+                        CommandParameter="{Binding ElementName=addAuthorWindow}"/>
             </Grid>
             <StackPanel Orientation="Vertical"
                         Grid.Row="1">

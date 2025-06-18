@@ -90,5 +90,20 @@ namespace LibraryManagement.DAL
                     return (false, "Xoá thất bại: " + ex.ToString());
                 }
         }
+        public async Task<(bool, string)> ChangePassword(NGUOIDUNG nd)
+        {
+            using (var context = new LibraryManagementEntities())
+                try
+                {
+                    NGUOIDUNG nguoidung = await context.NGUOIDUNGs.Where(ngd => ngd.IsDeleted == false || ngd.IsDeleted == null).FirstOrDefaultAsync(ngd => ngd.TenDangNhap == nd.TenDangNhap);
+                    nguoidung.MatKhau = nd.MatKhau;
+                    await context.SaveChangesAsync();
+                    return (true, "Đổi mật khẩu thành công");
+                }
+                catch (Exception ex)
+                {
+                    return (false, ex.Message);
+                }
+        }
     }
 }

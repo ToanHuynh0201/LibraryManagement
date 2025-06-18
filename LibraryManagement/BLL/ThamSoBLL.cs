@@ -28,6 +28,10 @@ namespace LibraryManagement.BLL
         }
         public async Task<(bool, string)> UpdateThamSo(THAMSO ts)
         {
+            if (ts.TuoiDGToiThieu < 0)
+                return (false, "Tuổi độc giả tối thiểu không được là số âm");
+            if (ts.TuoiDGToiDa < 0)
+                return (false, "Tuổi độc giả tối đa không được là số âm");
             if (ts.TuoiDGToiDa < ts.TuoiDGToiThieu)
                 return (false, "Tuổi độc giả tối đa không được nhỏ hơn tuổi độc giả tối thiểu");
             if (ts.GiaTriThe <= 0)

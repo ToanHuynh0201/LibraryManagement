@@ -136,7 +136,6 @@ namespace LibraryManagement.ViewModel
                 {
                     if (string.IsNullOrWhiteSpace(SearchText))
                     {
-                        ListAuthors.Clear();
                         ListAuthors = AllAuthors;
                     }
                     else

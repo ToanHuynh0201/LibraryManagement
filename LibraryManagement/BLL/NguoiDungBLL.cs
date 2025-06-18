@@ -119,5 +119,12 @@ namespace LibraryManagement.BLL
             }
             return (true, "");
         }
+        public async Task<(bool, string)> ChangePassWord(NGUOIDUNG nd)
+        {
+            var nguoidung = await NguoiDungDAL.Instance.GetNguoiDungByTenDN(nd.TenDangNhap);
+            if (nguoidung == null || nd.IsDeleted == true)
+                return (false, "Lỗi hệ thống, hãy thử lại");
+            return await NguoiDungDAL.Instance.ChangePassword(nd);
+        }
     }
 }

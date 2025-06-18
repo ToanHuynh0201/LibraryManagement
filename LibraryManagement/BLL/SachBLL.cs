@@ -67,6 +67,8 @@ namespace LibraryManagement.BLL
             int kc = thamso.KhoangCachNamXB;
             if (s.NamXB > pns.NgayNhap.Year)
                 return (false, "Năm xuất bản không được quá năm hiện giờ");
+            if (pns.NgayNhap.Date > DateTime.Today.Date)
+                return (false, "Ngày nhập không được vượt quá hiện tại");
             if (s.NamXB + kc < pns.NgayNhap.Year)
             {
                 return (false, "Chỉ nhận các sách xuất bản trong vòng " + kc + " năm.");

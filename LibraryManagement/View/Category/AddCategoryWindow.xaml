@@ -44,7 +44,8 @@
                         FontSize="20"
                         Background="Red" 
                         Foreground="White"
-                        Command="{Binding ExitCM}"/>
+                        Command="{Binding CloseWindowCM}"
+                        CommandParameter="{Binding ElementName=addCategoryWindow}"/>
             </Grid>
             <StackPanel Orientation="Vertical"
                         Grid.Row="1">

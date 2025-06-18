@@ -95,6 +95,9 @@ namespace LibraryManagement.BLL
             {
                 return (false, $"Tuổi độc giả hiện tại là {TuoiDG}. Tuổi hợp lệ phải từ {TuoiDGToiThieu} đến {TuoiDGToiDa}.");
             }
+
+            if (dg.NgayHetHan.Date < dg.NgayLapThe.Date)
+                return (false, "Ngày hết hạn thẻ phải trước ngày lập thẻ.");
             return await DocGiaDAL.Instance.UpdateDocGia(dg);
         }
         public async Task<(bool, string)> DeleteDocGia(int id)

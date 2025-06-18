@@ -67,9 +67,16 @@ namespace LibraryManagement.BLL
         public async Task<(bool, string)> DeleteDauSach(int id)
         {
             var dausach = await DauSachDAL.Instance.GetDauSachById(id);
-            if (dausach == null)
+            if (dausach == null || dausach.IsDeleted == true)
             {
                 return (false, "Đầu sách không hợp lệ");
+            }
+            foreach (SACH sach in dausach.SACHes)
+            {
+                if ((sach.IsDeleted == false || sach.IsDeleted == null) && sach.SoLuongCon < sach.SoLuong && sach.SoLuong != 0)
+                {
+                    return (false, "Không thể ẩn đầu sách vì đang có cuốn sách được mượn.");
+                }
             }
             return await DauSachDAL.Instance.DeleteDauSach(id);
         }

@@ -86,7 +86,9 @@
                 </ComboBox>
 
                 <DatePicker x:Name="IconDatePicker"
-                            materialDesign:HintAssist.Hint="Ngày"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            FontSize="18"
+                            materialDesign:HintAssist.Hint="Ngày nhập..."
                             materialDesign:TextFieldAssist.HasLeadingIcon="True"
                             materialDesign:TextFieldAssist.LeadingIcon="Calendar"
                             materialDesign:DatePickerAssist.OutlinedBorderActiveThickness="3"
@@ -96,6 +98,7 @@
                             Width="200"
                             Height="40"
                             Padding="10 0 10 0"
+                            Language="vi-VN"
                             SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectedDateChanged">

@@ -26,21 +26,21 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes).ToListAsync();
+                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false || ds.IsDeleted == null).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes).ToListAsync();
             }
         }
         public async Task<DAUSACH> GetDauSachById(int id)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false).Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes).FirstOrDefaultAsync(ds => ds.id == id);
+                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false || ds.IsDeleted == null).Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes).FirstOrDefaultAsync(ds => ds.id == id);
             }
         }
         public async Task<List<DAUSACH>> GetDauSachByMa(string madausach)
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes)
+                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false || ds.IsDeleted == null).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes)
                 .Where(ds => ds.MaDauSach.Contains(madausach)).ToListAsync();
             }
         }
@@ -48,7 +48,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes)
+                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false || ds.IsDeleted == null).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes)
                 .Where(ds => ds.TenDauSach.Contains(tendausach)).ToListAsync();
             }
         }
@@ -56,7 +56,7 @@ namespace LibraryManagement.DAL
         {
             using (var context = new LibraryManagementEntities())
             {
-                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes)
+                return await context.DAUSACHes.Where(ds => ds.IsDeleted == false || ds.IsDeleted == null).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes)
                 .Where(ds => ds.MaTheLoai == matheloai).ToListAsync();
             }
         }
@@ -67,7 +67,7 @@ namespace LibraryManagement.DAL
                 var dsds = new List<DAUSACH>();
                 foreach(TACGIA TG in dstg)
                 {
-                    var DS = await context.DAUSACHes.Where(ds => ds.IsDeleted == false).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes)
+                    var DS = await context.DAUSACHes.Where(ds => ds.IsDeleted == false || ds.IsDeleted == null).AsNoTracking().Include(ds => ds.THELOAI).Include(ds => ds.TACGIAs).Include(ds => ds.SACHes)
                     .Where(ds => ds.TACGIAs.Any(tg => tg.id == TG.id)).ToListAsync();
                     dsds.AddRange(DS);
                 }
@@ -88,6 +88,7 @@ namespace LibraryManagement.DAL
                     {
                         ds.TACGIAs.Add(tg);
                     }
+                    ds.IsDeleted = false;
                     context.DAUSACHes.Add(ds);
                     await context.SaveChangesAsync();
                     return (true, "Thêm đầu sách thành công");
@@ -104,7 +105,7 @@ namespace LibraryManagement.DAL
                 try
                 {
 
-                    var dausach = await context.DAUSACHes.Where(ds1 => ds1.IsDeleted == false).Include(d => d.TACGIAs).FirstOrDefaultAsync(d => d.id == ds.id);
+                    var dausach = await context.DAUSACHes.Where(ds1 => ds1.IsDeleted == false || ds1.IsDeleted == null).Include(d => d.TACGIAs).FirstOrDefaultAsync(d => d.id == ds.id);
 
                     if (dausach == null)
                         return (false, "Không tìm thấy đầu sách");
@@ -141,7 +142,22 @@ namespace LibraryManagement.DAL
             using (var context = new LibraryManagementEntities())
                 try
                 {
-                    var dausach = await context.DAUSACHes.Where(ds => ds.IsDeleted == false).FirstOrDefaultAsync(ds => ds.id == id);
+                    var dausach = await context.DAUSACHes.Where(ds => ds.IsDeleted == false || ds.IsDeleted == null).Include(ds => ds.SACHes).FirstOrDefaultAsync(ds => ds.id == id);
+                    if (dausach == null)
+                        return (false, "Đầu sách không hợp lệ");
+                    foreach(var Sach in dausach.SACHes)
+                        if(Sach != null)
+                        {
+                            var sach = await context.SACHes.Where(s => s.IsDeleted == false || s.IsDeleted == null).Include(s => s.CUONSACHes).FirstOrDefaultAsync(s => s.id == Sach.id);
+                            if(sach != null)
+                                if (sach.CUONSACHes.Count() > 0)
+                                {
+                                    foreach (var cs in sach.CUONSACHes)
+                                        if (cs != null)
+                                            cs.IsDeleted = true;
+                                    Sach.IsDeleted = true;
+                                }
+                        }    
                     dausach.IsDeleted = true;
                     await context.SaveChangesAsync();
                     return (true, "Ẩn đầu sách thành công");

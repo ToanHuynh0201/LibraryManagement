@@ -85,10 +85,11 @@ namespace LibraryManagement.ViewModel
                         {
                             MessageBox.Show("Đăng nhập thành công", "Thành công",
                                 MessageBoxButton.OK, MessageBoxImage.Information);
-
+                            Password = "";
                             OnLoginSuccess?.Invoke();
                             OnLoginResult?.Invoke(true);
 
+                            
                             Window w1 = new MainWindow();
                             w1.DataContext = new MainViewModel(nd);
                             w1.Show();

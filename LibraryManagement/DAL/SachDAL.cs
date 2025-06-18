@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ControlzEx;
 using LibraryManagement.DTO;
+using MaterialDesignThemes.Wpf;
 
 namespace LibraryManagement.DAL
 {
@@ -94,6 +95,7 @@ namespace LibraryManagement.DAL
             {
                 try
                 {
+                    s.IsDeleted = false;
                     context.SACHes.Add(s);
                     for (int i = 0; i < s.SoLuong; i++)
                     {
@@ -200,8 +202,10 @@ namespace LibraryManagement.DAL
                     var sach = await context.SACHes.FindAsync(s.id);
                     sach.NamXB = s.NamXB;
                     sach.NhaXB = s.NhaXB;
-                    sach.SoLuong = s.SoLuong;
-                    sach.SoLuongCon = s.SoLuongCon;
+                    if (s.SoLuong < 0) sach.SoLuong = 0;
+                    else sach.SoLuong = s.SoLuong;
+                    if (s.SoLuongCon < 0) sach.SoLuongCon = 0;
+                    else sach.SoLuongCon = s.SoLuongCon;
                     sach.TriGia = s.TriGia;
                     sach.IsDeleted = s.IsDeleted;
                     await context.SaveChangesAsync();

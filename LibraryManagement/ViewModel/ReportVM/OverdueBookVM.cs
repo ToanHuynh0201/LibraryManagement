@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Markup;
 
 namespace LibraryManagement.ViewModel
 {
@@ -76,19 +77,22 @@ namespace LibraryManagement.ViewModel
                     }
 
                     var result = MessageBox.Show(
-                                 "Lưu ý: Nếu đã có báo cáo cùng ngày, báo cáo cũ sẽ bị xóa và thay thế bằng báo cáo mới.",
                                  "Xác nhận lập báo cáo",
+                                 "Xác nhận",
                                  MessageBoxButton.YesNo,
                                  MessageBoxImage.Question);
 
                     if (result == MessageBoxResult.Yes)
                     {
                         var res = await Task.Run(async () => await BaoCaoThongKeBLL.Instance.AddBaoCaoSachTraTre(SelectedDate));
-                        MessageBox.Show(res.Item2);
                         if (res.Item1)
                         {
                             await LoadReportDataAsync();
+                            if (ListOverdueReport == null || ListOverdueReport.Count() <= 0)
+                                MessageBox.Show("Không có sách trả trễ vào ngày lập báo cáo");
+                            else MessageBox.Show(res.Item2);
                         }
+                        else MessageBox.Show(res.Item2);
                     }
                 }
                 catch (Exception ex)

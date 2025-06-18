@@ -45,7 +45,7 @@
                     Background="Red" 
                     Foreground="White"
                      Command="{Binding CloseWindowCM}"
-    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+                    CommandParameter="{Binding ElementName=addReaderTypeWindow}"/>
             </Grid>
             <StackPanel Orientation="Vertical"
                     Grid.Row="1">

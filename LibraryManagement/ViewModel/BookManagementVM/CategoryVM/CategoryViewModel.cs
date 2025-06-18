@@ -139,7 +139,6 @@ namespace LibraryManagement.ViewModel
                 {
                     if (string.IsNullOrWhiteSpace(SearchText))
                     {
-                        ListCategorys.Clear();
                         ListCategorys = AllCategorys;
                     }
                     else

@@ -33,8 +33,13 @@ namespace LibraryManagement.BLL
         public async Task<(bool, string)> AddBaoCao(int thang, int nam)
         {
             DateTime today = DateTime.Now;
-            if (nam > today.Year || (nam == today.Year && thang > today.Month))
-                return (false, "Không thể lập báo cáo ở tương lai");
+            if (nam > today.Year || (nam == today.Year && thang >= today.Month))
+                return (false, "Chỉ có thể lập báo cáo từ tháng trước trở về");
+            var bc = await BCTongLuotMuonDAL.Instance.GetBaoCaoByThangNam(thang, nam);
+            if (bc != null)
+            {
+                return (false, "Đã lập báo cáo cho tháng năm được chọn, không thể lập thêm");
+            }
             return await BCTongLuotMuonDAL.Instance.AddBaoCao(thang, nam);
         }
         public async Task<List<BCLUOTMUONTHEOTHELOAI>> GetBaoCaoTheLoai(int id)
@@ -54,6 +59,11 @@ namespace LibraryManagement.BLL
             DateTime today = DateTime.Now;
             if (ngay.Date > today.Date)
                 return (false, "Không thể lập báo cáo ở tương lai");
+            var bc = await BCSachTraTreDAL.Instance.GetBaoCaoSachTraTreByNgay(ngay);
+            if(bc != null && bc.Count > 0)
+            {
+                return (false, "Đã lập báo cáo cho ngày được chọn, không thể lập thêm");
+            }
             return await BCSachTraTreDAL.Instance.AddBaoCaoSachTraTre(ngay);
         }
     }

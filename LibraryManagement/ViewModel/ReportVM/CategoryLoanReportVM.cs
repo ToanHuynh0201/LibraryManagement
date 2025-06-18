@@ -79,7 +79,7 @@ namespace LibraryManagement.ViewModel
         public CategoryLoanReportVM()
         {
             ListMonths = new ObservableCollection<int>(Enumerable.Range(1, 12));
-            ListYears = new ObservableCollection<int>(Enumerable.Range(2020, DateTime.Now.Year - 2019).Reverse());
+            ListYears = new ObservableCollection<int>(Enumerable.Range(2000, DateTime.Now.Year - 2000 + 1).Reverse());
             SelectedMonth = DateTime.Now.Month;
             SelectedYear = DateTime.Now.Year;
 
@@ -100,8 +100,8 @@ namespace LibraryManagement.ViewModel
                     }
 
                     var result = MessageBox.Show(
-                                 "Lưu ý: Nếu đã có báo cáo cùng tháng năm, báo cáo cũ sẽ bị xóa và thay thế bằng báo cáo mới.",
                                  "Xác nhận lập báo cáo",
+                                 "Xác nhận",
                                  MessageBoxButton.YesNo,
                                  MessageBoxImage.Question);
 

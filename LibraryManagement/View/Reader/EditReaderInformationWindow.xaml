@@ -83,8 +83,8 @@
                                         VerticalAlignment="Center"
                                         VerticalContentAlignment="Bottom"
                                         SelectedDate="{Binding docgia.NgayLapThe, Mode=TwoWay}" 
-                                        SelectedDateFormat="Short"         
-/>
+                                        SelectedDateFormat="Short" Margin="10,0,0,0"     
+                                        IsEnabled="False"/>
                         </Grid>
                         <Grid
                             Grid.Row="0"
@@ -95,15 +95,13 @@
                         FontSize="18" Foreground="Black"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding docgia.MaDG, Mode=TwoWay}"
-                        IsEnabled="False"
-                 />
+                        IsReadOnly="True"/>
                             <TextBox
                         VerticalAlignment="Center"
                         materialDesign:HintAssist.Hint="Họ và tên"
                         FontSize="18" Foreground="Black"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding docgia.TenDG, Mode=TwoWay}" Margin="396,0,-396,0"
-                 />
+                        Text="{Binding docgia.TenDG, Mode=TwoWay}" Margin="396,0,-396,0"/>
                         </Grid>
 
                         <!--Ngày sinh-->
@@ -161,8 +159,7 @@
                                         materialDesign:TextFieldAssist.HasClearButton="True"
                                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                                         FontSize="18" 
-                                        Text="{Binding docgia.NgayHetHan, Mode=TwoWay}"
-                />
+                                        Text="{Binding docgia.NgayHetHan, Mode=TwoWay}"/>
                         </Grid>
 
                         <!--Email-->

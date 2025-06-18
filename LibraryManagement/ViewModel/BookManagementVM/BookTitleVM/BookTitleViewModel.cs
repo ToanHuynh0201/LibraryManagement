@@ -25,6 +25,7 @@ namespace LibraryManagement.ViewModel
         public ICommand SearchBookTitleCM { get; set; }
         public ICommand OpenAddBookTitleCM { get; set; }
         public ICommand OpenUpdateBookTitleCM { get; set; }
+        public ICommand DeleteBookTitleCM { get; set; }
 
         public BookTitleViewModel()
         {
@@ -52,7 +53,20 @@ namespace LibraryManagement.ViewModel
                 }
                 OnPropertyChanged(nameof(ListBookTitles));
             });
-
+            DeleteBookTitleCM = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                if (BookTitleSelected != null)
+                {
+                    var result = MessageBox.Show("Bạn có chắc muốn ẩn đầu sách này không?", "Xác nhận xóa",
+                                          MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        var res = await Task.Run(async () => await DauSachBLL.Instance.DeleteDauSach(BookTitleSelected.id));
+                        LoadDataBookTitleCM.Execute(null);
+                        MessageBox.Show(res.Item2);
+                    }
+                }
+            });
             OpenAddBookTitleCM = new RelayCommand<object>((p) => true, (p) =>
             {
                 var vm1 = new AddBookTitleViewModel();

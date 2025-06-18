@@ -12,7 +12,7 @@ namespace LibraryManagement.ViewModel
 {
     public class AddBookViewModel : BaseViewModel
     {
-        public ObservableCollection<string> YearList { get; set; }
+        public ObservableCollection<int> YearList { get; set; }
         public SACH sach { get; set; } = new SACH();
         public PHIEUNHAPSACH pns { get; set; } = new PHIEUNHAPSACH();
         private string _booktitleText { get; set; }
@@ -119,7 +119,7 @@ namespace LibraryManagement.ViewModel
         public AddBookViewModel()
         {
             pns.NgayNhap = DateTime.Now;
-            YearList = new ObservableCollection<string>(Enumerable.Range(1900, DateTime.Now.Year - 1900 + 1).Select(y => y.ToString()));
+            YearList = new ObservableCollection<int>(Enumerable.Range(2000, DateTime.Now.Year - 2000 + 1).Reverse());
             LoadOtherDataCM = new RelayCommand<Window>((p) => true, async (p) =>
             {
                 var booktitleData = await DauSachBLL.Instance.GetAllDauSach();
